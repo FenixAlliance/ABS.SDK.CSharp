@@ -12282,12 +12282,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [Newtonsoft.Json.JsonProperty("webPortalID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string WebPortalID { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("businessID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessProfileRecordID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessProfileRecordID { get; set; }
-
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -12526,12 +12520,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TenantId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string EnrollmentId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Title { get; set; }
@@ -12849,12 +12837,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
 
         [Newtonsoft.Json.JsonProperty("webPortalID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string WebPortalID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessProfileRecordID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessProfileRecordID { get; set; }
 
     }
 
@@ -15782,12 +15764,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TenantId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string EnrollmentId { get; set; }
-
         [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Title { get; set; }
 
@@ -16259,9 +16235,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [Newtonsoft.Json.JsonProperty("webPortalID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string WebPortalID { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("businessProfileRecordID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessProfileRecordID { get; set; }
-
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -16414,12 +16387,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TenantId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string EnrollmentId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Title { get; set; }
@@ -16758,9 +16725,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
 
         [Newtonsoft.Json.JsonProperty("webPortalID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string WebPortalID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessProfileRecordID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessProfileRecordID { get; set; }
 
     }
 
@@ -17126,9 +17090,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [Newtonsoft.Json.JsonProperty("disabled", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Disabled { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("businessID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessID { get; set; }
-
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; }
 
@@ -17137,9 +17098,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
 
         [Newtonsoft.Json.JsonProperty("businessDomainID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BusinessDomainID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessProfileRecordID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessProfileRecordID { get; set; }
 
         [Newtonsoft.Json.JsonProperty("businessPortalApplicationID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BusinessPortalApplicationID { get; set; }
@@ -17237,9 +17195,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [Newtonsoft.Json.JsonProperty("businessDomainID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BusinessDomainID { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("businessProfileRecordID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessProfileRecordID { get; set; }
-
         [Newtonsoft.Json.JsonProperty("businessPortalApplicationID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BusinessPortalApplicationID { get; set; }
 
@@ -17249,11 +17204,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
     public partial class WebTemplateCreateDto
     {
 
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? Timestamp { get; set; }
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
 
         [Newtonsoft.Json.JsonProperty("slug", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Slug { get; set; }

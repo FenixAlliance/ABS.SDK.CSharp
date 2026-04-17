@@ -7597,9 +7597,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
         [Newtonsoft.Json.JsonProperty("data9Label", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Data9Label { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("accountHolderID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AccountHolderID { get; set; }
-
         [Newtonsoft.Json.JsonProperty("individualID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string IndividualID { get; set; }
 
@@ -7608,12 +7605,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
 
         [Newtonsoft.Json.JsonProperty("receiverBusinessID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ReceiverBusinessID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessProfileRecordID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessProfileRecordID { get; set; }
 
         [Newtonsoft.Json.JsonProperty("paymentTokenID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PaymentTokenID { get; set; }
@@ -7948,9 +7939,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
         [Newtonsoft.Json.JsonProperty("data9Label", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Data9Label { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("accountHolderID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AccountHolderID { get; set; }
-
         [Newtonsoft.Json.JsonProperty("individualID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string IndividualID { get; set; }
 
@@ -7959,12 +7947,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
 
         [Newtonsoft.Json.JsonProperty("receiverBusinessID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ReceiverBusinessID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessProfileRecordID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessProfileRecordID { get; set; }
 
         [Newtonsoft.Json.JsonProperty("paymentTokenID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PaymentTokenID { get; set; }
@@ -8016,14 +7998,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
 
         [Newtonsoft.Json.JsonProperty("filePath", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FilePath { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.StringLength(36, MinimumLength = 36)]
-        public string BusinessID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessProfileRecordID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.StringLength(36, MinimumLength = 36)]
-        public string BusinessProfileRecordID { get; set; }
 
         [Newtonsoft.Json.JsonProperty("metadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Metadata { get; set; }
@@ -8226,20 +8200,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
         [Newtonsoft.Json.JsonProperty("approvedTimestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset ApprovedTimestamp { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("businessID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessProfileRecordID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessProfileRecordID { get; set; }
-
         [Newtonsoft.Json.JsonProperty("supportEntitlementID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SupportEntitlementID { get; set; }
 
         [Newtonsoft.Json.JsonProperty("contactID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ContactID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("accountHolderID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AccountHolderID { get; set; }
 
     }
 
@@ -8465,21 +8430,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
         [System.ComponentModel.DataAnnotations.StringLength(1000)]
         public string Description { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("accountHolderID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.StringLength(36, MinimumLength = 36)]
-        public string AccountHolderID { get; set; }
-
         [Newtonsoft.Json.JsonProperty("contactID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(36, MinimumLength = 36)]
         public string ContactID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.StringLength(36, MinimumLength = 36)]
-        public string BusinessID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessProfileRecordID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.StringLength(36, MinimumLength = 36)]
-        public string BusinessProfileRecordID { get; set; }
 
         [Newtonsoft.Json.JsonProperty("supportTicketTypeID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(36, MinimumLength = 36)]
@@ -8583,6 +8536,12 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
     public partial class SupportTicketPriorityCreateDto
     {
 
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
+
         [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255)]
         public string Title { get; set; }
@@ -8590,10 +8549,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(1000)]
         public string Description { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.StringLength(36, MinimumLength = 36)]
-        public string BusinessID { get; set; }
 
         [Newtonsoft.Json.JsonProperty("supportEntitlementID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(36, MinimumLength = 36)]
@@ -8703,10 +8658,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
         [System.ComponentModel.DataAnnotations.StringLength(1000)]
         public string Description { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("businessID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.StringLength(36, MinimumLength = 36)]
-        public string BusinessID { get; set; }
-
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -8805,14 +8756,8 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("accountHolderID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AccountHolderID { get; set; }
-
         [Newtonsoft.Json.JsonProperty("contactID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ContactID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("businessProfileRecordID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessProfileRecordID { get; set; }
 
         [Newtonsoft.Json.JsonProperty("supportTicketTypeID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SupportTicketTypeID { get; set; }
