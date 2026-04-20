@@ -36,10 +36,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.MarketingService
         private Newtonsoft.Json.JsonSerializerSettings _instanceSettings;
 
     #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public Client(string baseUrl, System.Net.Http.HttpClient httpClient)
+        public Client(System.Net.Http.HttpClient httpClient)
     #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
-            BaseUrl = baseUrl;
+            BaseUrl = "{server}";
             _httpClient = httpClient;
             Initialize();
         }
@@ -8090,11 +8090,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.MarketingService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(100, MinimumLength = 3)]
         public string Title { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Code { get; set; }
 
         [Newtonsoft.Json.JsonProperty("published", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Published { get; set; }
@@ -8102,8 +8101,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.MarketingService
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("htmlContent", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string HtmlContent { get; set; }
+        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Code { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("markup", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Markup { get; set; }
 
         [Newtonsoft.Json.JsonProperty("featuredImageUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FeaturedImageUrl { get; set; }
@@ -8525,11 +8527,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.MarketingService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(100, MinimumLength = 3)]
         public string Title { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Code { get; set; }
 
         [Newtonsoft.Json.JsonProperty("published", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Published { get; set; }
@@ -8537,8 +8538,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.MarketingService
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("htmlContent", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string HtmlContent { get; set; }
+        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Code { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("markup", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Markup { get; set; }
 
         [Newtonsoft.Json.JsonProperty("featuredImageUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FeaturedImageUrl { get; set; }
@@ -10196,6 +10200,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.MarketingService
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -10219,6 +10226,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.MarketingService
 
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
 
     }
 
@@ -10244,6 +10254,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.MarketingService
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -10267,6 +10280,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.MarketingService
 
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
 
     }
 
@@ -10292,6 +10308,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.MarketingService
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -10315,6 +10334,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.MarketingService
 
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
 
     }
 

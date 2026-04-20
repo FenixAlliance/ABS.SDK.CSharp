@@ -36,10 +36,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         private Newtonsoft.Json.JsonSerializerSettings _instanceSettings;
 
     #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public Client(string baseUrl, System.Net.Http.HttpClient httpClient)
+        public Client(System.Net.Http.HttpClient httpClient)
     #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
-            BaseUrl = baseUrl;
+            BaseUrl = "{server}";
             _httpClient = httpClient;
             Initialize();
         }
@@ -13136,11 +13136,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(100, MinimumLength = 3)]
         public string Title { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Code { get; set; }
 
         [Newtonsoft.Json.JsonProperty("published", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Published { get; set; }
@@ -13148,8 +13147,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("htmlContent", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string HtmlContent { get; set; }
+        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Code { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("markup", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Markup { get; set; }
 
         [Newtonsoft.Json.JsonProperty("featuredImageUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FeaturedImageUrl { get; set; }
@@ -13158,11 +13160,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public BlogPostCreateDtoCodeType? CodeType { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("blogPostCategoryID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BlogPostCategoryID { get; set; }
+        [Newtonsoft.Json.JsonProperty("blogPostCategoryId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BlogPostCategoryId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("webTemplateID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string WebTemplateID { get; set; }
+        [Newtonsoft.Json.JsonProperty("webTemplateId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string WebTemplateId { get; set; }
 
     }
 
@@ -13348,11 +13350,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [Newtonsoft.Json.JsonProperty("parentWebContentVersionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ParentWebContentVersionId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("blogPostCategoryID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BlogPostCategoryID { get; set; }
+        [Newtonsoft.Json.JsonProperty("blogPostCategoryId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BlogPostCategoryId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("webTemplateID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string WebTemplateID { get; set; }
+        [Newtonsoft.Json.JsonProperty("webTemplateId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string WebTemplateId { get; set; }
 
     }
 
@@ -13768,6 +13770,12 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
 
         [Newtonsoft.Json.JsonProperty("allowSearchEngineIndexing", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool AllowSearchEngineIndexing { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("blogPostCategoryId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BlogPostCategoryId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("webTemplateId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string WebTemplateId { get; set; }
 
     }
 
@@ -16379,11 +16387,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(100, MinimumLength = 3)]
         public string Title { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Code { get; set; }
 
         [Newtonsoft.Json.JsonProperty("published", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Published { get; set; }
@@ -16391,8 +16398,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("htmlContent", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string HtmlContent { get; set; }
+        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Code { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("markup", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Markup { get; set; }
 
         [Newtonsoft.Json.JsonProperty("featuredImageUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FeaturedImageUrl { get; set; }
@@ -17003,11 +17013,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(100, MinimumLength = 3)]
         public string Title { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Code { get; set; }
 
         [Newtonsoft.Json.JsonProperty("published", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Published { get; set; }
@@ -17015,8 +17024,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("htmlContent", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string HtmlContent { get; set; }
+        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Code { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("markup", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Markup { get; set; }
 
         [Newtonsoft.Json.JsonProperty("featuredImageUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FeaturedImageUrl { get; set; }
@@ -17747,17 +17759,17 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("websiteThemeID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string WebsiteThemeID { get; set; }
+        [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string EnrollmentId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("businessDomainID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessDomainID { get; set; }
+        [Newtonsoft.Json.JsonProperty("websiteThemeId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string WebsiteThemeId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("businessProfileRecordID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessProfileRecordID { get; set; }
+        [Newtonsoft.Json.JsonProperty("businessDomainId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BusinessDomainId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("businessPortalApplicationID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BusinessPortalApplicationID { get; set; }
+        [Newtonsoft.Json.JsonProperty("businessPortalApplicationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BusinessPortalApplicationId { get; set; }
 
     }
 
@@ -18134,6 +18146,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -18158,6 +18173,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -18181,6 +18199,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
 
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
 
     }
 
@@ -18692,6 +18713,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -18715,6 +18739,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
 
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
 
     }
 
@@ -18740,6 +18767,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -18763,6 +18793,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
 
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
 
     }
 
@@ -18788,6 +18821,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -18811,6 +18847,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ContentService
 
         [System.Runtime.Serialization.EnumMember(Value = @"Markdown")]
         Markdown = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Markup")]
+        Markup = 6,
 
     }
 
