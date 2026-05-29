@@ -3347,7 +3347,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IdentityService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class AuthorizationResult
+    public partial class AuthResult
     {
 
         [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3396,7 +3396,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IdentityService
         public string ActivityId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public AuthorizationResult Result { get; set; }
+        public AuthResult Result { get; set; }
 
     }
 
