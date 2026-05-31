@@ -36,10 +36,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         private Newtonsoft.Json.JsonSerializerSettings _instanceSettings;
 
     #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public Client(System.Net.Http.HttpClient httpClient)
+        public Client(string baseUrl, System.Net.Http.HttpClient httpClient)
     #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
-            BaseUrl = "{server}";
+            BaseUrl = baseUrl;
             _httpClient = httpClient;
             Initialize();
         }
@@ -71,6 +71,112 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task CompleteAsync(System.Guid tenantId, string conversationId, string message)
+        {
+            return CompleteAsync(tenantId, conversationId, message, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task CompleteAsync(System.Guid tenantId, string conversationId, string message, System.Threading.CancellationToken cancellationToken)
+        {
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/AiService/Completions/Complete"
+                    urlBuilder_.Append("api/v2/AiService/Completions/Complete");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (conversationId != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("conversationId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(conversationId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (message != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("message")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(message, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            return;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -2799,9 +2905,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> CreateSocialGroupAsync(System.Guid tenantId, string api_version, string x_api_version, SocialGroupCreateDto body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> CreateSocialGroupAsync(System.Guid tenantId, System.Guid socialProfileId, string api_version, string x_api_version, SocialGroupCreateDto body)
         {
-            return CreateSocialGroupAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
+            return CreateSocialGroupAsync(tenantId, socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2813,10 +2919,13 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> CreateSocialGroupAsync(System.Guid tenantId, string api_version, string x_api_version, SocialGroupCreateDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> CreateSocialGroupAsync(System.Guid tenantId, System.Guid socialProfileId, string api_version, string x_api_version, SocialGroupCreateDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
+
+            if (socialProfileId == null)
+                throw new System.ArgumentNullException("socialProfileId");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -2840,6 +2949,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
                     urlBuilder_.Append("api/v2/SocialService/SocialGroups");
                     urlBuilder_.Append('?');
                     urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     if (api_version != null)
                     {
                         urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
@@ -3176,9 +3286,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UpdateSocialGroupAsync(System.Guid tenantId, System.Guid socialGroupId, string api_version, string x_api_version, SocialGroupUpdateDto body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UpdateSocialGroupAsync(System.Guid tenantId, System.Guid socialProfileId, System.Guid socialGroupId, string api_version, string x_api_version, SocialGroupUpdateDto body)
         {
-            return UpdateSocialGroupAsync(tenantId, socialGroupId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
+            return UpdateSocialGroupAsync(tenantId, socialProfileId, socialGroupId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3190,13 +3300,16 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UpdateSocialGroupAsync(System.Guid tenantId, System.Guid socialGroupId, string api_version, string x_api_version, SocialGroupUpdateDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UpdateSocialGroupAsync(System.Guid tenantId, System.Guid socialProfileId, System.Guid socialGroupId, string api_version, string x_api_version, SocialGroupUpdateDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialGroupId == null)
                 throw new System.ArgumentNullException("socialGroupId");
 
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
+
+            if (socialProfileId == null)
+                throw new System.ArgumentNullException("socialProfileId");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -3221,6 +3334,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(socialGroupId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('?');
                     urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     if (api_version != null)
                     {
                         urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
@@ -3307,9 +3421,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> DeleteSocialGroupAsync(System.Guid tenantId, System.Guid socialGroupId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> DeleteSocialGroupAsync(System.Guid tenantId, System.Guid socialProfileId, System.Guid socialGroupId, string api_version, string x_api_version)
         {
-            return DeleteSocialGroupAsync(tenantId, socialGroupId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return DeleteSocialGroupAsync(tenantId, socialProfileId, socialGroupId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3321,13 +3435,16 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> DeleteSocialGroupAsync(System.Guid tenantId, System.Guid socialGroupId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> DeleteSocialGroupAsync(System.Guid tenantId, System.Guid socialProfileId, System.Guid socialGroupId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (socialGroupId == null)
                 throw new System.ArgumentNullException("socialGroupId");
 
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
+
+            if (socialProfileId == null)
+                throw new System.ArgumentNullException("socialProfileId");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -3348,6 +3465,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(socialGroupId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('?');
                     urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     if (api_version != null)
                     {
                         urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
@@ -8519,6 +8637,134 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         }
 
         /// <summary>
+        /// Get Notification
+        /// </summary>
+        /// <remarks>
+        /// Get a notification by ID for a social profile.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<NotificationDtoEnvelope> GetNotificationByIdAsync(System.Guid socialProfileId, System.Guid notificationId, string api_version, string x_api_version)
+        {
+            return GetNotificationByIdAsync(socialProfileId, notificationId, api_version, x_api_version, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get Notification
+        /// </summary>
+        /// <remarks>
+        /// Get a notification by ID for a social profile.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<NotificationDtoEnvelope> GetNotificationByIdAsync(System.Guid socialProfileId, System.Guid notificationId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        {
+            if (socialProfileId == null)
+                throw new System.ArgumentNullException("socialProfileId");
+
+            if (notificationId == null)
+                throw new System.ArgumentNullException("notificationId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/SocialService/SocialProfiles/{socialProfileId}/Notifications/{notificationId}"
+                    urlBuilder_.Append("api/v2/SocialService/SocialProfiles/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Notifications/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(notificationId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('?');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<NotificationDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
         /// Get Conversations
         /// </summary>
         /// <remarks>
@@ -8902,9 +9148,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<PrivateMessageDtoListEnvelope> GetMessagesAsync(System.Guid conversationId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<PrivateMessageDtoListEnvelope> GetMessagesAsync(System.Guid socialProfileId, System.Guid conversationId, string api_version, string x_api_version)
         {
-            return GetMessagesAsync(conversationId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetMessagesAsync(socialProfileId, conversationId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -8916,10 +9162,13 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<PrivateMessageDtoListEnvelope> GetMessagesAsync(System.Guid conversationId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<PrivateMessageDtoListEnvelope> GetMessagesAsync(System.Guid socialProfileId, System.Guid conversationId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (conversationId == null)
                 throw new System.ArgumentNullException("conversationId");
+
+            if (socialProfileId == null)
+                throw new System.ArgumentNullException("socialProfileId");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -8940,6 +9189,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(conversationId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/Messages");
                     urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     if (api_version != null)
                     {
                         urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
@@ -9158,9 +9408,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> CountMessagesAsync(System.Guid conversationId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> CountMessagesAsync(System.Guid socialProfileId, System.Guid conversationId, string api_version, string x_api_version)
         {
-            return CountMessagesAsync(conversationId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return CountMessagesAsync(socialProfileId, conversationId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -9172,10 +9422,13 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountMessagesAsync(System.Guid conversationId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountMessagesAsync(System.Guid socialProfileId, System.Guid conversationId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (conversationId == null)
                 throw new System.ArgumentNullException("conversationId");
+
+            if (socialProfileId == null)
+                throw new System.ArgumentNullException("socialProfileId");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -9196,6 +9449,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(conversationId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/Messages/Count");
                     urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     if (api_version != null)
                     {
                         urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
@@ -9840,6 +10094,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Id { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? Timestamp { get; set; }
+
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Type { get; set; }
 
@@ -10019,6 +10276,30 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("issuedTimestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset IssuedTimestamp { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class NotificationDtoEnvelope
+    {
+
+        [Newtonsoft.Json.JsonProperty("isSuccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsSuccess { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("correlationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CorrelationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ActivityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public NotificationDto Result { get; set; }
 
     }
 
