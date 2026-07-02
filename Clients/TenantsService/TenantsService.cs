@@ -36,10 +36,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         private Newtonsoft.Json.JsonSerializerSettings _instanceSettings;
 
     #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public Client(string baseUrl, System.Net.Http.HttpClient httpClient)
+        public Client(System.Net.Http.HttpClient httpClient)
     #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
-            BaseUrl = baseUrl;
+            BaseUrl = "{server}";
             _httpClient = httpClient;
             Initialize();
         }
@@ -72,17 +72,29 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
+        /// <summary>
+        /// Get business relationships count
+        /// </summary>
+        /// <remarks>
+        /// Returns the count of child business relationships owned by the specified parent tenant.
+        /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task CompleteAsync(System.Guid tenantId, string conversationId, string message)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBusinessRelationshipsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
         {
-            return CompleteAsync(tenantId, conversationId, message, System.Threading.CancellationToken.None);
+            return GetBusinessRelationshipsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get business relationships count
+        /// </summary>
+        /// <remarks>
+        /// Returns the count of child business relationships owned by the specified parent tenant.
+        /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task CompleteAsync(System.Guid tenantId, string conversationId, string message, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBusinessRelationshipsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -93,21 +105,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/v2/AiService/Completions/Complete"
-                    urlBuilder_.Append("api/v2/AiService/Completions/Complete");
+                    // Operation Path: "api/v2/TenantsService/BusinessRelationships/Count"
+                    urlBuilder_.Append("api/v2/TenantsService/BusinessRelationships/Count");
                     urlBuilder_.Append('?');
                     urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
-                    if (conversationId != null)
+                    if (api_version != null)
                     {
-                        urlBuilder_.Append(System.Uri.EscapeDataString("conversationId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(conversationId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
-                    }
-                    if (message != null)
-                    {
-                        urlBuilder_.Append(System.Uri.EscapeDataString("message")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(message, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     }
                     urlBuilder_.Length--;
 
@@ -136,7 +148,12 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<Int32Envelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -20241,7 +20258,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<UnitGroupDtoEnvelope> GetUnitGroupAsync(System.Guid tenantId, System.Guid unitGroupId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<UnitGroupDtoEnvelope> GetUnitGroupAsync(System.Guid tenantId, string unitGroupId, string api_version, string x_api_version)
         {
             return GetUnitGroupAsync(tenantId, unitGroupId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -20255,7 +20272,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<UnitGroupDtoEnvelope> GetUnitGroupAsync(System.Guid tenantId, System.Guid unitGroupId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<UnitGroupDtoEnvelope> GetUnitGroupAsync(System.Guid tenantId, string unitGroupId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (unitGroupId == null)
                 throw new System.ArgumentNullException("unitGroupId");
@@ -20368,7 +20385,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UpdateUnitGroupAsync(System.Guid tenantId, System.Guid unitGroupId, string api_version, string x_api_version, UnitGroupUpdateDto body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UpdateUnitGroupAsync(System.Guid tenantId, string unitGroupId, string api_version, string x_api_version, UnitGroupUpdateDto body)
         {
             return UpdateUnitGroupAsync(tenantId, unitGroupId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -20382,7 +20399,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UpdateUnitGroupAsync(System.Guid tenantId, System.Guid unitGroupId, string api_version, string x_api_version, UnitGroupUpdateDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UpdateUnitGroupAsync(System.Guid tenantId, string unitGroupId, string api_version, string x_api_version, UnitGroupUpdateDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (unitGroupId == null)
                 throw new System.ArgumentNullException("unitGroupId");
@@ -20499,7 +20516,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchUnitGroupAsync(System.Guid tenantId, System.Guid unitGroupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchUnitGroupAsync(System.Guid tenantId, string unitGroupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
         {
             return PatchUnitGroupAsync(tenantId, unitGroupId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -20513,7 +20530,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchUnitGroupAsync(System.Guid tenantId, System.Guid unitGroupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchUnitGroupAsync(System.Guid tenantId, string unitGroupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (unitGroupId == null)
                 throw new System.ArgumentNullException("unitGroupId");
@@ -20630,7 +20647,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> DeleteUnitGroupAsync(System.Guid tenantId, System.Guid unitGroupId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> DeleteUnitGroupAsync(System.Guid tenantId, string unitGroupId, string api_version, string x_api_version)
         {
             return DeleteUnitGroupAsync(tenantId, unitGroupId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -20644,7 +20661,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> DeleteUnitGroupAsync(System.Guid tenantId, System.Guid unitGroupId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> DeleteUnitGroupAsync(System.Guid tenantId, string unitGroupId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (unitGroupId == null)
                 throw new System.ArgumentNullException("unitGroupId");
@@ -20757,7 +20774,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<UnitDtoListEnvelope> GetUnitsAsync(System.Guid tenantId, System.Guid unitGroupId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<UnitDtoListEnvelope> GetUnitsAsync(System.Guid tenantId, string unitGroupId, string api_version, string x_api_version)
         {
             return GetUnitsAsync(tenantId, unitGroupId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -20771,7 +20788,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<UnitDtoListEnvelope> GetUnitsAsync(System.Guid tenantId, System.Guid unitGroupId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<UnitDtoListEnvelope> GetUnitsAsync(System.Guid tenantId, string unitGroupId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (unitGroupId == null)
                 throw new System.ArgumentNullException("unitGroupId");
@@ -20885,7 +20902,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> CreateUnitAsync(System.Guid tenantId, System.Guid unitGroupId, string api_version, string x_api_version, UnitCreateDto body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> CreateUnitAsync(System.Guid tenantId, string unitGroupId, string api_version, string x_api_version, UnitCreateDto body)
         {
             return CreateUnitAsync(tenantId, unitGroupId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -20899,7 +20916,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> CreateUnitAsync(System.Guid tenantId, System.Guid unitGroupId, string api_version, string x_api_version, UnitCreateDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> CreateUnitAsync(System.Guid tenantId, string unitGroupId, string api_version, string x_api_version, UnitCreateDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (unitGroupId == null)
                 throw new System.ArgumentNullException("unitGroupId");
@@ -21017,7 +21034,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetUnitsCountAsync(System.Guid tenantId, System.Guid unitGroupId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetUnitsCountAsync(System.Guid tenantId, string unitGroupId, string api_version, string x_api_version)
         {
             return GetUnitsCountAsync(tenantId, unitGroupId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -21031,7 +21048,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetUnitsCountAsync(System.Guid tenantId, System.Guid unitGroupId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetUnitsCountAsync(System.Guid tenantId, string unitGroupId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (unitGroupId == null)
                 throw new System.ArgumentNullException("unitGroupId");
@@ -21145,7 +21162,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<UnitDtoEnvelope> GetUnitAsync(System.Guid tenantId, System.Guid unitGroupId, System.Guid unitId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<UnitDtoEnvelope> GetUnitAsync(System.Guid tenantId, string unitGroupId, string unitId, string api_version, string x_api_version)
         {
             return GetUnitAsync(tenantId, unitGroupId, unitId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -21159,7 +21176,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<UnitDtoEnvelope> GetUnitAsync(System.Guid tenantId, System.Guid unitGroupId, System.Guid unitId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<UnitDtoEnvelope> GetUnitAsync(System.Guid tenantId, string unitGroupId, string unitId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (unitGroupId == null)
                 throw new System.ArgumentNullException("unitGroupId");
@@ -21277,7 +21294,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UpdateUnitAsync(System.Guid tenantId, System.Guid unitGroupId, System.Guid unitId, string api_version, string x_api_version, UnitUpdateDto body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UpdateUnitAsync(System.Guid tenantId, string unitGroupId, string unitId, string api_version, string x_api_version, UnitUpdateDto body)
         {
             return UpdateUnitAsync(tenantId, unitGroupId, unitId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -21291,7 +21308,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UpdateUnitAsync(System.Guid tenantId, System.Guid unitGroupId, System.Guid unitId, string api_version, string x_api_version, UnitUpdateDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UpdateUnitAsync(System.Guid tenantId, string unitGroupId, string unitId, string api_version, string x_api_version, UnitUpdateDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (unitGroupId == null)
                 throw new System.ArgumentNullException("unitGroupId");
@@ -21413,7 +21430,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchUnitAsync(System.Guid tenantId, System.Guid unitGroupId, System.Guid unitId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchUnitAsync(System.Guid tenantId, string unitGroupId, string unitId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
         {
             return PatchUnitAsync(tenantId, unitGroupId, unitId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -21427,7 +21444,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchUnitAsync(System.Guid tenantId, System.Guid unitGroupId, System.Guid unitId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchUnitAsync(System.Guid tenantId, string unitGroupId, string unitId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (unitGroupId == null)
                 throw new System.ArgumentNullException("unitGroupId");
@@ -21549,7 +21566,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> DeleteUnitAsync(System.Guid tenantId, System.Guid unitGroupId, System.Guid unitId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> DeleteUnitAsync(System.Guid tenantId, string unitGroupId, string unitId, string api_version, string x_api_version)
         {
             return DeleteUnitAsync(tenantId, unitGroupId, unitId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -21563,7 +21580,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> DeleteUnitAsync(System.Guid tenantId, System.Guid unitGroupId, System.Guid unitId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> DeleteUnitAsync(System.Guid tenantId, string unitGroupId, string unitId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (unitGroupId == null)
                 throw new System.ArgumentNullException("unitGroupId");
@@ -22857,6 +22874,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         [Newtonsoft.Json.JsonProperty("qualifiedName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string QualifiedName { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ExtendedTenantDtoKind Kind { get; set; }
+
         [Newtonsoft.Json.JsonProperty("taxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TaxId { get; set; }
 
@@ -23732,6 +23753,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public TenantCreateDtoKind Kind { get; set; }
+
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(100, MinimumLength = 1)]
@@ -23952,6 +23977,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
 
         [Newtonsoft.Json.JsonProperty("qualifiedName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string QualifiedName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public TenantDtoKind Kind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TaxId { get; set; }
@@ -25613,6 +25642,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
     public partial class TenantUpdateDto
     {
 
+        [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public TenantUpdateDtoKind? Kind { get; set; }
+
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(100, MinimumLength = 1)]
@@ -25770,6 +25803,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
         [Newtonsoft.Json.JsonProperty("baseUnitId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BaseUnitId { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("unECECode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string UnECECode { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -25784,6 +25820,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
 
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("unECECode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string UnECECode { get; set; }
 
         [Newtonsoft.Json.JsonProperty("unitGroupId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string UnitGroupId { get; set; }
@@ -25970,6 +26009,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
 
         [Newtonsoft.Json.JsonProperty("baseUnitId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BaseUnitId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("unECECode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string UnECECode { get; set; }
 
     }
 
@@ -26307,6 +26349,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ExtendedTenantDtoKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public enum NotificationDtoType
     {
 
@@ -26360,6 +26414,42 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.TenantsService
 
         [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
         Contact = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum TenantCreateDtoKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum TenantDtoKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum TenantUpdateDtoKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 1,
 
     }
 

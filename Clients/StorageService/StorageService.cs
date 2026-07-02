@@ -36,10 +36,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
         private Newtonsoft.Json.JsonSerializerSettings _instanceSettings;
 
     #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public Client(string baseUrl, System.Net.Http.HttpClient httpClient)
+        public Client(System.Net.Http.HttpClient httpClient)
     #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
-            BaseUrl = baseUrl;
+            BaseUrl = "{server}";
             _httpClient = httpClient;
             Initialize();
         }
@@ -150,26 +150,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == 401)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                        else
-                        if (status_ == 403)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                        else
                         {
                             var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
                             throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
@@ -261,26 +241,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             return objectResponse_.Object;
-                        }
-                        else
-                        if (status_ == 401)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                        else
-                        if (status_ == 403)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         {
@@ -518,26 +478,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == 401)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                        else
-                        if (status_ == 403)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                        else
                         {
                             var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
                             throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
@@ -633,26 +573,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             return objectResponse_.Object;
-                        }
-                        else
-                        if (status_ == 401)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                        else
-                        if (status_ == 403)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         {
@@ -892,26 +812,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             return objectResponse_.Object;
-                        }
-                        else
-                        if (status_ == 401)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                        else
-                        if (status_ == 403)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         {
@@ -1331,18 +1231,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task CompleteAsync(System.Guid tenantId, string conversationId, string message)
+        public virtual System.Threading.Tasks.Task<FileResponse> GetEditorAssetAsync(System.Guid fileId, string api_version, string x_api_version)
         {
-            return CompleteAsync(tenantId, conversationId, message, System.Threading.CancellationToken.None);
+            return GetEditorAssetAsync(fileId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task CompleteAsync(System.Guid tenantId, string conversationId, string message, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FileResponse> GetEditorAssetAsync(System.Guid fileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
-            if (tenantId == null)
-                throw new System.ArgumentNullException("tenantId");
+            if (fileId == null)
+                throw new System.ArgumentNullException("fileId");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1350,21 +1250,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/v2/AiService/Completions/Complete"
-                    urlBuilder_.Append("api/v2/AiService/Completions/Complete");
+                    // Operation Path: "api/v2/StorageService/EditorAssets/{fileId}"
+                    urlBuilder_.Append("api/v2/StorageService/EditorAssets/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(fileId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('?');
-                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
-                    if (conversationId != null)
+                    if (api_version != null)
                     {
-                        urlBuilder_.Append(System.Uri.EscapeDataString("conversationId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(conversationId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
-                    }
-                    if (message != null)
-                    {
-                        urlBuilder_.Append(System.Uri.EscapeDataString("message")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(message, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     }
                     urlBuilder_.Length--;
 
@@ -1391,29 +1291,22 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ == 200 || status_ == 206)
                         {
-                            return;
+                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await ReadAsStreamAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_);
+                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
+                            return fileResponse_;
                         }
                         else
-                        if (status_ == 401)
+                        if (status_ == 404)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<ProblemDetails>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                        else
-                        if (status_ == 403)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<ProblemDetails>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         {
@@ -2983,15 +2876,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> CreateFileAsync(System.Guid? tenantId, string api_version, string x_api_version, System.Guid? id, System.DateTimeOffset? timestamp, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, FileParameter file)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> CreateFileAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, PublicAccessType? publicAccessType, Purpose? purpose, System.Guid? socialProfileId_value, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, Source? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Guid? id, System.DateTimeOffset? timestamp)
         {
-            return CreateFileAsync(tenantId, api_version, x_api_version, id, timestamp, notes, title, author, isFolder, fileName, @abstract, keyWords, validResponse, parentFileUploadId, filePath, file, System.Threading.CancellationToken.None);
+            return CreateFileAsync(tenantId, api_version, x_api_version, file, notes, title, author, isFolder, fileName, @abstract, keyWords, validResponse, parentFileUploadId, filePath, publicAccessType, purpose, socialProfileId_value, appFile_content, appFile_sha256, appFile_createdAtUtc, appFile_userId_value, appFile_tenantId_value, appFile_enrollmentId_value, appFile_source, appFile_length, appFile_name, appFile_fileName, appFile_lastModified, appFile_size, appFile_contentType, appFile_contentDisposition, appFile_headers, id, timestamp, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> CreateFileAsync(System.Guid? tenantId, string api_version, string x_api_version, System.Guid? id, System.DateTimeOffset? timestamp, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, FileParameter file, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> CreateFileAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, PublicAccessType? publicAccessType, Purpose? purpose, System.Guid? socialProfileId_value, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, Source? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Guid? id, System.DateTimeOffset? timestamp, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -3007,6 +2900,213 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                     content_.Headers.Remove("Content-Type");
                     content_.Headers.TryAddWithoutValidation("Content-Type", "multipart/form-data; boundary=" + boundary_);
 
+                    if (file == null)
+                        throw new System.ArgumentNullException("file");
+                    else
+                    {
+                        var content_file_ = new System.Net.Http.StreamContent(file.Data);
+                        if (!string.IsNullOrEmpty(file.ContentType))
+                            content_file_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(file.ContentType);
+                        content_.Add(content_file_, "file", file.FileName ?? "file");
+                    }
+
+                    if (notes == null)
+                        throw new System.ArgumentNullException("notes");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(notes, System.Globalization.CultureInfo.InvariantCulture)), "notes");
+                    }
+
+                    if (title == null)
+                        throw new System.ArgumentNullException("title");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(title, System.Globalization.CultureInfo.InvariantCulture)), "title");
+                    }
+
+                    if (author == null)
+                        throw new System.ArgumentNullException("author");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(author, System.Globalization.CultureInfo.InvariantCulture)), "author");
+                    }
+
+                    if (isFolder == null)
+                        throw new System.ArgumentNullException("isFolder");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(isFolder, System.Globalization.CultureInfo.InvariantCulture)), "isFolder");
+                    }
+
+                    if (fileName == null)
+                        throw new System.ArgumentNullException("fileName");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(fileName, System.Globalization.CultureInfo.InvariantCulture)), "fileName");
+                    }
+
+                    if (@abstract == null)
+                        throw new System.ArgumentNullException("@abstract");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(@abstract, System.Globalization.CultureInfo.InvariantCulture)), "abstract");
+                    }
+
+                    if (keyWords == null)
+                        throw new System.ArgumentNullException("keyWords");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(keyWords, System.Globalization.CultureInfo.InvariantCulture)), "keyWords");
+                    }
+
+                    if (validResponse == null)
+                        throw new System.ArgumentNullException("validResponse");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(validResponse, System.Globalization.CultureInfo.InvariantCulture)), "validResponse");
+                    }
+
+                    if (parentFileUploadId == null)
+                        throw new System.ArgumentNullException("parentFileUploadId");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(parentFileUploadId, System.Globalization.CultureInfo.InvariantCulture)), "parentFileUploadId");
+                    }
+
+                    if (filePath == null)
+                        throw new System.ArgumentNullException("filePath");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(filePath, System.Globalization.CultureInfo.InvariantCulture)), "filePath");
+                    }
+
+                    if (publicAccessType == null)
+                        throw new System.ArgumentNullException("publicAccessType");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(publicAccessType, System.Globalization.CultureInfo.InvariantCulture)), "publicAccessType");
+                    }
+
+                    if (purpose == null)
+                        throw new System.ArgumentNullException("purpose");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(purpose, System.Globalization.CultureInfo.InvariantCulture)), "purpose");
+                    }
+
+                    if (socialProfileId_value == null)
+                        throw new System.ArgumentNullException("socialProfileId_value");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(socialProfileId_value, System.Globalization.CultureInfo.InvariantCulture)), "socialProfileId.value");
+                    }
+
+                    if (appFile_content == null)
+                        throw new System.ArgumentNullException("appFile_content");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_content, System.Globalization.CultureInfo.InvariantCulture)), "appFile.content");
+                    }
+
+                    if (appFile_sha256 == null)
+                        throw new System.ArgumentNullException("appFile_sha256");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_sha256, System.Globalization.CultureInfo.InvariantCulture)), "appFile.sha256");
+                    }
+
+                    if (appFile_createdAtUtc == null)
+                        throw new System.ArgumentNullException("appFile_createdAtUtc");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_createdAtUtc, System.Globalization.CultureInfo.InvariantCulture)), "appFile.createdAtUtc");
+                    }
+
+                    if (appFile_userId_value == null)
+                        throw new System.ArgumentNullException("appFile_userId_value");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_userId_value, System.Globalization.CultureInfo.InvariantCulture)), "appFile.userId.value");
+                    }
+
+                    if (appFile_tenantId_value == null)
+                        throw new System.ArgumentNullException("appFile_tenantId_value");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_tenantId_value, System.Globalization.CultureInfo.InvariantCulture)), "appFile.tenantId.value");
+                    }
+
+                    if (appFile_enrollmentId_value == null)
+                        throw new System.ArgumentNullException("appFile_enrollmentId_value");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_enrollmentId_value, System.Globalization.CultureInfo.InvariantCulture)), "appFile.enrollmentId.value");
+                    }
+
+                    if (appFile_source == null)
+                        throw new System.ArgumentNullException("appFile_source");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_source, System.Globalization.CultureInfo.InvariantCulture)), "appFile.source");
+                    }
+
+                    if (appFile_length == null)
+                        throw new System.ArgumentNullException("appFile_length");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_length, System.Globalization.CultureInfo.InvariantCulture)), "appFile.length");
+                    }
+
+                    if (appFile_name == null)
+                        throw new System.ArgumentNullException("appFile_name");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_name, System.Globalization.CultureInfo.InvariantCulture)), "appFile.name");
+                    }
+
+                    if (appFile_fileName == null)
+                        throw new System.ArgumentNullException("appFile_fileName");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_fileName, System.Globalization.CultureInfo.InvariantCulture)), "appFile.fileName");
+                    }
+
+                    if (appFile_lastModified == null)
+                        throw new System.ArgumentNullException("appFile_lastModified");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_lastModified, System.Globalization.CultureInfo.InvariantCulture)), "appFile.lastModified");
+                    }
+
+                    if (appFile_size == null)
+                        throw new System.ArgumentNullException("appFile_size");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_size, System.Globalization.CultureInfo.InvariantCulture)), "appFile.size");
+                    }
+
+                    if (appFile_contentType == null)
+                        throw new System.ArgumentNullException("appFile_contentType");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_contentType, System.Globalization.CultureInfo.InvariantCulture)), "appFile.contentType");
+                    }
+
+                    if (appFile_contentDisposition == null)
+                        throw new System.ArgumentNullException("appFile_contentDisposition");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_contentDisposition, System.Globalization.CultureInfo.InvariantCulture)), "appFile.contentDisposition");
+                    }
+
+                    if (appFile_headers == null)
+                        throw new System.ArgumentNullException("appFile_headers");
+                    else
+                    {
+                        var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(appFile_headers, JsonSerializerSettings);
+                        content_.Add(new System.Net.Http.StringContent(json_, System.Text.Encoding.UTF8, "application/json"), "appFile.headers");
+                    }
+
                     if (id == null)
                         throw new System.ArgumentNullException("id");
                     else
@@ -3019,68 +3119,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                     else
                     {
                         content_.Add(new System.Net.Http.StringContent(ConvertToString(timestamp, System.Globalization.CultureInfo.InvariantCulture)), "timestamp");
-                    }
-
-                    if (notes != null)
-                    {
-                        content_.Add(new System.Net.Http.StringContent(ConvertToString(notes, System.Globalization.CultureInfo.InvariantCulture)), "notes");
-                    }
-
-                    if (title != null)
-                    {
-                        content_.Add(new System.Net.Http.StringContent(ConvertToString(title, System.Globalization.CultureInfo.InvariantCulture)), "title");
-                    }
-
-                    if (author != null)
-                    {
-                        content_.Add(new System.Net.Http.StringContent(ConvertToString(author, System.Globalization.CultureInfo.InvariantCulture)), "author");
-                    }
-
-                    if (isFolder == null)
-                        throw new System.ArgumentNullException("isFolder");
-                    else
-                    {
-                        content_.Add(new System.Net.Http.StringContent(ConvertToString(isFolder, System.Globalization.CultureInfo.InvariantCulture)), "isFolder");
-                    }
-
-                    if (fileName != null)
-                    {
-                        content_.Add(new System.Net.Http.StringContent(ConvertToString(fileName, System.Globalization.CultureInfo.InvariantCulture)), "fileName");
-                    }
-
-                    if (@abstract != null)
-                    {
-                        content_.Add(new System.Net.Http.StringContent(ConvertToString(@abstract, System.Globalization.CultureInfo.InvariantCulture)), "abstract");
-                    }
-
-                    if (keyWords != null)
-                    {
-                        content_.Add(new System.Net.Http.StringContent(ConvertToString(keyWords, System.Globalization.CultureInfo.InvariantCulture)), "keyWords");
-                    }
-
-                    if (validResponse == null)
-                        throw new System.ArgumentNullException("validResponse");
-                    else
-                    {
-                        content_.Add(new System.Net.Http.StringContent(ConvertToString(validResponse, System.Globalization.CultureInfo.InvariantCulture)), "validResponse");
-                    }
-
-                    if (parentFileUploadId != null)
-                    {
-                        content_.Add(new System.Net.Http.StringContent(ConvertToString(parentFileUploadId, System.Globalization.CultureInfo.InvariantCulture)), "parentFileUploadId");
-                    }
-
-                    if (filePath != null)
-                    {
-                        content_.Add(new System.Net.Http.StringContent(ConvertToString(filePath, System.Globalization.CultureInfo.InvariantCulture)), "filePath");
-                    }
-
-                    if (file != null)
-                    {
-                        var content_file_ = new System.Net.Http.StreamContent(file.Data);
-                        if (!string.IsNullOrEmpty(file.ContentType))
-                            content_file_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(file.ContentType);
-                        content_.Add(content_file_, "file", file.FileName ?? "file");
                     }
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -3164,24 +3202,115 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                             throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
-                        if (status_ == 409)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<long> GetFilesCountAsync(System.Guid? tenantId, string api_version, string x_api_version)
+        {
+            return GetFilesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<long> GetFilesCountAsync(System.Guid? tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        {
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/StorageService/Files/Count"
+                    urlBuilder_.Append("api/v2/StorageService/Files/Count");
+                    urlBuilder_.Append('?');
+                    if (tenantId != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<long>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<ErrorEnvelope>("Conflict", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
-                        if (status_ == 422)
+                        if (status_ == 401)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<ErrorEnvelope>("Unprocessable Content", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         {
@@ -3289,14 +3418,14 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                             throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
-                        if (status_ == 403)
+                        if (status_ == 404)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         {
@@ -3320,15 +3449,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FileUploadDtoEnvelope> UpdateFileAsync(System.Guid? tenantId, System.Guid fileId, string api_version, string x_api_version, string notes, string metadata, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadID, string filePath, FileParameter file)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UpdateFileAsync(System.Guid? tenantId, System.Guid fileId, string api_version, string x_api_version, FileParameter file, string notes, string metadata, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadID, string filePath, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, Source2? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers)
         {
-            return UpdateFileAsync(tenantId, fileId, api_version, x_api_version, notes, metadata, title, author, isFolder, fileName, @abstract, keyWords, validResponse, parentFileUploadID, filePath, file, System.Threading.CancellationToken.None);
+            return UpdateFileAsync(tenantId, fileId, api_version, x_api_version, file, notes, metadata, title, author, isFolder, fileName, @abstract, keyWords, validResponse, parentFileUploadID, filePath, appFile_content, appFile_sha256, appFile_createdAtUtc, appFile_userId_value, appFile_tenantId_value, appFile_enrollmentId_value, appFile_source, appFile_length, appFile_name, appFile_fileName, appFile_lastModified, appFile_size, appFile_contentType, appFile_contentDisposition, appFile_headers, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileUploadDtoEnvelope> UpdateFileAsync(System.Guid? tenantId, System.Guid fileId, string api_version, string x_api_version, string notes, string metadata, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadID, string filePath, FileParameter file, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UpdateFileAsync(System.Guid? tenantId, System.Guid fileId, string api_version, string x_api_version, FileParameter file, string notes, string metadata, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadID, string filePath, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, Source2? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Threading.CancellationToken cancellationToken)
         {
             if (fileId == null)
                 throw new System.ArgumentNullException("fileId");
@@ -3347,22 +3476,40 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                     content_.Headers.Remove("Content-Type");
                     content_.Headers.TryAddWithoutValidation("Content-Type", "multipart/form-data; boundary=" + boundary_);
 
-                    if (notes != null)
+                    if (file == null)
+                        throw new System.ArgumentNullException("file");
+                    else
+                    {
+                        var content_file_ = new System.Net.Http.StreamContent(file.Data);
+                        if (!string.IsNullOrEmpty(file.ContentType))
+                            content_file_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(file.ContentType);
+                        content_.Add(content_file_, "file", file.FileName ?? "file");
+                    }
+
+                    if (notes == null)
+                        throw new System.ArgumentNullException("notes");
+                    else
                     {
                         content_.Add(new System.Net.Http.StringContent(ConvertToString(notes, System.Globalization.CultureInfo.InvariantCulture)), "notes");
                     }
 
-                    if (metadata != null)
+                    if (metadata == null)
+                        throw new System.ArgumentNullException("metadata");
+                    else
                     {
                         content_.Add(new System.Net.Http.StringContent(ConvertToString(metadata, System.Globalization.CultureInfo.InvariantCulture)), "metadata");
                     }
 
-                    if (title != null)
+                    if (title == null)
+                        throw new System.ArgumentNullException("title");
+                    else
                     {
                         content_.Add(new System.Net.Http.StringContent(ConvertToString(title, System.Globalization.CultureInfo.InvariantCulture)), "title");
                     }
 
-                    if (author != null)
+                    if (author == null)
+                        throw new System.ArgumentNullException("author");
+                    else
                     {
                         content_.Add(new System.Net.Http.StringContent(ConvertToString(author, System.Globalization.CultureInfo.InvariantCulture)), "author");
                     }
@@ -3374,17 +3521,23 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                         content_.Add(new System.Net.Http.StringContent(ConvertToString(isFolder, System.Globalization.CultureInfo.InvariantCulture)), "isFolder");
                     }
 
-                    if (fileName != null)
+                    if (fileName == null)
+                        throw new System.ArgumentNullException("fileName");
+                    else
                     {
                         content_.Add(new System.Net.Http.StringContent(ConvertToString(fileName, System.Globalization.CultureInfo.InvariantCulture)), "fileName");
                     }
 
-                    if (@abstract != null)
+                    if (@abstract == null)
+                        throw new System.ArgumentNullException("@abstract");
+                    else
                     {
                         content_.Add(new System.Net.Http.StringContent(ConvertToString(@abstract, System.Globalization.CultureInfo.InvariantCulture)), "abstract");
                     }
 
-                    if (keyWords != null)
+                    if (keyWords == null)
+                        throw new System.ArgumentNullException("keyWords");
+                    else
                     {
                         content_.Add(new System.Net.Http.StringContent(ConvertToString(keyWords, System.Globalization.CultureInfo.InvariantCulture)), "keyWords");
                     }
@@ -3396,22 +3549,124 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                         content_.Add(new System.Net.Http.StringContent(ConvertToString(validResponse, System.Globalization.CultureInfo.InvariantCulture)), "validResponse");
                     }
 
-                    if (parentFileUploadID != null)
+                    if (parentFileUploadID == null)
+                        throw new System.ArgumentNullException("parentFileUploadID");
+                    else
                     {
                         content_.Add(new System.Net.Http.StringContent(ConvertToString(parentFileUploadID, System.Globalization.CultureInfo.InvariantCulture)), "parentFileUploadID");
                     }
 
-                    if (filePath != null)
+                    if (filePath == null)
+                        throw new System.ArgumentNullException("filePath");
+                    else
                     {
                         content_.Add(new System.Net.Http.StringContent(ConvertToString(filePath, System.Globalization.CultureInfo.InvariantCulture)), "filePath");
                     }
 
-                    if (file != null)
+                    if (appFile_content == null)
+                        throw new System.ArgumentNullException("appFile_content");
+                    else
                     {
-                        var content_file_ = new System.Net.Http.StreamContent(file.Data);
-                        if (!string.IsNullOrEmpty(file.ContentType))
-                            content_file_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(file.ContentType);
-                        content_.Add(content_file_, "file", file.FileName ?? "file");
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_content, System.Globalization.CultureInfo.InvariantCulture)), "appFile.content");
+                    }
+
+                    if (appFile_sha256 == null)
+                        throw new System.ArgumentNullException("appFile_sha256");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_sha256, System.Globalization.CultureInfo.InvariantCulture)), "appFile.sha256");
+                    }
+
+                    if (appFile_createdAtUtc == null)
+                        throw new System.ArgumentNullException("appFile_createdAtUtc");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_createdAtUtc, System.Globalization.CultureInfo.InvariantCulture)), "appFile.createdAtUtc");
+                    }
+
+                    if (appFile_userId_value == null)
+                        throw new System.ArgumentNullException("appFile_userId_value");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_userId_value, System.Globalization.CultureInfo.InvariantCulture)), "appFile.userId.value");
+                    }
+
+                    if (appFile_tenantId_value == null)
+                        throw new System.ArgumentNullException("appFile_tenantId_value");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_tenantId_value, System.Globalization.CultureInfo.InvariantCulture)), "appFile.tenantId.value");
+                    }
+
+                    if (appFile_enrollmentId_value == null)
+                        throw new System.ArgumentNullException("appFile_enrollmentId_value");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_enrollmentId_value, System.Globalization.CultureInfo.InvariantCulture)), "appFile.enrollmentId.value");
+                    }
+
+                    if (appFile_source == null)
+                        throw new System.ArgumentNullException("appFile_source");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_source, System.Globalization.CultureInfo.InvariantCulture)), "appFile.source");
+                    }
+
+                    if (appFile_length == null)
+                        throw new System.ArgumentNullException("appFile_length");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_length, System.Globalization.CultureInfo.InvariantCulture)), "appFile.length");
+                    }
+
+                    if (appFile_name == null)
+                        throw new System.ArgumentNullException("appFile_name");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_name, System.Globalization.CultureInfo.InvariantCulture)), "appFile.name");
+                    }
+
+                    if (appFile_fileName == null)
+                        throw new System.ArgumentNullException("appFile_fileName");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_fileName, System.Globalization.CultureInfo.InvariantCulture)), "appFile.fileName");
+                    }
+
+                    if (appFile_lastModified == null)
+                        throw new System.ArgumentNullException("appFile_lastModified");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_lastModified, System.Globalization.CultureInfo.InvariantCulture)), "appFile.lastModified");
+                    }
+
+                    if (appFile_size == null)
+                        throw new System.ArgumentNullException("appFile_size");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_size, System.Globalization.CultureInfo.InvariantCulture)), "appFile.size");
+                    }
+
+                    if (appFile_contentType == null)
+                        throw new System.ArgumentNullException("appFile_contentType");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_contentType, System.Globalization.CultureInfo.InvariantCulture)), "appFile.contentType");
+                    }
+
+                    if (appFile_contentDisposition == null)
+                        throw new System.ArgumentNullException("appFile_contentDisposition");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(appFile_contentDisposition, System.Globalization.CultureInfo.InvariantCulture)), "appFile.contentDisposition");
+                    }
+
+                    if (appFile_headers == null)
+                        throw new System.ArgumentNullException("appFile_headers");
+                    else
+                    {
+                        var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(appFile_headers, JsonSerializerSettings);
+                        content_.Add(new System.Net.Http.StringContent(json_, System.Text.Encoding.UTF8, "application/json"), "appFile.headers");
                     }
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
@@ -3458,7 +3713,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<FileUploadDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<EmptyEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3476,16 +3731,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                             throw new ApiException<ErrorEnvelope>("Bad Request", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
-                        if (status_ == 401)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                        else
                         if (status_ == 403)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
@@ -3496,24 +3741,14 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                             throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
-                        if (status_ == 409)
+                        if (status_ == 404)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<ErrorEnvelope>("Conflict", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                        else
-                        if (status_ == 422)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Unprocessable Content", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         {
@@ -3537,7 +3772,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FileUploadDtoEnvelope> DeleteFileAsync(System.Guid? tenantId, System.Guid fileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> DeleteFileAsync(System.Guid? tenantId, System.Guid fileId, string api_version, string x_api_version)
         {
             return DeleteFileAsync(tenantId, fileId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -3545,7 +3780,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileUploadDtoEnvelope> DeleteFileAsync(System.Guid? tenantId, System.Guid fileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> DeleteFileAsync(System.Guid? tenantId, System.Guid fileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (fileId == null)
                 throw new System.ArgumentNullException("fileId");
@@ -3603,22 +3838,12 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<FileUploadDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<EmptyEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             return objectResponse_.Object;
-                        }
-                        else
-                        if (status_ == 400)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Bad Request", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         if (status_ == 401)
@@ -3641,24 +3866,14 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                             throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
-                        if (status_ == 409)
+                        if (status_ == 404)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<ErrorEnvelope>("Conflict", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                        else
-                        if (status_ == 422)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ErrorEnvelope>("Unprocessable Content", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         {
@@ -3765,14 +3980,128 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                             throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
-                        if (status_ == 403)
+                        if (status_ == 404)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<FileResponse> GetFileThumbnailAsync(System.Guid? tenantId, System.Guid fileId, string api_version, string x_api_version)
+        {
+            return GetFileThumbnailAsync(tenantId, fileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<FileResponse> GetFileThumbnailAsync(System.Guid? tenantId, System.Guid fileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        {
+            if (fileId == null)
+                throw new System.ArgumentNullException("fileId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/StorageService/Files/{fileId}/Thumbnail"
+                    urlBuilder_.Append("api/v2/StorageService/Files/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(fileId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Thumbnail");
+                    urlBuilder_.Append('?');
+                    if (tenantId != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200 || status_ == 206)
+                        {
+                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await ReadAsStreamAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_);
+                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
+                            return fileResponse_;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         {
@@ -3795,28 +4124,494 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
         }
 
         /// <summary>
-        /// Upload a single file
+        /// Upload a single editor file to tenant storage.
         /// </summary>
-        /// <remarks>
-        /// Uploads a single file to tenant or user storage.
-        /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task SingleAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file)
+        public virtual System.Threading.Tasks.Task RadzenUploadSingleAsync(System.Guid tenantId, string api_version, string x_api_version, FileParameter file)
         {
-            return SingleAsync(tenantId, api_version, x_api_version, file, System.Threading.CancellationToken.None);
+            return RadzenUploadSingleAsync(tenantId, api_version, x_api_version, file, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Upload a single file
+        /// Upload a single editor file to tenant storage.
         /// </summary>
-        /// <remarks>
-        /// Uploads a single file to tenant or user storage.
-        /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task SingleAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task RadzenUploadSingleAsync(System.Guid tenantId, string api_version, string x_api_version, FileParameter file, System.Threading.CancellationToken cancellationToken)
+        {
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var boundary_ = System.Guid.NewGuid().ToString();
+                    var content_ = new System.Net.Http.MultipartFormDataContent(boundary_);
+                    content_.Headers.Remove("Content-Type");
+                    content_.Headers.TryAddWithoutValidation("Content-Type", "multipart/form-data; boundary=" + boundary_);
+
+                    if (file == null)
+                        throw new System.ArgumentNullException("file");
+                    else
+                    {
+                        var content_file_ = new System.Net.Http.StreamContent(file.Data);
+                        if (!string.IsNullOrEmpty(file.ContentType))
+                            content_file_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(file.ContentType);
+                        content_.Add(content_file_, "file", file.FileName ?? "file");
+                    }
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/fs/radzen/tenants/{tenantId}/upload/single"
+                    urlBuilder_.Append("api/v2/fs/radzen/tenants/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/upload/single");
+                    urlBuilder_.Append('?');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Upload a single editor file scoped to a record.
+        /// </summary>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task RadzenUploadSingleScopedAsync(System.Guid tenantId, string recordType, string recordId, string api_version, string x_api_version, FileParameter file)
+        {
+            return RadzenUploadSingleScopedAsync(tenantId, recordType, recordId, api_version, x_api_version, file, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Upload a single editor file scoped to a record.
+        /// </summary>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task RadzenUploadSingleScopedAsync(System.Guid tenantId, string recordType, string recordId, string api_version, string x_api_version, FileParameter file, System.Threading.CancellationToken cancellationToken)
+        {
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            if (recordType == null)
+                throw new System.ArgumentNullException("recordType");
+
+            if (recordId == null)
+                throw new System.ArgumentNullException("recordId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var boundary_ = System.Guid.NewGuid().ToString();
+                    var content_ = new System.Net.Http.MultipartFormDataContent(boundary_);
+                    content_.Headers.Remove("Content-Type");
+                    content_.Headers.TryAddWithoutValidation("Content-Type", "multipart/form-data; boundary=" + boundary_);
+
+                    if (file == null)
+                        throw new System.ArgumentNullException("file");
+                    else
+                    {
+                        var content_file_ = new System.Net.Http.StreamContent(file.Data);
+                        if (!string.IsNullOrEmpty(file.ContentType))
+                            content_file_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(file.ContentType);
+                        content_.Add(content_file_, "file", file.FileName ?? "file");
+                    }
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/fs/radzen/tenants/{tenantId}/{recordType}/{recordId}/upload/single"
+                    urlBuilder_.Append("api/v2/fs/radzen/tenants/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(recordType, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(recordId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/upload/single");
+                    urlBuilder_.Append('?');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Upload an editor image to tenant storage.
+        /// </summary>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task RadzenUploadImageAsync(System.Guid tenantId, string visibility, string socialProfileId, string purpose, string api_version, string x_api_version, FileParameter file)
+        {
+            return RadzenUploadImageAsync(tenantId, visibility, socialProfileId, purpose, api_version, x_api_version, file, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Upload an editor image to tenant storage.
+        /// </summary>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task RadzenUploadImageAsync(System.Guid tenantId, string visibility, string socialProfileId, string purpose, string api_version, string x_api_version, FileParameter file, System.Threading.CancellationToken cancellationToken)
+        {
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var boundary_ = System.Guid.NewGuid().ToString();
+                    var content_ = new System.Net.Http.MultipartFormDataContent(boundary_);
+                    content_.Headers.Remove("Content-Type");
+                    content_.Headers.TryAddWithoutValidation("Content-Type", "multipart/form-data; boundary=" + boundary_);
+
+                    if (file == null)
+                        throw new System.ArgumentNullException("file");
+                    else
+                    {
+                        var content_file_ = new System.Net.Http.StreamContent(file.Data);
+                        if (!string.IsNullOrEmpty(file.ContentType))
+                            content_file_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(file.ContentType);
+                        content_.Add(content_file_, "file", file.FileName ?? "file");
+                    }
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/fs/radzen/tenants/{tenantId}/upload/image"
+                    urlBuilder_.Append("api/v2/fs/radzen/tenants/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/upload/image");
+                    urlBuilder_.Append('?');
+                    if (visibility != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("visibility")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(visibility, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (socialProfileId != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (purpose != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("purpose")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(purpose, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Upload an editor image scoped to a record.
+        /// </summary>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task RadzenUploadImageScopedAsync(System.Guid tenantId, string recordType, string recordId, string visibility, string socialProfileId, string purpose, string api_version, string x_api_version, FileParameter file)
+        {
+            return RadzenUploadImageScopedAsync(tenantId, recordType, recordId, visibility, socialProfileId, purpose, api_version, x_api_version, file, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Upload an editor image scoped to a record.
+        /// </summary>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task RadzenUploadImageScopedAsync(System.Guid tenantId, string recordType, string recordId, string visibility, string socialProfileId, string purpose, string api_version, string x_api_version, FileParameter file, System.Threading.CancellationToken cancellationToken)
+        {
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            if (recordType == null)
+                throw new System.ArgumentNullException("recordType");
+
+            if (recordId == null)
+                throw new System.ArgumentNullException("recordId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var boundary_ = System.Guid.NewGuid().ToString();
+                    var content_ = new System.Net.Http.MultipartFormDataContent(boundary_);
+                    content_.Headers.Remove("Content-Type");
+                    content_.Headers.TryAddWithoutValidation("Content-Type", "multipart/form-data; boundary=" + boundary_);
+
+                    if (file == null)
+                        throw new System.ArgumentNullException("file");
+                    else
+                    {
+                        var content_file_ = new System.Net.Http.StreamContent(file.Data);
+                        if (!string.IsNullOrEmpty(file.ContentType))
+                            content_file_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(file.ContentType);
+                        content_.Add(content_file_, "file", file.FileName ?? "file");
+                    }
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/fs/radzen/tenants/{tenantId}/{recordType}/{recordId}/upload/image"
+                    urlBuilder_.Append("api/v2/fs/radzen/tenants/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(recordType, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(recordId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/upload/image");
+                    urlBuilder_.Append('?');
+                    if (visibility != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("visibility")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(visibility, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (socialProfileId != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (purpose != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("purpose")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(purpose, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Upload an editor image to user storage.
+        /// </summary>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task RadzenUploadUserImageAsync(string visibility, string socialProfileId, string purpose, string api_version, string x_api_version, FileParameter file)
+        {
+            return RadzenUploadUserImageAsync(visibility, socialProfileId, purpose, api_version, x_api_version, file, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Upload an editor image to user storage.
+        /// </summary>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task RadzenUploadUserImageAsync(string visibility, string socialProfileId, string purpose, string api_version, string x_api_version, FileParameter file, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -3846,12 +4641,20 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/v2/StorageService/RadzenEditor/Uploads/Single"
-                    urlBuilder_.Append("api/v2/StorageService/RadzenEditor/Uploads/Single");
+                    // Operation Path: "api/v2/fs/radzen/users/upload/image"
+                    urlBuilder_.Append("api/v2/fs/radzen/users/upload/image");
                     urlBuilder_.Append('?');
-                    if (tenantId != null)
+                    if (visibility != null)
                     {
-                        urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                        urlBuilder_.Append(System.Uri.EscapeDataString("visibility")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(visibility, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (socialProfileId != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (purpose != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("purpose")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(purpose, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     }
                     if (api_version != null)
                     {
@@ -3907,29 +4710,29 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
         }
 
         /// <summary>
-        /// Upload an image file
+        /// Upload a user editor image scoped to a record.
         /// </summary>
-        /// <remarks>
-        /// Uploads an image file and returns its URL for editor embedding.
-        /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task ImageAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file)
+        public virtual System.Threading.Tasks.Task RadzenUploadUserImageScopedAsync(string recordType, string recordId, string visibility, string socialProfileId, string purpose, string api_version, string x_api_version, FileParameter file)
         {
-            return ImageAsync(tenantId, api_version, x_api_version, file, System.Threading.CancellationToken.None);
+            return RadzenUploadUserImageScopedAsync(recordType, recordId, visibility, socialProfileId, purpose, api_version, x_api_version, file, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Upload an image file
+        /// Upload a user editor image scoped to a record.
         /// </summary>
-        /// <remarks>
-        /// Uploads an image file and returns its URL for editor embedding.
-        /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task ImageAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task RadzenUploadUserImageScopedAsync(string recordType, string recordId, string visibility, string socialProfileId, string purpose, string api_version, string x_api_version, FileParameter file, System.Threading.CancellationToken cancellationToken)
         {
+            if (recordType == null)
+                throw new System.ArgumentNullException("recordType");
+
+            if (recordId == null)
+                throw new System.ArgumentNullException("recordId");
+
             var client_ = _httpClient;
             var disposeClient_ = false;
             try
@@ -3958,12 +4761,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/v2/StorageService/RadzenEditor/Uploads/Image"
-                    urlBuilder_.Append("api/v2/StorageService/RadzenEditor/Uploads/Image");
+                    // Operation Path: "api/v2/fs/radzen/users/{recordType}/{recordId}/upload/image"
+                    urlBuilder_.Append("api/v2/fs/radzen/users/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(recordType, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(recordId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/upload/image");
                     urlBuilder_.Append('?');
-                    if (tenantId != null)
+                    if (visibility != null)
                     {
-                        urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                        urlBuilder_.Append(System.Uri.EscapeDataString("visibility")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(visibility, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (socialProfileId != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (purpose != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("purpose")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(purpose, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     }
                     if (api_version != null)
                     {
@@ -4019,29 +4834,26 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
         }
 
         /// <summary>
-        /// Upload multiple files
+        /// Chunked editor upload (not implemented).
         /// </summary>
-        /// <remarks>
-        /// Uploads multiple files to tenant or user storage.
-        /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task MultipleAsync(System.Guid? tenantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<FileParameter> files)
+        public virtual System.Threading.Tasks.Task RadzenUploadStreamAsync(string tenantId, string api_version, string x_api_version)
         {
-            return MultipleAsync(tenantId, api_version, x_api_version, files, System.Threading.CancellationToken.None);
+            return RadzenUploadStreamAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Upload multiple files
+        /// Chunked editor upload (not implemented).
         /// </summary>
-        /// <remarks>
-        /// Uploads multiple files to tenant or user storage.
-        /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task MultipleAsync(System.Guid? tenantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<FileParameter> files, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task RadzenUploadStreamAsync(string tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
             var client_ = _httpClient;
             var disposeClient_ = false;
             try
@@ -4051,35 +4863,16 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
-                    var boundary_ = System.Guid.NewGuid().ToString();
-                    var content_ = new System.Net.Http.MultipartFormDataContent(boundary_);
-                    content_.Headers.Remove("Content-Type");
-                    content_.Headers.TryAddWithoutValidation("Content-Type", "multipart/form-data; boundary=" + boundary_);
-
-                    if (files == null)
-                        throw new System.ArgumentNullException("files");
-                    else
-                    {
-                        foreach (var item_ in files)
-                        {
-                            var content_files_ = new System.Net.Http.StreamContent(item_.Data);
-                            if (!string.IsNullOrEmpty(item_.ContentType))
-                                content_files_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(item_.ContentType);
-                            content_.Add(content_files_, "files", item_.FileName ?? "files");
-                        }
-                    }
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("PUT");
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/v2/StorageService/RadzenEditor/Uploads/Multiple"
-                    urlBuilder_.Append("api/v2/StorageService/RadzenEditor/Uploads/Multiple");
+                    // Operation Path: "api/v2/fs/radzen/tenants/{tenantId}/upload/stream"
+                    urlBuilder_.Append("api/v2/fs/radzen/tenants/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/upload/stream");
                     urlBuilder_.Append('?');
-                    if (tenantId != null)
-                    {
-                        urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
-                    }
                     if (api_version != null)
                     {
                         urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
@@ -4134,31 +4927,31 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
         }
 
         /// <summary>
-        /// Upload files by ID
+        /// Chunked editor upload (not implemented).
         /// </summary>
-        /// <remarks>
-        /// Uploads files associated with a specific resource ID.
-        /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task PostAsync(int id, System.Guid? tenantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<FileParameter> files)
+        public virtual System.Threading.Tasks.Task RadzenUploadStream2Async(string tenantId, string recordType, string recordId, string api_version, string x_api_version)
         {
-            return PostAsync(id, tenantId, api_version, x_api_version, files, System.Threading.CancellationToken.None);
+            return RadzenUploadStream2Async(tenantId, recordType, recordId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Upload files by ID
+        /// Chunked editor upload (not implemented).
         /// </summary>
-        /// <remarks>
-        /// Uploads files associated with a specific resource ID.
-        /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task PostAsync(int id, System.Guid? tenantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<FileParameter> files, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task RadzenUploadStream2Async(string tenantId, string recordType, string recordId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
-            if (id == null)
-                throw new System.ArgumentNullException("id");
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            if (recordType == null)
+                throw new System.ArgumentNullException("recordType");
+
+            if (recordId == null)
+                throw new System.ArgumentNullException("recordId");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -4169,148 +4962,20 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
-                    var boundary_ = System.Guid.NewGuid().ToString();
-                    var content_ = new System.Net.Http.MultipartFormDataContent(boundary_);
-                    content_.Headers.Remove("Content-Type");
-                    content_.Headers.TryAddWithoutValidation("Content-Type", "multipart/form-data; boundary=" + boundary_);
-
-                    if (files == null)
-                        throw new System.ArgumentNullException("files");
-                    else
-                    {
-                        foreach (var item_ in files)
-                        {
-                            var content_files_ = new System.Net.Http.StreamContent(item_.Data);
-                            if (!string.IsNullOrEmpty(item_.ContentType))
-                                content_files_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(item_.ContentType);
-                            content_.Add(content_files_, "files", item_.FileName ?? "files");
-                        }
-                    }
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("PUT");
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/v2/StorageService/RadzenEditor/Uploads/{id}"
-                    urlBuilder_.Append("api/v2/StorageService/RadzenEditor/Uploads/");
-                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
+                    // Operation Path: "api/v2/fs/radzen/tenants/{tenantId}/{recordType}/{recordId}/upload/stream"
+                    urlBuilder_.Append("api/v2/fs/radzen/tenants/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(recordType, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(recordId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/upload/stream");
                     urlBuilder_.Append('?');
-                    if (tenantId != null)
-                    {
-                        urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
-                    }
-                    if (api_version != null)
-                    {
-                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
-                    }
-                    urlBuilder_.Length--;
-
-                    PrepareRequest(client_, request_, urlBuilder_);
-
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-
-                    PrepareRequest(client_, request_, url_);
-
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
-                        foreach (var item_ in response_.Headers)
-                            headers_[item_.Key] = item_.Value;
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-
-                        ProcessResponse(client_, response_);
-
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-
-        /// <summary>
-        /// Upload a specific file
-        /// </summary>
-        /// <remarks>
-        /// Uploads a specific file to tenant or user storage.
-        /// </remarks>
-        /// <returns>OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task SpecificAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file)
-        {
-            return SpecificAsync(tenantId, api_version, x_api_version, file, System.Threading.CancellationToken.None);
-        }
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Upload a specific file
-        /// </summary>
-        /// <remarks>
-        /// Uploads a specific file to tenant or user storage.
-        /// </remarks>
-        /// <returns>OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task SpecificAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, System.Threading.CancellationToken cancellationToken)
-        {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-
-                    if (x_api_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
-                    var boundary_ = System.Guid.NewGuid().ToString();
-                    var content_ = new System.Net.Http.MultipartFormDataContent(boundary_);
-                    content_.Headers.Remove("Content-Type");
-                    content_.Headers.TryAddWithoutValidation("Content-Type", "multipart/form-data; boundary=" + boundary_);
-
-                    if (file == null)
-                        throw new System.ArgumentNullException("file");
-                    else
-                    {
-                        var content_file_ = new System.Net.Http.StreamContent(file.Data);
-                        if (!string.IsNullOrEmpty(file.ContentType))
-                            content_file_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(file.ContentType);
-                        content_.Add(content_file_, "file", file.FileName ?? "file");
-                    }
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-
-                    var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/v2/StorageService/RadzenEditor/Uploads/Specific"
-                    urlBuilder_.Append("api/v2/StorageService/RadzenEditor/Uploads/Specific");
-                    urlBuilder_.Append('?');
-                    if (tenantId != null)
-                    {
-                        urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
-                    }
                     if (api_version != null)
                     {
                         urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
@@ -4368,13 +5033,13 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
         /// Upload a file
         /// </summary>
         /// <remarks>
-        /// Uploads a file to tenant or user storage.
+        /// Uploads a file to tenant or user storage, scanned and catalogued through the storage spine.
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> SaveFileAsync(System.Guid? tenantId, string api_version, string x_api_version, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, Source? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Guid? id, System.DateTimeOffset? timestamp)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> SaveFileAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, PublicAccessType2? publicAccessType, Purpose2? purpose, System.Guid? socialProfileId_value, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, Source3? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Guid? id, System.DateTimeOffset? timestamp)
         {
-            return SaveFileAsync(tenantId, api_version, x_api_version, notes, title, author, isFolder, fileName, @abstract, keyWords, validResponse, parentFileUploadId, filePath, appFile_content, appFile_sha256, appFile_createdAtUtc, appFile_userId_value, appFile_tenantId_value, appFile_enrollmentId_value, appFile_source, appFile_length, appFile_name, appFile_fileName, appFile_lastModified, appFile_size, appFile_contentType, appFile_contentDisposition, appFile_headers, id, timestamp, System.Threading.CancellationToken.None);
+            return SaveFileAsync(tenantId, api_version, x_api_version, file, notes, title, author, isFolder, fileName, @abstract, keyWords, validResponse, parentFileUploadId, filePath, publicAccessType, purpose, socialProfileId_value, appFile_content, appFile_sha256, appFile_createdAtUtc, appFile_userId_value, appFile_tenantId_value, appFile_enrollmentId_value, appFile_source, appFile_length, appFile_name, appFile_fileName, appFile_lastModified, appFile_size, appFile_contentType, appFile_contentDisposition, appFile_headers, id, timestamp, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -4382,11 +5047,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
         /// Upload a file
         /// </summary>
         /// <remarks>
-        /// Uploads a file to tenant or user storage.
+        /// Uploads a file to tenant or user storage, scanned and catalogued through the storage spine.
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> SaveFileAsync(System.Guid? tenantId, string api_version, string x_api_version, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, Source? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Guid? id, System.DateTimeOffset? timestamp, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> SaveFileAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, PublicAccessType2? publicAccessType, Purpose2? purpose, System.Guid? socialProfileId_value, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, Source3? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Guid? id, System.DateTimeOffset? timestamp, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -4401,6 +5066,16 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                     var content_ = new System.Net.Http.MultipartFormDataContent(boundary_);
                     content_.Headers.Remove("Content-Type");
                     content_.Headers.TryAddWithoutValidation("Content-Type", "multipart/form-data; boundary=" + boundary_);
+
+                    if (file == null)
+                        throw new System.ArgumentNullException("file");
+                    else
+                    {
+                        var content_file_ = new System.Net.Http.StreamContent(file.Data);
+                        if (!string.IsNullOrEmpty(file.ContentType))
+                            content_file_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(file.ContentType);
+                        content_.Add(content_file_, "file", file.FileName ?? "file");
+                    }
 
                     if (notes == null)
                         throw new System.ArgumentNullException("notes");
@@ -4470,6 +5145,27 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
                     else
                     {
                         content_.Add(new System.Net.Http.StringContent(ConvertToString(filePath, System.Globalization.CultureInfo.InvariantCulture)), "filePath");
+                    }
+
+                    if (publicAccessType == null)
+                        throw new System.ArgumentNullException("publicAccessType");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(publicAccessType, System.Globalization.CultureInfo.InvariantCulture)), "publicAccessType");
+                    }
+
+                    if (purpose == null)
+                        throw new System.ArgumentNullException("purpose");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(purpose, System.Globalization.CultureInfo.InvariantCulture)), "purpose");
+                    }
+
+                    if (socialProfileId_value == null)
+                        throw new System.ArgumentNullException("socialProfileId_value");
+                    else
+                    {
+                        content_.Add(new System.Net.Http.StringContent(ConvertToString(socialProfileId_value, System.Globalization.CultureInfo.InvariantCulture)), "socialProfileId.value");
                     }
 
                     if (appFile_content == null)
@@ -4975,6 +5671,12 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
         [Newtonsoft.Json.JsonProperty("filePath", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FilePath { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("storageKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string StorageKey { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("storageProviderKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string StorageProviderKey { get; set; }
+
         [Newtonsoft.Json.JsonProperty("fileName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FileName { get; set; }
 
@@ -5013,6 +5715,33 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
         [Newtonsoft.Json.JsonProperty("folderPath", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FolderPath { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("scanStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public FileUploadDtoScanStatus ScanStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("thumbnailStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public FileUploadDtoThumbnailStatus ThumbnailStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("hasThumbnail", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool HasThumbnail { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("thumbnailStorageKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ThumbnailStorageKey { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("thumbnailContentType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ThumbnailContentType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("thumbnailWidth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ThumbnailWidth { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("thumbnailHeight", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ThumbnailHeight { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("publicAccessType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public FileUploadDtoPublicAccessType PublicAccessType { get; set; }
 
     }
 
@@ -5128,89 +5857,32 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class PayloadFileUploadCreateDto
+    public partial class ProblemDetails
     {
 
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset Timestamp { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("notes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Notes { get; set; }
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Title { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("author", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Author { get; set; }
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Status { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("isFolder", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsFolder { get; set; }
+        [Newtonsoft.Json.JsonProperty("detail", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Detail { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("fileName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FileName { get; set; }
+        [Newtonsoft.Json.JsonProperty("instance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Instance { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("abstract", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Abstract { get; set; }
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
-        [Newtonsoft.Json.JsonProperty("keyWords", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string KeyWords { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("validResponse", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool ValidResponse { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("parentFileUploadId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ParentFileUploadId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("filePath", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FilePath { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("file", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] File { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class PayloadFileUploadUpdateDto
-    {
-
-        [Newtonsoft.Json.JsonProperty("notes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Notes { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("metadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Metadata { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Title { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("author", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Author { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("isFolder", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsFolder { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("fileName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FileName { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("abstract", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Abstract { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("keyWords", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string KeyWords { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("validResponse", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool ValidResponse { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("parentFileUploadID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ParentFileUploadID { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("filePath", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FilePath { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("file", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] File { get; set; }
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
 
     }
 
@@ -5302,7 +5974,175 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PublicAccessType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
+        Off = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
+        Container = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
+        Blob = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum Purpose
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"IdentityAvatar")]
+        IdentityAvatar = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"IdentityBanner")]
+        IdentityBanner = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ProfileAsset")]
+        ProfileAsset = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"EngagementInline")]
+        EngagementInline = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"EngagementAttachment")]
+        EngagementAttachment = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MessageAttachment")]
+        MessageAttachment = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SocialPost")]
+        SocialPost = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"RecordAttachment")]
+        RecordAttachment = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AiGenerated")]
+        AiGenerated = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SystemArtifact")]
+        SystemArtifact = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Temporary")]
+        Temporary = 11,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public enum Source
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"HttpUpload")]
+        HttpUpload = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Integration")]
+        Integration = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"InternalProcess")]
+        InternalProcess = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ApiClient")]
+        ApiClient = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"WorkflowEngine")]
+        WorkflowEngine = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum Source2
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"HttpUpload")]
+        HttpUpload = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Integration")]
+        Integration = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"InternalProcess")]
+        InternalProcess = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ApiClient")]
+        ApiClient = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"WorkflowEngine")]
+        WorkflowEngine = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PublicAccessType2
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
+        Off = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
+        Container = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
+        Blob = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum Purpose2
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"IdentityAvatar")]
+        IdentityAvatar = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"IdentityBanner")]
+        IdentityBanner = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ProfileAsset")]
+        ProfileAsset = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"EngagementInline")]
+        EngagementInline = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"EngagementAttachment")]
+        EngagementAttachment = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MessageAttachment")]
+        MessageAttachment = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SocialPost")]
+        SocialPost = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"RecordAttachment")]
+        RecordAttachment = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AiGenerated")]
+        AiGenerated = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SystemArtifact")]
+        SystemArtifact = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Temporary")]
+        Temporary = 11,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum Source3
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
@@ -5334,6 +6174,69 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
         [System.Runtime.Serialization.EnumMember(Value = @"Folder")]
         Folder = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum FileUploadDtoScanStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
+        NotRequired = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Clean")]
+        Clean = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Infected")]
+        Infected = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Quarantined")]
+        Quarantined = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum FileUploadDtoThumbnailStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
+        NotRequired = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Ready")]
+        Ready = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unsupported")]
+        Unsupported = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum FileUploadDtoPublicAccessType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
+        Off = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
+        Container = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
+        Blob = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 3,
 
     }
 
