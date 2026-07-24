@@ -218,6 +218,84 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.WalletsService
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task AguiAsync(string agentId)
+        {
+            return AguiAsync(agentId, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task AguiAsync(string agentId, System.Threading.CancellationToken cancellationToken)
+        {
+            if (agentId == null)
+                throw new System.ArgumentNullException("agentId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/AIService/Agents/{agentId}/agui"
+                    urlBuilder_.Append("api/v2/AIService/Agents/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(agentId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/agui");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task HelloAsync()
         {
             return HelloAsync(System.Threading.CancellationToken.None);
@@ -2634,9 +2712,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.WalletsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LocationDtoListEnvelope> GetWalletLocationsAsync(System.Guid walletId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<LocationDtoListEnvelope> GetLocationsForWalletAsync(System.Guid walletId, string api_version, string x_api_version)
         {
-            return GetWalletLocationsAsync(walletId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetLocationsForWalletAsync(walletId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2648,7 +2726,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.WalletsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LocationDtoListEnvelope> GetWalletLocationsAsync(System.Guid walletId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<LocationDtoListEnvelope> GetLocationsForWalletAsync(System.Guid walletId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
@@ -2758,9 +2836,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.WalletsService
         /// </remarks>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> CreateWalletLocationAsync(System.Guid walletId, string api_version, string x_api_version, LocationCreateDto body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> CreateLocationForWalletAsync(System.Guid walletId, string api_version, string x_api_version, LocationCreateDto body)
         {
-            return CreateWalletLocationAsync(walletId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
+            return CreateLocationForWalletAsync(walletId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2772,7 +2850,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.WalletsService
         /// </remarks>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> CreateWalletLocationAsync(System.Guid walletId, string api_version, string x_api_version, LocationCreateDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> CreateLocationForWalletAsync(System.Guid walletId, string api_version, string x_api_version, LocationCreateDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
@@ -2886,9 +2964,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.WalletsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetWalletLocationsCountAsync(System.Guid walletId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetLocationsForWalletCountAsync(System.Guid walletId, string api_version, string x_api_version)
         {
-            return GetWalletLocationsCountAsync(walletId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetLocationsForWalletCountAsync(walletId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2900,7 +2978,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.WalletsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetWalletLocationsCountAsync(System.Guid walletId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetLocationsForWalletCountAsync(System.Guid walletId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
@@ -3010,9 +3088,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.WalletsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LocationDtoEnvelope> GetWalletLocationAsync(System.Guid walletId, System.Guid locationId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<LocationDtoEnvelope> GetLocationForWalletAsync(System.Guid walletId, System.Guid locationId, string api_version, string x_api_version)
         {
-            return GetWalletLocationAsync(walletId, locationId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetLocationForWalletAsync(walletId, locationId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3024,7 +3102,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.WalletsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LocationDtoEnvelope> GetWalletLocationAsync(System.Guid walletId, System.Guid locationId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<LocationDtoEnvelope> GetLocationForWalletAsync(System.Guid walletId, System.Guid locationId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
@@ -3138,9 +3216,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.WalletsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UpdateWalletLocationAsync(System.Guid walletId, System.Guid locationId, string api_version, string x_api_version, LocationUpdateDto body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UpdateLocationForWalletAsync(System.Guid walletId, System.Guid locationId, string api_version, string x_api_version, LocationUpdateDto body)
         {
-            return UpdateWalletLocationAsync(walletId, locationId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
+            return UpdateLocationForWalletAsync(walletId, locationId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3152,7 +3230,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.WalletsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UpdateWalletLocationAsync(System.Guid walletId, System.Guid locationId, string api_version, string x_api_version, LocationUpdateDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UpdateLocationForWalletAsync(System.Guid walletId, System.Guid locationId, string api_version, string x_api_version, LocationUpdateDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
@@ -3270,9 +3348,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.WalletsService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> DeleteWalletLocationAsync(System.Guid walletId, System.Guid locationId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> DeleteLocationForWalletAsync(System.Guid walletId, System.Guid locationId, string api_version, string x_api_version)
         {
-            return DeleteWalletLocationAsync(walletId, locationId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return DeleteLocationForWalletAsync(walletId, locationId, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3284,7 +3362,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.WalletsService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> DeleteWalletLocationAsync(System.Guid walletId, System.Guid locationId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> DeleteLocationForWalletAsync(System.Guid walletId, System.Guid locationId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
