@@ -80,9 +80,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<AccountGroupDtoListEnvelope> GetAccountGroupsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<AccountGroupDtoListEnvelope> GetAccountGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, AccountGroupDtoCollectionQueryParameters body)
         {
-            return GetAccountGroupsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountGroupsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -94,7 +94,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<AccountGroupDtoListEnvelope> GetAccountGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<AccountGroupDtoListEnvelope> GetAccountGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, AccountGroupDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -108,6 +108,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -340,9 +344,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAccountGroupsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAccountGroupsCountAsync(System.Guid tenantId, string api_version, string x_api_version, AccountGroupDtoCollectionQueryParameters body)
         {
-            return GetAccountGroupsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountGroupsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -354,7 +358,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAccountGroupsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAccountGroupsCountAsync(System.Guid tenantId, string api_version, string x_api_version, AccountGroupDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -368,6 +372,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -751,7 +759,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountGroupAsync(System.Guid tenantId, System.Guid accountGroupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountGroupAsync(System.Guid tenantId, System.Guid accountGroupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchAccountGroupAsync(tenantId, accountGroupId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -765,7 +773,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountGroupAsync(System.Guid tenantId, System.Guid accountGroupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountGroupAsync(System.Guid tenantId, System.Guid accountGroupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (accountGroupId == null)
                 throw new System.ArgumentNullException("accountGroupId");
@@ -1013,9 +1021,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<AccountingPeriodDtoListEnvelope> GetAccountingPeriodsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<AccountingPeriodDtoListEnvelope> GetAccountingPeriodsAsync(System.Guid tenantId, string api_version, string x_api_version, AccountingPeriodDtoCollectionQueryParameters body)
         {
-            return GetAccountingPeriodsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountingPeriodsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1027,7 +1035,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<AccountingPeriodDtoListEnvelope> GetAccountingPeriodsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<AccountingPeriodDtoListEnvelope> GetAccountingPeriodsAsync(System.Guid tenantId, string api_version, string x_api_version, AccountingPeriodDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -1041,6 +1049,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -1273,9 +1285,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAccountingPeriodsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAccountingPeriodsCountAsync(System.Guid tenantId, string api_version, string x_api_version, AccountingPeriodDtoCollectionQueryParameters body)
         {
-            return GetAccountingPeriodsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountingPeriodsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1287,7 +1299,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAccountingPeriodsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAccountingPeriodsCountAsync(System.Guid tenantId, string api_version, string x_api_version, AccountingPeriodDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -1301,6 +1313,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -1674,7 +1690,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountingPeriodAsync(System.Guid tenantId, System.Guid accountingPeriodId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountingPeriodAsync(System.Guid tenantId, System.Guid accountingPeriodId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchAccountingPeriodAsync(tenantId, accountingPeriodId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -1688,7 +1704,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountingPeriodAsync(System.Guid tenantId, System.Guid accountingPeriodId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountingPeriodAsync(System.Guid tenantId, System.Guid accountingPeriodId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (accountingPeriodId == null)
                 throw new System.ArgumentNullException("accountingPeriodId");
@@ -1932,9 +1948,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<MoneyEnvelope> GetIncomesSumAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<MoneyEnvelope> GetIncomesSumAsync(System.Guid tenantId, string api_version, string x_api_version, JournalEntryDtoCollectionQueryParameters body)
         {
-            return GetIncomesSumAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetIncomesSumAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1946,7 +1962,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<MoneyEnvelope> GetIncomesSumAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<MoneyEnvelope> GetIncomesSumAsync(System.Guid tenantId, string api_version, string x_api_version, JournalEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -1960,6 +1976,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -2055,9 +2075,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<MoneyEnvelope> GetExpensesSumAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<MoneyEnvelope> GetExpensesSumAsync(System.Guid tenantId, string api_version, string x_api_version, JournalEntryDtoCollectionQueryParameters body)
         {
-            return GetExpensesSumAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetExpensesSumAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2069,7 +2089,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<MoneyEnvelope> GetExpensesSumAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<MoneyEnvelope> GetExpensesSumAsync(System.Guid tenantId, string api_version, string x_api_version, JournalEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -2083,6 +2103,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -2178,9 +2202,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<DecimalEnvelope> GetDebitsSumAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<DecimalEnvelope> GetDebitsSumAsync(System.Guid tenantId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body)
         {
-            return GetDebitsSumAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetDebitsSumAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2192,7 +2216,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<DecimalEnvelope> GetDebitsSumAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<DecimalEnvelope> GetDebitsSumAsync(System.Guid tenantId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -2206,6 +2230,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -2301,9 +2329,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<DecimalEnvelope> GetCreditsSumAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<DecimalEnvelope> GetCreditsSumAsync(System.Guid tenantId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body)
         {
-            return GetCreditsSumAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCreditsSumAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2315,7 +2343,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<DecimalEnvelope> GetCreditsSumAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<DecimalEnvelope> GetCreditsSumAsync(System.Guid tenantId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -2329,6 +2357,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -2424,9 +2456,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<AccountDtoListEnvelope> GetAccountsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<AccountDtoListEnvelope> GetAccountsAsync(System.Guid tenantId, string api_version, string x_api_version, AccountDtoCollectionQueryParameters body)
         {
-            return GetAccountsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2438,7 +2470,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<AccountDtoListEnvelope> GetAccountsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<AccountDtoListEnvelope> GetAccountsAsync(System.Guid tenantId, string api_version, string x_api_version, AccountDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -2452,6 +2484,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -2674,9 +2710,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAccountsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAccountsCountAsync(System.Guid tenantId, string api_version, string x_api_version, AccountDtoCollectionQueryParameters body)
         {
-            return GetAccountsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2688,7 +2724,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAccountsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAccountsCountAsync(System.Guid tenantId, string api_version, string x_api_version, AccountDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -2702,6 +2738,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -2797,9 +2837,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<AccountDtoListEnvelope> GetRootAccountsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<AccountDtoListEnvelope> GetRootAccountsAsync(System.Guid tenantId, string api_version, string x_api_version, AccountDtoCollectionQueryParameters body)
         {
-            return GetRootAccountsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetRootAccountsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2811,7 +2851,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<AccountDtoListEnvelope> GetRootAccountsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<AccountDtoListEnvelope> GetRootAccountsAsync(System.Guid tenantId, string api_version, string x_api_version, AccountDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -2825,6 +2865,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -3178,7 +3222,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchAccountAsync(tenantId, accountId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -3192,7 +3236,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (accountId == null)
                 throw new System.ArgumentNullException("accountId");
@@ -3817,9 +3861,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetAccountEntriesAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetAccountEntriesAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body)
         {
-            return GetAccountEntriesAsync(tenantId, accountId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountEntriesAsync(tenantId, accountId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3831,7 +3875,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetAccountEntriesAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetAccountEntriesAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (accountId == null)
                 throw new System.ArgumentNullException("accountId");
@@ -3848,6 +3892,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -4087,9 +4135,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetDebitAccountEntriesAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetDebitAccountEntriesAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body)
         {
-            return GetDebitAccountEntriesAsync(tenantId, accountId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetDebitAccountEntriesAsync(tenantId, accountId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -4101,7 +4149,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetDebitAccountEntriesAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetDebitAccountEntriesAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (accountId == null)
                 throw new System.ArgumentNullException("accountId");
@@ -4118,6 +4166,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -4215,9 +4267,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetCreditAccountEntriesAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetCreditAccountEntriesAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body)
         {
-            return GetCreditAccountEntriesAsync(tenantId, accountId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCreditAccountEntriesAsync(tenantId, accountId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -4229,7 +4281,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetCreditAccountEntriesAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetCreditAccountEntriesAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (accountId == null)
                 throw new System.ArgumentNullException("accountId");
@@ -4246,6 +4298,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -4621,7 +4677,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountEntryAsync(System.Guid tenantId, System.Guid accountId, System.Guid entryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountEntryAsync(System.Guid tenantId, System.Guid accountId, System.Guid entryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchAccountEntryAsync(tenantId, accountId, entryId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -4635,7 +4691,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountEntryAsync(System.Guid tenantId, System.Guid accountId, System.Guid entryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountEntryAsync(System.Guid tenantId, System.Guid accountId, System.Guid entryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (accountId == null)
                 throw new System.ArgumentNullException("accountId");
@@ -4899,9 +4955,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetAccountDebitsAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetAccountDebitsAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body)
         {
-            return GetAccountDebitsAsync(tenantId, accountId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountDebitsAsync(tenantId, accountId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -4913,7 +4969,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetAccountDebitsAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetAccountDebitsAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (accountId == null)
                 throw new System.ArgumentNullException("accountId");
@@ -4930,6 +4986,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -5159,9 +5219,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAccountDebitsCountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAccountDebitsCountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body)
         {
-            return GetAccountDebitsCountAsync(tenantId, accountId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountDebitsCountAsync(tenantId, accountId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -5173,7 +5233,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAccountDebitsCountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAccountDebitsCountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (accountId == null)
                 throw new System.ArgumentNullException("accountId");
@@ -5190,6 +5250,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -5287,9 +5351,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetAccountCreditsAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetAccountCreditsAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body)
         {
-            return GetAccountCreditsAsync(tenantId, accountId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountCreditsAsync(tenantId, accountId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -5301,7 +5365,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetAccountCreditsAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<AccountingEntryDtoListEnvelope> GetAccountCreditsAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (accountId == null)
                 throw new System.ArgumentNullException("accountId");
@@ -5318,6 +5382,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -5547,9 +5615,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAccountCreditsCountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAccountCreditsCountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body)
         {
-            return GetAccountCreditsCountAsync(tenantId, accountId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountCreditsCountAsync(tenantId, accountId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -5561,7 +5629,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAccountCreditsCountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAccountCreditsCountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountingEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (accountId == null)
                 throw new System.ArgumentNullException("accountId");
@@ -5578,6 +5646,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -5675,9 +5747,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<MoneyEnvelope> AggregateAccountsBalanceAsync(System.Guid tenantId, string currencyId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<MoneyEnvelope> AggregateAccountsBalanceAsync(System.Guid tenantId, string currencyId, string api_version, string x_api_version, AccountDtoCollectionQueryParameters body)
         {
-            return AggregateAccountsBalanceAsync(tenantId, currencyId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return AggregateAccountsBalanceAsync(tenantId, currencyId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -5689,7 +5761,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<MoneyEnvelope> AggregateAccountsBalanceAsync(System.Guid tenantId, string currencyId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<MoneyEnvelope> AggregateAccountsBalanceAsync(System.Guid tenantId, string currencyId, string api_version, string x_api_version, AccountDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -5703,6 +5775,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -5933,9 +6009,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<AccountTypeDtoListEnvelope> GetAccountTypesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<AccountTypeDtoListEnvelope> GetAccountTypesAsync(System.Guid tenantId, string api_version, string x_api_version, AccountTypeDtoCollectionQueryParameters body)
         {
-            return GetAccountTypesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountTypesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -5947,7 +6023,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<AccountTypeDtoListEnvelope> GetAccountTypesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<AccountTypeDtoListEnvelope> GetAccountTypesAsync(System.Guid tenantId, string api_version, string x_api_version, AccountTypeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -5961,6 +6037,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -6183,9 +6263,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAccountTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAccountTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, AccountTypeDtoCollectionQueryParameters body)
         {
-            return GetAccountTypesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountTypesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -6197,7 +6277,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAccountTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAccountTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, AccountTypeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -6211,6 +6291,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -6564,7 +6648,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountTypeAsync(System.Guid tenantId, System.Guid accountTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountTypeAsync(System.Guid tenantId, System.Guid accountTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchAccountTypeAsync(tenantId, accountTypeId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -6578,7 +6662,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountTypeAsync(System.Guid tenantId, System.Guid accountTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountTypeAsync(System.Guid tenantId, System.Guid accountTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (accountTypeId == null)
                 throw new System.ArgumentNullException("accountTypeId");
@@ -6822,9 +6906,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<AccountRelationDtoListEnvelope> GetAccountRelationsAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<AccountRelationDtoListEnvelope> GetAccountRelationsAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountRelationDtoCollectionQueryParameters body)
         {
-            return GetAccountRelationsAsync(tenantId, accountId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountRelationsAsync(tenantId, accountId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -6836,7 +6920,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<AccountRelationDtoListEnvelope> GetAccountRelationsAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<AccountRelationDtoListEnvelope> GetAccountRelationsAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountRelationDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -6853,6 +6937,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -7080,9 +7168,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAccountRelationsCountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAccountRelationsCountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountRelationDtoCollectionQueryParameters body)
         {
-            return GetAccountRelationsCountAsync(tenantId, accountId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAccountRelationsCountAsync(tenantId, accountId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -7094,7 +7182,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAccountRelationsCountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAccountRelationsCountAsync(System.Guid tenantId, System.Guid accountId, string api_version, string x_api_version, AccountRelationDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -7111,6 +7199,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -7342,7 +7434,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountRelationAsync(System.Guid tenantId, System.Guid accountRelationId, System.Guid accountId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountRelationAsync(System.Guid tenantId, System.Guid accountRelationId, System.Guid accountId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchAccountRelationAsync(tenantId, accountRelationId, accountId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -7356,7 +7448,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountRelationAsync(System.Guid tenantId, System.Guid accountRelationId, System.Guid accountId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchAccountRelationAsync(System.Guid tenantId, System.Guid accountRelationId, System.Guid accountId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (accountRelationId == null)
                 throw new System.ArgumentNullException("accountRelationId");
@@ -7854,9 +7946,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<BankDtoListEnvelope> GetBanksAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<BankDtoListEnvelope> GetBanksAsync(System.Guid tenantId, string api_version, string x_api_version, BankDtoCollectionQueryParameters body)
         {
-            return GetBanksAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBanksAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -7868,7 +7960,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BankDtoListEnvelope> GetBanksAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BankDtoListEnvelope> GetBanksAsync(System.Guid tenantId, string api_version, string x_api_version, BankDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -7882,6 +7974,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -8114,9 +8210,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBanksCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBanksCountAsync(System.Guid tenantId, string api_version, string x_api_version, BankDtoCollectionQueryParameters body)
         {
-            return GetBanksCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBanksCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -8128,7 +8224,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBanksCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBanksCountAsync(System.Guid tenantId, string api_version, string x_api_version, BankDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -8142,6 +8238,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -8525,7 +8625,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBankAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBankAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchBankAsync(tenantId, bankId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -8539,7 +8639,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBankAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBankAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (bankId == null)
                 throw new System.ArgumentNullException("bankId");
@@ -8807,9 +8907,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<BankAccountDtoListEnvelope> GetBankAccountsAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<BankAccountDtoListEnvelope> GetBankAccountsAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, BankAccountDtoCollectionQueryParameters body)
         {
-            return GetBankAccountsAsync(tenantId, bankId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBankAccountsAsync(tenantId, bankId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -8821,7 +8921,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BankAccountDtoListEnvelope> GetBankAccountsAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BankAccountDtoListEnvelope> GetBankAccountsAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, BankAccountDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (bankId == null)
                 throw new System.ArgumentNullException("bankId");
@@ -8838,6 +8938,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -9077,9 +9181,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBankAccountsCountAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBankAccountsCountAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, BankAccountDtoCollectionQueryParameters body)
         {
-            return GetBankAccountsCountAsync(tenantId, bankId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBankAccountsCountAsync(tenantId, bankId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -9091,7 +9195,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBankAccountsCountAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBankAccountsCountAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, BankAccountDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (bankId == null)
                 throw new System.ArgumentNullException("bankId");
@@ -9108,6 +9212,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -9493,7 +9601,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBankAccountAsync(System.Guid tenantId, System.Guid bankId, System.Guid accountId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBankAccountAsync(System.Guid tenantId, System.Guid bankId, System.Guid accountId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchBankAccountAsync(tenantId, bankId, accountId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -9507,7 +9615,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBankAccountAsync(System.Guid tenantId, System.Guid bankId, System.Guid accountId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBankAccountAsync(System.Guid tenantId, System.Guid bankId, System.Guid accountId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (bankId == null)
                 throw new System.ArgumentNullException("bankId");
@@ -9785,9 +9893,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<BankGuaranteeDtoListEnvelope> GetBankGuaranteesAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<BankGuaranteeDtoListEnvelope> GetBankGuaranteesAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, BankGuaranteeDtoCollectionQueryParameters body)
         {
-            return GetBankGuaranteesAsync(tenantId, bankId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBankGuaranteesAsync(tenantId, bankId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -9799,7 +9907,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BankGuaranteeDtoListEnvelope> GetBankGuaranteesAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BankGuaranteeDtoListEnvelope> GetBankGuaranteesAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, BankGuaranteeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (bankId == null)
                 throw new System.ArgumentNullException("bankId");
@@ -9816,6 +9924,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -10055,9 +10167,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBankGuaranteesCountAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBankGuaranteesCountAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, BankGuaranteeDtoCollectionQueryParameters body)
         {
-            return GetBankGuaranteesCountAsync(tenantId, bankId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBankGuaranteesCountAsync(tenantId, bankId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -10069,7 +10181,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBankGuaranteesCountAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBankGuaranteesCountAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, BankGuaranteeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (bankId == null)
                 throw new System.ArgumentNullException("bankId");
@@ -10086,6 +10198,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -10471,7 +10587,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBankGuaranteeAsync(System.Guid tenantId, System.Guid bankId, System.Guid guaranteeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBankGuaranteeAsync(System.Guid tenantId, System.Guid bankId, System.Guid guaranteeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchBankGuaranteeAsync(tenantId, bankId, guaranteeId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -10485,7 +10601,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBankGuaranteeAsync(System.Guid tenantId, System.Guid bankId, System.Guid guaranteeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBankGuaranteeAsync(System.Guid tenantId, System.Guid bankId, System.Guid guaranteeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (bankId == null)
                 throw new System.ArgumentNullException("bankId");
@@ -10763,9 +10879,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<BankTransactionDtoListEnvelope> GetBankTransactionsAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<BankTransactionDtoListEnvelope> GetBankTransactionsAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, BankTransactionDtoCollectionQueryParameters body)
         {
-            return GetBankTransactionsAsync(tenantId, bankId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBankTransactionsAsync(tenantId, bankId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -10777,7 +10893,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BankTransactionDtoListEnvelope> GetBankTransactionsAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BankTransactionDtoListEnvelope> GetBankTransactionsAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, BankTransactionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (bankId == null)
                 throw new System.ArgumentNullException("bankId");
@@ -10794,6 +10910,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -11033,9 +11153,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBankTransactionsCountAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBankTransactionsCountAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, BankTransactionDtoCollectionQueryParameters body)
         {
-            return GetBankTransactionsCountAsync(tenantId, bankId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBankTransactionsCountAsync(tenantId, bankId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -11047,7 +11167,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBankTransactionsCountAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBankTransactionsCountAsync(System.Guid tenantId, System.Guid bankId, string api_version, string x_api_version, BankTransactionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (bankId == null)
                 throw new System.ArgumentNullException("bankId");
@@ -11064,6 +11184,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -11449,7 +11573,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBankTransactionAsync(System.Guid tenantId, System.Guid bankId, System.Guid transactionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBankTransactionAsync(System.Guid tenantId, System.Guid bankId, System.Guid transactionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchBankTransactionAsync(tenantId, bankId, transactionId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -11463,7 +11587,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBankTransactionAsync(System.Guid tenantId, System.Guid bankId, System.Guid transactionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBankTransactionAsync(System.Guid tenantId, System.Guid bankId, System.Guid transactionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (bankId == null)
                 throw new System.ArgumentNullException("bankId");
@@ -11741,9 +11865,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<BankProfileDtoListEnvelope> GetBankProfilesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<BankProfileDtoListEnvelope> GetBankProfilesAsync(System.Guid tenantId, string api_version, string x_api_version, BankProfileDtoCollectionQueryParameters body)
         {
-            return GetBankProfilesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBankProfilesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -11755,7 +11879,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BankProfileDtoListEnvelope> GetBankProfilesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BankProfileDtoListEnvelope> GetBankProfilesAsync(System.Guid tenantId, string api_version, string x_api_version, BankProfileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -11769,6 +11893,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -11864,9 +11992,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBankProfilesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBankProfilesCountAsync(System.Guid tenantId, string api_version, string x_api_version, BankProfileDtoCollectionQueryParameters body)
         {
-            return GetBankProfilesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBankProfilesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -11878,7 +12006,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBankProfilesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBankProfilesCountAsync(System.Guid tenantId, string api_version, string x_api_version, BankProfileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -11892,6 +12020,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -11987,9 +12119,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<AppliedItemTaxRecordDtoIReadOnlyListEnvelope> GetBillableLineTaxesAsync(System.Guid tenantId, System.Guid billableLineId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<AppliedItemTaxRecordDtoIReadOnlyListEnvelope> GetBillableLineTaxesAsync(System.Guid tenantId, System.Guid billableLineId, string api_version, string x_api_version, AppliedItemTaxRecordDtoCollectionQueryParameters body)
         {
-            return GetBillableLineTaxesAsync(tenantId, billableLineId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBillableLineTaxesAsync(tenantId, billableLineId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -12001,7 +12133,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<AppliedItemTaxRecordDtoIReadOnlyListEnvelope> GetBillableLineTaxesAsync(System.Guid tenantId, System.Guid billableLineId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<AppliedItemTaxRecordDtoIReadOnlyListEnvelope> GetBillableLineTaxesAsync(System.Guid tenantId, System.Guid billableLineId, string api_version, string x_api_version, AppliedItemTaxRecordDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (billableLineId == null)
                 throw new System.ArgumentNullException("billableLineId");
@@ -12018,6 +12150,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -12207,9 +12343,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBillableLineTaxesCountAsync(System.Guid tenantId, System.Guid billableLineId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBillableLineTaxesCountAsync(System.Guid tenantId, System.Guid billableLineId, string api_version, string x_api_version, AppliedItemTaxRecordDtoCollectionQueryParameters body)
         {
-            return GetBillableLineTaxesCountAsync(tenantId, billableLineId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBillableLineTaxesCountAsync(tenantId, billableLineId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -12221,7 +12357,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBillableLineTaxesCountAsync(System.Guid tenantId, System.Guid billableLineId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBillableLineTaxesCountAsync(System.Guid tenantId, System.Guid billableLineId, string api_version, string x_api_version, AppliedItemTaxRecordDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (billableLineId == null)
                 throw new System.ArgumentNullException("billableLineId");
@@ -12238,6 +12374,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -12431,7 +12571,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBillableLineTaxAsync(System.Guid tenantId, System.Guid billableLineId, System.Guid taxId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBillableLineTaxAsync(System.Guid tenantId, System.Guid billableLineId, System.Guid taxId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchBillableLineTaxAsync(tenantId, billableLineId, taxId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -12445,7 +12585,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBillableLineTaxAsync(System.Guid tenantId, System.Guid billableLineId, System.Guid taxId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBillableLineTaxAsync(System.Guid tenantId, System.Guid billableLineId, System.Guid taxId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (billableLineId == null)
                 throw new System.ArgumentNullException("billableLineId");
@@ -12900,7 +13040,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBillingProfileAsync(System.Guid tenantId, System.Guid billingProfileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBillingProfileAsync(System.Guid tenantId, System.Guid billingProfileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchBillingProfileAsync(tenantId, billingProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -12914,7 +13054,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBillingProfileAsync(System.Guid tenantId, System.Guid billingProfileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBillingProfileAsync(System.Guid tenantId, System.Guid billingProfileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (billingProfileId == null)
                 throw new System.ArgumentNullException("billingProfileId");
@@ -13138,9 +13278,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<BillingProfileDtoIReadOnlyListEnvelope> GetBillingProfilesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<BillingProfileDtoIReadOnlyListEnvelope> GetBillingProfilesAsync(System.Guid tenantId, string api_version, string x_api_version, BillingProfileDtoCollectionQueryParameters body)
         {
-            return GetBillingProfilesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBillingProfilesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -13152,7 +13292,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BillingProfileDtoIReadOnlyListEnvelope> GetBillingProfilesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BillingProfileDtoIReadOnlyListEnvelope> GetBillingProfilesAsync(System.Guid tenantId, string api_version, string x_api_version, BillingProfileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -13166,6 +13306,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -13351,9 +13495,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBillingProfilesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBillingProfilesCountAsync(System.Guid tenantId, string api_version, string x_api_version, BillingProfileDtoCollectionQueryParameters body)
         {
-            return GetBillingProfilesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBillingProfilesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -13365,7 +13509,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBillingProfilesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBillingProfilesCountAsync(System.Guid tenantId, string api_version, string x_api_version, BillingProfileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -13379,6 +13523,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -13715,7 +13863,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBudgetAsync(System.Guid tenantId, System.Guid budgetId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBudgetAsync(System.Guid tenantId, System.Guid budgetId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchBudgetAsync(tenantId, budgetId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -13729,7 +13877,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBudgetAsync(System.Guid tenantId, System.Guid budgetId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBudgetAsync(System.Guid tenantId, System.Guid budgetId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (budgetId == null)
                 throw new System.ArgumentNullException("budgetId");
@@ -13983,9 +14131,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<BudgetDtoIReadOnlyListEnvelope> GetBudgetsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<BudgetDtoIReadOnlyListEnvelope> GetBudgetsAsync(System.Guid tenantId, string api_version, string x_api_version, BudgetDtoCollectionQueryParameters body)
         {
-            return GetBudgetsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBudgetsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -13997,7 +14145,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BudgetDtoIReadOnlyListEnvelope> GetBudgetsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BudgetDtoIReadOnlyListEnvelope> GetBudgetsAsync(System.Guid tenantId, string api_version, string x_api_version, BudgetDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -14011,6 +14159,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -14236,9 +14388,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBudgetsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetBudgetsCountAsync(System.Guid tenantId, string api_version, string x_api_version, BudgetDtoCollectionQueryParameters body)
         {
-            return GetBudgetsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBudgetsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -14250,7 +14402,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBudgetsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetBudgetsCountAsync(System.Guid tenantId, string api_version, string x_api_version, BudgetDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -14264,6 +14416,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -14359,9 +14515,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<BudgetAccountEntryDtoIReadOnlyListEnvelope> GetBudgetAccountEntriesCollectionAsync(System.Guid tenantId, System.Guid budgetId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<BudgetAccountEntryDtoIReadOnlyListEnvelope> GetBudgetAccountEntriesCollectionAsync(System.Guid tenantId, System.Guid budgetId, string api_version, string x_api_version, BudgetAccountEntryDtoCollectionQueryParameters body)
         {
-            return GetBudgetAccountEntriesCollectionAsync(tenantId, budgetId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetBudgetAccountEntriesCollectionAsync(tenantId, budgetId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -14373,7 +14529,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BudgetAccountEntryDtoIReadOnlyListEnvelope> GetBudgetAccountEntriesCollectionAsync(System.Guid tenantId, System.Guid budgetId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BudgetAccountEntryDtoIReadOnlyListEnvelope> GetBudgetAccountEntriesCollectionAsync(System.Guid tenantId, System.Guid budgetId, string api_version, string x_api_version, BudgetAccountEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (budgetId == null)
                 throw new System.ArgumentNullException("budgetId");
@@ -14390,6 +14546,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -14893,7 +15053,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBudgetAccountEntryAsync(System.Guid tenantId, System.Guid budgetId, System.Guid entryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchBudgetAccountEntryAsync(System.Guid tenantId, System.Guid budgetId, System.Guid entryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchBudgetAccountEntryAsync(tenantId, budgetId, entryId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -14907,7 +15067,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBudgetAccountEntryAsync(System.Guid tenantId, System.Guid budgetId, System.Guid entryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchBudgetAccountEntryAsync(System.Guid tenantId, System.Guid budgetId, System.Guid entryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (budgetId == null)
                 throw new System.ArgumentNullException("budgetId");
@@ -15171,9 +15331,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CommissionDtoListEnvelope> GetCommissionsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<CommissionDtoListEnvelope> GetCommissionsAsync(System.Guid tenantId, string api_version, string x_api_version, CommissionDtoCollectionQueryParameters body)
         {
-            return GetCommissionsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCommissionsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -15185,7 +15345,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CommissionDtoListEnvelope> GetCommissionsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CommissionDtoListEnvelope> GetCommissionsAsync(System.Guid tenantId, string api_version, string x_api_version, CommissionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -15199,6 +15359,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -15424,9 +15588,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCommissionsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCommissionsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CommissionDtoCollectionQueryParameters body)
         {
-            return GetCommissionsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCommissionsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -15438,7 +15602,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCommissionsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCommissionsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CommissionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -15452,6 +15616,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -15808,7 +15976,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCommissionAsync(System.Guid tenantId, System.Guid commissionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCommissionAsync(System.Guid tenantId, System.Guid commissionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCommissionAsync(tenantId, commissionId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -15822,7 +15990,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCommissionAsync(System.Guid tenantId, System.Guid commissionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCommissionAsync(System.Guid tenantId, System.Guid commissionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (commissionId == null)
                 throw new System.ArgumentNullException("commissionId");
@@ -16066,9 +16234,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<PaymentCommissionDtoListEnvelope> GetPaymentCommissionsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<PaymentCommissionDtoListEnvelope> GetPaymentCommissionsAsync(System.Guid tenantId, string api_version, string x_api_version, PaymentCommissionDtoCollectionQueryParameters body)
         {
-            return GetPaymentCommissionsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetPaymentCommissionsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -16080,7 +16248,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<PaymentCommissionDtoListEnvelope> GetPaymentCommissionsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<PaymentCommissionDtoListEnvelope> GetPaymentCommissionsAsync(System.Guid tenantId, string api_version, string x_api_version, PaymentCommissionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -16094,6 +16262,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -16319,9 +16491,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetPaymentCommissionsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetPaymentCommissionsCountAsync(System.Guid tenantId, string api_version, string x_api_version, PaymentCommissionDtoCollectionQueryParameters body)
         {
-            return GetPaymentCommissionsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetPaymentCommissionsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -16333,7 +16505,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetPaymentCommissionsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetPaymentCommissionsCountAsync(System.Guid tenantId, string api_version, string x_api_version, PaymentCommissionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -16347,6 +16519,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -16703,7 +16879,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchPaymentCommissionAsync(System.Guid tenantId, System.Guid paymentCommissionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchPaymentCommissionAsync(System.Guid tenantId, System.Guid paymentCommissionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchPaymentCommissionAsync(tenantId, paymentCommissionId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -16717,7 +16893,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchPaymentCommissionAsync(System.Guid tenantId, System.Guid paymentCommissionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchPaymentCommissionAsync(System.Guid tenantId, System.Guid paymentCommissionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (paymentCommissionId == null)
                 throw new System.ArgumentNullException("paymentCommissionId");
@@ -16961,9 +17137,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CostCentreDtoListEnvelope> GetCostCentresAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<CostCentreDtoListEnvelope> GetCostCentresAsync(System.Guid tenantId, string api_version, string x_api_version, CostCentreDtoCollectionQueryParameters body)
         {
-            return GetCostCentresAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCostCentresAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -16975,7 +17151,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CostCentreDtoListEnvelope> GetCostCentresAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CostCentreDtoListEnvelope> GetCostCentresAsync(System.Guid tenantId, string api_version, string x_api_version, CostCentreDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -16989,6 +17165,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -17214,9 +17394,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCostCentresCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCostCentresCountAsync(System.Guid tenantId, string api_version, string x_api_version, CostCentreDtoCollectionQueryParameters body)
         {
-            return GetCostCentresCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCostCentresCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -17228,7 +17408,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCostCentresCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCostCentresCountAsync(System.Guid tenantId, string api_version, string x_api_version, CostCentreDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -17242,6 +17422,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -17598,7 +17782,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCostCentreAsync(System.Guid tenantId, System.Guid costCentreId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCostCentreAsync(System.Guid tenantId, System.Guid costCentreId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCostCentreAsync(tenantId, costCentreId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -17612,7 +17796,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCostCentreAsync(System.Guid tenantId, System.Guid costCentreId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCostCentreAsync(System.Guid tenantId, System.Guid costCentreId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (costCentreId == null)
                 throw new System.ArgumentNullException("costCentreId");
@@ -17856,9 +18040,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CostCentreGroupDtoListEnvelope> GetCostCentreGroupsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<CostCentreGroupDtoListEnvelope> GetCostCentreGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, CostCentreGroupDtoCollectionQueryParameters body)
         {
-            return GetCostCentreGroupsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCostCentreGroupsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -17870,7 +18054,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CostCentreGroupDtoListEnvelope> GetCostCentreGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CostCentreGroupDtoListEnvelope> GetCostCentreGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, CostCentreGroupDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -17884,6 +18068,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -18109,9 +18297,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCostCentreGroupsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCostCentreGroupsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CostCentreGroupDtoCollectionQueryParameters body)
         {
-            return GetCostCentreGroupsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCostCentreGroupsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -18123,7 +18311,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCostCentreGroupsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCostCentreGroupsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CostCentreGroupDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -18137,6 +18325,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -18493,7 +18685,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCostCentreGroupAsync(System.Guid tenantId, System.Guid groupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCostCentreGroupAsync(System.Guid tenantId, System.Guid groupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCostCentreGroupAsync(tenantId, groupId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -18507,7 +18699,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCostCentreGroupAsync(System.Guid tenantId, System.Guid groupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCostCentreGroupAsync(System.Guid tenantId, System.Guid groupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (groupId == null)
                 throw new System.ArgumentNullException("groupId");
@@ -18751,9 +18943,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CostCentreBudgetDtoListEnvelope> GetCostCentreBudgetsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<CostCentreBudgetDtoListEnvelope> GetCostCentreBudgetsAsync(System.Guid tenantId, string api_version, string x_api_version, CostCentreBudgetDtoCollectionQueryParameters body)
         {
-            return GetCostCentreBudgetsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCostCentreBudgetsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -18765,7 +18957,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CostCentreBudgetDtoListEnvelope> GetCostCentreBudgetsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CostCentreBudgetDtoListEnvelope> GetCostCentreBudgetsAsync(System.Guid tenantId, string api_version, string x_api_version, CostCentreBudgetDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -18779,6 +18971,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -19265,7 +19461,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCostCentreBudgetAsync(System.Guid tenantId, System.Guid budgetId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCostCentreBudgetAsync(System.Guid tenantId, System.Guid budgetId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCostCentreBudgetAsync(tenantId, budgetId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -19279,7 +19475,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCostCentreBudgetAsync(System.Guid tenantId, System.Guid budgetId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCostCentreBudgetAsync(System.Guid tenantId, System.Guid budgetId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (budgetId == null)
                 throw new System.ArgumentNullException("budgetId");
@@ -19523,9 +19719,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<ExpenseClaimDtoListEnvelope> GetExpenseClaimsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<ExpenseClaimDtoListEnvelope> GetExpenseClaimsAsync(System.Guid tenantId, string api_version, string x_api_version, ExpenseClaimDtoCollectionQueryParameters body)
         {
-            return GetExpenseClaimsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetExpenseClaimsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -19537,7 +19733,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<ExpenseClaimDtoListEnvelope> GetExpenseClaimsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<ExpenseClaimDtoListEnvelope> GetExpenseClaimsAsync(System.Guid tenantId, string api_version, string x_api_version, ExpenseClaimDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -19551,6 +19747,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -19776,9 +19976,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetExpenseClaimsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetExpenseClaimsCountAsync(System.Guid tenantId, string api_version, string x_api_version, ExpenseClaimDtoCollectionQueryParameters body)
         {
-            return GetExpenseClaimsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetExpenseClaimsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -19790,7 +19990,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetExpenseClaimsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetExpenseClaimsCountAsync(System.Guid tenantId, string api_version, string x_api_version, ExpenseClaimDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -19804,6 +20004,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -20160,7 +20364,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchExpenseClaimAsync(System.Guid tenantId, System.Guid expenseClaimId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchExpenseClaimAsync(System.Guid tenantId, System.Guid expenseClaimId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchExpenseClaimAsync(tenantId, expenseClaimId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -20174,7 +20378,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchExpenseClaimAsync(System.Guid tenantId, System.Guid expenseClaimId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchExpenseClaimAsync(System.Guid tenantId, System.Guid expenseClaimId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (expenseClaimId == null)
                 throw new System.ArgumentNullException("expenseClaimId");
@@ -20418,9 +20622,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<ExpenseTypeDtoListEnvelope> GetExpenseTypesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<ExpenseTypeDtoListEnvelope> GetExpenseTypesAsync(System.Guid tenantId, string api_version, string x_api_version, ExpenseTypeDtoCollectionQueryParameters body)
         {
-            return GetExpenseTypesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetExpenseTypesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -20432,7 +20636,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<ExpenseTypeDtoListEnvelope> GetExpenseTypesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<ExpenseTypeDtoListEnvelope> GetExpenseTypesAsync(System.Guid tenantId, string api_version, string x_api_version, ExpenseTypeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -20446,6 +20650,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -20671,9 +20879,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetExpenseTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetExpenseTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, ExpenseTypeDtoCollectionQueryParameters body)
         {
-            return GetExpenseTypesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetExpenseTypesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -20685,7 +20893,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetExpenseTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetExpenseTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, ExpenseTypeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -20699,6 +20907,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -21055,7 +21267,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchExpenseTypeAsync(System.Guid tenantId, System.Guid expenseTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchExpenseTypeAsync(System.Guid tenantId, System.Guid expenseTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchExpenseTypeAsync(tenantId, expenseTypeId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -21069,7 +21281,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchExpenseTypeAsync(System.Guid tenantId, System.Guid expenseTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchExpenseTypeAsync(System.Guid tenantId, System.Guid expenseTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (expenseTypeId == null)
                 throw new System.ArgumentNullException("expenseTypeId");
@@ -21401,84 +21613,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
                     // Operation Path: "health"
                     urlBuilder_.Append("health");
-
-                    PrepareRequest(client_, request_, urlBuilder_);
-
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-
-                    PrepareRequest(client_, request_, url_);
-
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
-                        foreach (var item_ in response_.Headers)
-                            headers_[item_.Key] = item_.Value;
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-
-                        ProcessResponse(client_, response_);
-
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-
-        /// <returns>OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task AguiAsync(string agentId)
-        {
-            return AguiAsync(agentId, System.Threading.CancellationToken.None);
-        }
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task AguiAsync(string agentId, System.Threading.CancellationToken cancellationToken)
-        {
-            if (agentId == null)
-                throw new System.ArgumentNullException("agentId");
-
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-
-                    var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/v2/AIService/Agents/{agentId}/agui"
-                    urlBuilder_.Append("api/v2/AIService/Agents/");
-                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(agentId, System.Globalization.CultureInfo.InvariantCulture)));
-                    urlBuilder_.Append("/agui");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -22826,9 +22960,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FinancialBookDtoListEnvelope> GetFinancialBooksAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FinancialBookDtoListEnvelope> GetFinancialBooksAsync(System.Guid tenantId, string api_version, string x_api_version, FinancialBookDtoCollectionQueryParameters body)
         {
-            return GetFinancialBooksAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFinancialBooksAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -22840,7 +22974,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FinancialBookDtoListEnvelope> GetFinancialBooksAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FinancialBookDtoListEnvelope> GetFinancialBooksAsync(System.Guid tenantId, string api_version, string x_api_version, FinancialBookDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -22854,6 +22988,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -23099,9 +23237,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFinancialBooksCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFinancialBooksCountAsync(System.Guid tenantId, string api_version, string x_api_version, FinancialBookDtoCollectionQueryParameters body)
         {
-            return GetFinancialBooksCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFinancialBooksCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -23113,7 +23251,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFinancialBooksCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFinancialBooksCountAsync(System.Guid tenantId, string api_version, string x_api_version, FinancialBookDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -23127,6 +23265,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -23513,7 +23655,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFinancialBookAsync(System.Guid tenantId, System.Guid financialBookId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFinancialBookAsync(System.Guid tenantId, System.Guid financialBookId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchFinancialBookAsync(tenantId, financialBookId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -23527,7 +23669,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFinancialBookAsync(System.Guid tenantId, System.Guid financialBookId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFinancialBookAsync(System.Guid tenantId, System.Guid financialBookId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (financialBookId == null)
                 throw new System.ArgumentNullException("financialBookId");
@@ -23781,9 +23923,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FiscalAuthorityDtoListEnvelope> GetFiscalAuthoritiesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FiscalAuthorityDtoListEnvelope> GetFiscalAuthoritiesAsync(System.Guid tenantId, string api_version, string x_api_version, FiscalAuthorityDtoCollectionQueryParameters body)
         {
-            return GetFiscalAuthoritiesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalAuthoritiesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -23795,7 +23937,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FiscalAuthorityDtoListEnvelope> GetFiscalAuthoritiesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FiscalAuthorityDtoListEnvelope> GetFiscalAuthoritiesAsync(System.Guid tenantId, string api_version, string x_api_version, FiscalAuthorityDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -23809,6 +23951,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -24031,9 +24177,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalAuthoritiesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalAuthoritiesCountAsync(System.Guid tenantId, string api_version, string x_api_version, FiscalAuthorityDtoCollectionQueryParameters body)
         {
-            return GetFiscalAuthoritiesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalAuthoritiesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -24045,7 +24191,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalAuthoritiesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalAuthoritiesCountAsync(System.Guid tenantId, string api_version, string x_api_version, FiscalAuthorityDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -24059,6 +24205,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -24412,7 +24562,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalAuthorityAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalAuthorityAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchFiscalAuthorityAsync(tenantId, authorityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -24426,7 +24576,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalAuthorityAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalAuthorityAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (authorityId == null)
                 throw new System.ArgumentNullException("authorityId");
@@ -24670,9 +24820,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FiscalYearDtoListEnvelope> GetFiscalYearsAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FiscalYearDtoListEnvelope> GetFiscalYearsAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version, FiscalYearDtoCollectionQueryParameters body)
         {
-            return GetFiscalYearsAsync(tenantId, fiscalAuthorityId, authorityId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalYearsAsync(tenantId, fiscalAuthorityId, authorityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -24684,7 +24834,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FiscalYearDtoListEnvelope> GetFiscalYearsAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FiscalYearDtoListEnvelope> GetFiscalYearsAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version, FiscalYearDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (authorityId == null)
                 throw new System.ArgumentNullException("authorityId");
@@ -24704,6 +24854,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -24802,9 +24956,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalYearsCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalYearsCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version, FiscalYearDtoCollectionQueryParameters body)
         {
-            return GetFiscalYearsCountAsync(tenantId, fiscalAuthorityId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalYearsCountAsync(tenantId, fiscalAuthorityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -24816,7 +24970,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalYearsCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalYearsCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version, FiscalYearDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (fiscalAuthorityId == null)
                 throw new System.ArgumentNullException("fiscalAuthorityId");
@@ -24833,6 +24987,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -25320,7 +25478,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalAuthorityYearAsync(System.Guid tenantId, System.Guid fiscalYearId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalAuthorityYearAsync(System.Guid tenantId, System.Guid fiscalYearId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchFiscalAuthorityYearAsync(tenantId, fiscalYearId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -25334,7 +25492,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalAuthorityYearAsync(System.Guid tenantId, System.Guid fiscalYearId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalAuthorityYearAsync(System.Guid tenantId, System.Guid fiscalYearId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (fiscalYearId == null)
                 throw new System.ArgumentNullException("fiscalYearId");
@@ -25578,9 +25736,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<InvoiceEnumerationRangeDtoListEnvelope> GetInvoiceEnumerationRangesAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<InvoiceEnumerationRangeDtoListEnvelope> GetInvoiceEnumerationRangesAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version, InvoiceEnumerationRangeDtoCollectionQueryParameters body)
         {
-            return GetInvoiceEnumerationRangesAsync(tenantId, fiscalAuthorityId, authorityId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetInvoiceEnumerationRangesAsync(tenantId, fiscalAuthorityId, authorityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -25592,7 +25750,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<InvoiceEnumerationRangeDtoListEnvelope> GetInvoiceEnumerationRangesAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<InvoiceEnumerationRangeDtoListEnvelope> GetInvoiceEnumerationRangesAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version, InvoiceEnumerationRangeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (authorityId == null)
                 throw new System.ArgumentNullException("authorityId");
@@ -25612,6 +25770,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -25710,9 +25872,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetInvoiceEnumerationRangesCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetInvoiceEnumerationRangesCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version, InvoiceEnumerationRangeDtoCollectionQueryParameters body)
         {
-            return GetInvoiceEnumerationRangesCountAsync(tenantId, fiscalAuthorityId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetInvoiceEnumerationRangesCountAsync(tenantId, fiscalAuthorityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -25724,7 +25886,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetInvoiceEnumerationRangesCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetInvoiceEnumerationRangesCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version, InvoiceEnumerationRangeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (fiscalAuthorityId == null)
                 throw new System.ArgumentNullException("fiscalAuthorityId");
@@ -25741,6 +25903,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -26228,7 +26394,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalEnumerationRangeAsync(System.Guid tenantId, System.Guid enumerationRangeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalEnumerationRangeAsync(System.Guid tenantId, System.Guid enumerationRangeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchFiscalEnumerationRangeAsync(tenantId, enumerationRangeId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -26242,7 +26408,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalEnumerationRangeAsync(System.Guid tenantId, System.Guid enumerationRangeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalEnumerationRangeAsync(System.Guid tenantId, System.Guid enumerationRangeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (enumerationRangeId == null)
                 throw new System.ArgumentNullException("enumerationRangeId");
@@ -26486,9 +26652,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FiscalIdentificationTypeDtoListEnvelope> GetFiscalIdentificationTypesAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FiscalIdentificationTypeDtoListEnvelope> GetFiscalIdentificationTypesAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version, FiscalIdentificationTypeDtoCollectionQueryParameters body)
         {
-            return GetFiscalIdentificationTypesAsync(tenantId, authorityId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalIdentificationTypesAsync(tenantId, authorityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -26500,7 +26666,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FiscalIdentificationTypeDtoListEnvelope> GetFiscalIdentificationTypesAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FiscalIdentificationTypeDtoListEnvelope> GetFiscalIdentificationTypesAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version, FiscalIdentificationTypeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (authorityId == null)
                 throw new System.ArgumentNullException("authorityId");
@@ -26517,6 +26683,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -26614,9 +26784,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalIdentificationTypesCountAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalIdentificationTypesCountAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version, FiscalIdentificationTypeDtoCollectionQueryParameters body)
         {
-            return GetFiscalIdentificationTypesCountAsync(tenantId, authorityId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalIdentificationTypesCountAsync(tenantId, authorityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -26628,7 +26798,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalIdentificationTypesCountAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalIdentificationTypesCountAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version, FiscalIdentificationTypeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (authorityId == null)
                 throw new System.ArgumentNullException("authorityId");
@@ -26645,6 +26815,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -27132,7 +27306,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalIdentificationTypeAsync(System.Guid tenantId, System.Guid identificationTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalIdentificationTypeAsync(System.Guid tenantId, System.Guid identificationTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchFiscalIdentificationTypeAsync(tenantId, identificationTypeId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -27146,7 +27320,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalIdentificationTypeAsync(System.Guid tenantId, System.Guid identificationTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalIdentificationTypeAsync(System.Guid tenantId, System.Guid identificationTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (identificationTypeId == null)
                 throw new System.ArgumentNullException("identificationTypeId");
@@ -27390,9 +27564,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FiscalPeriodDtoListEnvelope> GetFiscalPeriodsAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalYearId, string authorityId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FiscalPeriodDtoListEnvelope> GetFiscalPeriodsAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalYearId, string authorityId, string api_version, string x_api_version, FiscalPeriodDtoCollectionQueryParameters body)
         {
-            return GetFiscalPeriodsAsync(tenantId, fiscalAuthorityId, fiscalYearId, authorityId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalPeriodsAsync(tenantId, fiscalAuthorityId, fiscalYearId, authorityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -27404,7 +27578,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FiscalPeriodDtoListEnvelope> GetFiscalPeriodsAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalYearId, string authorityId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FiscalPeriodDtoListEnvelope> GetFiscalPeriodsAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalYearId, string authorityId, string api_version, string x_api_version, FiscalPeriodDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (fiscalYearId == null)
                 throw new System.ArgumentNullException("fiscalYearId");
@@ -27427,6 +27601,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -27527,9 +27705,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalPeriodsCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalYearId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalPeriodsCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalYearId, string api_version, string x_api_version, FiscalPeriodDtoCollectionQueryParameters body)
         {
-            return GetFiscalPeriodsCountAsync(tenantId, fiscalAuthorityId, fiscalYearId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalPeriodsCountAsync(tenantId, fiscalAuthorityId, fiscalYearId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -27541,7 +27719,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalPeriodsCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalYearId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalPeriodsCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalYearId, string api_version, string x_api_version, FiscalPeriodDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (fiscalAuthorityId == null)
                 throw new System.ArgumentNullException("fiscalAuthorityId");
@@ -27561,6 +27739,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -28055,7 +28237,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalPeriodAsync(System.Guid tenantId, System.Guid fiscalPeriodId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalPeriodAsync(System.Guid tenantId, System.Guid fiscalPeriodId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchFiscalPeriodAsync(tenantId, fiscalPeriodId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -28069,7 +28251,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalPeriodAsync(System.Guid tenantId, System.Guid fiscalPeriodId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalPeriodAsync(System.Guid tenantId, System.Guid fiscalPeriodId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (fiscalPeriodId == null)
                 throw new System.ArgumentNullException("fiscalPeriodId");
@@ -28591,9 +28773,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FiscalRegimeDtoListEnvelope> GetFiscalRegimesAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FiscalRegimeDtoListEnvelope> GetFiscalRegimesAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version, FiscalRegimeDtoCollectionQueryParameters body)
         {
-            return GetFiscalRegimesAsync(tenantId, fiscalAuthorityId, authorityId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalRegimesAsync(tenantId, fiscalAuthorityId, authorityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -28605,7 +28787,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FiscalRegimeDtoListEnvelope> GetFiscalRegimesAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FiscalRegimeDtoListEnvelope> GetFiscalRegimesAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version, FiscalRegimeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (authorityId == null)
                 throw new System.ArgumentNullException("authorityId");
@@ -28625,6 +28807,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -28723,9 +28909,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalRegimesCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalRegimesCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version, FiscalRegimeDtoCollectionQueryParameters body)
         {
-            return GetFiscalRegimesCountAsync(tenantId, fiscalAuthorityId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalRegimesCountAsync(tenantId, fiscalAuthorityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -28737,7 +28923,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalRegimesCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalRegimesCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version, FiscalRegimeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (fiscalAuthorityId == null)
                 throw new System.ArgumentNullException("fiscalAuthorityId");
@@ -28754,6 +28940,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -29241,7 +29431,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalRegimeAsync(System.Guid tenantId, System.Guid regimeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalRegimeAsync(System.Guid tenantId, System.Guid regimeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchFiscalRegimeAsync(tenantId, regimeId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -29255,7 +29445,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalRegimeAsync(System.Guid tenantId, System.Guid regimeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalRegimeAsync(System.Guid tenantId, System.Guid regimeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (regimeId == null)
                 throw new System.ArgumentNullException("regimeId");
@@ -29499,9 +29689,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FiscalResponsibilityDtoListEnvelope> GetFiscalResponsibilitiesAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FiscalResponsibilityDtoListEnvelope> GetFiscalResponsibilitiesAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version, FiscalResponsibilityDtoCollectionQueryParameters body)
         {
-            return GetFiscalResponsibilitiesAsync(tenantId, fiscalAuthorityId, authorityId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalResponsibilitiesAsync(tenantId, fiscalAuthorityId, authorityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -29513,7 +29703,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FiscalResponsibilityDtoListEnvelope> GetFiscalResponsibilitiesAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FiscalResponsibilityDtoListEnvelope> GetFiscalResponsibilitiesAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string authorityId, string api_version, string x_api_version, FiscalResponsibilityDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (authorityId == null)
                 throw new System.ArgumentNullException("authorityId");
@@ -29533,6 +29723,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -29631,9 +29825,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalResponsibilitiesCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalResponsibilitiesCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version, FiscalResponsibilityDtoCollectionQueryParameters body)
         {
-            return GetFiscalResponsibilitiesCountAsync(tenantId, fiscalAuthorityId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalResponsibilitiesCountAsync(tenantId, fiscalAuthorityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -29645,7 +29839,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalResponsibilitiesCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalResponsibilitiesCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, string api_version, string x_api_version, FiscalResponsibilityDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (fiscalAuthorityId == null)
                 throw new System.ArgumentNullException("fiscalAuthorityId");
@@ -29662,6 +29856,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -30149,7 +30347,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalResponsibilityAsync(System.Guid tenantId, System.Guid fiscalResponsibilityId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalResponsibilityAsync(System.Guid tenantId, System.Guid fiscalResponsibilityId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchFiscalResponsibilityAsync(tenantId, fiscalResponsibilityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -30163,7 +30361,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalResponsibilityAsync(System.Guid tenantId, System.Guid fiscalResponsibilityId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalResponsibilityAsync(System.Guid tenantId, System.Guid fiscalResponsibilityId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (fiscalResponsibilityId == null)
                 throw new System.ArgumentNullException("fiscalResponsibilityId");
@@ -30407,9 +30605,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FiscalResponsibilityRecordDtoListEnvelope> GetFiscalResponsibilityRecordsAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalResponsibilityId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FiscalResponsibilityRecordDtoListEnvelope> GetFiscalResponsibilityRecordsAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalResponsibilityId, string api_version, string x_api_version, FiscalResponsibilityRecordDtoCollectionQueryParameters body)
         {
-            return GetFiscalResponsibilityRecordsAsync(tenantId, fiscalAuthorityId, fiscalResponsibilityId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalResponsibilityRecordsAsync(tenantId, fiscalAuthorityId, fiscalResponsibilityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -30421,7 +30619,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FiscalResponsibilityRecordDtoListEnvelope> GetFiscalResponsibilityRecordsAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalResponsibilityId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FiscalResponsibilityRecordDtoListEnvelope> GetFiscalResponsibilityRecordsAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalResponsibilityId, string api_version, string x_api_version, FiscalResponsibilityRecordDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (fiscalAuthorityId == null)
                 throw new System.ArgumentNullException("fiscalAuthorityId");
@@ -30441,6 +30639,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -30540,9 +30742,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalResponsibilityRecordsCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalResponsibilityId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalResponsibilityRecordsCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalResponsibilityId, string api_version, string x_api_version, FiscalResponsibilityRecordDtoCollectionQueryParameters body)
         {
-            return GetFiscalResponsibilityRecordsCountAsync(tenantId, fiscalAuthorityId, fiscalResponsibilityId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalResponsibilityRecordsCountAsync(tenantId, fiscalAuthorityId, fiscalResponsibilityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -30554,7 +30756,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalResponsibilityRecordsCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalResponsibilityId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalResponsibilityRecordsCountAsync(System.Guid tenantId, System.Guid fiscalAuthorityId, System.Guid fiscalResponsibilityId, string api_version, string x_api_version, FiscalResponsibilityRecordDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (fiscalAuthorityId == null)
                 throw new System.ArgumentNullException("fiscalAuthorityId");
@@ -30574,6 +30776,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -31068,7 +31274,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalResponsibilityRecordAsync(System.Guid tenantId, System.Guid fiscalResponsibilityRecordId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalResponsibilityRecordAsync(System.Guid tenantId, System.Guid fiscalResponsibilityRecordId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchFiscalResponsibilityRecordAsync(tenantId, fiscalResponsibilityRecordId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -31082,7 +31288,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalResponsibilityRecordAsync(System.Guid tenantId, System.Guid fiscalResponsibilityRecordId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalResponsibilityRecordAsync(System.Guid tenantId, System.Guid fiscalResponsibilityRecordId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (fiscalResponsibilityRecordId == null)
                 throw new System.ArgumentNullException("fiscalResponsibilityRecordId");
@@ -31326,9 +31532,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FiscalYearDtoIReadOnlyListEnvelope> GetFiscalYearsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FiscalYearDtoIReadOnlyListEnvelope> GetFiscalYearsAsync(System.Guid tenantId, string api_version, string x_api_version, FiscalYearDtoCollectionQueryParameters body)
         {
-            return GetFiscalYearsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalYearsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -31340,7 +31546,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FiscalYearDtoIReadOnlyListEnvelope> GetFiscalYearsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FiscalYearDtoIReadOnlyListEnvelope> GetFiscalYearsAsync(System.Guid tenantId, string api_version, string x_api_version, FiscalYearDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -31354,6 +31560,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -31536,9 +31746,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalYearsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFiscalYearsCountAsync(System.Guid tenantId, string api_version, string x_api_version, FiscalYearDtoCollectionQueryParameters body)
         {
-            return GetFiscalYearsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFiscalYearsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -31550,7 +31760,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalYearsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFiscalYearsCountAsync(System.Guid tenantId, string api_version, string x_api_version, FiscalYearDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -31564,6 +31774,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -31857,7 +32071,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalYearAsync(System.Guid tenantId, System.Guid fiscalYearId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalYearAsync(System.Guid tenantId, System.Guid fiscalYearId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchFiscalYearAsync(tenantId, fiscalYearId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -31871,7 +32085,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalYearAsync(System.Guid tenantId, System.Guid fiscalYearId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFiscalYearAsync(System.Guid tenantId, System.Guid fiscalYearId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (fiscalYearId == null)
                 throw new System.ArgumentNullException("fiscalYearId");
@@ -32095,9 +32309,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<GrantDtoIReadOnlyListEnvelope> GetGrantsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<GrantDtoIReadOnlyListEnvelope> GetGrantsAsync(System.Guid tenantId, string api_version, string x_api_version, GrantDtoCollectionQueryParameters body)
         {
-            return GetGrantsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetGrantsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -32109,7 +32323,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<GrantDtoIReadOnlyListEnvelope> GetGrantsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<GrantDtoIReadOnlyListEnvelope> GetGrantsAsync(System.Guid tenantId, string api_version, string x_api_version, GrantDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -32123,6 +32337,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -32305,9 +32523,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetGrantsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetGrantsCountAsync(System.Guid tenantId, string api_version, string x_api_version, GrantDtoCollectionQueryParameters body)
         {
-            return GetGrantsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetGrantsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -32319,7 +32537,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetGrantsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetGrantsCountAsync(System.Guid tenantId, string api_version, string x_api_version, GrantDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -32333,6 +32551,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -32626,7 +32848,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchGrantAsync(System.Guid tenantId, System.Guid grantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchGrantAsync(System.Guid tenantId, System.Guid grantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchGrantAsync(tenantId, grantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -32640,7 +32862,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchGrantAsync(System.Guid tenantId, System.Guid grantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchGrantAsync(System.Guid tenantId, System.Guid grantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (grantId == null)
                 throw new System.ArgumentNullException("grantId");
@@ -32864,9 +33086,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<InvoiceEnumerationRangeDtoListEnvelope> GetInvoiceEnumerationRangesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<InvoiceEnumerationRangeDtoListEnvelope> GetInvoiceEnumerationRangesAsync(System.Guid tenantId, string api_version, string x_api_version, InvoiceEnumerationRangeDtoCollectionQueryParameters body)
         {
-            return GetInvoiceEnumerationRangesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetInvoiceEnumerationRangesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -32878,7 +33100,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<InvoiceEnumerationRangeDtoListEnvelope> GetInvoiceEnumerationRangesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<InvoiceEnumerationRangeDtoListEnvelope> GetInvoiceEnumerationRangesAsync(System.Guid tenantId, string api_version, string x_api_version, InvoiceEnumerationRangeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -32892,6 +33114,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -33412,7 +33638,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchInvoiceEnumerationRangeAsync(System.Guid tenantId, System.Guid rangeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchInvoiceEnumerationRangeAsync(System.Guid tenantId, System.Guid rangeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchInvoiceEnumerationRangeAsync(tenantId, rangeId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -33426,7 +33652,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchInvoiceEnumerationRangeAsync(System.Guid tenantId, System.Guid rangeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchInvoiceEnumerationRangeAsync(System.Guid tenantId, System.Guid rangeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (rangeId == null)
                 throw new System.ArgumentNullException("rangeId");
@@ -33680,9 +33906,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<JournalDtoIReadOnlyListEnvelope> GetJournalsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<JournalDtoIReadOnlyListEnvelope> GetJournalsAsync(System.Guid tenantId, string api_version, string x_api_version, JournalDtoCollectionQueryParameters body)
         {
-            return GetJournalsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetJournalsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -33694,7 +33920,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<JournalDtoIReadOnlyListEnvelope> GetJournalsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<JournalDtoIReadOnlyListEnvelope> GetJournalsAsync(System.Guid tenantId, string api_version, string x_api_version, JournalDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -33708,6 +33934,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -33930,9 +34160,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> CountJournalsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> CountJournalsAsync(System.Guid tenantId, string api_version, string x_api_version, JournalDtoCollectionQueryParameters body)
         {
-            return CountJournalsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return CountJournalsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -33944,7 +34174,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountJournalsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountJournalsAsync(System.Guid tenantId, string api_version, string x_api_version, JournalDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -33958,6 +34188,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -34311,7 +34545,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchJournalAsync(System.Guid tenantId, System.Guid journalId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchJournalAsync(System.Guid tenantId, System.Guid journalId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchJournalAsync(tenantId, journalId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -34325,7 +34559,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchJournalAsync(System.Guid tenantId, System.Guid journalId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchJournalAsync(System.Guid tenantId, System.Guid journalId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (journalId == null)
                 throw new System.ArgumentNullException("journalId");
@@ -34562,28 +34796,28 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         }
 
         /// <summary>
-        /// Get journal entries
+        /// Bind a journal to a financial book
         /// </summary>
         /// <remarks>
-        /// Gets entries for the specified journal.
+        /// Establishes the one-way Journal↔FinancialBook binding (finish-line #5): binds an unbound journal to the supplied book and sets its book-scoped code, enforcing (Tenant, Book, Code) uniqueness. Binding an unbound journal or re-affirming the same book succeeds; a duplicate code in the book is rejected (400), and re-homing an already-bound journal to a DIFFERENT book is rejected by the aggregate. Requires the journals_update permission.
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<JournalEntryDtoIReadOnlyListEnvelope> GetJournalEntriesAsync(System.Guid tenantId, System.Guid journalId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> AssignJournalToBookAsync(System.Guid tenantId, System.Guid journalId, string api_version, string x_api_version, AssignJournalToBookRequest body)
         {
-            return GetJournalEntriesAsync(tenantId, journalId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return AssignJournalToBookAsync(tenantId, journalId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Get journal entries
+        /// Bind a journal to a financial book
         /// </summary>
         /// <remarks>
-        /// Gets entries for the specified journal.
+        /// Establishes the one-way Journal↔FinancialBook binding (finish-line #5): binds an unbound journal to the supplied book and sets its book-scoped code, enforcing (Tenant, Book, Code) uniqueness. Binding an unbound journal or re-affirming the same book succeeds; a duplicate code in the book is rejected (400), and re-homing an already-bound journal to a DIFFERENT book is rejected by the aggregate. Requires the journals_update permission.
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<JournalEntryDtoIReadOnlyListEnvelope> GetJournalEntriesAsync(System.Guid tenantId, System.Guid journalId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> AssignJournalToBookAsync(System.Guid tenantId, System.Guid journalId, string api_version, string x_api_version, AssignJournalToBookRequest body, System.Threading.CancellationToken cancellationToken)
         {
             if (journalId == null)
                 throw new System.ArgumentNullException("journalId");
@@ -34600,6 +34834,152 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/AccountingService/Journals/{journalId}/AssignToBook"
+                    urlBuilder_.Append("api/v2/AccountingService/Journals/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(journalId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/AssignToBook");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<EmptyEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 400)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Bad Request", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Get journal entries
+        /// </summary>
+        /// <remarks>
+        /// Gets entries for the specified journal.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<JournalEntryDtoIReadOnlyListEnvelope> GetJournalEntriesAsync(System.Guid tenantId, System.Guid journalId, string api_version, string x_api_version, JournalEntryDtoCollectionQueryParameters body)
+        {
+            return GetJournalEntriesAsync(tenantId, journalId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get journal entries
+        /// </summary>
+        /// <remarks>
+        /// Gets entries for the specified journal.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<JournalEntryDtoIReadOnlyListEnvelope> GetJournalEntriesAsync(System.Guid tenantId, System.Guid journalId, string api_version, string x_api_version, JournalEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (journalId == null)
+                throw new System.ArgumentNullException("journalId");
+
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -34829,9 +35209,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetJournalEntriesCountAsync(System.Guid tenantId, System.Guid journalId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetJournalEntriesCountAsync(System.Guid tenantId, System.Guid journalId, string api_version, string x_api_version, JournalEntryDtoCollectionQueryParameters body)
         {
-            return GetJournalEntriesCountAsync(tenantId, journalId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetJournalEntriesCountAsync(tenantId, journalId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -34843,7 +35223,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetJournalEntriesCountAsync(System.Guid tenantId, System.Guid journalId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetJournalEntriesCountAsync(System.Guid tenantId, System.Guid journalId, string api_version, string x_api_version, JournalEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (journalId == null)
                 throw new System.ArgumentNullException("journalId");
@@ -34860,6 +35240,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -35225,7 +35609,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchJournalEntryAsync(System.Guid tenantId, System.Guid journalId, System.Guid entryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchJournalEntryAsync(System.Guid tenantId, System.Guid journalId, System.Guid entryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchJournalEntryAsync(tenantId, journalId, entryId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -35239,7 +35623,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchJournalEntryAsync(System.Guid tenantId, System.Guid journalId, System.Guid entryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchJournalEntryAsync(System.Guid tenantId, System.Guid journalId, System.Guid entryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (journalId == null)
                 throw new System.ArgumentNullException("journalId");
@@ -35493,9 +35877,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<MoneyEnvelope> AggregateJournalEntryDebitsAsync(System.Guid tenantId, System.Guid journalId, string currencyId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<MoneyEnvelope> AggregateJournalEntryDebitsAsync(System.Guid tenantId, System.Guid journalId, string currencyId, string api_version, string x_api_version, JournalEntryDtoCollectionQueryParameters body)
         {
-            return AggregateJournalEntryDebitsAsync(tenantId, journalId, currencyId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return AggregateJournalEntryDebitsAsync(tenantId, journalId, currencyId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -35507,7 +35891,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<MoneyEnvelope> AggregateJournalEntryDebitsAsync(System.Guid tenantId, System.Guid journalId, string currencyId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<MoneyEnvelope> AggregateJournalEntryDebitsAsync(System.Guid tenantId, System.Guid journalId, string currencyId, string api_version, string x_api_version, JournalEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (journalId == null)
                 throw new System.ArgumentNullException("journalId");
@@ -35524,6 +35908,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -35625,9 +36013,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<MoneyEnvelope> AggregateJournalEntryCreditsAsync(System.Guid tenantId, System.Guid journalId, string currencyId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<MoneyEnvelope> AggregateJournalEntryCreditsAsync(System.Guid tenantId, System.Guid journalId, string currencyId, string api_version, string x_api_version, JournalEntryDtoCollectionQueryParameters body)
         {
-            return AggregateJournalEntryCreditsAsync(tenantId, journalId, currencyId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return AggregateJournalEntryCreditsAsync(tenantId, journalId, currencyId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -35639,7 +36027,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<MoneyEnvelope> AggregateJournalEntryCreditsAsync(System.Guid tenantId, System.Guid journalId, string currencyId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<MoneyEnvelope> AggregateJournalEntryCreditsAsync(System.Guid tenantId, System.Guid journalId, string currencyId, string api_version, string x_api_version, JournalEntryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (journalId == null)
                 throw new System.ArgumentNullException("journalId");
@@ -35656,6 +36044,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -36276,7 +36668,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchJournalTypeAsync(System.Guid tenantId, System.Guid journalTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchJournalTypeAsync(System.Guid tenantId, System.Guid journalTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchJournalTypeAsync(tenantId, journalTypeId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -36290,7 +36682,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchJournalTypeAsync(System.Guid tenantId, System.Guid journalTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchJournalTypeAsync(System.Guid tenantId, System.Guid journalTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (journalTypeId == null)
                 throw new System.ArgumentNullException("journalTypeId");
@@ -36514,9 +36906,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<JournalTypeDtoIReadOnlyListEnvelope> GetJournalTypesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<JournalTypeDtoIReadOnlyListEnvelope> GetJournalTypesAsync(System.Guid tenantId, string api_version, string x_api_version, JournalTypeDtoCollectionQueryParameters body)
         {
-            return GetJournalTypesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetJournalTypesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -36528,7 +36920,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<JournalTypeDtoIReadOnlyListEnvelope> GetJournalTypesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<JournalTypeDtoIReadOnlyListEnvelope> GetJournalTypesAsync(System.Guid tenantId, string api_version, string x_api_version, JournalTypeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -36542,6 +36934,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -36724,9 +37120,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetJournalTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetJournalTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, JournalTypeDtoCollectionQueryParameters body)
         {
-            return GetJournalTypesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetJournalTypesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -36738,7 +37134,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetJournalTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetJournalTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, JournalTypeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -36752,6 +37148,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -36827,9 +37227,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LedgerDtoIReadOnlyListEnvelope> GetLedgersAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<LedgerDtoIReadOnlyListEnvelope> GetLedgersAsync(System.Guid tenantId, string api_version, string x_api_version, LedgerDtoCollectionQueryParameters body)
         {
-            return GetLedgersAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetLedgersAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -36841,7 +37241,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LedgerDtoIReadOnlyListEnvelope> GetLedgersAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<LedgerDtoIReadOnlyListEnvelope> GetLedgersAsync(System.Guid tenantId, string api_version, string x_api_version, LedgerDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -36855,6 +37255,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -37077,9 +37481,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetLedgersCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetLedgersCountAsync(System.Guid tenantId, string api_version, string x_api_version, LedgerDtoCollectionQueryParameters body)
         {
-            return GetLedgersCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetLedgersCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -37091,7 +37495,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetLedgersCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetLedgersCountAsync(System.Guid tenantId, string api_version, string x_api_version, LedgerDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -37105,6 +37509,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -37458,7 +37866,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchLedgerAsync(System.Guid tenantId, System.Guid ledgerId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchLedgerAsync(System.Guid tenantId, System.Guid ledgerId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchLedgerAsync(tenantId, ledgerId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -37472,7 +37880,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchLedgerAsync(System.Guid tenantId, System.Guid ledgerId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchLedgerAsync(System.Guid tenantId, System.Guid ledgerId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (ledgerId == null)
                 throw new System.ArgumentNullException("ledgerId");
@@ -37716,9 +38124,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LedgerTypeDtoIReadOnlyListEnvelope> GetLedgerTypesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<LedgerTypeDtoIReadOnlyListEnvelope> GetLedgerTypesAsync(System.Guid tenantId, string api_version, string x_api_version, LedgerTypeDtoCollectionQueryParameters body)
         {
-            return GetLedgerTypesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetLedgerTypesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -37730,7 +38138,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LedgerTypeDtoIReadOnlyListEnvelope> GetLedgerTypesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<LedgerTypeDtoIReadOnlyListEnvelope> GetLedgerTypesAsync(System.Guid tenantId, string api_version, string x_api_version, LedgerTypeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -37744,6 +38152,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -37966,9 +38378,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetLedgerTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetLedgerTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, LedgerTypeDtoCollectionQueryParameters body)
         {
-            return GetLedgerTypesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetLedgerTypesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -37980,7 +38392,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetLedgerTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetLedgerTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, LedgerTypeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -37994,6 +38406,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -38347,7 +38763,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchLedgerTypeAsync(System.Guid tenantId, System.Guid ledgerTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchLedgerTypeAsync(System.Guid tenantId, System.Guid ledgerTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchLedgerTypeAsync(tenantId, ledgerTypeId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -38361,7 +38777,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchLedgerTypeAsync(System.Guid tenantId, System.Guid ledgerTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchLedgerTypeAsync(System.Guid tenantId, System.Guid ledgerTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (ledgerTypeId == null)
                 throw new System.ArgumentNullException("ledgerTypeId");
@@ -38866,7 +39282,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchLoanAsync(System.Guid tenantId, System.Guid loanId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchLoanAsync(System.Guid tenantId, System.Guid loanId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchLoanAsync(tenantId, loanId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -38880,7 +39296,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchLoanAsync(System.Guid tenantId, System.Guid loanId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchLoanAsync(System.Guid tenantId, System.Guid loanId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (loanId == null)
                 throw new System.ArgumentNullException("loanId");
@@ -39124,9 +39540,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LoanDtoIReadOnlyListEnvelope> GetLoansAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<LoanDtoIReadOnlyListEnvelope> GetLoansAsync(System.Guid tenantId, string api_version, string x_api_version, LoanDtoCollectionQueryParameters body)
         {
-            return GetLoansAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetLoansAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -39138,7 +39554,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LoanDtoIReadOnlyListEnvelope> GetLoansAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<LoanDtoIReadOnlyListEnvelope> GetLoansAsync(System.Guid tenantId, string api_version, string x_api_version, LoanDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -39152,6 +39568,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -39377,9 +39797,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetLoansCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetLoansCountAsync(System.Guid tenantId, string api_version, string x_api_version, LoanDtoCollectionQueryParameters body)
         {
-            return GetLoansCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetLoansCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -39391,7 +39811,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetLoansCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetLoansCountAsync(System.Guid tenantId, string api_version, string x_api_version, LoanDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -39405,6 +39825,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -39500,9 +39924,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LoanApplicationDtoIReadOnlyListEnvelope> GetLoanApplicationsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<LoanApplicationDtoIReadOnlyListEnvelope> GetLoanApplicationsAsync(System.Guid tenantId, string api_version, string x_api_version, LoanApplicationDtoCollectionQueryParameters body)
         {
-            return GetLoanApplicationsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetLoanApplicationsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -39514,7 +39938,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LoanApplicationDtoIReadOnlyListEnvelope> GetLoanApplicationsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<LoanApplicationDtoIReadOnlyListEnvelope> GetLoanApplicationsAsync(System.Guid tenantId, string api_version, string x_api_version, LoanApplicationDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -39528,6 +39952,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -39753,9 +40181,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetLoanApplicationsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetLoanApplicationsCountAsync(System.Guid tenantId, string api_version, string x_api_version, LoanApplicationDtoCollectionQueryParameters body)
         {
-            return GetLoanApplicationsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetLoanApplicationsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -39767,7 +40195,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetLoanApplicationsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetLoanApplicationsCountAsync(System.Guid tenantId, string api_version, string x_api_version, LoanApplicationDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -39781,6 +40209,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -40137,7 +40569,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchLoanApplicationAsync(System.Guid tenantId, System.Guid applicationId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchLoanApplicationAsync(System.Guid tenantId, System.Guid applicationId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchLoanApplicationAsync(tenantId, applicationId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -40151,7 +40583,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchLoanApplicationAsync(System.Guid tenantId, System.Guid applicationId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchLoanApplicationAsync(System.Guid tenantId, System.Guid applicationId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (applicationId == null)
                 throw new System.ArgumentNullException("applicationId");
@@ -40395,9 +40827,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LoanTypeDtoIReadOnlyListEnvelope> GetLoanTypesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<LoanTypeDtoIReadOnlyListEnvelope> GetLoanTypesAsync(System.Guid tenantId, string api_version, string x_api_version, LoanTypeDtoCollectionQueryParameters body)
         {
-            return GetLoanTypesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetLoanTypesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -40409,7 +40841,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LoanTypeDtoIReadOnlyListEnvelope> GetLoanTypesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<LoanTypeDtoIReadOnlyListEnvelope> GetLoanTypesAsync(System.Guid tenantId, string api_version, string x_api_version, LoanTypeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -40423,6 +40855,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -40648,9 +41084,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetLoanTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetLoanTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, LoanTypeDtoCollectionQueryParameters body)
         {
-            return GetLoanTypesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetLoanTypesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -40662,7 +41098,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetLoanTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetLoanTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, LoanTypeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -40676,6 +41112,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -41032,7 +41472,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchLoanTypeAsync(System.Guid tenantId, System.Guid loanTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchLoanTypeAsync(System.Guid tenantId, System.Guid loanTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchLoanTypeAsync(tenantId, loanTypeId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -41046,7 +41486,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchLoanTypeAsync(System.Guid tenantId, System.Guid loanTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchLoanTypeAsync(System.Guid tenantId, System.Guid loanTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (loanTypeId == null)
                 throw new System.ArgumentNullException("loanTypeId");
@@ -41283,6 +41723,260 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         }
 
         /// <summary>
+        /// List posting executions
+        /// </summary>
+        /// <remarks>
+        /// Lists the tenant's posting-inbox executions (the durable evidence of every posting intent). Use OData to scope to a state — e.g. $filter=Status eq 'Rejected' for rejected intents, or Status eq 'PendingMapping'/'PendingPeriod'/'PendingRate' for the retryable pending set — and to page/order. Requires journals_read.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<PostingExecutionDtoIReadOnlyListEnvelope> GetPostingExecutionsAsync(System.Guid tenantId, string api_version, string x_api_version, PostingExecutionDtoCollectionQueryParameters body)
+        {
+            return GetPostingExecutionsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// List posting executions
+        /// </summary>
+        /// <remarks>
+        /// Lists the tenant's posting-inbox executions (the durable evidence of every posting intent). Use OData to scope to a state — e.g. $filter=Status eq 'Rejected' for rejected intents, or Status eq 'PendingMapping'/'PendingPeriod'/'PendingRate' for the retryable pending set — and to page/order. Requires journals_read.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<PostingExecutionDtoIReadOnlyListEnvelope> GetPostingExecutionsAsync(System.Guid tenantId, string api_version, string x_api_version, PostingExecutionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/AccountingService/PostingExecutions"
+                    urlBuilder_.Append("api/v2/AccountingService/PostingExecutions");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<PostingExecutionDtoIReadOnlyListEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Count posting executions
+        /// </summary>
+        /// <remarks>
+        /// Returns the count of the tenant's posting-inbox executions under the same OData shaping as the list read (e.g. $filter=Status eq 'Rejected' to count rejected intents). Requires journals_read.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<Int32Envelope> CountPostingExecutionsAsync(System.Guid tenantId, string api_version, string x_api_version, PostingExecutionDtoCollectionQueryParameters body)
+        {
+            return CountPostingExecutionsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Count posting executions
+        /// </summary>
+        /// <remarks>
+        /// Returns the count of the tenant's posting-inbox executions under the same OData shaping as the list read (e.g. $filter=Status eq 'Rejected' to count rejected intents). Requires journals_read.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountPostingExecutionsAsync(System.Guid tenantId, string api_version, string x_api_version, PostingExecutionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/AccountingService/PostingExecutions/Count"
+                    urlBuilder_.Append("api/v2/AccountingService/PostingExecutions/Count");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Int32Envelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
         /// Retrieves tenant receipts
         /// </summary>
         /// <remarks>
@@ -41290,9 +41984,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<ReceiptDtoIReadOnlyListEnvelope> GetReceiptsAsync(System.Guid tenantId)
+        public virtual System.Threading.Tasks.Task<ReceiptDtoIReadOnlyListEnvelope> GetReceiptsAsync(System.Guid tenantId, ReceiptDtoCollectionQueryParameters body)
         {
-            return GetReceiptsAsync(tenantId, System.Threading.CancellationToken.None);
+            return GetReceiptsAsync(tenantId, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -41304,7 +41998,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<ReceiptDtoIReadOnlyListEnvelope> GetReceiptsAsync(System.Guid tenantId, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<ReceiptDtoIReadOnlyListEnvelope> GetReceiptsAsync(System.Guid tenantId, ReceiptDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -41315,6 +42009,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -41489,9 +42187,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetReceiptsCountAsync(System.Guid tenantId)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetReceiptsCountAsync(System.Guid tenantId, ReceiptDtoCollectionQueryParameters body)
         {
-            return GetReceiptsCountAsync(tenantId, System.Threading.CancellationToken.None);
+            return GetReceiptsCountAsync(tenantId, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -41503,7 +42201,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetReceiptsCountAsync(System.Guid tenantId, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetReceiptsCountAsync(System.Guid tenantId, ReceiptDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -41514,6 +42212,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -41792,7 +42494,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchReceiptAsync(System.Guid tenantId, System.Guid receiptId, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchReceiptAsync(System.Guid tenantId, System.Guid receiptId, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchReceiptAsync(tenantId, receiptId, body, System.Threading.CancellationToken.None);
         }
@@ -41806,7 +42508,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchReceiptAsync(System.Guid tenantId, System.Guid receiptId, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchReceiptAsync(System.Guid tenantId, System.Guid receiptId, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (receiptId == null)
                 throw new System.ArgumentNullException("receiptId");
@@ -42151,9 +42853,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<ShareClassDtoListEnvelope> GetShareClassesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<ShareClassDtoListEnvelope> GetShareClassesAsync(System.Guid tenantId, string api_version, string x_api_version, ShareClassDtoCollectionQueryParameters body)
         {
-            return GetShareClassesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetShareClassesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -42165,7 +42867,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<ShareClassDtoListEnvelope> GetShareClassesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<ShareClassDtoListEnvelope> GetShareClassesAsync(System.Guid tenantId, string api_version, string x_api_version, ShareClassDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -42179,6 +42881,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -42411,9 +43117,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetShareClassesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetShareClassesCountAsync(System.Guid tenantId, string api_version, string x_api_version, ShareClassDtoCollectionQueryParameters body)
         {
-            return GetShareClassesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetShareClassesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -42425,7 +43131,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetShareClassesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetShareClassesCountAsync(System.Guid tenantId, string api_version, string x_api_version, ShareClassDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -42439,6 +43145,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -42822,7 +43532,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchShareClassAsync(System.Guid tenantId, System.Guid shareClassId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchShareClassAsync(System.Guid tenantId, System.Guid shareClassId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchShareClassAsync(tenantId, shareClassId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -42836,7 +43546,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchShareClassAsync(System.Guid tenantId, System.Guid shareClassId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchShareClassAsync(System.Guid tenantId, System.Guid shareClassId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (shareClassId == null)
                 throw new System.ArgumentNullException("shareClassId");
@@ -43084,9 +43794,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<ShareIssuanceDtoListEnvelope> GetShareIssuancesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<ShareIssuanceDtoListEnvelope> GetShareIssuancesAsync(System.Guid tenantId, string api_version, string x_api_version, ShareIssuanceDtoCollectionQueryParameters body)
         {
-            return GetShareIssuancesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetShareIssuancesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -43098,7 +43808,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<ShareIssuanceDtoListEnvelope> GetShareIssuancesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<ShareIssuanceDtoListEnvelope> GetShareIssuancesAsync(System.Guid tenantId, string api_version, string x_api_version, ShareIssuanceDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -43112,6 +43822,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -43344,9 +44058,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetShareIssuancesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetShareIssuancesCountAsync(System.Guid tenantId, string api_version, string x_api_version, ShareIssuanceDtoCollectionQueryParameters body)
         {
-            return GetShareIssuancesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetShareIssuancesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -43358,7 +44072,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetShareIssuancesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetShareIssuancesCountAsync(System.Guid tenantId, string api_version, string x_api_version, ShareIssuanceDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -43372,6 +44086,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -43467,9 +44185,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<DecimalEnvelope> GetShareIssuancesSumAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<DecimalEnvelope> GetShareIssuancesSumAsync(System.Guid tenantId, string api_version, string x_api_version, ShareIssuanceDtoCollectionQueryParameters body)
         {
-            return GetShareIssuancesSumAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetShareIssuancesSumAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -43481,7 +44199,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<DecimalEnvelope> GetShareIssuancesSumAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<DecimalEnvelope> GetShareIssuancesSumAsync(System.Guid tenantId, string api_version, string x_api_version, ShareIssuanceDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -43495,6 +44213,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -43878,7 +44600,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchShareIssuanceAsync(System.Guid tenantId, System.Guid issuanceId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchShareIssuanceAsync(System.Guid tenantId, System.Guid issuanceId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchShareIssuanceAsync(tenantId, issuanceId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -43892,7 +44614,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchShareIssuanceAsync(System.Guid tenantId, System.Guid issuanceId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchShareIssuanceAsync(System.Guid tenantId, System.Guid issuanceId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (issuanceId == null)
                 throw new System.ArgumentNullException("issuanceId");
@@ -44140,9 +44862,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<ShareTransferDtoListEnvelope> GetShareTransfersAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<ShareTransferDtoListEnvelope> GetShareTransfersAsync(System.Guid tenantId, string api_version, string x_api_version, ShareTransferDtoCollectionQueryParameters body)
         {
-            return GetShareTransfersAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetShareTransfersAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -44154,7 +44876,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<ShareTransferDtoListEnvelope> GetShareTransfersAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<ShareTransferDtoListEnvelope> GetShareTransfersAsync(System.Guid tenantId, string api_version, string x_api_version, ShareTransferDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -44168,6 +44890,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -44400,9 +45126,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetShareTransfersCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetShareTransfersCountAsync(System.Guid tenantId, string api_version, string x_api_version, ShareTransferDtoCollectionQueryParameters body)
         {
-            return GetShareTransfersCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetShareTransfersCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -44414,7 +45140,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetShareTransfersCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetShareTransfersCountAsync(System.Guid tenantId, string api_version, string x_api_version, ShareTransferDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -44428,6 +45154,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -44811,7 +45541,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchShareTransferAsync(System.Guid tenantId, System.Guid transferId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchShareTransferAsync(System.Guid tenantId, System.Guid transferId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchShareTransferAsync(tenantId, transferId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -44825,7 +45555,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchShareTransferAsync(System.Guid tenantId, System.Guid transferId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchShareTransferAsync(System.Guid tenantId, System.Guid transferId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (transferId == null)
                 throw new System.ArgumentNullException("transferId");
@@ -45073,9 +45803,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<ShareTransferReasonDtoListEnvelope> GetShareTransferReasonsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<ShareTransferReasonDtoListEnvelope> GetShareTransferReasonsAsync(System.Guid tenantId, string api_version, string x_api_version, ShareTransferReasonDtoCollectionQueryParameters body)
         {
-            return GetShareTransferReasonsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetShareTransferReasonsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -45087,7 +45817,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<ShareTransferReasonDtoListEnvelope> GetShareTransferReasonsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<ShareTransferReasonDtoListEnvelope> GetShareTransferReasonsAsync(System.Guid tenantId, string api_version, string x_api_version, ShareTransferReasonDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -45101,6 +45831,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -45333,9 +46067,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetShareTransferReasonsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetShareTransferReasonsCountAsync(System.Guid tenantId, string api_version, string x_api_version, ShareTransferReasonDtoCollectionQueryParameters body)
         {
-            return GetShareTransferReasonsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetShareTransferReasonsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -45347,7 +46081,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetShareTransferReasonsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetShareTransferReasonsCountAsync(System.Guid tenantId, string api_version, string x_api_version, ShareTransferReasonDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -45361,6 +46095,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -45744,7 +46482,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchShareTransferReasonAsync(System.Guid tenantId, System.Guid reasonId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchShareTransferReasonAsync(System.Guid tenantId, System.Guid reasonId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchShareTransferReasonAsync(tenantId, reasonId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -45758,7 +46496,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchShareTransferReasonAsync(System.Guid tenantId, System.Guid reasonId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchShareTransferReasonAsync(System.Guid tenantId, System.Guid reasonId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (reasonId == null)
                 throw new System.ArgumentNullException("reasonId");
@@ -46006,9 +46744,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<TaxClassDtoListEnvelope> GetTaxClassesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<TaxClassDtoListEnvelope> GetTaxClassesAsync(System.Guid tenantId, string api_version, string x_api_version, TaxClassDtoCollectionQueryParameters body)
         {
-            return GetTaxClassesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetTaxClassesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -46020,7 +46758,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<TaxClassDtoListEnvelope> GetTaxClassesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<TaxClassDtoListEnvelope> GetTaxClassesAsync(System.Guid tenantId, string api_version, string x_api_version, TaxClassDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -46034,6 +46772,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -46256,9 +46998,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetTaxClassesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetTaxClassesCountAsync(System.Guid tenantId, string api_version, string x_api_version, TaxClassDtoCollectionQueryParameters body)
         {
-            return GetTaxClassesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetTaxClassesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -46270,7 +47012,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetTaxClassesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetTaxClassesCountAsync(System.Guid tenantId, string api_version, string x_api_version, TaxClassDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -46284,6 +47026,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -46764,7 +47510,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchTaxClassAsync(System.Guid tenantId, System.Guid id, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchTaxClassAsync(System.Guid tenantId, System.Guid id, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchTaxClassAsync(tenantId, id, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -46778,7 +47524,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchTaxClassAsync(System.Guid tenantId, System.Guid id, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchTaxClassAsync(System.Guid tenantId, System.Guid id, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -46895,9 +47641,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<TaxPolicyDtoListEnvelope> GetTaxPoliciesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<TaxPolicyDtoListEnvelope> GetTaxPoliciesAsync(System.Guid tenantId, string api_version, string x_api_version, TaxPolicyDtoCollectionQueryParameters body)
         {
-            return GetTaxPoliciesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetTaxPoliciesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -46909,7 +47655,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<TaxPolicyDtoListEnvelope> GetTaxPoliciesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<TaxPolicyDtoListEnvelope> GetTaxPoliciesAsync(System.Guid tenantId, string api_version, string x_api_version, TaxPolicyDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -46923,6 +47669,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -47145,9 +47895,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetTaxPoliciesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetTaxPoliciesCountAsync(System.Guid tenantId, string api_version, string x_api_version, TaxPolicyDtoCollectionQueryParameters body)
         {
-            return GetTaxPoliciesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetTaxPoliciesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -47159,7 +47909,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetTaxPoliciesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetTaxPoliciesCountAsync(System.Guid tenantId, string api_version, string x_api_version, TaxPolicyDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -47173,6 +47923,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -47268,9 +48022,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<TaxPolicyDtoListEnvelope> GetTaxPoliciesByAuthorityAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<TaxPolicyDtoListEnvelope> GetTaxPoliciesByAuthorityAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version, TaxPolicyDtoCollectionQueryParameters body)
         {
-            return GetTaxPoliciesByAuthorityAsync(tenantId, authorityId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetTaxPoliciesByAuthorityAsync(tenantId, authorityId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -47282,7 +48036,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<TaxPolicyDtoListEnvelope> GetTaxPoliciesByAuthorityAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<TaxPolicyDtoListEnvelope> GetTaxPoliciesByAuthorityAsync(System.Guid tenantId, System.Guid authorityId, string api_version, string x_api_version, TaxPolicyDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (authorityId == null)
                 throw new System.ArgumentNullException("authorityId");
@@ -47299,6 +48053,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -47780,7 +48538,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchTaxPolicyAsync(System.Guid tenantId, System.Guid id, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchTaxPolicyAsync(System.Guid tenantId, System.Guid id, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchTaxPolicyAsync(tenantId, id, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -47794,7 +48552,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchTaxPolicyAsync(System.Guid tenantId, System.Guid id, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchTaxPolicyAsync(System.Guid tenantId, System.Guid id, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -47911,9 +48669,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<ItemTaxPolicyRecordDtoListEnvelope> GetItemTaxPolicyRecordsAsync(System.Guid tenantId, System.Guid taxPolicyId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<ItemTaxPolicyRecordDtoListEnvelope> GetItemTaxPolicyRecordsAsync(System.Guid tenantId, System.Guid taxPolicyId, string api_version, string x_api_version, ItemTaxPolicyRecordDtoCollectionQueryParameters body)
         {
-            return GetItemTaxPolicyRecordsAsync(tenantId, taxPolicyId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetItemTaxPolicyRecordsAsync(tenantId, taxPolicyId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -47925,7 +48683,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<ItemTaxPolicyRecordDtoListEnvelope> GetItemTaxPolicyRecordsAsync(System.Guid tenantId, System.Guid taxPolicyId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<ItemTaxPolicyRecordDtoListEnvelope> GetItemTaxPolicyRecordsAsync(System.Guid tenantId, System.Guid taxPolicyId, string api_version, string x_api_version, ItemTaxPolicyRecordDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (taxPolicyId == null)
                 throw new System.ArgumentNullException("taxPolicyId");
@@ -47942,6 +48700,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -48571,7 +49333,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchItemTaxPolicyRecordAsync(System.Guid tenantId, System.Guid taxPolicyId, System.Guid itemTaxPolicyRecordId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchItemTaxPolicyRecordAsync(System.Guid tenantId, System.Guid taxPolicyId, System.Guid itemTaxPolicyRecordId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchItemTaxPolicyRecordAsync(tenantId, taxPolicyId, itemTaxPolicyRecordId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -48585,7 +49347,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchItemTaxPolicyRecordAsync(System.Guid tenantId, System.Guid taxPolicyId, System.Guid itemTaxPolicyRecordId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchItemTaxPolicyRecordAsync(System.Guid tenantId, System.Guid taxPolicyId, System.Guid itemTaxPolicyRecordId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (taxPolicyId == null)
                 throw new System.ArgumentNullException("taxPolicyId");
@@ -48707,9 +49469,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<AppliedTaxPolicyRecordDtoListEnvelope> GetAppliedTaxPolicyRecordsAsync(System.Guid tenantId, System.Guid taxPolicyId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<AppliedTaxPolicyRecordDtoListEnvelope> GetAppliedTaxPolicyRecordsAsync(System.Guid tenantId, System.Guid taxPolicyId, string api_version, string x_api_version, AppliedTaxPolicyRecordDtoCollectionQueryParameters body)
         {
-            return GetAppliedTaxPolicyRecordsAsync(tenantId, taxPolicyId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAppliedTaxPolicyRecordsAsync(tenantId, taxPolicyId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -48721,7 +49483,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<AppliedTaxPolicyRecordDtoListEnvelope> GetAppliedTaxPolicyRecordsAsync(System.Guid tenantId, System.Guid taxPolicyId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<AppliedTaxPolicyRecordDtoListEnvelope> GetAppliedTaxPolicyRecordsAsync(System.Guid tenantId, System.Guid taxPolicyId, string api_version, string x_api_version, AppliedTaxPolicyRecordDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (taxPolicyId == null)
                 throw new System.ArgumentNullException("taxPolicyId");
@@ -48738,6 +49500,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -48967,9 +49733,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAppliedTaxPolicyRecordsCountAsync(System.Guid tenantId, System.Guid taxPolicyId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetAppliedTaxPolicyRecordsCountAsync(System.Guid tenantId, System.Guid taxPolicyId, string api_version, string x_api_version, AppliedTaxPolicyRecordDtoCollectionQueryParameters body)
         {
-            return GetAppliedTaxPolicyRecordsCountAsync(tenantId, taxPolicyId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetAppliedTaxPolicyRecordsCountAsync(tenantId, taxPolicyId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -48981,7 +49747,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAppliedTaxPolicyRecordsCountAsync(System.Guid tenantId, System.Guid taxPolicyId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetAppliedTaxPolicyRecordsCountAsync(System.Guid tenantId, System.Guid taxPolicyId, string api_version, string x_api_version, AppliedTaxPolicyRecordDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (taxPolicyId == null)
                 throw new System.ArgumentNullException("taxPolicyId");
@@ -48998,6 +49764,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -49495,7 +50265,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchAppliedTaxPolicyRecordAsync(System.Guid tenantId, System.Guid taxPolicyId, System.Guid appliedTaxPolicyRecordId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchAppliedTaxPolicyRecordAsync(System.Guid tenantId, System.Guid taxPolicyId, System.Guid appliedTaxPolicyRecordId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchAppliedTaxPolicyRecordAsync(tenantId, taxPolicyId, appliedTaxPolicyRecordId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -49509,7 +50279,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchAppliedTaxPolicyRecordAsync(System.Guid tenantId, System.Guid taxPolicyId, System.Guid appliedTaxPolicyRecordId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchAppliedTaxPolicyRecordAsync(System.Guid tenantId, System.Guid taxPolicyId, System.Guid appliedTaxPolicyRecordId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (taxPolicyId == null)
                 throw new System.ArgumentNullException("taxPolicyId");
@@ -49631,9 +50401,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<TaxRateDtoListEnvelope> GetTaxRatesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<TaxRateDtoListEnvelope> GetTaxRatesAsync(System.Guid tenantId, string api_version, string x_api_version, TaxRateDtoCollectionQueryParameters body)
         {
-            return GetTaxRatesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetTaxRatesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -49645,7 +50415,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<TaxRateDtoListEnvelope> GetTaxRatesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<TaxRateDtoListEnvelope> GetTaxRatesAsync(System.Guid tenantId, string api_version, string x_api_version, TaxRateDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -49659,6 +50429,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -49881,9 +50655,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetTaxRatesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetTaxRatesCountAsync(System.Guid tenantId, string api_version, string x_api_version, TaxRateDtoCollectionQueryParameters body)
         {
-            return GetTaxRatesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetTaxRatesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -49895,7 +50669,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetTaxRatesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetTaxRatesCountAsync(System.Guid tenantId, string api_version, string x_api_version, TaxRateDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -49909,6 +50683,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -50389,7 +51167,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchTaxRateAsync(System.Guid tenantId, System.Guid id, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchTaxRateAsync(System.Guid tenantId, System.Guid id, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchTaxRateAsync(tenantId, id, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -50403,7 +51181,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchTaxRateAsync(System.Guid tenantId, System.Guid id, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchTaxRateAsync(System.Guid tenantId, System.Guid id, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -50520,9 +51298,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<TransactionDtoListEnvelope> GetTransactionsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<TransactionDtoListEnvelope> GetTransactionsAsync(System.Guid tenantId, string api_version, string x_api_version, TransactionDtoCollectionQueryParameters body)
         {
-            return GetTransactionsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetTransactionsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -50534,7 +51312,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<TransactionDtoListEnvelope> GetTransactionsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<TransactionDtoListEnvelope> GetTransactionsAsync(System.Guid tenantId, string api_version, string x_api_version, TransactionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -50548,6 +51326,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -50780,9 +51562,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetTransactionsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetTransactionsCountAsync(System.Guid tenantId, string api_version, string x_api_version, TransactionDtoCollectionQueryParameters body)
         {
-            return GetTransactionsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetTransactionsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -50794,7 +51576,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetTransactionsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetTransactionsCountAsync(System.Guid tenantId, string api_version, string x_api_version, TransactionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -50808,6 +51590,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -51318,7 +52104,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchTransactionAsync(System.Guid tenantId, System.Guid transactionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchTransactionAsync(System.Guid tenantId, System.Guid transactionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchTransactionAsync(tenantId, transactionId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -51332,7 +52118,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchTransactionAsync(System.Guid tenantId, System.Guid transactionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchTransactionAsync(System.Guid tenantId, System.Guid transactionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (transactionId == null)
                 throw new System.ArgumentNullException("transactionId");
@@ -51449,9 +52235,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<TransactionCategoryDtoListEnvelope> GetTransactionCategoriesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<TransactionCategoryDtoListEnvelope> GetTransactionCategoriesAsync(System.Guid tenantId, string api_version, string x_api_version, TransactionCategoryDtoCollectionQueryParameters body)
         {
-            return GetTransactionCategoriesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetTransactionCategoriesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -51463,7 +52249,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<TransactionCategoryDtoListEnvelope> GetTransactionCategoriesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<TransactionCategoryDtoListEnvelope> GetTransactionCategoriesAsync(System.Guid tenantId, string api_version, string x_api_version, TransactionCategoryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -51477,6 +52263,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -51709,9 +52499,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetTransactionCategoriesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetTransactionCategoriesCountAsync(System.Guid tenantId, string api_version, string x_api_version, TransactionCategoryDtoCollectionQueryParameters body)
         {
-            return GetTransactionCategoriesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetTransactionCategoriesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -51723,7 +52513,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetTransactionCategoriesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetTransactionCategoriesCountAsync(System.Guid tenantId, string api_version, string x_api_version, TransactionCategoryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -51737,6 +52527,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -52247,7 +53041,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchTransactionCategoryAsync(System.Guid tenantId, System.Guid categoryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchTransactionCategoryAsync(System.Guid tenantId, System.Guid categoryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchTransactionCategoryAsync(tenantId, categoryId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -52261,7 +53055,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchTransactionCategoryAsync(System.Guid tenantId, System.Guid categoryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchTransactionCategoryAsync(System.Guid tenantId, System.Guid categoryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (categoryId == null)
                 throw new System.ArgumentNullException("categoryId");
@@ -52715,6 +53509,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AccountDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AccountDtoEnvelope
     {
 
@@ -52729,6 +53556,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -52753,6 +53589,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -52814,6 +53659,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AccountGroupDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AccountGroupDtoEnvelope
     {
 
@@ -52828,6 +53706,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -52852,6 +53739,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -52923,6 +53819,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AccountRelationDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AccountRelationDtoListEnvelope
     {
 
@@ -52937,6 +53866,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -53004,6 +53942,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AccountTypeDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AccountTypeDtoEnvelope
     {
 
@@ -53018,6 +53989,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -53042,6 +54022,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -53162,6 +54151,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Id { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? Timestamp { get; set; }
+
         [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TenantId { get; set; }
 
@@ -53217,9 +54209,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("projectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ProjectId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? Timestamp { get; set; }
-
         [Newtonsoft.Json.JsonProperty("debit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Debit { get; set; }
 
@@ -53231,6 +54220,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("amountInUsd", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Money AmountInUsd { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AccountingEntryDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
 
     }
 
@@ -53249,6 +54271,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -53273,6 +54304,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -53359,6 +54399,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AccountingPeriodDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AccountingPeriodDtoEnvelope
     {
 
@@ -53373,6 +54446,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -53397,6 +54479,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -53493,6 +54584,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AppliedItemTaxRecordDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AppliedItemTaxRecordDtoIReadOnlyListEnvelope
     {
 
@@ -53507,6 +54631,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -53608,6 +54741,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AppliedTaxPolicyRecordDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AppliedTaxPolicyRecordDtoEnvelope
     {
 
@@ -53622,6 +54788,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -53646,6 +54821,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -53676,6 +54860,22 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("taxBaseAmountInUSD", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double TaxBaseAmountInUSD { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AssignJournalToBookRequest
+    {
+
+        [Newtonsoft.Json.JsonProperty("financialBookId", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(36)]
+        public string FinancialBookId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 1)]
+        public string Code { get; set; }
 
     }
 
@@ -53764,6 +54964,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class BankAccountDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class BankAccountDtoEnvelope
     {
 
@@ -53778,6 +55011,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -53802,6 +55044,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -53889,6 +55140,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class BankDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class BankDtoEnvelope
     {
 
@@ -53903,6 +55187,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -53927,6 +55220,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -54070,6 +55372,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class BankGuaranteeDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class BankGuaranteeDtoEnvelope
     {
 
@@ -54084,6 +55419,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -54108,6 +55452,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -54289,6 +55642,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class BankProfileDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class BankProfileDtoListEnvelope
     {
 
@@ -54303,6 +55689,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -54428,6 +55823,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class BankTransactionDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class BankTransactionDtoEnvelope
     {
 
@@ -54442,6 +55870,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -54466,6 +55903,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -54842,6 +56288,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class BillingProfileDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class BillingProfileDtoEnvelope
     {
 
@@ -54856,6 +56335,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -54880,6 +56368,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -55053,6 +56550,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class BudgetAccountEntryDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class BudgetAccountEntryDtoEnvelope
     {
 
@@ -55067,6 +56597,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -55091,6 +56630,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -55165,6 +56713,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class BudgetDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class BudgetDtoEnvelope
     {
 
@@ -55179,6 +56760,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -55203,6 +56793,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -55257,6 +56856,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -55370,6 +56978,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CommissionDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CommissionDtoEnvelope
     {
 
@@ -55384,6 +57025,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -55408,6 +57058,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -55694,6 +57353,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CostCentreBudgetDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CostCentreBudgetDtoEnvelope
     {
 
@@ -55708,6 +57400,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -55732,6 +57433,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -55827,6 +57537,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CostCentreDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CostCentreDtoEnvelope
     {
 
@@ -55841,6 +57584,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -55865,6 +57617,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -55929,6 +57690,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CostCentreGroupDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CostCentreGroupDtoEnvelope
     {
 
@@ -55943,6 +57737,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -55967,6 +57770,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56084,6 +57896,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
@@ -56108,6 +57929,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
@@ -56128,6 +57958,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56172,6 +58011,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ExpenseClaimDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ExpenseClaimDtoEnvelope
     {
 
@@ -56186,6 +58058,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56210,6 +58091,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56273,6 +58163,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ExpenseTypeDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ExpenseTypeDtoEnvelope
     {
 
@@ -56287,6 +58210,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56311,6 +58243,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56376,6 +58317,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class FinancialBookDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class FinancialBookDtoEnvelope
     {
 
@@ -56390,6 +58364,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56414,6 +58397,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56498,6 +58490,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class FiscalAuthorityDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class FiscalAuthorityDtoEnvelope
     {
 
@@ -56512,6 +58537,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56536,6 +58570,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56617,6 +58660,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class FiscalIdentificationTypeDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class FiscalIdentificationTypeDtoEnvelope
     {
 
@@ -56631,6 +58707,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56655,6 +58740,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56737,6 +58831,43 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("fiscalYearId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FiscalYearId { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public FiscalPeriodDtoStatus Status { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class FiscalPeriodDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -56754,6 +58885,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56778,6 +58918,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56860,6 +59009,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class FiscalRegimeDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class FiscalRegimeDtoEnvelope
     {
 
@@ -56874,6 +59056,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56898,6 +59089,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -56975,6 +59175,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class FiscalResponsibilityDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class FiscalResponsibilityDtoEnvelope
     {
 
@@ -56989,6 +59222,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57013,6 +59255,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57067,6 +59318,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class FiscalResponsibilityRecordDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class FiscalResponsibilityRecordDtoEnvelope
     {
 
@@ -57081,6 +59365,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57105,6 +59398,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57214,6 +59516,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class FiscalYearDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class FiscalYearDtoEnvelope
     {
 
@@ -57228,6 +59563,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57253,6 +59597,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
@@ -57276,6 +59629,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57351,6 +59713,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class GrantDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class GrantDtoEnvelope
     {
 
@@ -57365,6 +59760,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57389,6 +59793,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57479,6 +59892,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57589,6 +60011,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class InvoiceEnumerationRangeDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class InvoiceEnumerationRangeDtoEnvelope
     {
 
@@ -57603,6 +60058,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57627,6 +60091,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57728,6 +60201,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ItemTaxPolicyRecordDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ItemTaxPolicyRecordDtoEnvelope
     {
 
@@ -57742,6 +60248,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57766,6 +60281,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57827,6 +60351,14 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [System.ComponentModel.DataAnnotations.StringLength(36)]
         public string LedgerId { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("financialBookId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(36)]
+        public string FinancialBookId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 1)]
+        public string Code { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -57863,6 +60395,45 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("parentJournalId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ParentJournalId { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("financialBookId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FinancialBookId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Code { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class JournalDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -57880,6 +60451,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57904,6 +60484,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -57963,6 +60552,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? Timestamp { get; set; }
 
         [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TenantId { get; set; }
@@ -58026,9 +60618,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("forexRatesSnapshot", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ForexRatesSnapshot { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? Timestamp { get; set; }
-
         [Newtonsoft.Json.JsonProperty("debitInUsd", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double DebitInUsd { get; set; }
 
@@ -58050,6 +60639,45 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("totalCreditAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Money TotalCreditAmount { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("debitInUsdAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Money DebitInUsdAmount { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("creditInUsdAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Money CreditInUsdAmount { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class JournalEntryDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -58067,6 +60695,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58091,6 +60728,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58165,6 +60811,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class JournalTypeDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class JournalTypeDtoEnvelope
     {
 
@@ -58179,6 +60858,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58203,6 +60891,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58281,6 +60978,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class LedgerDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LedgerDtoEnvelope
     {
 
@@ -58295,6 +61025,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58319,6 +61058,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58375,6 +61123,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class LedgerTypeDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LedgerTypeDtoEnvelope
     {
 
@@ -58389,6 +61170,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58413,6 +61203,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58467,6 +61266,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class LoanApplicationDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LoanApplicationDtoEnvelope
     {
 
@@ -58481,6 +61313,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58505,6 +61346,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58593,6 +61443,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class LoanDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LoanDtoEnvelope
     {
 
@@ -58607,6 +61490,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58631,6 +61523,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58686,6 +61587,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class LoanTypeDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LoanTypeDtoEnvelope
     {
 
@@ -58700,6 +61634,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58724,6 +61667,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58821,6 +61773,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
@@ -58830,18 +61791,14 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Operation
+    public partial class PatchOperation
     {
-
-        [Newtonsoft.Json.JsonProperty("operationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public OperationType OperationType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("path", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Path { get; set; }
 
         [Newtonsoft.Json.JsonProperty("op", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Op { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("path", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Path { get; set; }
 
         [Newtonsoft.Json.JsonProperty("from", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string From { get; set; }
@@ -58922,6 +61879,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PaymentCommissionDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class PaymentCommissionDtoEnvelope
     {
 
@@ -58936,6 +61926,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -58960,6 +61959,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -59020,6 +62028,169 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PostingBookResultDto
+    {
+
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("financialBookId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FinancialBookId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public PostingBookResultDtoStatus Status { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("journalEntryId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string JournalEntryId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("failureCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FailureCode { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PostingExecutionDto
+    {
+
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TenantId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string EnrollmentId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("postingIntentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string PostingIntentId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("postingIdempotencyKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string PostingIdempotencyKey { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("intentType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string IntentType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("postingOperation", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string PostingOperation { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("sourceDocumentType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SourceDocumentType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("sourceDocumentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SourceDocumentId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public PostingExecutionDtoStatus Status { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("failureKind", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public PostingExecutionDtoFailureKind? FailureKind { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("failureCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FailureCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("retryable", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Retryable { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("correlationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CorrelationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("causationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CausationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("receivedAtUtc", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset ReceivedAtUtc { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("processingStartedAtUtc", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? ProcessingStartedAtUtc { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("completedAtUtc", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? CompletedAtUtc { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("bookResults", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<PostingBookResultDto> BookResults { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("failureClass", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public PostingExecutionDtoFailureClass? FailureClass { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PostingExecutionDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PostingExecutionDtoIReadOnlyListEnvelope
+    {
+
+        [Newtonsoft.Json.JsonProperty("isSuccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsSuccess { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("correlationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CorrelationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ActivityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<PostingExecutionDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ReceiptCreateDto
     {
 
@@ -59028,6 +62199,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("closed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Closed { get; set; }
 
         [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Title { get; set; }
@@ -59079,6 +62253,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("cityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("forexRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double ForexRate { get; set; }
 
         [Newtonsoft.Json.JsonProperty("currencyId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CurrencyId { get; set; }
@@ -59166,17 +62343,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("paymentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PaymentId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("forexRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double ForexRate { get; set; }
-
         [Newtonsoft.Json.JsonProperty("totalAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double TotalAmount { get; set; }
 
         [Newtonsoft.Json.JsonProperty("totalAmountInUSD", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double TotalAmountInUSD { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("closed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Closed { get; set; }
 
         [Newtonsoft.Json.JsonProperty("contactId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ContactId { get; set; }
@@ -59234,6 +62405,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ReceiptDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ReceiptDtoEnvelope
     {
 
@@ -59248,6 +62452,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -59272,6 +62485,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -59441,6 +62663,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ShareClassDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ShareClassDtoEnvelope
     {
 
@@ -59455,6 +62710,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -59479,6 +62743,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -59561,6 +62834,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ShareIssuanceDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ShareIssuanceDtoEnvelope
     {
 
@@ -59575,6 +62881,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -59599,6 +62914,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -59689,6 +63013,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ShareTransferDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ShareTransferDtoEnvelope
     {
 
@@ -59703,6 +63060,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -59727,6 +63093,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -59781,6 +63156,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ShareTransferReasonDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ShareTransferReasonDtoEnvelope
     {
 
@@ -59795,6 +63203,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -59819,6 +63236,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -59920,6 +63346,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class TaxClassDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TaxClassDtoEnvelope
     {
 
@@ -59934,6 +63393,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -59958,6 +63426,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -60183,6 +63660,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class TaxPolicyDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TaxPolicyDtoEnvelope
     {
 
@@ -60197,6 +63707,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -60221,6 +63740,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -60468,6 +63996,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class TaxRateDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TaxRateDtoEnvelope
     {
 
@@ -60482,6 +64043,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -60506,6 +64076,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -60627,6 +64206,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class TransactionCategoryDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TransactionCategoryDtoEnvelope
     {
 
@@ -60641,6 +64253,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -60665,6 +64286,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -60790,6 +64420,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class TransactionDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TransactionDtoEnvelope
     {
 
@@ -60804,6 +64467,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -60828,6 +64500,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -60923,6 +64604,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -61303,6 +64993,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum FiscalPeriodDtoStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Open")]
+        Open = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Closed")]
+        Closed = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Locked")]
+        Locked = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public enum InvoiceEnumerationRangeCreateDtoDocumentType
     {
 
@@ -61447,29 +65152,116 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum OperationType
+    public enum PostingBookResultDtoStatus
     {
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Add")]
-        Add = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"Posted")]
+        Posted = 0,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Remove")]
-        Remove = 1,
+        [System.Runtime.Serialization.EnumMember(Value = @"Duplicate")]
+        Duplicate = 1,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Replace")]
-        Replace = 2,
+        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
+        Rejected = 2,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Move")]
-        Move = 3,
+    }
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Copy")]
-        Copy = 4,
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PostingExecutionDtoStatus
+    {
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Test")]
-        Test = 5,
+        [System.Runtime.Serialization.EnumMember(Value = @"Received")]
+        Received = 0,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Invalid")]
-        Invalid = 6,
+        [System.Runtime.Serialization.EnumMember(Value = @"Processing")]
+        Processing = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Posted")]
+        Posted = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Duplicate")]
+        Duplicate = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PendingMapping")]
+        PendingMapping = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PendingPeriod")]
+        PendingPeriod = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PendingRate")]
+        PendingRate = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
+        Rejected = 7,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PostingExecutionDtoFailureKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UnknownOperation")]
+        UnknownOperation = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UnknownRole")]
+        UnknownRole = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AmbiguousPolicy")]
+        AmbiguousPolicy = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MissingAccountMapping")]
+        MissingAccountMapping = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MissingFinancialBook")]
+        MissingFinancialBook = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MissingJournal")]
+        MissingJournal = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ClosedPeriod")]
+        ClosedPeriod = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MissingFxRate")]
+        MissingFxRate = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"InvalidFxEvidence")]
+        InvalidFxEvidence = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UnbalancedPlan")]
+        UnbalancedPlan = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DuplicateIntent")]
+        DuplicateIntent = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DuplicateBookPosting")]
+        DuplicateBookPosting = 11,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"InvalidPartyReference")]
+        InvalidPartyReference = 12,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"InvalidCustodyContext")]
+        InvalidCustodyContext = 13,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PolicyConfigurationError")]
+        PolicyConfigurationError = 14,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PostingExecutionDtoFailureClass
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Retryable")]
+        Retryable = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OperatorActionRequired")]
+        OperatorActionRequired = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ConfigurationError")]
+        ConfigurationError = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ProducerError")]
+        ProducerError = 3,
 
     }
 

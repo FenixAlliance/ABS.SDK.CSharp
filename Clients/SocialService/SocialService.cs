@@ -80,9 +80,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CurriculumExperienceDtoListEnvelope> GetCurriculumExperiencesAsync(System.Guid curriculumId, System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<CurriculumExperienceDtoListEnvelope> GetCurriculumExperiencesAsync(System.Guid curriculumId, System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, CurriculumExperienceDtoCollectionQueryParameters body)
         {
-            return GetCurriculumExperiencesAsync(curriculumId, socialProfileId, tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCurriculumExperiencesAsync(curriculumId, socialProfileId, tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -94,7 +94,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CurriculumExperienceDtoListEnvelope> GetCurriculumExperiencesAsync(System.Guid curriculumId, System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CurriculumExperienceDtoListEnvelope> GetCurriculumExperiencesAsync(System.Guid curriculumId, System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, CurriculumExperienceDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (curriculumId == null)
                 throw new System.ArgumentNullException("curriculumId");
@@ -111,6 +111,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -358,9 +362,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCurriculumExperiencesCountAsync(System.Guid curriculumId, System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCurriculumExperiencesCountAsync(System.Guid curriculumId, System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, CurriculumExperienceDtoCollectionQueryParameters body)
         {
-            return GetCurriculumExperiencesCountAsync(curriculumId, socialProfileId, tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCurriculumExperiencesCountAsync(curriculumId, socialProfileId, tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -372,7 +376,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCurriculumExperiencesCountAsync(System.Guid curriculumId, System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCurriculumExperiencesCountAsync(System.Guid curriculumId, System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, CurriculumExperienceDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (curriculumId == null)
                 throw new System.ArgumentNullException("curriculumId");
@@ -389,6 +393,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -776,7 +784,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCurriculumExperienceAsync(System.Guid curriculumId, System.Guid experienceId, System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCurriculumExperienceAsync(System.Guid curriculumId, System.Guid experienceId, System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCurriculumExperienceAsync(curriculumId, experienceId, socialProfileId, tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -790,7 +798,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCurriculumExperienceAsync(System.Guid curriculumId, System.Guid experienceId, System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCurriculumExperienceAsync(System.Guid curriculumId, System.Guid experienceId, System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (curriculumId == null)
                 throw new System.ArgumentNullException("curriculumId");
@@ -1072,9 +1080,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CurriculumDtoListEnvelope> GetCurriculumsAsync(System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<CurriculumDtoListEnvelope> GetCurriculumsAsync(System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, CurriculumDtoCollectionQueryParameters body)
         {
-            return GetCurriculumsAsync(socialProfileId, tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCurriculumsAsync(socialProfileId, tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1086,7 +1094,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CurriculumDtoListEnvelope> GetCurriculumsAsync(System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CurriculumDtoListEnvelope> GetCurriculumsAsync(System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, CurriculumDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -1100,6 +1108,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -1340,9 +1352,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCurriculumsCountAsync(System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCurriculumsCountAsync(System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, CurriculumDtoCollectionQueryParameters body)
         {
-            return GetCurriculumsCountAsync(socialProfileId, tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCurriculumsCountAsync(socialProfileId, tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1354,7 +1366,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCurriculumsCountAsync(System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCurriculumsCountAsync(System.Guid socialProfileId, System.Guid? tenantId, string api_version, string x_api_version, CurriculumDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -1368,6 +1380,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -1743,7 +1759,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCurriculumAsync(System.Guid socialProfileId, System.Guid curriculumId, System.Guid? tenantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCurriculumAsync(System.Guid socialProfileId, System.Guid curriculumId, System.Guid? tenantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCurriculumAsync(socialProfileId, curriculumId, tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -1757,7 +1773,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCurriculumAsync(System.Guid socialProfileId, System.Guid curriculumId, System.Guid? tenantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCurriculumAsync(System.Guid socialProfileId, System.Guid curriculumId, System.Guid? tenantId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (curriculumId == null)
                 throw new System.ArgumentNullException("curriculumId");
@@ -3464,9 +3480,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SkillDtoListEnvelope> GetSkillsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<SkillDtoListEnvelope> GetSkillsAsync(System.Guid tenantId, string api_version, string x_api_version, SkillDtoCollectionQueryParameters body)
         {
-            return GetSkillsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetSkillsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3478,7 +3494,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SkillDtoListEnvelope> GetSkillsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SkillDtoListEnvelope> GetSkillsAsync(System.Guid tenantId, string api_version, string x_api_version, SkillDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -3492,6 +3508,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -3724,9 +3744,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetSkillsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetSkillsCountAsync(System.Guid tenantId, string api_version, string x_api_version, SkillDtoCollectionQueryParameters body)
         {
-            return GetSkillsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetSkillsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3738,7 +3758,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetSkillsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetSkillsCountAsync(System.Guid tenantId, string api_version, string x_api_version, SkillDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -3752,6 +3772,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -4115,7 +4139,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchSkillAsync(System.Guid tenantId, System.Guid skillId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchSkillAsync(System.Guid tenantId, System.Guid skillId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchSkillAsync(tenantId, skillId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -4129,7 +4153,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchSkillAsync(System.Guid tenantId, System.Guid skillId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchSkillAsync(System.Guid tenantId, System.Guid skillId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (skillId == null)
                 throw new System.ArgumentNullException("skillId");
@@ -4393,9 +4417,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SocialFeedDtoListEnvelope> GetFeedNotificationsAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<SocialFeedDtoListEnvelope> GetFeedNotificationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialFeedDtoCollectionQueryParameters body)
         {
-            return GetFeedNotificationsAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFeedNotificationsAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -4407,7 +4431,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SocialFeedDtoListEnvelope> GetFeedNotificationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SocialFeedDtoListEnvelope> GetFeedNotificationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialFeedDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -4421,6 +4445,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -4516,9 +4544,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetNotificationsCountAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetNotificationsCountAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialFeedDtoCollectionQueryParameters body)
         {
-            return GetNotificationsCountAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetNotificationsCountAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -4530,7 +4558,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetNotificationsCountAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetNotificationsCountAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialFeedDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -4544,6 +4572,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -4766,9 +4798,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SocialFeedPostDtoListEnvelope> GetFeedPostsAsync(System.Guid socialProfileId, System.Guid socialFeedId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<SocialFeedPostDtoListEnvelope> GetFeedPostsAsync(System.Guid socialProfileId, System.Guid socialFeedId, string api_version, string x_api_version, SocialFeedPostDtoCollectionQueryParameters body)
         {
-            return GetFeedPostsAsync(socialProfileId, socialFeedId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFeedPostsAsync(socialProfileId, socialFeedId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -4780,7 +4812,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SocialFeedPostDtoListEnvelope> GetFeedPostsAsync(System.Guid socialProfileId, System.Guid socialFeedId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SocialFeedPostDtoListEnvelope> GetFeedPostsAsync(System.Guid socialProfileId, System.Guid socialFeedId, string api_version, string x_api_version, SocialFeedPostDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialFeedId == null)
                 throw new System.ArgumentNullException("socialFeedId");
@@ -4797,6 +4829,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -4892,9 +4928,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// <remarks>
         /// Creates a new post in a specific social feed.
         /// </remarks>
-        /// <returns>Created</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SocialFeedPostDtoEnvelope> CreateFeedPostAsync(System.Guid socialProfileId, System.Guid socialFeedId, string api_version, string x_api_version, SocialFeedPostCreateDto body)
+        public virtual System.Threading.Tasks.Task<StringEnvelope> CreateFeedPostAsync(System.Guid socialProfileId, System.Guid socialFeedId, string api_version, string x_api_version, SocialFeedPostCreateDto body)
         {
             return CreateFeedPostAsync(socialProfileId, socialFeedId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -4906,9 +4942,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// <remarks>
         /// Creates a new post in a specific social feed.
         /// </remarks>
-        /// <returns>Created</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SocialFeedPostDtoEnvelope> CreateFeedPostAsync(System.Guid socialProfileId, System.Guid socialFeedId, string api_version, string x_api_version, SocialFeedPostCreateDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<StringEnvelope> CreateFeedPostAsync(System.Guid socialProfileId, System.Guid socialFeedId, string api_version, string x_api_version, SocialFeedPostCreateDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialFeedId == null)
                 throw new System.ArgumentNullException("socialFeedId");
@@ -4969,9 +5005,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<SocialFeedPostDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<StringEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -5026,9 +5062,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFeedPostsCountAsync(System.Guid socialProfileId, System.Guid socialFeedId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetFeedPostsCountAsync(System.Guid socialProfileId, System.Guid socialFeedId, string api_version, string x_api_version, SocialFeedPostDtoCollectionQueryParameters body)
         {
-            return GetFeedPostsCountAsync(socialProfileId, socialFeedId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFeedPostsCountAsync(socialProfileId, socialFeedId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -5040,7 +5076,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFeedPostsCountAsync(System.Guid socialProfileId, System.Guid socialFeedId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetFeedPostsCountAsync(System.Guid socialProfileId, System.Guid socialFeedId, string api_version, string x_api_version, SocialFeedPostDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialFeedId == null)
                 throw new System.ArgumentNullException("socialFeedId");
@@ -5057,6 +5093,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -5422,7 +5462,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFeedPostAsync(System.Guid socialProfileId, System.Guid socialFeedId, System.Guid feedPostId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchFeedPostAsync(System.Guid socialProfileId, System.Guid socialFeedId, System.Guid feedPostId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchFeedPostAsync(socialProfileId, socialFeedId, feedPostId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -5436,7 +5476,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFeedPostAsync(System.Guid socialProfileId, System.Guid socialFeedId, System.Guid feedPostId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchFeedPostAsync(System.Guid socialProfileId, System.Guid socialFeedId, System.Guid feedPostId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialFeedId == null)
                 throw new System.ArgumentNullException("socialFeedId");
@@ -5690,9 +5730,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SocialGroupDtoListEnvelope> GetSocialGroupsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<SocialGroupDtoListEnvelope> GetSocialGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, SocialGroupDtoCollectionQueryParameters body)
         {
-            return GetSocialGroupsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetSocialGroupsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -5704,7 +5744,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SocialGroupDtoListEnvelope> GetSocialGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SocialGroupDtoListEnvelope> GetSocialGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, SocialGroupDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -5718,6 +5758,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -5944,9 +5988,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> CountSocialGroupsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> CountSocialGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, SocialGroupDtoCollectionQueryParameters body)
         {
-            return CountSocialGroupsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return CountSocialGroupsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -5958,7 +6002,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountSocialGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountSocialGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, SocialGroupDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -5972,6 +6016,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -6329,7 +6377,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchSocialGroupAsync(System.Guid tenantId, System.Guid socialProfileId, System.Guid socialGroupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchSocialGroupAsync(System.Guid tenantId, System.Guid socialProfileId, System.Guid socialGroupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchSocialGroupAsync(tenantId, socialProfileId, socialGroupId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -6343,7 +6391,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchSocialGroupAsync(System.Guid tenantId, System.Guid socialProfileId, System.Guid socialGroupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchSocialGroupAsync(System.Guid tenantId, System.Guid socialProfileId, System.Guid socialGroupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialGroupId == null)
                 throw new System.ArgumentNullException("socialGroupId");
@@ -6595,9 +6643,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SocialPostDtoListEnvelope> GetSocialPostsAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<SocialPostDtoListEnvelope> GetSocialPostsAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialPostDtoCollectionQueryParameters body)
         {
-            return GetSocialPostsAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetSocialPostsAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -6609,7 +6657,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SocialPostDtoListEnvelope> GetSocialPostsAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SocialPostDtoListEnvelope> GetSocialPostsAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialPostDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -6623,6 +6671,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -6845,9 +6897,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetSocialPostsCountAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetSocialPostsCountAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialPostDtoCollectionQueryParameters body)
         {
-            return GetSocialPostsCountAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetSocialPostsCountAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -6859,7 +6911,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetSocialPostsCountAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetSocialPostsCountAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialPostDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -6873,6 +6925,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -7226,7 +7282,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchSocialPostAsync(System.Guid socialProfileId, System.Guid socialPostId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchSocialPostAsync(System.Guid socialProfileId, System.Guid socialPostId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchSocialPostAsync(socialProfileId, socialPostId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -7240,7 +7296,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchSocialPostAsync(System.Guid socialProfileId, System.Guid socialPostId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchSocialPostAsync(System.Guid socialProfileId, System.Guid socialPostId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialPostId == null)
                 throw new System.ArgumentNullException("socialPostId");
@@ -7484,9 +7540,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SocialPostAttachmentDtoListEnvelope> GetSocialPostAttachmentsAsync(System.Guid socialPostId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<SocialPostAttachmentDtoListEnvelope> GetSocialPostAttachmentsAsync(System.Guid socialPostId, string api_version, string x_api_version, SocialPostAttachmentDtoCollectionQueryParameters body)
         {
-            return GetSocialPostAttachmentsAsync(socialPostId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetSocialPostAttachmentsAsync(socialPostId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -7498,7 +7554,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SocialPostAttachmentDtoListEnvelope> GetSocialPostAttachmentsAsync(System.Guid socialPostId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SocialPostAttachmentDtoListEnvelope> GetSocialPostAttachmentsAsync(System.Guid socialPostId, string api_version, string x_api_version, SocialPostAttachmentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialPostId == null)
                 throw new System.ArgumentNullException("socialPostId");
@@ -7512,6 +7568,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -7740,9 +7800,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetSocialPostAttachmentsCountAsync(System.Guid socialPostId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetSocialPostAttachmentsCountAsync(System.Guid socialPostId, string api_version, string x_api_version, SocialPostAttachmentDtoCollectionQueryParameters body)
         {
-            return GetSocialPostAttachmentsCountAsync(socialPostId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetSocialPostAttachmentsCountAsync(socialPostId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -7754,7 +7814,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetSocialPostAttachmentsCountAsync(System.Guid socialPostId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetSocialPostAttachmentsCountAsync(System.Guid socialPostId, string api_version, string x_api_version, SocialPostAttachmentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialPostId == null)
                 throw new System.ArgumentNullException("socialPostId");
@@ -7768,6 +7828,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -8253,28 +8317,28 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         }
 
         /// <summary>
-        /// Get social post reactions
+        /// Upload a social post image attachment
         /// </summary>
         /// <remarks>
-        /// Retrieves a list of reactions for a specific social post.
+        /// Uploads an image and attaches it to a social post, storing the bytes through the storage spine.
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SocialReactionDtoListEnvelope> GetSocialPostReactionsAsync(System.Guid socialPostId, System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<SocialPostAttachmentDtoEnvelope> UploadSocialPostImageAttachmentAsync(System.Guid socialPostId, System.Guid socialProfileId, string api_version, string x_api_version, Body body, FileParameter file)
         {
-            return GetSocialPostReactionsAsync(socialPostId, socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return UploadSocialPostImageAttachmentAsync(socialPostId, socialProfileId, api_version, x_api_version, body, file, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Get social post reactions
+        /// Upload a social post image attachment
         /// </summary>
         /// <remarks>
-        /// Retrieves a list of reactions for a specific social post.
+        /// Uploads an image and attaches it to a social post, storing the bytes through the storage spine.
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SocialReactionDtoListEnvelope> GetSocialPostReactionsAsync(System.Guid socialPostId, System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SocialPostAttachmentDtoEnvelope> UploadSocialPostImageAttachmentAsync(System.Guid socialPostId, System.Guid socialProfileId, string api_version, string x_api_version, Body body, FileParameter file, System.Threading.CancellationToken cancellationToken)
         {
             if (socialPostId == null)
                 throw new System.ArgumentNullException("socialPostId");
@@ -8291,6 +8355,152 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("multipart/form-data");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/SocialService/SocialPosts/{socialPostId}/Attachments/Image"
+                    urlBuilder_.Append("api/v2/SocialService/SocialPosts/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(socialPostId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Attachments/Image");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<SocialPostAttachmentDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 400)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Bad Request", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Get social post reactions
+        /// </summary>
+        /// <remarks>
+        /// Retrieves a list of reactions for a specific social post.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<SocialReactionDtoListEnvelope> GetSocialPostReactionsAsync(System.Guid socialPostId, System.Guid socialProfileId, string api_version, string x_api_version, SocialPostReactionDtoCollectionQueryParameters body)
+        {
+            return GetSocialPostReactionsAsync(socialPostId, socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get social post reactions
+        /// </summary>
+        /// <remarks>
+        /// Retrieves a list of reactions for a specific social post.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<SocialReactionDtoListEnvelope> GetSocialPostReactionsAsync(System.Guid socialPostId, System.Guid socialProfileId, string api_version, string x_api_version, SocialPostReactionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (socialPostId == null)
+                throw new System.ArgumentNullException("socialPostId");
+
+            if (socialProfileId == null)
+                throw new System.ArgumentNullException("socialProfileId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -8386,9 +8596,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// <remarks>
         /// Creates a new reaction on a specific social post.
         /// </remarks>
-        /// <returns>Created</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SocialReactionDtoEnvelope> CreateSocialPostReactionAsync(System.Guid socialPostId, System.Guid socialProfileId, string api_version, string x_api_version, SocialReactionCreateDto body)
+        public virtual System.Threading.Tasks.Task<SocialPostReactionDtoEnvelope> CreateSocialPostReactionAsync(System.Guid socialPostId, System.Guid socialProfileId, string api_version, string x_api_version, SocialReactionCreateDto body)
         {
             return CreateSocialPostReactionAsync(socialPostId, socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -8400,9 +8610,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// <remarks>
         /// Creates a new reaction on a specific social post.
         /// </remarks>
-        /// <returns>Created</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SocialReactionDtoEnvelope> CreateSocialPostReactionAsync(System.Guid socialPostId, System.Guid socialProfileId, string api_version, string x_api_version, SocialReactionCreateDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SocialPostReactionDtoEnvelope> CreateSocialPostReactionAsync(System.Guid socialPostId, System.Guid socialProfileId, string api_version, string x_api_version, SocialReactionCreateDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialPostId == null)
                 throw new System.ArgumentNullException("socialPostId");
@@ -8463,9 +8673,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<SocialReactionDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<SocialPostReactionDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -8520,9 +8730,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetSocialPostReactionsCountAsync(System.Guid socialPostId, System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetSocialPostReactionsCountAsync(System.Guid socialPostId, System.Guid socialProfileId, string api_version, string x_api_version, SocialPostReactionDtoCollectionQueryParameters body)
         {
-            return GetSocialPostReactionsCountAsync(socialPostId, socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetSocialPostReactionsCountAsync(socialPostId, socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -8534,7 +8744,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetSocialPostReactionsCountAsync(System.Guid socialPostId, System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetSocialPostReactionsCountAsync(System.Guid socialPostId, System.Guid socialProfileId, string api_version, string x_api_version, SocialPostReactionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialPostId == null)
                 throw new System.ArgumentNullException("socialPostId");
@@ -8551,6 +8761,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -8776,7 +8990,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UpdateSocialPostReactionAsync(System.Guid socialProfileId, System.Guid socialPostId, System.Guid reactionId, string api_version, string x_api_version, SocialReactionUpdateDto body)
+        public virtual System.Threading.Tasks.Task<SocialPostReactionDtoEnvelope> UpdateSocialPostReactionAsync(System.Guid socialProfileId, System.Guid socialPostId, System.Guid reactionId, string api_version, string x_api_version, SocialReactionUpdateDto body)
         {
             return UpdateSocialPostReactionAsync(socialProfileId, socialPostId, reactionId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -8790,7 +9004,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UpdateSocialPostReactionAsync(System.Guid socialProfileId, System.Guid socialPostId, System.Guid reactionId, string api_version, string x_api_version, SocialReactionUpdateDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SocialPostReactionDtoEnvelope> UpdateSocialPostReactionAsync(System.Guid socialProfileId, System.Guid socialPostId, System.Guid reactionId, string api_version, string x_api_version, SocialReactionUpdateDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialPostId == null)
                 throw new System.ArgumentNullException("socialPostId");
@@ -8857,7 +9071,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<EmptyEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<SocialPostReactionDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -9044,9 +9258,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SocialPostCommentDtoListEnvelope> GetSocialPostCommentsAsync(System.Guid socialProfileId, System.Guid socialPostId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<SocialPostCommentDtoListEnvelope> GetSocialPostCommentsAsync(System.Guid socialProfileId, System.Guid socialPostId, string parentCommentId, string api_version, string x_api_version, SocialPostCommentDtoCollectionQueryParameters body)
         {
-            return GetSocialPostCommentsAsync(socialProfileId, socialPostId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetSocialPostCommentsAsync(socialProfileId, socialPostId, parentCommentId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -9058,7 +9272,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SocialPostCommentDtoListEnvelope> GetSocialPostCommentsAsync(System.Guid socialProfileId, System.Guid socialPostId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SocialPostCommentDtoListEnvelope> GetSocialPostCommentsAsync(System.Guid socialProfileId, System.Guid socialPostId, string parentCommentId, string api_version, string x_api_version, SocialPostCommentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialPostId == null)
                 throw new System.ArgumentNullException("socialPostId");
@@ -9075,6 +9289,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -9086,6 +9304,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
                     urlBuilder_.Append("/Comments");
                     urlBuilder_.Append('?');
                     urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (parentCommentId != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("parentCommentId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(parentCommentId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
                     if (api_version != null)
                     {
                         urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
@@ -9304,9 +9526,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetSocialPostCommentsCountAsync(System.Guid socialProfileId, System.Guid socialPostId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetSocialPostCommentsCountAsync(System.Guid socialProfileId, System.Guid socialPostId, string parentCommentId, string api_version, string x_api_version, SocialPostCommentDtoCollectionQueryParameters body)
         {
-            return GetSocialPostCommentsCountAsync(socialProfileId, socialPostId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetSocialPostCommentsCountAsync(socialProfileId, socialPostId, parentCommentId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -9318,7 +9540,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetSocialPostCommentsCountAsync(System.Guid socialProfileId, System.Guid socialPostId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetSocialPostCommentsCountAsync(System.Guid socialProfileId, System.Guid socialPostId, string parentCommentId, string api_version, string x_api_version, SocialPostCommentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialPostId == null)
                 throw new System.ArgumentNullException("socialPostId");
@@ -9335,6 +9557,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -9346,6 +9572,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
                     urlBuilder_.Append("/Comments/Count");
                     urlBuilder_.Append('?');
                     urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (parentCommentId != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("parentCommentId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(parentCommentId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
                     if (api_version != null)
                     {
                         urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
@@ -9825,6 +10055,828 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         }
 
         /// <summary>
+        /// Get social comment reactions
+        /// </summary>
+        /// <remarks>
+        /// Retrieves a list of reactions for a specific social comment.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<SocialCommentReactionDtoListEnvelope> GetSocialCommentReactionsAsync(System.Guid socialPostId, System.Guid commentId, System.Guid socialProfileId, string api_version, string x_api_version, SocialCommentReactionDtoCollectionQueryParameters body)
+        {
+            return GetSocialCommentReactionsAsync(socialPostId, commentId, socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get social comment reactions
+        /// </summary>
+        /// <remarks>
+        /// Retrieves a list of reactions for a specific social comment.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<SocialCommentReactionDtoListEnvelope> GetSocialCommentReactionsAsync(System.Guid socialPostId, System.Guid commentId, System.Guid socialProfileId, string api_version, string x_api_version, SocialCommentReactionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (socialPostId == null)
+                throw new System.ArgumentNullException("socialPostId");
+
+            if (commentId == null)
+                throw new System.ArgumentNullException("commentId");
+
+            if (socialProfileId == null)
+                throw new System.ArgumentNullException("socialProfileId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/SocialService/SocialPosts/{socialPostId}/Comments/{commentId}/Reactions"
+                    urlBuilder_.Append("api/v2/SocialService/SocialPosts/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(socialPostId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Comments/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(commentId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Reactions");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<SocialCommentReactionDtoListEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Create a social comment reaction
+        /// </summary>
+        /// <remarks>
+        /// Creates a new reaction on a specific social comment.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<SocialCommentReactionDtoEnvelope> CreateSocialCommentReactionAsync(System.Guid socialPostId, System.Guid commentId, System.Guid socialProfileId, string api_version, string x_api_version, SocialReactionCreateDto body)
+        {
+            return CreateSocialCommentReactionAsync(socialPostId, commentId, socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Create a social comment reaction
+        /// </summary>
+        /// <remarks>
+        /// Creates a new reaction on a specific social comment.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<SocialCommentReactionDtoEnvelope> CreateSocialCommentReactionAsync(System.Guid socialPostId, System.Guid commentId, System.Guid socialProfileId, string api_version, string x_api_version, SocialReactionCreateDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (socialPostId == null)
+                throw new System.ArgumentNullException("socialPostId");
+
+            if (commentId == null)
+                throw new System.ArgumentNullException("commentId");
+
+            if (socialProfileId == null)
+                throw new System.ArgumentNullException("socialProfileId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/SocialService/SocialPosts/{socialPostId}/Comments/{commentId}/Reactions"
+                    urlBuilder_.Append("api/v2/SocialService/SocialPosts/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(socialPostId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Comments/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(commentId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Reactions");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<SocialCommentReactionDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Count social comment reactions
+        /// </summary>
+        /// <remarks>
+        /// Returns the count of reactions for a specific social comment.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetSocialCommentReactionsCountAsync(System.Guid socialPostId, System.Guid commentId, System.Guid socialProfileId, string api_version, string x_api_version, SocialCommentReactionDtoCollectionQueryParameters body)
+        {
+            return GetSocialCommentReactionsCountAsync(socialPostId, commentId, socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Count social comment reactions
+        /// </summary>
+        /// <remarks>
+        /// Returns the count of reactions for a specific social comment.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetSocialCommentReactionsCountAsync(System.Guid socialPostId, System.Guid commentId, System.Guid socialProfileId, string api_version, string x_api_version, SocialCommentReactionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (socialPostId == null)
+                throw new System.ArgumentNullException("socialPostId");
+
+            if (commentId == null)
+                throw new System.ArgumentNullException("commentId");
+
+            if (socialProfileId == null)
+                throw new System.ArgumentNullException("socialProfileId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/SocialService/SocialPosts/{socialPostId}/Comments/{commentId}/Reactions/Count"
+                    urlBuilder_.Append("api/v2/SocialService/SocialPosts/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(socialPostId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Comments/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(commentId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Reactions/Count");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Int32Envelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Get social comment reaction by ID
+        /// </summary>
+        /// <remarks>
+        /// Retrieves a specific reaction from a social comment by its ID.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<SocialCommentReactionDtoEnvelope> GetSocialCommentReactionAsync(System.Guid socialPostId, System.Guid commentId, System.Guid reactionId, string api_version, string x_api_version)
+        {
+            return GetSocialCommentReactionAsync(socialPostId, commentId, reactionId, api_version, x_api_version, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get social comment reaction by ID
+        /// </summary>
+        /// <remarks>
+        /// Retrieves a specific reaction from a social comment by its ID.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<SocialCommentReactionDtoEnvelope> GetSocialCommentReactionAsync(System.Guid socialPostId, System.Guid commentId, System.Guid reactionId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        {
+            if (socialPostId == null)
+                throw new System.ArgumentNullException("socialPostId");
+
+            if (commentId == null)
+                throw new System.ArgumentNullException("commentId");
+
+            if (reactionId == null)
+                throw new System.ArgumentNullException("reactionId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/SocialService/SocialPosts/{socialPostId}/Comments/{commentId}/Reactions/{reactionId}"
+                    urlBuilder_.Append("api/v2/SocialService/SocialPosts/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(socialPostId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Comments/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(commentId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Reactions/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(reactionId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('?');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<SocialCommentReactionDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Update a social comment reaction
+        /// </summary>
+        /// <remarks>
+        /// Updates an existing reaction on a specific social comment.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<SocialCommentReactionDtoEnvelope> UpdateSocialCommentReactionAsync(System.Guid socialPostId, System.Guid commentId, System.Guid reactionId, System.Guid socialProfileId, string api_version, string x_api_version, SocialReactionUpdateDto body)
+        {
+            return UpdateSocialCommentReactionAsync(socialPostId, commentId, reactionId, socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Update a social comment reaction
+        /// </summary>
+        /// <remarks>
+        /// Updates an existing reaction on a specific social comment.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<SocialCommentReactionDtoEnvelope> UpdateSocialCommentReactionAsync(System.Guid socialPostId, System.Guid commentId, System.Guid reactionId, System.Guid socialProfileId, string api_version, string x_api_version, SocialReactionUpdateDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (socialPostId == null)
+                throw new System.ArgumentNullException("socialPostId");
+
+            if (commentId == null)
+                throw new System.ArgumentNullException("commentId");
+
+            if (reactionId == null)
+                throw new System.ArgumentNullException("reactionId");
+
+            if (socialProfileId == null)
+                throw new System.ArgumentNullException("socialProfileId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("PUT");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/SocialService/SocialPosts/{socialPostId}/Comments/{commentId}/Reactions/{reactionId}"
+                    urlBuilder_.Append("api/v2/SocialService/SocialPosts/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(socialPostId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Comments/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(commentId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Reactions/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(reactionId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<SocialCommentReactionDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Delete a social comment reaction
+        /// </summary>
+        /// <remarks>
+        /// Deletes a reaction from a specific social comment.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> DeleteSocialCommentReactionAsync(System.Guid socialPostId, System.Guid commentId, System.Guid reactionId, System.Guid socialProfileId, string api_version, string x_api_version)
+        {
+            return DeleteSocialCommentReactionAsync(socialPostId, commentId, reactionId, socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Delete a social comment reaction
+        /// </summary>
+        /// <remarks>
+        /// Deletes a reaction from a specific social comment.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> DeleteSocialCommentReactionAsync(System.Guid socialPostId, System.Guid commentId, System.Guid reactionId, System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        {
+            if (socialPostId == null)
+                throw new System.ArgumentNullException("socialPostId");
+
+            if (commentId == null)
+                throw new System.ArgumentNullException("commentId");
+
+            if (reactionId == null)
+                throw new System.ArgumentNullException("reactionId");
+
+            if (socialProfileId == null)
+                throw new System.ArgumentNullException("socialProfileId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    request_.Method = new System.Net.Http.HttpMethod("DELETE");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/SocialService/SocialPosts/{socialPostId}/Comments/{commentId}/Reactions/{reactionId}"
+                    urlBuilder_.Append("api/v2/SocialService/SocialPosts/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(socialPostId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Comments/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(commentId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Reactions/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(reactionId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("socialProfileId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<EmptyEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
         /// Get Social Profiles
         /// </summary>
         /// <remarks>
@@ -9832,9 +10884,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SocialProfileDtoListEnvelope> GetSocialProfilesAsync(string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<SocialProfileDtoListEnvelope> GetSocialProfilesAsync(string api_version, string x_api_version, SocialProfileDtoCollectionQueryParameters body)
         {
-            return GetSocialProfilesAsync(api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetSocialProfilesAsync(api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -9846,7 +10898,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SocialProfileDtoListEnvelope> GetSocialProfilesAsync(string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SocialProfileDtoListEnvelope> GetSocialProfilesAsync(string api_version, string x_api_version, SocialProfileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -9857,6 +10909,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -9951,9 +11007,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> CountSocialProfilesAsync(string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> CountSocialProfilesAsync(string api_version, string x_api_version, SocialProfileDtoCollectionQueryParameters body)
         {
-            return CountSocialProfilesAsync(api_version, x_api_version, System.Threading.CancellationToken.None);
+            return CountSocialProfilesAsync(api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -9965,7 +11021,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountSocialProfilesAsync(string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountSocialProfilesAsync(string api_version, string x_api_version, SocialProfileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -9976,6 +11032,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -10193,9 +11253,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FollowRecordDtoListEnvelope> GetFollowersAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FollowRecordDtoListEnvelope> GetFollowersAsync(System.Guid socialProfileId, string api_version, string x_api_version, FollowRecordDtoCollectionQueryParameters body)
         {
-            return GetFollowersAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFollowersAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -10207,7 +11267,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FollowRecordDtoListEnvelope> GetFollowersAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FollowRecordDtoListEnvelope> GetFollowersAsync(System.Guid socialProfileId, string api_version, string x_api_version, FollowRecordDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -10221,6 +11281,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -10317,9 +11381,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> CountFollowersAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> CountFollowersAsync(System.Guid socialProfileId, string api_version, string x_api_version, FollowRecordDtoCollectionQueryParameters body)
         {
-            return CountFollowersAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return CountFollowersAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -10331,7 +11395,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountFollowersAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountFollowersAsync(System.Guid socialProfileId, string api_version, string x_api_version, FollowRecordDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -10345,6 +11409,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -10441,9 +11509,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SocialProfileDtoListEnvelope> GetFollowerProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<SocialProfileDtoListEnvelope> GetFollowerProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialProfileDtoCollectionQueryParameters body)
         {
-            return GetFollowerProfilesAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFollowerProfilesAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -10455,7 +11523,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SocialProfileDtoListEnvelope> GetFollowerProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SocialProfileDtoListEnvelope> GetFollowerProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialProfileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -10469,6 +11537,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -10565,9 +11637,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> CountFollowerProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> CountFollowerProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialProfileDtoCollectionQueryParameters body)
         {
-            return CountFollowerProfilesAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return CountFollowerProfilesAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -10579,7 +11651,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountFollowerProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountFollowerProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialProfileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -10593,6 +11665,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -10689,9 +11765,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FollowRecordDtoListEnvelope> GetFollowsAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FollowRecordDtoListEnvelope> GetFollowsAsync(System.Guid socialProfileId, string api_version, string x_api_version, FollowRecordDtoCollectionQueryParameters body)
         {
-            return GetFollowsAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFollowsAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -10703,7 +11779,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FollowRecordDtoListEnvelope> GetFollowsAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FollowRecordDtoListEnvelope> GetFollowsAsync(System.Guid socialProfileId, string api_version, string x_api_version, FollowRecordDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -10717,6 +11793,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -10813,9 +11893,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> CountFollowsAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> CountFollowsAsync(System.Guid socialProfileId, string api_version, string x_api_version, FollowRecordDtoCollectionQueryParameters body)
         {
-            return CountFollowsAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return CountFollowsAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -10827,7 +11907,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountFollowsAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountFollowsAsync(System.Guid socialProfileId, string api_version, string x_api_version, FollowRecordDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -10841,6 +11921,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -10937,9 +12021,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SocialProfileDtoListEnvelope> GetFollowedProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<SocialProfileDtoListEnvelope> GetFollowedProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialProfileDtoCollectionQueryParameters body)
         {
-            return GetFollowedProfilesAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetFollowedProfilesAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -10951,7 +12035,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SocialProfileDtoListEnvelope> GetFollowedProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SocialProfileDtoListEnvelope> GetFollowedProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialProfileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -10965,6 +12049,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -11061,9 +12149,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> CountFollowedProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> CountFollowedProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialProfileDtoCollectionQueryParameters body)
         {
-            return CountFollowedProfilesAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return CountFollowedProfilesAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -11075,7 +12163,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountFollowedProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountFollowedProfilesAsync(System.Guid socialProfileId, string api_version, string x_api_version, SocialProfileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -11089,6 +12177,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -11570,9 +12662,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<NotificationDtoListEnvelope> GetNotificationsAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<NotificationDtoListEnvelope> GetNotificationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, NotificationDtoCollectionQueryParameters body)
         {
-            return GetNotificationsAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetNotificationsAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -11584,7 +12676,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<NotificationDtoListEnvelope> GetNotificationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<NotificationDtoListEnvelope> GetNotificationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, NotificationDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -11598,6 +12690,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -11694,9 +12790,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> CountNotificationsAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> CountNotificationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, NotificationDtoCollectionQueryParameters body)
         {
-            return CountNotificationsAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return CountNotificationsAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -11708,7 +12804,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountNotificationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountNotificationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, NotificationDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -11722,6 +12818,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -11946,9 +13046,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<ConversationDtoListEnvelope> GetConversationsAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<ConversationDtoListEnvelope> GetConversationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, ConversationDtoCollectionQueryParameters body)
         {
-            return GetConversationsAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetConversationsAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -11960,7 +13060,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<ConversationDtoListEnvelope> GetConversationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<ConversationDtoListEnvelope> GetConversationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, ConversationDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -11974,6 +13074,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -12198,9 +13302,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> CountConversationsAsync(System.Guid socialProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> CountConversationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, ConversationDtoCollectionQueryParameters body)
         {
-            return CountConversationsAsync(socialProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return CountConversationsAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -12212,7 +13316,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountConversationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountConversationsAsync(System.Guid socialProfileId, string api_version, string x_api_version, ConversationDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (socialProfileId == null)
                 throw new System.ArgumentNullException("socialProfileId");
@@ -12226,6 +13330,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -12315,6 +13423,134 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         }
 
         /// <summary>
+        /// Get or Create Direct Conversation
+        /// </summary>
+        /// <remarks>
+        /// Get or create the direct two-party conversation between the acting profile and a counterparty.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<ConversationDtoEnvelope> GetOrCreateDirectConversationAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Guid? body)
+        {
+            return GetOrCreateDirectConversationAsync(socialProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get or Create Direct Conversation
+        /// </summary>
+        /// <remarks>
+        /// Get or create the direct two-party conversation between the acting profile and a counterparty.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<ConversationDtoEnvelope> GetOrCreateDirectConversationAsync(System.Guid socialProfileId, string api_version, string x_api_version, System.Guid? body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (socialProfileId == null)
+                throw new System.ArgumentNullException("socialProfileId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/SocialService/SocialProfiles/{socialProfileId}/Conversations/Direct"
+                    urlBuilder_.Append("api/v2/SocialService/SocialProfiles/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(socialProfileId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Conversations/Direct");
+                    urlBuilder_.Append('?');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ConversationDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
         /// Get Messages
         /// </summary>
         /// <remarks>
@@ -12322,9 +13558,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<PrivateMessageDtoListEnvelope> GetMessagesAsync(System.Guid socialProfileId, System.Guid conversationId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<PrivateMessageDtoListEnvelope> GetMessagesAsync(System.Guid socialProfileId, System.Guid conversationId, string api_version, string x_api_version, PrivateMessageDtoCollectionQueryParameters body)
         {
-            return GetMessagesAsync(socialProfileId, conversationId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetMessagesAsync(socialProfileId, conversationId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -12336,7 +13572,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<PrivateMessageDtoListEnvelope> GetMessagesAsync(System.Guid socialProfileId, System.Guid conversationId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<PrivateMessageDtoListEnvelope> GetMessagesAsync(System.Guid socialProfileId, System.Guid conversationId, string api_version, string x_api_version, PrivateMessageDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (conversationId == null)
                 throw new System.ArgumentNullException("conversationId");
@@ -12353,6 +13589,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -12582,9 +13822,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> CountMessagesAsync(System.Guid socialProfileId, System.Guid conversationId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> CountMessagesAsync(System.Guid socialProfileId, System.Guid conversationId, string api_version, string x_api_version, PrivateMessageDtoCollectionQueryParameters body)
         {
-            return CountMessagesAsync(socialProfileId, conversationId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return CountMessagesAsync(socialProfileId, conversationId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -12596,7 +13836,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountMessagesAsync(System.Guid socialProfileId, System.Guid conversationId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> CountMessagesAsync(System.Guid socialProfileId, System.Guid conversationId, string api_version, string x_api_version, PrivateMessageDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (conversationId == null)
                 throw new System.ArgumentNullException("conversationId");
@@ -12613,6 +13853,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -13136,6 +14380,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
@@ -13196,6 +14449,72 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ConversationDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ConversationDtoEnvelope
+    {
+
+        [Newtonsoft.Json.JsonProperty("isSuccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsSuccess { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("correlationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CorrelationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ActivityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ConversationDto Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ConversationDtoListEnvelope
     {
 
@@ -13210,6 +14529,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -13394,6 +14722,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CurriculumDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CurriculumDtoEnvelope
     {
 
@@ -13408,6 +14769,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -13432,6 +14802,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -13574,6 +14953,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CurriculumExperienceDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CurriculumExperienceDtoEnvelope
     {
 
@@ -13588,6 +15000,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -13612,6 +15033,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -13772,6 +15202,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
@@ -13792,6 +15231,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -13823,6 +15271,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class FollowRecordDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class FollowRecordDtoListEnvelope
     {
 
@@ -13837,6 +15318,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -13931,6 +15421,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
@@ -13998,6 +15497,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class NotificationDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class NotificationDtoEnvelope
     {
 
@@ -14012,6 +15544,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -14037,6 +15578,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
@@ -14046,18 +15596,14 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Operation
+    public partial class PatchOperation
     {
-
-        [Newtonsoft.Json.JsonProperty("operationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public OperationType OperationType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("path", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Path { get; set; }
 
         [Newtonsoft.Json.JsonProperty("op", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Op { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("path", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Path { get; set; }
 
         [Newtonsoft.Json.JsonProperty("from", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string From { get; set; }
@@ -14131,6 +15677,49 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("receivedTimestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset ReceivedTimestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("socialProfileName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SocialProfileName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialProfileAvatarUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SocialProfileAvatarUrl { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public PrivateMessageDtoSocialProfileType? SocialProfileType { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PrivateMessageDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -14148,6 +15737,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -14255,8 +15853,8 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset Timestamp { get; set; }
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? Timestamp { get; set; }
 
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
@@ -14286,6 +15884,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SkillDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SkillDtoEnvelope
     {
 
@@ -14300,6 +15931,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -14324,6 +15964,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -14361,6 +16010,140 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialCommentReactionDto
+    {
+
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("reaction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialCommentReactionDtoReaction Reaction { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("reactionValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ReactionValue { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialProfileId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SocialProfileId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialProfileName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SocialProfileName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialProfileAvatarUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SocialProfileAvatarUrl { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialCommentReactionDtoSocialProfileType? SocialProfileType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialCommentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SocialCommentId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialCommentReactionDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialCommentReactionDtoEnvelope
+    {
+
+        [Newtonsoft.Json.JsonProperty("isSuccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsSuccess { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("correlationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CorrelationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ActivityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SocialCommentReactionDto Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialCommentReactionDtoListEnvelope
+    {
+
+        [Newtonsoft.Json.JsonProperty("isSuccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsSuccess { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("correlationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CorrelationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ActivityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<SocialCommentReactionDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SocialFeedDto
     {
 
@@ -14379,6 +16162,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialFeedDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SocialFeedDtoEnvelope
     {
 
@@ -14393,6 +16209,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -14417,6 +16242,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -14447,6 +16281,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("socialProfileId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialProfileId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("bodyHtml", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(8000)]
+        public string BodyHtml { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialFeedPostCreateDtoBodyFormat? BodyFormat { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("backgroundStyle", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(64)]
+        public string BackgroundStyle { get; set; }
 
     }
 
@@ -14481,8 +16327,68 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("reactionsCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int ReactionsCount { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialFeedPostDtoSocialProfileType? SocialProfileType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("bodyHtml", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BodyHtml { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialFeedPostDtoBodyFormat? BodyFormat { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("backgroundStyle", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BackgroundStyle { get; set; }
+
         [Newtonsoft.Json.JsonProperty("socialFeedId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialFeedId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("facepile", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<SocialPostReactionFacepileDto> Facepile { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("attachments", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<SocialPostAttachmentRefDto> Attachments { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("myReaction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialFeedPostDtoMyReaction? MyReaction { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("myReactionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string MyReactionId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialFeedPostDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
 
     }
 
@@ -14501,6 +16407,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -14526,6 +16441,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
@@ -14543,6 +16467,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Message { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("bodyHtml", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(8000)]
+        public string BodyHtml { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialFeedPostUpdateDtoBodyFormat? BodyFormat { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("backgroundStyle", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(64)]
+        public string BackgroundStyle { get; set; }
 
     }
 
@@ -14601,6 +16537,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialGroupDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SocialGroupDtoEnvelope
     {
 
@@ -14615,6 +16584,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -14639,6 +16617,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -14821,6 +16808,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialPostAttachmentDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SocialPostAttachmentDtoEnvelope
     {
 
@@ -14835,6 +16855,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -14860,11 +16889,38 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<SocialPostAttachmentDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialPostAttachmentRefDto
+    {
+
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("fileUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FileUrl { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Title { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("contentType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ContentType { get; set; }
 
     }
 
@@ -14917,10 +16973,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.StringLength(280, MinimumLength = 1)]
-        [System.ComponentModel.DataAnnotations.RegularExpression(@"^[\w\s\.\,\!\?\-\(\)\[\]\{\}\'\""\:\;]{1,280}$")]
+        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Message { get; set; }
 
         [Newtonsoft.Json.JsonProperty("bodyHtml", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -14973,6 +17026,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("socialProfileAvatarUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialProfileAvatarUrl { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialPostCommentDtoSocialProfileType? SocialProfileType { get; set; }
+
         [Newtonsoft.Json.JsonProperty("bodyHtml", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BodyHtml { get; set; }
 
@@ -14980,8 +17037,57 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public SocialPostCommentDtoBodyFormat? BodyFormat { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("replyCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ReplyCount { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("reactionsCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ReactionsCount { get; set; }
+
         [Newtonsoft.Json.JsonProperty("socialPostId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialPostId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("facepile", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<SocialPostReactionFacepileDto> Facepile { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("myReaction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialPostCommentDtoMyReaction? MyReaction { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("myReactionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string MyReactionId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialPostCommentDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
 
     }
 
@@ -15000,6 +17106,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -15024,6 +17139,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -15100,6 +17224,53 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("reactionsCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int ReactionsCount { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialPostDtoSocialProfileType? SocialProfileType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("bodyHtml", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BodyHtml { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialPostDtoBodyFormat? BodyFormat { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("backgroundStyle", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BackgroundStyle { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialPostDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -15117,6 +17288,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -15142,11 +17322,144 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<SocialPostDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialPostReactionDto
+    {
+
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("reaction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialPostReactionDtoReaction Reaction { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("reactionValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ReactionValue { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialProfileId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SocialProfileId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialProfileName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SocialProfileName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialProfileAvatarUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SocialProfileAvatarUrl { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialPostReactionDtoSocialProfileType? SocialProfileType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialPostId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SocialPostId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialPostReactionDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialPostReactionDtoEnvelope
+    {
+
+        [Newtonsoft.Json.JsonProperty("isSuccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsSuccess { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("correlationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CorrelationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ActivityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SocialPostReactionDto Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialPostReactionFacepileDto
+    {
+
+        [Newtonsoft.Json.JsonProperty("socialProfileId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SocialProfileId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialProfileName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SocialProfileName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialProfileAvatarUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SocialProfileAvatarUrl { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialPostReactionFacepileDtoSocialProfileType? SocialProfileType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("reaction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialPostReactionFacepileDtoReaction Reaction { get; set; }
 
     }
 
@@ -15248,6 +17561,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class SocialProfileDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SocialProfileDtoEnvelope
     {
 
@@ -15262,6 +17608,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -15286,6 +17641,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -15343,6 +17707,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("socialProfileAvatarUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialProfileAvatarUrl { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SocialReactionDtoSocialProfileType? SocialProfileType { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -15360,6 +17728,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -15385,6 +17762,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
@@ -15409,6 +17795,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("reactionValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ReactionValue { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class StringEnvelope
+    {
+
+        [Newtonsoft.Json.JsonProperty("isSuccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsSuccess { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("correlationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CorrelationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ActivityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Result { get; set; }
 
     }
 
@@ -15455,6 +17874,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class Body
+    {
+
+        [Newtonsoft.Json.JsonProperty("file", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public byte[] File { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public enum NotificationDtoType
     {
 
@@ -15470,29 +17907,17 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum OperationType
+    public enum PrivateMessageDtoSocialProfileType
     {
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Add")]
-        Add = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"User")]
+        User = 0,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Remove")]
-        Remove = 1,
+        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
+        Tenant = 1,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Replace")]
-        Replace = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Move")]
-        Move = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Copy")]
-        Copy = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Test")]
-        Test = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Invalid")]
-        Invalid = 6,
+        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
+        Contact = 2,
 
     }
 
@@ -15529,6 +17954,132 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [System.Runtime.Serialization.EnumMember(Value = @"Certification")]
         Certification = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialCommentReactionDtoReaction
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Like")]
+        Like = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Happy")]
+        Happy = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"HaHa")]
+        HaHa = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Love")]
+        Love = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Sad")]
+        Sad = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Angry")]
+        Angry = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Wow")]
+        Wow = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
+        Afraid = 7,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialCommentReactionDtoSocialProfileType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"User")]
+        User = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
+        Tenant = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
+        Contact = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialFeedPostCreateDtoBodyFormat
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PlainText")]
+        PlainText = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Html")]
+        Html = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialFeedPostDtoSocialProfileType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"User")]
+        User = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
+        Tenant = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
+        Contact = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialFeedPostDtoBodyFormat
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PlainText")]
+        PlainText = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Html")]
+        Html = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialFeedPostDtoMyReaction
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Like")]
+        Like = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Happy")]
+        Happy = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"HaHa")]
+        HaHa = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Love")]
+        Love = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Sad")]
+        Sad = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Angry")]
+        Angry = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Wow")]
+        Wow = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
+        Afraid = 7,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialFeedPostUpdateDtoBodyFormat
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PlainText")]
+        PlainText = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Html")]
+        Html = 1,
 
     }
 
@@ -15626,6 +18177,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialPostCommentDtoSocialProfileType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"User")]
+        User = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
+        Tenant = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
+        Contact = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public enum SocialPostCommentDtoBodyFormat
     {
 
@@ -15634,6 +18200,153 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [System.Runtime.Serialization.EnumMember(Value = @"Html")]
         Html = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialPostCommentDtoMyReaction
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Like")]
+        Like = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Happy")]
+        Happy = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"HaHa")]
+        HaHa = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Love")]
+        Love = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Sad")]
+        Sad = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Angry")]
+        Angry = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Wow")]
+        Wow = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
+        Afraid = 7,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialPostDtoSocialProfileType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"User")]
+        User = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
+        Tenant = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
+        Contact = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialPostDtoBodyFormat
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PlainText")]
+        PlainText = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Html")]
+        Html = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialPostReactionDtoReaction
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Like")]
+        Like = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Happy")]
+        Happy = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"HaHa")]
+        HaHa = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Love")]
+        Love = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Sad")]
+        Sad = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Angry")]
+        Angry = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Wow")]
+        Wow = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
+        Afraid = 7,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialPostReactionDtoSocialProfileType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"User")]
+        User = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
+        Tenant = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
+        Contact = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialPostReactionFacepileDtoSocialProfileType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"User")]
+        User = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
+        Tenant = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
+        Contact = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialPostReactionFacepileDtoReaction
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Like")]
+        Like = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Happy")]
+        Happy = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"HaHa")]
+        HaHa = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Love")]
+        Love = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Sad")]
+        Sad = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Angry")]
+        Angry = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Wow")]
+        Wow = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
+        Afraid = 7,
 
     }
 
@@ -15713,6 +18426,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialReactionDtoSocialProfileType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"User")]
+        User = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
+        Tenant = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
+        Contact = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public enum SocialReactionUpdateDtoReaction
     {
 
@@ -15740,6 +18468,33 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
         Afraid = 7,
 
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class FileParameter
+    {
+        public FileParameter(System.IO.Stream data)
+            : this (data, null, null)
+        {
+        }
+
+        public FileParameter(System.IO.Stream data, string fileName)
+            : this (data, fileName, null)
+        {
+        }
+
+        public FileParameter(System.IO.Stream data, string fileName, string contentType)
+        {
+            Data = data;
+            FileName = fileName;
+            ContentType = contentType;
+        }
+
+        public System.IO.Stream Data { get; private set; }
+
+        public string FileName { get; private set; }
+
+        public string ContentType { get; private set; }
     }
 
 

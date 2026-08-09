@@ -80,9 +80,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseArticleDto>> GetCourseArticlesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseArticleDto>> GetCourseArticlesAsync(System.Guid tenantId, string api_version, string x_api_version, CourseArticleDtoCollectionQueryParameters body)
         {
-            return GetCourseArticlesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseArticlesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -94,7 +94,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseArticleDto>> GetCourseArticlesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseArticleDto>> GetCourseArticlesAsync(System.Guid tenantId, string api_version, string x_api_version, CourseArticleDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -108,6 +108,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -304,9 +308,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseArticlesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseArticlesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseArticleDtoCollectionQueryParameters body)
         {
-            return GetCourseArticlesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseArticlesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -318,7 +322,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseArticlesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseArticlesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseArticleDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -332,6 +336,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -645,7 +653,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseArticleAsync(System.Guid tenantId, string articleId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseArticleAsync(System.Guid tenantId, string articleId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseArticleAsync(tenantId, articleId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -659,7 +667,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseArticleAsync(System.Guid tenantId, string articleId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseArticleAsync(System.Guid tenantId, string articleId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (articleId == null)
                 throw new System.ArgumentNullException("articleId");
@@ -877,9 +885,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentComponentDto>> GetCourseAssignmentComponentsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentComponentDto>> GetCourseAssignmentComponentsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseAssignmentComponentDtoCollectionQueryParameters body)
         {
-            return GetCourseAssignmentComponentsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseAssignmentComponentsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -891,7 +899,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentComponentDto>> GetCourseAssignmentComponentsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentComponentDto>> GetCourseAssignmentComponentsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseAssignmentComponentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -905,6 +913,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -1101,9 +1113,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseAssignmentComponentsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseAssignmentComponentsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseAssignmentComponentDtoCollectionQueryParameters body)
         {
-            return GetCourseAssignmentComponentsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseAssignmentComponentsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1115,7 +1127,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseAssignmentComponentsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseAssignmentComponentsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseAssignmentComponentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -1129,6 +1141,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -1442,7 +1458,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAssignmentComponentAsync(System.Guid tenantId, string componentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAssignmentComponentAsync(System.Guid tenantId, string componentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseAssignmentComponentAsync(tenantId, componentId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -1456,7 +1472,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAssignmentComponentAsync(System.Guid tenantId, string componentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAssignmentComponentAsync(System.Guid tenantId, string componentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (componentId == null)
                 throw new System.ArgumentNullException("componentId");
@@ -1674,9 +1690,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentDto>> GetCourseAssignmentsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentDto>> GetCourseAssignmentsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseAssignmentDtoCollectionQueryParameters body)
         {
-            return GetCourseAssignmentsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseAssignmentsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1688,7 +1704,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentDto>> GetCourseAssignmentsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentDto>> GetCourseAssignmentsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseAssignmentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -1702,6 +1718,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -1898,9 +1918,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseAssignmentsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseAssignmentsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseAssignmentDtoCollectionQueryParameters body)
         {
-            return GetCourseAssignmentsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseAssignmentsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1912,7 +1932,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseAssignmentsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseAssignmentsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseAssignmentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -1926,6 +1946,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -2239,7 +2263,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAssignmentAsync(System.Guid tenantId, string assignmentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAssignmentAsync(System.Guid tenantId, string assignmentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseAssignmentAsync(tenantId, assignmentId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -2253,7 +2277,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAssignmentAsync(System.Guid tenantId, string assignmentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAssignmentAsync(System.Guid tenantId, string assignmentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (assignmentId == null)
                 throw new System.ArgumentNullException("assignmentId");
@@ -2471,9 +2495,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentTypeDto>> GetCourseAssignmentTypesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentTypeDto>> GetCourseAssignmentTypesAsync(System.Guid tenantId, string api_version, string x_api_version, CourseAssignmentTypeDtoCollectionQueryParameters body)
         {
-            return GetCourseAssignmentTypesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseAssignmentTypesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2485,7 +2509,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentTypeDto>> GetCourseAssignmentTypesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentTypeDto>> GetCourseAssignmentTypesAsync(System.Guid tenantId, string api_version, string x_api_version, CourseAssignmentTypeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -2499,6 +2523,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -2695,9 +2723,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseAssignmentTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseAssignmentTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseAssignmentTypeDtoCollectionQueryParameters body)
         {
-            return GetCourseAssignmentTypesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseAssignmentTypesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2709,7 +2737,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseAssignmentTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseAssignmentTypesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseAssignmentTypeDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -2723,6 +2751,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -3036,7 +3068,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAssignmentTypeAsync(System.Guid tenantId, string assignmentTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAssignmentTypeAsync(System.Guid tenantId, string assignmentTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseAssignmentTypeAsync(tenantId, assignmentTypeId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -3050,7 +3082,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAssignmentTypeAsync(System.Guid tenantId, string assignmentTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAssignmentTypeAsync(System.Guid tenantId, string assignmentTypeId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (assignmentTypeId == null)
                 throw new System.ArgumentNullException("assignmentTypeId");
@@ -3268,9 +3300,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCategoryDto>> GetCourseCategoriesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCategoryDto>> GetCourseCategoriesAsync(System.Guid tenantId, string api_version, string x_api_version, CourseCategoryDtoCollectionQueryParameters body)
         {
-            return GetCourseCategoriesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseCategoriesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3282,7 +3314,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCategoryDto>> GetCourseCategoriesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCategoryDto>> GetCourseCategoriesAsync(System.Guid tenantId, string api_version, string x_api_version, CourseCategoryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -3296,6 +3328,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -3492,9 +3528,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseCategoriesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseCategoriesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseCategoryDtoCollectionQueryParameters body)
         {
-            return GetCourseCategoriesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseCategoriesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3506,7 +3542,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseCategoriesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseCategoriesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseCategoryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -3520,6 +3556,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -3833,7 +3873,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCategoryAsync(System.Guid tenantId, string categoryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCategoryAsync(System.Guid tenantId, string categoryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseCategoryAsync(tenantId, categoryId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -3847,7 +3887,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCategoryAsync(System.Guid tenantId, string categoryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCategoryAsync(System.Guid tenantId, string categoryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (categoryId == null)
                 throw new System.ArgumentNullException("categoryId");
@@ -4634,7 +4674,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCertificateAsync(System.Guid tenantId, System.Guid courseCertificateId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCertificateAsync(System.Guid tenantId, System.Guid courseCertificateId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseCertificateAsync(tenantId, courseCertificateId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -4648,7 +4688,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCertificateAsync(System.Guid tenantId, System.Guid courseCertificateId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCertificateAsync(System.Guid tenantId, System.Guid courseCertificateId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseCertificateId == null)
                 throw new System.ArgumentNullException("courseCertificateId");
@@ -5433,7 +5473,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCertificateTemplateAsync(System.Guid tenantId, System.Guid courseCertificateTemplateId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCertificateTemplateAsync(System.Guid tenantId, System.Guid courseCertificateTemplateId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseCertificateTemplateAsync(tenantId, courseCertificateTemplateId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -5447,7 +5487,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCertificateTemplateAsync(System.Guid tenantId, System.Guid courseCertificateTemplateId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCertificateTemplateAsync(System.Guid tenantId, System.Guid courseCertificateTemplateId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseCertificateTemplateId == null)
                 throw new System.ArgumentNullException("courseCertificateTemplateId");
@@ -5667,9 +5707,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCohortDto>> GetCourseCohortsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCohortDto>> GetCourseCohortsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseCohortDtoCollectionQueryParameters body)
         {
-            return GetCourseCohortsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseCohortsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -5681,7 +5721,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCohortDto>> GetCourseCohortsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCohortDto>> GetCourseCohortsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseCohortDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -5695,6 +5735,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -5891,9 +5935,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseCohortsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseCohortsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseCohortDtoCollectionQueryParameters body)
         {
-            return GetCourseCohortsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseCohortsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -5905,7 +5949,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseCohortsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseCohortsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseCohortDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -5919,6 +5963,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -6232,7 +6280,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCohortAsync(System.Guid tenantId, string cohortId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCohortAsync(System.Guid tenantId, string cohortId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseCohortAsync(tenantId, cohortId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -6246,7 +6294,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCohortAsync(System.Guid tenantId, string cohortId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseCohortAsync(System.Guid tenantId, string cohortId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (cohortId == null)
                 throw new System.ArgumentNullException("cohortId");
@@ -6464,9 +6512,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseContentGroupDto>> GetCourseContentGroupsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseContentGroupDto>> GetCourseContentGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseContentGroupDtoCollectionQueryParameters body)
         {
-            return GetCourseContentGroupsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseContentGroupsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -6478,7 +6526,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseContentGroupDto>> GetCourseContentGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseContentGroupDto>> GetCourseContentGroupsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseContentGroupDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -6492,6 +6540,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -6688,9 +6740,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseContentGroupsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseContentGroupsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseContentGroupDtoCollectionQueryParameters body)
         {
-            return GetCourseContentGroupsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseContentGroupsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -6702,7 +6754,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseContentGroupsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseContentGroupsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseContentGroupDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -6716,6 +6768,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -7029,7 +7085,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseContentGroupAsync(System.Guid tenantId, string groupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseContentGroupAsync(System.Guid tenantId, string groupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseContentGroupAsync(tenantId, groupId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -7043,7 +7099,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseContentGroupAsync(System.Guid tenantId, string groupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseContentGroupAsync(System.Guid tenantId, string groupId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (groupId == null)
                 throw new System.ArgumentNullException("groupId");
@@ -7261,9 +7317,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseContentGroupDto>> GetCourseContentGroupsByCourseAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseContentGroupDto>> GetCourseContentGroupsByCourseAsync(string courseId, string api_version, string x_api_version, CourseContentGroupDtoCollectionQueryParameters body)
         {
-            return GetCourseContentGroupsByCourseAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseContentGroupsByCourseAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -7275,7 +7331,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseContentGroupDto>> GetCourseContentGroupsByCourseAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseContentGroupDto>> GetCourseContentGroupsByCourseAsync(string courseId, string api_version, string x_api_version, CourseContentGroupDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -7289,6 +7345,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -7375,9 +7435,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseContentGroupsByCourseCountAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseContentGroupsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseContentGroupDtoCollectionQueryParameters body)
         {
-            return GetCourseContentGroupsByCourseCountAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseContentGroupsByCourseCountAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -7389,7 +7449,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseContentGroupsByCourseCountAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseContentGroupsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseContentGroupDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -7403,6 +7463,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -7489,9 +7553,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseEnrollmentDto>> GetEnrollmentsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseEnrollmentDto>> GetEnrollmentsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseEnrollmentDtoCollectionQueryParameters body)
         {
-            return GetEnrollmentsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetEnrollmentsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -7503,7 +7567,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseEnrollmentDto>> GetEnrollmentsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseEnrollmentDto>> GetEnrollmentsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseEnrollmentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -7517,6 +7581,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -7713,9 +7781,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetEnrollmentsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetEnrollmentsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseEnrollmentDtoCollectionQueryParameters body)
         {
-            return GetEnrollmentsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetEnrollmentsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -7727,7 +7795,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetEnrollmentsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetEnrollmentsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseEnrollmentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -7741,6 +7809,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -8058,7 +8130,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task PatchCourseEnrollmentAsync(System.Guid tenantId, System.Guid courseEnrollmentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task PatchCourseEnrollmentAsync(System.Guid tenantId, System.Guid courseEnrollmentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseEnrollmentAsync(tenantId, courseEnrollmentId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -8072,7 +8144,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task PatchCourseEnrollmentAsync(System.Guid tenantId, System.Guid courseEnrollmentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task PatchCourseEnrollmentAsync(System.Guid tenantId, System.Guid courseEnrollmentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseEnrollmentId == null)
                 throw new System.ArgumentNullException("courseEnrollmentId");
@@ -8284,9 +8356,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseEnrollmentDto>> GetStudentCourseEnrollmentsAsync(System.Guid tenantId, System.Guid studentProfileId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseEnrollmentDto>> GetStudentCourseEnrollmentsAsync(System.Guid tenantId, System.Guid studentProfileId, string api_version, string x_api_version, CourseEnrollmentDtoCollectionQueryParameters body)
         {
-            return GetStudentCourseEnrollmentsAsync(tenantId, studentProfileId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetStudentCourseEnrollmentsAsync(tenantId, studentProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -8298,7 +8370,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseEnrollmentDto>> GetStudentCourseEnrollmentsAsync(System.Guid tenantId, System.Guid studentProfileId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseEnrollmentDto>> GetStudentCourseEnrollmentsAsync(System.Guid tenantId, System.Guid studentProfileId, string api_version, string x_api_version, CourseEnrollmentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (studentProfileId == null)
                 throw new System.ArgumentNullException("studentProfileId");
@@ -8315,6 +8387,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -8401,9 +8477,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseFileDto>> GetCourseFilesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseFileDto>> GetCourseFilesAsync(System.Guid tenantId, string api_version, string x_api_version, CourseFileDtoCollectionQueryParameters body)
         {
-            return GetCourseFilesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseFilesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -8415,7 +8491,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseFileDto>> GetCourseFilesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseFileDto>> GetCourseFilesAsync(System.Guid tenantId, string api_version, string x_api_version, CourseFileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -8429,6 +8505,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -8625,9 +8705,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseFilesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseFilesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseFileDtoCollectionQueryParameters body)
         {
-            return GetCourseFilesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseFilesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -8639,7 +8719,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseFilesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseFilesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseFileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -8653,6 +8733,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -8966,7 +9050,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task PatchCourseFileAsync(System.Guid tenantId, string fileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task PatchCourseFileAsync(System.Guid tenantId, string fileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseFileAsync(tenantId, fileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -8980,7 +9064,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task PatchCourseFileAsync(System.Guid tenantId, string fileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task PatchCourseFileAsync(System.Guid tenantId, string fileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (fileId == null)
                 throw new System.ArgumentNullException("fileId");
@@ -9192,9 +9276,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseForumDto>> GetCourseForumsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseForumDto>> GetCourseForumsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseForumDtoCollectionQueryParameters body)
         {
-            return GetCourseForumsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseForumsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -9206,7 +9290,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseForumDto>> GetCourseForumsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseForumDto>> GetCourseForumsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseForumDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -9220,6 +9304,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -9422,9 +9510,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseForumsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseForumsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseForumDtoCollectionQueryParameters body)
         {
-            return GetCourseForumsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseForumsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -9436,7 +9524,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseForumsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseForumsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseForumDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -9450,6 +9538,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -9769,7 +9861,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task PatchCourseForumAsync(System.Guid tenantId, string forumId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task PatchCourseForumAsync(System.Guid tenantId, string forumId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseForumAsync(tenantId, forumId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -9783,7 +9875,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task PatchCourseForumAsync(System.Guid tenantId, string forumId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task PatchCourseForumAsync(System.Guid tenantId, string forumId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (forumId == null)
                 throw new System.ArgumentNullException("forumId");
@@ -9995,9 +10087,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseGradingRubricDto>> GetCourseGradingRubricsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseGradingRubricDto>> GetCourseGradingRubricsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseGradingRubricDtoCollectionQueryParameters body)
         {
-            return GetCourseGradingRubricsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseGradingRubricsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -10009,7 +10101,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseGradingRubricDto>> GetCourseGradingRubricsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseGradingRubricDto>> GetCourseGradingRubricsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseGradingRubricDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -10023,6 +10115,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -10219,9 +10315,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseGradingRubricsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseGradingRubricsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseGradingRubricDtoCollectionQueryParameters body)
         {
-            return GetCourseGradingRubricsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseGradingRubricsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -10233,7 +10329,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseGradingRubricsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseGradingRubricsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseGradingRubricDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -10247,6 +10343,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -10560,7 +10660,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task PatchCourseGradingRubricAsync(System.Guid tenantId, string rubricId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task PatchCourseGradingRubricAsync(System.Guid tenantId, string rubricId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseGradingRubricAsync(tenantId, rubricId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -10574,7 +10674,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task PatchCourseGradingRubricAsync(System.Guid tenantId, string rubricId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task PatchCourseGradingRubricAsync(System.Guid tenantId, string rubricId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (rubricId == null)
                 throw new System.ArgumentNullException("rubricId");
@@ -10786,9 +10886,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseHandoutDto>> GetCourseHandoutsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseHandoutDto>> GetCourseHandoutsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseHandoutDtoCollectionQueryParameters body)
         {
-            return GetCourseHandoutsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseHandoutsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -10800,7 +10900,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseHandoutDto>> GetCourseHandoutsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseHandoutDto>> GetCourseHandoutsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseHandoutDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -10814,6 +10914,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -11016,9 +11120,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseHandoutsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseHandoutsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseHandoutDtoCollectionQueryParameters body)
         {
-            return GetCourseHandoutsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseHandoutsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -11030,7 +11134,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseHandoutsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseHandoutsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseHandoutDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -11044,6 +11148,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -11363,7 +11471,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task PatchCourseHandoutAsync(System.Guid tenantId, string handoutId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task PatchCourseHandoutAsync(System.Guid tenantId, string handoutId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseHandoutAsync(tenantId, handoutId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -11377,7 +11485,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task PatchCourseHandoutAsync(System.Guid tenantId, string handoutId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task PatchCourseHandoutAsync(System.Guid tenantId, string handoutId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (handoutId == null)
                 throw new System.ArgumentNullException("handoutId");
@@ -11589,9 +11697,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseLibraryDto>> GetCourseLibrariesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseLibraryDto>> GetCourseLibrariesAsync(System.Guid tenantId, string api_version, string x_api_version, CourseLibraryDtoCollectionQueryParameters body)
         {
-            return GetCourseLibrariesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseLibrariesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -11603,7 +11711,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseLibraryDto>> GetCourseLibrariesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseLibraryDto>> GetCourseLibrariesAsync(System.Guid tenantId, string api_version, string x_api_version, CourseLibraryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -11617,6 +11725,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -11819,9 +11931,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseLibrariesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseLibrariesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseLibraryDtoCollectionQueryParameters body)
         {
-            return GetCourseLibrariesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseLibrariesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -11833,7 +11945,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseLibrariesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseLibrariesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseLibraryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -11847,6 +11959,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -12166,7 +12282,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task PatchCourseLibraryAsync(System.Guid tenantId, string libraryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task PatchCourseLibraryAsync(System.Guid tenantId, string libraryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseLibraryAsync(tenantId, libraryId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -12180,7 +12296,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task PatchCourseLibraryAsync(System.Guid tenantId, string libraryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task PatchCourseLibraryAsync(System.Guid tenantId, string libraryId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (libraryId == null)
                 throw new System.ArgumentNullException("libraryId");
@@ -12392,9 +12508,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CoursePageDto>> GetCoursePagesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CoursePageDto>> GetCoursePagesAsync(System.Guid tenantId, string api_version, string x_api_version, CoursePageDtoCollectionQueryParameters body)
         {
-            return GetCoursePagesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCoursePagesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -12406,7 +12522,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CoursePageDto>> GetCoursePagesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CoursePageDto>> GetCoursePagesAsync(System.Guid tenantId, string api_version, string x_api_version, CoursePageDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -12420,6 +12536,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -12616,9 +12736,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCoursePagesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCoursePagesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CoursePageDtoCollectionQueryParameters body)
         {
-            return GetCoursePagesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCoursePagesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -12630,7 +12750,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCoursePagesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCoursePagesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CoursePageDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -12644,6 +12764,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -12957,7 +13081,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task PatchCoursePageAsync(System.Guid tenantId, string pageId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task PatchCoursePageAsync(System.Guid tenantId, string pageId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCoursePageAsync(tenantId, pageId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -12971,7 +13095,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task PatchCoursePageAsync(System.Guid tenantId, string pageId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task PatchCoursePageAsync(System.Guid tenantId, string pageId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (pageId == null)
                 throw new System.ArgumentNullException("pageId");
@@ -13183,9 +13307,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseProblemSetDto>> GetCourseProblemSetsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseProblemSetDto>> GetCourseProblemSetsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseProblemSetDtoCollectionQueryParameters body)
         {
-            return GetCourseProblemSetsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseProblemSetsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -13197,7 +13321,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseProblemSetDto>> GetCourseProblemSetsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseProblemSetDto>> GetCourseProblemSetsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseProblemSetDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -13211,6 +13335,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -13407,9 +13535,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseProblemSetsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseProblemSetsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseProblemSetDtoCollectionQueryParameters body)
         {
-            return GetCourseProblemSetsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseProblemSetsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -13421,7 +13549,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseProblemSetsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseProblemSetsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseProblemSetDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -13435,6 +13563,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -13748,7 +13880,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseProblemSetAsync(System.Guid tenantId, string problemSetId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseProblemSetAsync(System.Guid tenantId, string problemSetId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseProblemSetAsync(tenantId, problemSetId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -13762,7 +13894,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseProblemSetAsync(System.Guid tenantId, string problemSetId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseProblemSetAsync(System.Guid tenantId, string problemSetId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (problemSetId == null)
                 throw new System.ArgumentNullException("problemSetId");
@@ -13980,9 +14112,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseDto>> GetCoursesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseDto>> GetCoursesAsync(System.Guid tenantId, string api_version, string x_api_version, CourseDtoCollectionQueryParameters body)
         {
-            return GetCoursesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCoursesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -13994,7 +14126,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseDto>> GetCoursesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseDto>> GetCoursesAsync(System.Guid tenantId, string api_version, string x_api_version, CourseDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -14008,6 +14140,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -14204,9 +14340,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCoursesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCoursesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseDtoCollectionQueryParameters body)
         {
-            return GetCoursesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCoursesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -14218,7 +14354,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCoursesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCoursesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -14232,6 +14368,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -14549,7 +14689,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAsync(System.Guid tenantId, System.Guid courseId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAsync(System.Guid tenantId, System.Guid courseId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseAsync(tenantId, courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -14563,7 +14703,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAsync(System.Guid tenantId, System.Guid courseId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseAsync(System.Guid tenantId, System.Guid courseId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -14781,9 +14921,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseWikiDto>> GetCourseWikisByCourseAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseWikiDto>> GetCourseWikisByCourseAsync(string courseId, string api_version, string x_api_version, CourseWikiDtoCollectionQueryParameters body)
         {
-            return GetCourseWikisByCourseAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseWikisByCourseAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -14795,7 +14935,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseWikiDto>> GetCourseWikisByCourseAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseWikiDto>> GetCourseWikisByCourseAsync(string courseId, string api_version, string x_api_version, CourseWikiDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -14809,6 +14949,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -14895,9 +15039,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseWikisByCourseCountAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseWikisByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseWikiDtoCollectionQueryParameters body)
         {
-            return GetCourseWikisByCourseCountAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseWikisByCourseCountAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -14909,7 +15053,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseWikisByCourseCountAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseWikisByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseWikiDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -14923,6 +15067,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -15009,9 +15157,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseArticleDto>> GetCourseArticlesByCourseWikiAsync(string courseId, string wikiId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseArticleDto>> GetCourseArticlesByCourseWikiAsync(string courseId, string wikiId, string api_version, string x_api_version, CourseArticleDtoCollectionQueryParameters body)
         {
-            return GetCourseArticlesByCourseWikiAsync(courseId, wikiId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseArticlesByCourseWikiAsync(courseId, wikiId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -15023,7 +15171,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseArticleDto>> GetCourseArticlesByCourseWikiAsync(string courseId, string wikiId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseArticleDto>> GetCourseArticlesByCourseWikiAsync(string courseId, string wikiId, string api_version, string x_api_version, CourseArticleDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -15040,6 +15188,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -15127,9 +15279,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseArticlesByCourseWikiCountAsync(string courseId, string wikiId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseArticlesByCourseWikiCountAsync(string courseId, string wikiId, string api_version, string x_api_version, CourseArticleDtoCollectionQueryParameters body)
         {
-            return GetCourseArticlesByCourseWikiCountAsync(courseId, wikiId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseArticlesByCourseWikiCountAsync(courseId, wikiId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -15141,7 +15293,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseArticlesByCourseWikiCountAsync(string courseId, string wikiId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseArticlesByCourseWikiCountAsync(string courseId, string wikiId, string api_version, string x_api_version, CourseArticleDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -15158,6 +15310,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -15246,9 +15402,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseNewsDto>> GetCourseUpdatesByCourseAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseNewsDto>> GetCourseUpdatesByCourseAsync(string courseId, string api_version, string x_api_version, CourseNewsDtoCollectionQueryParameters body)
         {
-            return GetCourseUpdatesByCourseAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseUpdatesByCourseAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -15260,7 +15416,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseNewsDto>> GetCourseUpdatesByCourseAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseNewsDto>> GetCourseUpdatesByCourseAsync(string courseId, string api_version, string x_api_version, CourseNewsDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -15274,6 +15430,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -15360,9 +15520,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseUpdatesByCourseCountAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseUpdatesByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseNewsDtoCollectionQueryParameters body)
         {
-            return GetCourseUpdatesByCourseCountAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseUpdatesByCourseCountAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -15374,7 +15534,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseUpdatesByCourseCountAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseUpdatesByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseNewsDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -15388,6 +15548,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -15474,9 +15638,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseSectionDto>> GetCourseSectionsByCourseAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseSectionDto>> GetCourseSectionsByCourseAsync(string courseId, string api_version, string x_api_version, CourseSectionDtoCollectionQueryParameters body)
         {
-            return GetCourseSectionsByCourseAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseSectionsByCourseAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -15488,7 +15652,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseSectionDto>> GetCourseSectionsByCourseAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseSectionDto>> GetCourseSectionsByCourseAsync(string courseId, string api_version, string x_api_version, CourseSectionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -15502,6 +15666,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -15588,9 +15756,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseSectionsByCourseCountAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseSectionsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseSectionDtoCollectionQueryParameters body)
         {
-            return GetCourseSectionsByCourseCountAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseSectionsByCourseCountAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -15602,7 +15770,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseSectionsByCourseCountAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseSectionsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseSectionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -15616,6 +15784,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -15702,9 +15874,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitDto>> GetCourseUnitsBySectionAsync(string courseId, string sectionId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitDto>> GetCourseUnitsBySectionAsync(string courseId, string sectionId, string api_version, string x_api_version, CourseUnitDtoCollectionQueryParameters body)
         {
-            return GetCourseUnitsBySectionAsync(courseId, sectionId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseUnitsBySectionAsync(courseId, sectionId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -15716,7 +15888,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitDto>> GetCourseUnitsBySectionAsync(string courseId, string sectionId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitDto>> GetCourseUnitsBySectionAsync(string courseId, string sectionId, string api_version, string x_api_version, CourseUnitDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -15733,6 +15905,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -15820,9 +15996,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseUnitsBySectionCountAsync(string courseId, string sectionId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseUnitsBySectionCountAsync(string courseId, string sectionId, string api_version, string x_api_version, CourseUnitDtoCollectionQueryParameters body)
         {
-            return GetCourseUnitsBySectionCountAsync(courseId, sectionId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseUnitsBySectionCountAsync(courseId, sectionId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -15834,7 +16010,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseUnitsBySectionCountAsync(string courseId, string sectionId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseUnitsBySectionCountAsync(string courseId, string sectionId, string api_version, string x_api_version, CourseUnitDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -15851,6 +16027,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -15939,9 +16119,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentDto>> GetCourseAssignmentsByCourseAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentDto>> GetCourseAssignmentsByCourseAsync(string courseId, string api_version, string x_api_version, CourseAssignmentDtoCollectionQueryParameters body)
         {
-            return GetCourseAssignmentsByCourseAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseAssignmentsByCourseAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -15953,7 +16133,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentDto>> GetCourseAssignmentsByCourseAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseAssignmentDto>> GetCourseAssignmentsByCourseAsync(string courseId, string api_version, string x_api_version, CourseAssignmentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -15967,6 +16147,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -16053,9 +16237,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseAssignmentsByCourseCountAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseAssignmentsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseAssignmentDtoCollectionQueryParameters body)
         {
-            return GetCourseAssignmentsByCourseCountAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseAssignmentsByCourseCountAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -16067,7 +16251,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseAssignmentsByCourseCountAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseAssignmentsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseAssignmentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -16081,6 +16265,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -16167,9 +16355,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCategoryDto>> GetCourseCategoriesByCourseAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCategoryDto>> GetCourseCategoriesByCourseAsync(string courseId, string api_version, string x_api_version, CourseCategoryDtoCollectionQueryParameters body)
         {
-            return GetCourseCategoriesByCourseAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseCategoriesByCourseAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -16181,7 +16369,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCategoryDto>> GetCourseCategoriesByCourseAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCategoryDto>> GetCourseCategoriesByCourseAsync(string courseId, string api_version, string x_api_version, CourseCategoryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -16195,6 +16383,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -16281,9 +16473,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseCategoriesByCourseCountAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseCategoriesByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseCategoryDtoCollectionQueryParameters body)
         {
-            return GetCourseCategoriesByCourseCountAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseCategoriesByCourseCountAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -16295,7 +16487,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseCategoriesByCourseCountAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseCategoriesByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseCategoryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -16309,6 +16501,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -16395,9 +16591,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCohortDto>> GetCourseCohortsByCourseAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCohortDto>> GetCourseCohortsByCourseAsync(string courseId, string api_version, string x_api_version, CourseCohortDtoCollectionQueryParameters body)
         {
-            return GetCourseCohortsByCourseAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseCohortsByCourseAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -16409,7 +16605,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCohortDto>> GetCourseCohortsByCourseAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseCohortDto>> GetCourseCohortsByCourseAsync(string courseId, string api_version, string x_api_version, CourseCohortDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -16423,6 +16619,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -16509,9 +16709,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseCohortsByCourseCountAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseCohortsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseCohortDtoCollectionQueryParameters body)
         {
-            return GetCourseCohortsByCourseCountAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseCohortsByCourseCountAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -16523,7 +16723,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseCohortsByCourseCountAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseCohortsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseCohortDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -16537,6 +16737,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -16623,9 +16827,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseFileDto>> GetCourseFilesByCourseAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseFileDto>> GetCourseFilesByCourseAsync(string courseId, string api_version, string x_api_version, CourseFileDtoCollectionQueryParameters body)
         {
-            return GetCourseFilesByCourseAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseFilesByCourseAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -16637,7 +16841,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseFileDto>> GetCourseFilesByCourseAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseFileDto>> GetCourseFilesByCourseAsync(string courseId, string api_version, string x_api_version, CourseFileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -16651,6 +16855,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -16737,9 +16945,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseFilesByCourseCountAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseFilesByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseFileDtoCollectionQueryParameters body)
         {
-            return GetCourseFilesByCourseCountAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseFilesByCourseCountAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -16751,7 +16959,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseFilesByCourseCountAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseFilesByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseFileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -16765,6 +16973,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -16851,9 +17063,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseForumDto>> GetCourseForumsByCourseAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseForumDto>> GetCourseForumsByCourseAsync(string courseId, string api_version, string x_api_version, CourseForumDtoCollectionQueryParameters body)
         {
-            return GetCourseForumsByCourseAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseForumsByCourseAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -16865,7 +17077,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseForumDto>> GetCourseForumsByCourseAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseForumDto>> GetCourseForumsByCourseAsync(string courseId, string api_version, string x_api_version, CourseForumDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -16879,6 +17091,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -16965,9 +17181,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseForumsByCourseCountAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseForumsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseForumDtoCollectionQueryParameters body)
         {
-            return GetCourseForumsByCourseCountAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseForumsByCourseCountAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -16979,7 +17195,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseForumsByCourseCountAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseForumsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseForumDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -16993,6 +17209,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -17079,9 +17299,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseLibraryDto>> GetCourseLibrariesByCourseAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseLibraryDto>> GetCourseLibrariesByCourseAsync(string courseId, string api_version, string x_api_version, CourseLibraryDtoCollectionQueryParameters body)
         {
-            return GetCourseLibrariesByCourseAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseLibrariesByCourseAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -17093,7 +17313,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseLibraryDto>> GetCourseLibrariesByCourseAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseLibraryDto>> GetCourseLibrariesByCourseAsync(string courseId, string api_version, string x_api_version, CourseLibraryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -17107,6 +17327,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -17193,9 +17417,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseLibrariesByCourseCountAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseLibrariesByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseLibraryDtoCollectionQueryParameters body)
         {
-            return GetCourseLibrariesByCourseCountAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseLibrariesByCourseCountAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -17207,7 +17431,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseLibrariesByCourseCountAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseLibrariesByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseLibraryDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -17221,6 +17445,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -17307,9 +17535,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CoursePageDto>> GetCoursePagesByCourseAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CoursePageDto>> GetCoursePagesByCourseAsync(string courseId, string api_version, string x_api_version, CoursePageDtoCollectionQueryParameters body)
         {
-            return GetCoursePagesByCourseAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCoursePagesByCourseAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -17321,7 +17549,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CoursePageDto>> GetCoursePagesByCourseAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CoursePageDto>> GetCoursePagesByCourseAsync(string courseId, string api_version, string x_api_version, CoursePageDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -17335,6 +17563,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -17421,9 +17653,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCoursePagesByCourseCountAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCoursePagesByCourseCountAsync(string courseId, string api_version, string x_api_version, CoursePageDtoCollectionQueryParameters body)
         {
-            return GetCoursePagesByCourseCountAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCoursePagesByCourseCountAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -17435,7 +17667,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCoursePagesByCourseCountAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCoursePagesByCourseCountAsync(string courseId, string api_version, string x_api_version, CoursePageDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -17449,6 +17681,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -17535,9 +17771,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseProblemSetDto>> GetCourseProblemSetsByCourseAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseProblemSetDto>> GetCourseProblemSetsByCourseAsync(string courseId, string api_version, string x_api_version, CourseProblemSetDtoCollectionQueryParameters body)
         {
-            return GetCourseProblemSetsByCourseAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseProblemSetsByCourseAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -17549,7 +17785,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseProblemSetDto>> GetCourseProblemSetsByCourseAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseProblemSetDto>> GetCourseProblemSetsByCourseAsync(string courseId, string api_version, string x_api_version, CourseProblemSetDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -17563,6 +17799,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -17649,9 +17889,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseProblemSetsByCourseCountAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseProblemSetsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseProblemSetDtoCollectionQueryParameters body)
         {
-            return GetCourseProblemSetsByCourseCountAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseProblemSetsByCourseCountAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -17663,7 +17903,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseProblemSetsByCourseCountAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseProblemSetsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseProblemSetDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -17677,6 +17917,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -17763,9 +18007,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseHandoutDto>> GetCourseHandoutsByCourseAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseHandoutDto>> GetCourseHandoutsByCourseAsync(string courseId, string api_version, string x_api_version, CourseHandoutDtoCollectionQueryParameters body)
         {
-            return GetCourseHandoutsByCourseAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseHandoutsByCourseAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -17777,7 +18021,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseHandoutDto>> GetCourseHandoutsByCourseAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseHandoutDto>> GetCourseHandoutsByCourseAsync(string courseId, string api_version, string x_api_version, CourseHandoutDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -17791,6 +18035,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -17877,9 +18125,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseHandoutsByCourseCountAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseHandoutsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseHandoutDtoCollectionQueryParameters body)
         {
-            return GetCourseHandoutsByCourseCountAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseHandoutsByCourseCountAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -17891,7 +18139,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseHandoutsByCourseCountAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseHandoutsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseHandoutDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -17905,6 +18153,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -17991,9 +18243,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitComponentDto>> GetCourseUnitComponentsByCourseAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitComponentDto>> GetCourseUnitComponentsByCourseAsync(string courseId, string api_version, string x_api_version, CourseUnitComponentDtoCollectionQueryParameters body)
         {
-            return GetCourseUnitComponentsByCourseAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseUnitComponentsByCourseAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -18005,7 +18257,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitComponentDto>> GetCourseUnitComponentsByCourseAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitComponentDto>> GetCourseUnitComponentsByCourseAsync(string courseId, string api_version, string x_api_version, CourseUnitComponentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -18019,6 +18271,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -18105,9 +18361,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseUnitComponentsByCourseCountAsync(string courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseUnitComponentsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseUnitComponentDtoCollectionQueryParameters body)
         {
-            return GetCourseUnitComponentsByCourseCountAsync(courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseUnitComponentsByCourseCountAsync(courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -18119,7 +18375,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseUnitComponentsByCourseCountAsync(string courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseUnitComponentsByCourseCountAsync(string courseId, string api_version, string x_api_version, CourseUnitComponentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -18133,6 +18389,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -18675,9 +18935,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseEnrollmentDto>> GetCourseEnrollmentsByCourseAsync(System.Guid tenantId, System.Guid courseId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseEnrollmentDto>> GetCourseEnrollmentsByCourseAsync(System.Guid tenantId, System.Guid courseId, string api_version, string x_api_version, CourseEnrollmentDtoCollectionQueryParameters body)
         {
-            return GetCourseEnrollmentsByCourseAsync(tenantId, courseId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseEnrollmentsByCourseAsync(tenantId, courseId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -18689,7 +18949,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseEnrollmentDto>> GetCourseEnrollmentsByCourseAsync(System.Guid tenantId, System.Guid courseId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseEnrollmentDto>> GetCourseEnrollmentsByCourseAsync(System.Guid tenantId, System.Guid courseId, string api_version, string x_api_version, CourseEnrollmentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (courseId == null)
                 throw new System.ArgumentNullException("courseId");
@@ -18706,6 +18966,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -18793,9 +19057,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseSectionDto>> GetCourseSectionsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseSectionDto>> GetCourseSectionsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseSectionDtoCollectionQueryParameters body)
         {
-            return GetCourseSectionsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseSectionsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -18807,7 +19071,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseSectionDto>> GetCourseSectionsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseSectionDto>> GetCourseSectionsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseSectionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -18821,6 +19085,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -19017,9 +19285,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseSectionsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseSectionsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseSectionDtoCollectionQueryParameters body)
         {
-            return GetCourseSectionsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseSectionsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -19031,7 +19299,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseSectionsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseSectionsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseSectionDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -19045,6 +19313,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -19358,7 +19630,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseSectionAsync(System.Guid tenantId, string sectionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseSectionAsync(System.Guid tenantId, string sectionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseSectionAsync(tenantId, sectionId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -19372,7 +19644,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseSectionAsync(System.Guid tenantId, string sectionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseSectionAsync(System.Guid tenantId, string sectionId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (sectionId == null)
                 throw new System.ArgumentNullException("sectionId");
@@ -19590,9 +19862,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseTeamMembershipDto>> GetCourseTeamMembershipsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseTeamMembershipDto>> GetCourseTeamMembershipsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseTeamMembershipDtoCollectionQueryParameters body)
         {
-            return GetCourseTeamMembershipsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseTeamMembershipsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -19604,7 +19876,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseTeamMembershipDto>> GetCourseTeamMembershipsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseTeamMembershipDto>> GetCourseTeamMembershipsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseTeamMembershipDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -19618,6 +19890,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -19814,9 +20090,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseTeamMembershipsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseTeamMembershipsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseTeamMembershipDtoCollectionQueryParameters body)
         {
-            return GetCourseTeamMembershipsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseTeamMembershipsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -19828,7 +20104,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseTeamMembershipsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseTeamMembershipsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseTeamMembershipDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -19842,6 +20118,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -20155,7 +20435,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseTeamMembershipAsync(System.Guid tenantId, string membershipId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseTeamMembershipAsync(System.Guid tenantId, string membershipId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseTeamMembershipAsync(tenantId, membershipId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -20169,7 +20449,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseTeamMembershipAsync(System.Guid tenantId, string membershipId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseTeamMembershipAsync(System.Guid tenantId, string membershipId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (membershipId == null)
                 throw new System.ArgumentNullException("membershipId");
@@ -20387,9 +20667,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitComponentDto>> GetCourseUnitComponentsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitComponentDto>> GetCourseUnitComponentsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseUnitComponentDtoCollectionQueryParameters body)
         {
-            return GetCourseUnitComponentsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseUnitComponentsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -20401,7 +20681,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitComponentDto>> GetCourseUnitComponentsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitComponentDto>> GetCourseUnitComponentsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseUnitComponentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -20415,6 +20695,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -20611,9 +20895,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseUnitComponentsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseUnitComponentsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseUnitComponentDtoCollectionQueryParameters body)
         {
-            return GetCourseUnitComponentsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseUnitComponentsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -20625,7 +20909,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseUnitComponentsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseUnitComponentsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseUnitComponentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -20639,6 +20923,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -20952,7 +21240,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseUnitComponentAsync(System.Guid tenantId, string componentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseUnitComponentAsync(System.Guid tenantId, string componentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseUnitComponentAsync(tenantId, componentId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -20966,7 +21254,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseUnitComponentAsync(System.Guid tenantId, string componentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseUnitComponentAsync(System.Guid tenantId, string componentId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (componentId == null)
                 throw new System.ArgumentNullException("componentId");
@@ -21184,9 +21472,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitDto>> GetCourseUnitsAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitDto>> GetCourseUnitsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseUnitDtoCollectionQueryParameters body)
         {
-            return GetCourseUnitsAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseUnitsAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -21198,7 +21486,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitDto>> GetCourseUnitsAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseUnitDto>> GetCourseUnitsAsync(System.Guid tenantId, string api_version, string x_api_version, CourseUnitDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -21212,6 +21500,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -21408,9 +21700,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseUnitsCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseUnitsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseUnitDtoCollectionQueryParameters body)
         {
-            return GetCourseUnitsCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseUnitsCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -21422,7 +21714,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseUnitsCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseUnitsCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseUnitDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -21436,6 +21728,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -21749,7 +22045,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseUnitAsync(System.Guid tenantId, string unitId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseUnitAsync(System.Guid tenantId, string unitId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseUnitAsync(tenantId, unitId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -21763,7 +22059,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseUnitAsync(System.Guid tenantId, string unitId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseUnitAsync(System.Guid tenantId, string unitId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (unitId == null)
                 throw new System.ArgumentNullException("unitId");
@@ -21981,9 +22277,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseNewsDto>> GetCourseUpdatesAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseNewsDto>> GetCourseUpdatesAsync(System.Guid tenantId, string api_version, string x_api_version, CourseNewsDtoCollectionQueryParameters body)
         {
-            return GetCourseUpdatesAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseUpdatesAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -21995,7 +22291,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseNewsDto>> GetCourseUpdatesAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseNewsDto>> GetCourseUpdatesAsync(System.Guid tenantId, string api_version, string x_api_version, CourseNewsDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -22009,6 +22305,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -22205,9 +22505,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseUpdatesCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseUpdatesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseNewsDtoCollectionQueryParameters body)
         {
-            return GetCourseUpdatesCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseUpdatesCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -22219,7 +22519,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseUpdatesCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseUpdatesCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseNewsDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -22233,6 +22533,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -22546,7 +22850,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseUpdateAsync(System.Guid tenantId, string updateId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseUpdateAsync(System.Guid tenantId, string updateId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseUpdateAsync(tenantId, updateId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -22560,7 +22864,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseUpdateAsync(System.Guid tenantId, string updateId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseUpdateAsync(System.Guid tenantId, string updateId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (updateId == null)
                 throw new System.ArgumentNullException("updateId");
@@ -22778,9 +23082,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseWikiDto>> GetCourseWikisAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseWikiDto>> GetCourseWikisAsync(System.Guid tenantId, string api_version, string x_api_version, CourseWikiDtoCollectionQueryParameters body)
         {
-            return GetCourseWikisAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseWikisAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -22792,7 +23096,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseWikiDto>> GetCourseWikisAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CourseWikiDto>> GetCourseWikisAsync(System.Guid tenantId, string api_version, string x_api_version, CourseWikiDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -22806,6 +23110,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -23002,9 +23310,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetCourseWikisCountAsync(System.Guid tenantId, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetCourseWikisCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseWikiDtoCollectionQueryParameters body)
         {
-            return GetCourseWikisCountAsync(tenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetCourseWikisCountAsync(tenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -23016,7 +23324,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetCourseWikisCountAsync(System.Guid tenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetCourseWikisCountAsync(System.Guid tenantId, string api_version, string x_api_version, CourseWikiDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -23030,6 +23338,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -23343,7 +23655,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseWikiAsync(System.Guid tenantId, string wikiId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseWikiAsync(System.Guid tenantId, string wikiId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return PatchCourseWikiAsync(tenantId, wikiId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -23357,7 +23669,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseWikiAsync(System.Guid tenantId, string wikiId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PatchCourseWikiAsync(System.Guid tenantId, string wikiId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (wikiId == null)
                 throw new System.ArgumentNullException("wikiId");
@@ -23663,84 +23975,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
                     // Operation Path: "health"
                     urlBuilder_.Append("health");
-
-                    PrepareRequest(client_, request_, urlBuilder_);
-
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-
-                    PrepareRequest(client_, request_, url_);
-
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
-                        foreach (var item_ in response_.Headers)
-                            headers_[item_.Key] = item_.Value;
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-
-                        ProcessResponse(client_, response_);
-
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-
-        /// <returns>OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task AguiAsync(string agentId)
-        {
-            return AguiAsync(agentId, System.Threading.CancellationToken.None);
-        }
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task AguiAsync(string agentId, System.Threading.CancellationToken cancellationToken)
-        {
-            if (agentId == null)
-                throw new System.ArgumentNullException("agentId");
-
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-
-                    var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/v2/AIService/Agents/{agentId}/agui"
-                    urlBuilder_.Append("api/v2/AIService/Agents/");
-                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(agentId, System.Globalization.CultureInfo.InvariantCulture)));
-                    urlBuilder_.Append("/agui");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -25591,7 +25825,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> InstructorProfilesPATCHAsync(System.Guid tenantId, System.Guid instructorProfileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> InstructorProfilesPATCHAsync(System.Guid tenantId, System.Guid instructorProfileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return InstructorProfilesPATCHAsync(tenantId, instructorProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -25599,7 +25833,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> InstructorProfilesPATCHAsync(System.Guid tenantId, System.Guid instructorProfileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> InstructorProfilesPATCHAsync(System.Guid tenantId, System.Guid instructorProfileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (instructorProfileId == null)
                 throw new System.ArgumentNullException("instructorProfileId");
@@ -25802,9 +26036,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<StudentProfileDtoIReadOnlyListEnvelope> GetMyStudentProfilesAsync(string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<StudentProfileDtoIReadOnlyListEnvelope> GetMyStudentProfilesAsync(string api_version, string x_api_version, StudentProfileDtoCollectionQueryParameters body)
         {
-            return GetMyStudentProfilesAsync(api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetMyStudentProfilesAsync(api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -25813,7 +26047,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<StudentProfileDtoIReadOnlyListEnvelope> GetMyStudentProfilesAsync(string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<StudentProfileDtoIReadOnlyListEnvelope> GetMyStudentProfilesAsync(string api_version, string x_api_version, StudentProfileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -25824,6 +26058,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -25905,9 +26143,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetMyStudentProfilesCountAsync(string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetMyStudentProfilesCountAsync(string api_version, string x_api_version, StudentProfileDtoCollectionQueryParameters body)
         {
-            return GetMyStudentProfilesCountAsync(api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetMyStudentProfilesCountAsync(api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -25916,7 +26154,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetMyStudentProfilesCountAsync(string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetMyStudentProfilesCountAsync(string api_version, string x_api_version, StudentProfileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -25927,6 +26165,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -26008,9 +26250,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<InstructorProfileDtoIReadOnlyListEnvelope> GetMyInstructorProfilesAsync(string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<InstructorProfileDtoIReadOnlyListEnvelope> GetMyInstructorProfilesAsync(string api_version, string x_api_version, InstructorProfileDtoCollectionQueryParameters body)
         {
-            return GetMyInstructorProfilesAsync(api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetMyInstructorProfilesAsync(api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -26019,7 +26261,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<InstructorProfileDtoIReadOnlyListEnvelope> GetMyInstructorProfilesAsync(string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<InstructorProfileDtoIReadOnlyListEnvelope> GetMyInstructorProfilesAsync(string api_version, string x_api_version, InstructorProfileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -26030,6 +26272,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -26111,9 +26357,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetMyInstructorProfilesCountAsync(string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetMyInstructorProfilesCountAsync(string api_version, string x_api_version, InstructorProfileDtoCollectionQueryParameters body)
         {
-            return GetMyInstructorProfilesCountAsync(api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetMyInstructorProfilesCountAsync(api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -26122,7 +26368,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetMyInstructorProfilesCountAsync(string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetMyInstructorProfilesCountAsync(string api_version, string x_api_version, InstructorProfileDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -26133,6 +26379,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -26214,9 +26464,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CourseEnrollmentDtoIReadOnlyListEnvelope> GetMyEnrollmentsAsync(string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<CourseEnrollmentDtoIReadOnlyListEnvelope> GetMyEnrollmentsAsync(string api_version, string x_api_version, CourseEnrollmentDtoCollectionQueryParameters body)
         {
-            return GetMyEnrollmentsAsync(api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetMyEnrollmentsAsync(api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -26225,7 +26475,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CourseEnrollmentDtoIReadOnlyListEnvelope> GetMyEnrollmentsAsync(string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CourseEnrollmentDtoIReadOnlyListEnvelope> GetMyEnrollmentsAsync(string api_version, string x_api_version, CourseEnrollmentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -26236,6 +26486,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -26317,9 +26571,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetMyEnrollmentsCountAsync(string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetMyEnrollmentsCountAsync(string api_version, string x_api_version, CourseEnrollmentDtoCollectionQueryParameters body)
         {
-            return GetMyEnrollmentsCountAsync(api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetMyEnrollmentsCountAsync(api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -26328,7 +26582,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetMyEnrollmentsCountAsync(string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetMyEnrollmentsCountAsync(string api_version, string x_api_version, CourseEnrollmentDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -26339,6 +26593,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -26420,9 +26678,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CourseDtoIReadOnlyListEnvelope> GetMyStudentCoursesAsync(string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<CourseDtoIReadOnlyListEnvelope> GetMyStudentCoursesAsync(string api_version, string x_api_version, CourseDtoCollectionQueryParameters body)
         {
-            return GetMyStudentCoursesAsync(api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetMyStudentCoursesAsync(api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -26431,7 +26689,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CourseDtoIReadOnlyListEnvelope> GetMyStudentCoursesAsync(string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CourseDtoIReadOnlyListEnvelope> GetMyStudentCoursesAsync(string api_version, string x_api_version, CourseDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -26442,6 +26700,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -26523,9 +26785,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetMyStudentCoursesCountAsync(string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetMyStudentCoursesCountAsync(string api_version, string x_api_version, CourseDtoCollectionQueryParameters body)
         {
-            return GetMyStudentCoursesCountAsync(api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetMyStudentCoursesCountAsync(api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -26534,7 +26796,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetMyStudentCoursesCountAsync(string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetMyStudentCoursesCountAsync(string api_version, string x_api_version, CourseDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -26545,6 +26807,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -26626,9 +26892,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CourseDtoIReadOnlyListEnvelope> GetMyInstructorCoursesAsync(string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<CourseDtoIReadOnlyListEnvelope> GetMyInstructorCoursesAsync(string api_version, string x_api_version, CourseDtoCollectionQueryParameters body)
         {
-            return GetMyInstructorCoursesAsync(api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetMyInstructorCoursesAsync(api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -26637,7 +26903,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CourseDtoIReadOnlyListEnvelope> GetMyInstructorCoursesAsync(string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CourseDtoIReadOnlyListEnvelope> GetMyInstructorCoursesAsync(string api_version, string x_api_version, CourseDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -26648,6 +26914,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -26729,9 +26999,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetMyInstructorCoursesCountAsync(string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetMyInstructorCoursesCountAsync(string api_version, string x_api_version, CourseDtoCollectionQueryParameters body)
         {
-            return GetMyInstructorCoursesCountAsync(api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetMyInstructorCoursesCountAsync(api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -26740,7 +27010,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetMyInstructorCoursesCountAsync(string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetMyInstructorCoursesCountAsync(string api_version, string x_api_version, CourseDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -26751,6 +27021,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -26832,9 +27106,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CourseCompletionCertificateDtoIReadOnlyListEnvelope> GetMyCertificatesAsync(string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<CourseCompletionCertificateDtoIReadOnlyListEnvelope> GetMyCertificatesAsync(string api_version, string x_api_version, CourseCompletionCertificateDtoCollectionQueryParameters body)
         {
-            return GetMyCertificatesAsync(api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetMyCertificatesAsync(api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -26843,7 +27117,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CourseCompletionCertificateDtoIReadOnlyListEnvelope> GetMyCertificatesAsync(string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CourseCompletionCertificateDtoIReadOnlyListEnvelope> GetMyCertificatesAsync(string api_version, string x_api_version, CourseCompletionCertificateDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -26854,6 +27128,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -26935,9 +27213,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> GetMyCertificatesCountAsync(string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<int> GetMyCertificatesCountAsync(string api_version, string x_api_version, CourseCompletionCertificateDtoCollectionQueryParameters body)
         {
-            return GetMyCertificatesCountAsync(api_version, x_api_version, System.Threading.CancellationToken.None);
+            return GetMyCertificatesCountAsync(api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -26946,7 +27224,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> GetMyCertificatesCountAsync(string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> GetMyCertificatesCountAsync(string api_version, string x_api_version, CourseCompletionCertificateDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -26957,6 +27235,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
                     if (x_api_version != null)
                         request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -27853,7 +28135,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> StudentProfilesPATCHAsync(System.Guid tenantId, System.Guid studentProfileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> StudentProfilesPATCHAsync(System.Guid tenantId, System.Guid studentProfileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body)
         {
             return StudentProfilesPATCHAsync(tenantId, studentProfileId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -27861,7 +28143,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> StudentProfilesPATCHAsync(System.Guid tenantId, System.Guid studentProfileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<Operation> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> StudentProfilesPATCHAsync(System.Guid tenantId, System.Guid studentProfileId, string api_version, string x_api_version, System.Collections.Generic.IEnumerable<PatchOperation> body, System.Threading.CancellationToken cancellationToken)
         {
             if (studentProfileId == null)
                 throw new System.ArgumentNullException("studentProfileId");
@@ -28452,6 +28734,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
@@ -28819,6 +29110,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
@@ -28887,6 +29187,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EnrollmentId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseArticleDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
 
     }
 
@@ -28971,6 +29304,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EnrollmentId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseAssignmentComponentDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
 
     }
 
@@ -29097,6 +29463,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseAssignmentDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CourseAssignmentTypeCreateDto
     {
 
@@ -29161,6 +29560,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EnrollmentId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseAssignmentTypeDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
 
     }
 
@@ -29273,6 +29705,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EnrollmentId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseCategoryDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
 
     }
 
@@ -29452,6 +29917,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseCohortDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CourseCohortUpdateDto
     {
 
@@ -29549,6 +30047,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseCompletionCertificateDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CourseCompletionCertificateDtoIReadOnlyListEnvelope
     {
 
@@ -29563,6 +30094,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -29631,6 +30171,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EnrollmentId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseContentGroupDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
 
     }
 
@@ -30252,6 +30825,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CourseDtoIReadOnlyListEnvelope
     {
 
@@ -30266,6 +30872,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -30330,6 +30945,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseEnrollmentDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CourseEnrollmentDtoIReadOnlyListEnvelope
     {
 
@@ -30344,6 +30992,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -30436,6 +31093,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseFileDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CourseFileUpdateDto
     {
 
@@ -30507,6 +31197,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseForumDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CourseForumUpdateDto
     {
 
@@ -30571,6 +31294,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EnrollmentId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseGradingRubricDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
 
     }
 
@@ -30664,6 +31420,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseHandoutDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CourseHandoutUpdateDto
     {
 
@@ -30750,6 +31539,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseLibraryDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CourseLibraryUpdateDto
     {
 
@@ -30820,6 +31642,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EnrollmentId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseNewsDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
 
     }
 
@@ -30897,6 +31752,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EnrollmentId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CoursePageDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
 
     }
 
@@ -30993,6 +31881,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseProblemSetDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CourseProblemSetUpdateDto
     {
 
@@ -31085,6 +32006,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseSectionDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CourseSectionUpdateDto
     {
 
@@ -31154,6 +32108,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EnrollmentId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseTeamMembershipDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
 
     }
 
@@ -31235,6 +32222,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EnrollmentId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseUnitComponentDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
 
     }
 
@@ -31340,6 +32360,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("courseComponents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<CourseUnitComponentDto> CourseComponents { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseUnitDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
 
     }
 
@@ -31490,6 +32543,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CourseWikiDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CourseWikiUpdateDto
     {
 
@@ -31523,6 +32609,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
 
@@ -31543,6 +32638,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -31817,6 +32921,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class InstructorProfileDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class InstructorProfileDtoIReadOnlyListEnvelope
     {
 
@@ -31831,6 +32968,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -31940,18 +33086,14 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Operation
+    public partial class PatchOperation
     {
-
-        [Newtonsoft.Json.JsonProperty("operationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public OperationType OperationType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("path", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Path { get; set; }
 
         [Newtonsoft.Json.JsonProperty("op", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Op { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("path", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Path { get; set; }
 
         [Newtonsoft.Json.JsonProperty("from", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string From { get; set; }
@@ -32199,6 +33341,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class StudentProfileDtoCollectionQueryParameters
+    {
+
+        [Newtonsoft.Json.JsonProperty("top", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Top { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Skip { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Filter { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("search", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Search { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("select", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Select { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expand", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Expand { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class StudentProfileDtoIReadOnlyListEnvelope
     {
 
@@ -32213,6 +33388,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
@@ -32399,33 +33583,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LearningService
 
         [System.Runtime.Serialization.EnumMember(Value = @"Staff")]
         Staff = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.0.0 (NJsonSchema v11.6.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum OperationType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Add")]
-        Add = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Remove")]
-        Remove = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Replace")]
-        Replace = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Move")]
-        Move = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Copy")]
-        Copy = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Test")]
-        Test = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Invalid")]
-        Invalid = 6,
 
     }
 
