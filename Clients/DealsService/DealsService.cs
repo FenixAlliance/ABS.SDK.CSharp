@@ -2955,6 +2955,122 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
         }
 
         /// <summary>
+        /// Close a deal unit
+        /// </summary>
+        /// <remarks>
+        /// Closes the specified deal unit for the tenant as won (won=true) or lost (won=false).
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> CloseDealUnitAsync(System.Guid tenantId, System.Guid dealUnitId, bool won)
+        {
+            return CloseDealUnitAsync(tenantId, dealUnitId, won, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Close a deal unit
+        /// </summary>
+        /// <remarks>
+        /// Closes the specified deal unit for the tenant as won (won=true) or lost (won=false).
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> CloseDealUnitAsync(System.Guid tenantId, System.Guid dealUnitId, bool won, System.Threading.CancellationToken cancellationToken)
+        {
+            if (dealUnitId == null)
+                throw new System.ArgumentNullException("dealUnitId");
+
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            if (won == null)
+                throw new System.ArgumentNullException("won");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("PUT");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/DealsService/DealUnits/{dealUnitId}/Close"
+                    urlBuilder_.Append("api/v2/DealsService/DealUnits/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(dealUnitId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Close");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("won")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(won, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<EmptyEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
         /// Get deal unit lines
         /// </summary>
         /// <remarks>
@@ -5654,6 +5770,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum BusinessEntityKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContactDto
     {
 
@@ -5671,7 +5799,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ContactDtoType Type { get; set; }
+        public ContactType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Email { get; set; }
@@ -5836,11 +5964,94 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
         [Newtonsoft.Json.JsonProperty("birthday", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? Birthday { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("contactStage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ContactStage ContactStage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("contactStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ContactStatus ContactStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lastContactDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? LastContactDate { get; set; }
+
         [Newtonsoft.Json.JsonProperty("tikTokUsername", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TikTokUsername { get; set; }
 
         [Newtonsoft.Json.JsonProperty("instagramUsername", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string InstagramUsername { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactStage
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Lead")]
+        Lead = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Prospect")]
+        Prospect = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Customer")]
+        Customer = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Opportunity")]
+        Opportunity = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"New")]
+        New = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
+        Active = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Qualified")]
+        Qualified = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unqualified")]
+        Unqualified = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum CostCalculationMethod
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
+        Automatic = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
+        Custom = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum DealUnitAmountsCalculation
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UserProvided")]
+        UserProvided = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SystemCalculated")]
+        SystemCalculated = 1,
 
     }
 
@@ -5988,11 +6199,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitCreateDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitCreateDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dealUnitFlowId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DealUnitFlowId { get; set; }
@@ -6035,19 +6246,19 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("dealUnitStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitCreateDtoDealUnitStatus DealUnitStatus { get; set; }
+        public DealUnitStatus DealUnitStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dealUnitPurchaseProcess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitCreateDtoDealUnitPurchaseProcess DealUnitPurchaseProcess { get; set; }
+        public DealUnitPurchaseProcess DealUnitPurchaseProcess { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dealUnitForecastCategory", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitCreateDtoDealUnitForecastCategory DealUnitForecastCategory { get; set; }
+        public DealUnitForecastCategory DealUnitForecastCategory { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dealUnitAmountsCalculation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitCreateDtoDealUnitAmountsCalculation DealUnitAmountsCalculation { get; set; }
+        public DealUnitAmountsCalculation DealUnitAmountsCalculation { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dealUnitLines", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<DealUnitLineCreateDto> DealUnitLines { get; set; }
@@ -6132,11 +6343,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("forexRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double ForexRate { get; set; }
@@ -6308,19 +6519,19 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("dealUnitStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitDtoDealUnitStatus DealUnitStatus { get; set; }
+        public DealUnitStatus DealUnitStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dealUnitPurchaseProcess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitDtoDealUnitPurchaseProcess DealUnitPurchaseProcess { get; set; }
+        public DealUnitPurchaseProcess DealUnitPurchaseProcess { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dealUnitForecastCategory", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitDtoDealUnitForecastCategory DealUnitForecastCategory { get; set; }
+        public DealUnitForecastCategory DealUnitForecastCategory { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dealUnitAmountsCalculation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitDtoDealUnitAmountsCalculation DealUnitAmountsCalculation { get; set; }
+        public DealUnitAmountsCalculation DealUnitAmountsCalculation { get; set; }
 
         [Newtonsoft.Json.JsonProperty("linesCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int LinesCount { get; set; }
@@ -6799,6 +7010,33 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum DealUnitForecastCategory
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"None")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pipeline")]
+        Pipeline = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"BestCase")]
+        BestCase = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Commited")]
+        Commited = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Ommited")]
+        Ommited = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Won")]
+        Won = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Lost")]
+        Lost = 6,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class DealUnitLineCreateDto
     {
 
@@ -6942,11 +7180,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitLineCreateDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitLineCreateDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("itemId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ItemId { get; set; }
@@ -7214,11 +7452,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitLineDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitLineDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("forexRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double ForexRate { get; set; }
@@ -7354,6 +7592,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("quantity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Quantity { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("unitPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double UnitPrice { get; set; }
 
         [Newtonsoft.Json.JsonProperty("free", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Free { get; set; }
@@ -7732,11 +7973,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitLineUpdateDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitLineUpdateDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("itemId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ItemId { get; set; }
@@ -7921,6 +8162,42 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum DealUnitPurchaseProcess
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"None")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Commitee")]
+        Commitee = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum DealUnitStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Open")]
+        Open = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Won")]
+        Won = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Lost")]
+        Lost = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Frozen")]
+        Frozen = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class DealUnitUpdateDto
     {
 
@@ -8070,11 +8347,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitUpdateDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitUpdateDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("ordered", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Ordered { get; set; }
@@ -8126,19 +8403,19 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("dealUnitStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitUpdateDtoDealUnitStatus DealUnitStatus { get; set; }
+        public DealUnitStatus DealUnitStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dealUnitPurchaseProcess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitUpdateDtoDealUnitPurchaseProcess DealUnitPurchaseProcess { get; set; }
+        public DealUnitPurchaseProcess DealUnitPurchaseProcess { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dealUnitForecastCategory", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitUpdateDtoDealUnitForecastCategory DealUnitForecastCategory { get; set; }
+        public DealUnitForecastCategory DealUnitForecastCategory { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dealUnitAmountsCalculation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DealUnitUpdateDtoDealUnitAmountsCalculation DealUnitAmountsCalculation { get; set; }
+        public DealUnitAmountsCalculation DealUnitAmountsCalculation { get; set; }
 
     }
 
@@ -8280,11 +8557,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedDealUnitDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedDealUnitDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("forexRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double ForexRate { get; set; }
@@ -8456,19 +8733,19 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("dealUnitStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedDealUnitDtoDealUnitStatus DealUnitStatus { get; set; }
+        public DealUnitStatus DealUnitStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dealUnitPurchaseProcess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedDealUnitDtoDealUnitPurchaseProcess DealUnitPurchaseProcess { get; set; }
+        public DealUnitPurchaseProcess DealUnitPurchaseProcess { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dealUnitForecastCategory", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedDealUnitDtoDealUnitForecastCategory DealUnitForecastCategory { get; set; }
+        public DealUnitForecastCategory DealUnitForecastCategory { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dealUnitAmountsCalculation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedDealUnitDtoDealUnitAmountsCalculation DealUnitAmountsCalculation { get; set; }
+        public DealUnitAmountsCalculation DealUnitAmountsCalculation { get; set; }
 
         [Newtonsoft.Json.JsonProperty("linesCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int LinesCount { get; set; }
@@ -8622,6 +8899,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.AllowNull)]
         public string Email { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum Gender
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Male")]
+        Male = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Female")]
+        Female = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PreferNotToSay")]
+        PreferNotToSay = 3,
 
     }
 
@@ -8800,6 +9095,33 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SiteTheme
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"System")]
+        System = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Light")]
+        Light = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Dark")]
+        Dark = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum TaxCalculationMethod
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
+        Included = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
+        Excluded = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TenantDto
     {
 
@@ -8814,7 +9136,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
 
         [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TenantDtoKind Kind { get; set; }
+        public BusinessEntityKind Kind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TaxId { get; set; }
@@ -8996,6 +9318,27 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum UserAvailability
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DND")]
+        DND = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Busy")]
+        Busy = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Away")]
+        Away = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Offline")]
+        Offline = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Available")]
+        Available = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class UserDto
     {
 
@@ -9068,9 +9411,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
         [Newtonsoft.Json.JsonProperty("languageId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string LanguageId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UserDtoGender? Gender { get; set; }
+        public Gender Gender { get; set; }
 
         [Newtonsoft.Json.JsonProperty("cityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CityId { get; set; }
@@ -9126,9 +9469,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
         [Newtonsoft.Json.JsonProperty("emailConfirmed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool EmailConfirmed { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("availability", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("availability", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UserDtoAvailability? Availability { get; set; }
+        public UserAvailability Availability { get; set; }
 
         [Newtonsoft.Json.JsonProperty("lockoutEnabled", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool LockoutEnabled { get; set; }
@@ -9139,555 +9482,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.DealsService
         [Newtonsoft.Json.JsonProperty("enrollmentsCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? EnrollmentsCount { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("siteTheme", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("siteTheme", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UserDtoSiteTheme? SiteTheme { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ContactDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitCreateDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitCreateDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitCreateDtoDealUnitStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Open")]
-        Open = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Won")]
-        Won = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Lost")]
-        Lost = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Frozen")]
-        Frozen = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitCreateDtoDealUnitPurchaseProcess
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Commitee")]
-        Commitee = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitCreateDtoDealUnitForecastCategory
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pipeline")]
-        Pipeline = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"BestCase")]
-        BestCase = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Commited")]
-        Commited = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Ommited")]
-        Ommited = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Won")]
-        Won = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Lost")]
-        Lost = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitCreateDtoDealUnitAmountsCalculation
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UserProvided")]
-        UserProvided = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SystemCalculated")]
-        SystemCalculated = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitDtoDealUnitStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Open")]
-        Open = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Won")]
-        Won = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Lost")]
-        Lost = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Frozen")]
-        Frozen = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitDtoDealUnitPurchaseProcess
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Commitee")]
-        Commitee = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitDtoDealUnitForecastCategory
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pipeline")]
-        Pipeline = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"BestCase")]
-        BestCase = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Commited")]
-        Commited = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Ommited")]
-        Ommited = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Won")]
-        Won = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Lost")]
-        Lost = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitDtoDealUnitAmountsCalculation
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UserProvided")]
-        UserProvided = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SystemCalculated")]
-        SystemCalculated = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitLineCreateDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitLineCreateDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitLineDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitLineDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitLineUpdateDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitLineUpdateDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitUpdateDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitUpdateDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitUpdateDtoDealUnitStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Open")]
-        Open = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Won")]
-        Won = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Lost")]
-        Lost = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Frozen")]
-        Frozen = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitUpdateDtoDealUnitPurchaseProcess
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Commitee")]
-        Commitee = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitUpdateDtoDealUnitForecastCategory
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pipeline")]
-        Pipeline = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"BestCase")]
-        BestCase = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Commited")]
-        Commited = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Ommited")]
-        Ommited = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Won")]
-        Won = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Lost")]
-        Lost = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DealUnitUpdateDtoDealUnitAmountsCalculation
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UserProvided")]
-        UserProvided = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SystemCalculated")]
-        SystemCalculated = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedDealUnitDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedDealUnitDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedDealUnitDtoDealUnitStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Open")]
-        Open = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Won")]
-        Won = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Lost")]
-        Lost = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Frozen")]
-        Frozen = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedDealUnitDtoDealUnitPurchaseProcess
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Commitee")]
-        Commitee = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedDealUnitDtoDealUnitForecastCategory
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pipeline")]
-        Pipeline = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"BestCase")]
-        BestCase = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Commited")]
-        Commited = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Ommited")]
-        Ommited = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Won")]
-        Won = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Lost")]
-        Lost = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedDealUnitDtoDealUnitAmountsCalculation
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UserProvided")]
-        UserProvided = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SystemCalculated")]
-        SystemCalculated = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TenantDtoKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UserDtoGender
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Male")]
-        Male = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Female")]
-        Female = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PreferNotToSay")]
-        PreferNotToSay = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UserDtoAvailability
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DND")]
-        DND = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Busy")]
-        Busy = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Away")]
-        Away = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Offline")]
-        Offline = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Available")]
-        Available = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UserDtoSiteTheme
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"System")]
-        System = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Light")]
-        Light = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Dark")]
-        Dark = 2,
+        public SiteTheme SiteTheme { get; set; }
 
     }
 

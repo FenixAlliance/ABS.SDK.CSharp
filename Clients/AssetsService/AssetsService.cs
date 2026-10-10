@@ -10665,6 +10665,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AssetsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AssetClass
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Fixed")]
+        Fixed = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Stock")]
+        Stock = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AssetCreateDto
     {
 
@@ -10682,11 +10694,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AssetsService
 
         [Newtonsoft.Json.JsonProperty("assetClass", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AssetCreateDtoAssetClass AssetClass { get; set; }
+        public AssetClass AssetClass { get; set; }
 
         [Newtonsoft.Json.JsonProperty("assetOwner", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AssetCreateDtoAssetOwner AssetOwner { get; set; }
+        public AssetOwner AssetOwner { get; set; }
 
         [Newtonsoft.Json.JsonProperty("isExistingAsset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsExistingAsset { get; set; }
@@ -10990,11 +11002,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AssetsService
 
         [Newtonsoft.Json.JsonProperty("assetClass", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AssetDtoAssetClass AssetClass { get; set; }
+        public AssetClass AssetClass { get; set; }
 
         [Newtonsoft.Json.JsonProperty("assetOwner", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AssetDtoAssetOwner AssetOwner { get; set; }
+        public AssetOwner AssetOwner { get; set; }
 
         [Newtonsoft.Json.JsonProperty("isExistingAsset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsExistingAsset { get; set; }
@@ -11167,6 +11179,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AssetsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AssetOwner
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Business")]
+        Business = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
+        Contact = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Supplier")]
+        Supplier = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AssetRepairCreateDto
     {
 
@@ -11181,7 +11211,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AssetsService
 
         [Newtonsoft.Json.JsonProperty("repairStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AssetRepairCreateDtoRepairStatus RepairStatus { get; set; }
+        public RepairStatusDto RepairStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("scheduledDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset ScheduledDate { get; set; }
@@ -11236,7 +11266,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AssetsService
 
         [Newtonsoft.Json.JsonProperty("repairStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AssetRepairDtoRepairStatus RepairStatus { get; set; }
+        public RepairStatusDto RepairStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("scheduledDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset ScheduledDate { get; set; }
@@ -11373,9 +11403,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AssetsService
     public partial class AssetRepairUpdateDto
     {
 
-        [Newtonsoft.Json.JsonProperty("repairStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("repairStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AssetRepairUpdateDtoRepairStatus? RepairStatus { get; set; }
+        public RepairStatusDto RepairStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("scheduledDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? ScheduledDate { get; set; }
@@ -11818,13 +11848,13 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AssetsService
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("assetClass", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("assetClass", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AssetUpdateDtoAssetClass? AssetClass { get; set; }
+        public AssetClass AssetClass { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("assetOwner", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("assetOwner", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AssetUpdateDtoAssetOwner? AssetOwner { get; set; }
+        public AssetOwner AssetOwner { get; set; }
 
         [Newtonsoft.Json.JsonProperty("calculateDepreciation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool CalculateDepreciation { get; set; }
@@ -12276,6 +12306,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AssetsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum RepairStatusDto
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Scheduled")]
+        Scheduled = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"InProgress")]
+        InProgress = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Completed")]
+        Completed = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Cancelled")]
+        Cancelled = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ResendConfirmationEmailRequest
     {
 
@@ -12338,150 +12386,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AssetsService
 
         [Newtonsoft.Json.JsonProperty("isMachineRemembered", Required = Newtonsoft.Json.Required.Always)]
         public bool IsMachineRemembered { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AssetCreateDtoAssetClass
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Fixed")]
-        Fixed = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Stock")]
-        Stock = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AssetCreateDtoAssetOwner
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Business")]
-        Business = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Supplier")]
-        Supplier = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AssetDtoAssetClass
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Fixed")]
-        Fixed = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Stock")]
-        Stock = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AssetDtoAssetOwner
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Business")]
-        Business = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Supplier")]
-        Supplier = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AssetRepairCreateDtoRepairStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Scheduled")]
-        Scheduled = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"InProgress")]
-        InProgress = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Completed")]
-        Completed = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Cancelled")]
-        Cancelled = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AssetRepairDtoRepairStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Scheduled")]
-        Scheduled = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"InProgress")]
-        InProgress = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Completed")]
-        Completed = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Cancelled")]
-        Cancelled = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AssetRepairUpdateDtoRepairStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Scheduled")]
-        Scheduled = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"InProgress")]
-        InProgress = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Completed")]
-        Completed = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Cancelled")]
-        Cancelled = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AssetUpdateDtoAssetClass
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Fixed")]
-        Fixed = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Stock")]
-        Stock = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AssetUpdateDtoAssetOwner
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Business")]
-        Business = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Supplier")]
-        Supplier = 3,
 
     }
 

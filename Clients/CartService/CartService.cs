@@ -11307,6 +11307,13 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CartService
         [Newtonsoft.Json.JsonProperty("itemToCompareRecordsCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? ItemToCompareRecordsCount { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("saleChannel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SaleChannel SaleChannel { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("directSellerTenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string DirectSellerTenantId { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -11351,6 +11358,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CartService
 
         [Newtonsoft.Json.JsonProperty("countryId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CountryId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum CostCalculationMethod
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
+        Automatic = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
+        Custom = 1,
 
     }
 
@@ -11723,11 +11742,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CartService
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ItemCartRecordDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ItemCartRecordDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("forexRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double ForexRate { get; set; }
@@ -11863,6 +11882,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CartService
 
         [Newtonsoft.Json.JsonProperty("quantity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Quantity { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("unitPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double UnitPrice { get; set; }
 
         [Newtonsoft.Json.JsonProperty("free", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Free { get; set; }
@@ -12374,6 +12396,33 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CartService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SaleChannel
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unset")]
+        Unset = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Marketplace")]
+        Marketplace = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Direct")]
+        Direct = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum TaxCalculationMethod
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
+        Included = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
+        Excluded = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TwoFactorRequest
     {
 
@@ -12503,30 +12552,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CartService
 
         [Newtonsoft.Json.JsonProperty("public", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Public { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ItemCartRecordDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ItemCartRecordDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
 
     }
 

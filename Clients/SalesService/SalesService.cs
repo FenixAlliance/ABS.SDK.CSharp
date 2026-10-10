@@ -5878,6 +5878,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SalesService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum BusinessEntityKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class EmptyEnvelope
     {
 
@@ -6968,7 +6980,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SalesService
 
         [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TenantDtoKind Kind { get; set; }
+        public BusinessEntityKind Kind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TaxId { get; set; }
@@ -7116,18 +7128,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SalesService
 
         [Newtonsoft.Json.JsonProperty("isMachineRemembered", Required = Newtonsoft.Json.Required.Always)]
         public bool IsMachineRemembered { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TenantDtoKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 1,
 
     }
 

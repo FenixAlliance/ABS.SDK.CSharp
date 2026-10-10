@@ -3368,6 +3368,317 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AiUsageClient 
+    {
+        #pragma warning disable 8618
+        private string _baseUrl;
+        #pragma warning restore 8618
+
+        private System.Net.Http.HttpClient _httpClient;
+        private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
+        private Newtonsoft.Json.JsonSerializerSettings _instanceSettings;
+
+    #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public AiUsageClient(System.Net.Http.HttpClient httpClient)
+    #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        {
+            BaseUrl = "{server}";
+            _httpClient = httpClient;
+            Initialize();
+        }
+
+        private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
+        {
+            var settings = new Newtonsoft.Json.JsonSerializerSettings();
+            UpdateJsonSerializerSettings(settings);
+            return settings;
+        }
+
+        public string BaseUrl
+        {
+            get { return _baseUrl; }
+            set
+            {
+                _baseUrl = value;
+                if (!string.IsNullOrEmpty(_baseUrl) && !_baseUrl.EndsWith("/"))
+                    _baseUrl += '/';
+            }
+        }
+
+        protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _instanceSettings ?? _settings.Value; } }
+
+        static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
+
+        partial void Initialize();
+
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
+        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
+
+        /// <summary>
+        /// Get the AI usage summary
+        /// </summary>
+        /// <remarks>
+        /// Returns the tenant's AI usage summary over the half-open UTC window [fromUtc, toUtc): quantities only, split managed, BYOK and unresolved, with one point per UTC day (read-only, tenant-scoped).
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<AiUsageSummaryDtoEnvelope> GetAiUsageSummaryAsync(System.Guid tenantId, System.DateTimeOffset fromUtc, System.DateTimeOffset toUtc, string api_version, string x_api_version)
+        {
+            return GetAiUsageSummaryAsync(tenantId, fromUtc, toUtc, api_version, x_api_version, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get the AI usage summary
+        /// </summary>
+        /// <remarks>
+        /// Returns the tenant's AI usage summary over the half-open UTC window [fromUtc, toUtc): quantities only, split managed, BYOK and unresolved, with one point per UTC day (read-only, tenant-scoped).
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<AiUsageSummaryDtoEnvelope> GetAiUsageSummaryAsync(System.Guid tenantId, System.DateTimeOffset fromUtc, System.DateTimeOffset toUtc, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        {
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            if (fromUtc == null)
+                throw new System.ArgumentNullException("fromUtc");
+
+            if (toUtc == null)
+                throw new System.ArgumentNullException("toUtc");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/IntelligenceService/AiUsage/Summary"
+                    urlBuilder_.Append("api/v2/IntelligenceService/AiUsage/Summary");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("fromUtc")).Append('=').Append(System.Uri.EscapeDataString(fromUtc.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("toUtc")).Append('=').Append(System.Uri.EscapeDataString(toUtc.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<AiUsageSummaryDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 400)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Bad Request", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        protected struct ObjectResponseResult<T>
+        {
+            public ObjectResponseResult(T responseObject, string responseText)
+            {
+                this.Object = responseObject;
+                this.Text = responseText;
+            }
+
+            public T Object { get; }
+
+            public string Text { get; }
+        }
+
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        private static System.Threading.Tasks.Task<string> ReadAsStringAsync(System.Net.Http.HttpContent content, System.Threading.CancellationToken cancellationToken)
+        {
+    #if NET5_0_OR_GREATER
+            return content.ReadAsStringAsync(cancellationToken);
+    #else
+            return content.ReadAsStringAsync();
+    #endif
+        }
+
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        private static System.Threading.Tasks.Task<System.IO.Stream> ReadAsStreamAsync(System.Net.Http.HttpContent content, System.Threading.CancellationToken cancellationToken)
+        {
+    #if NET5_0_OR_GREATER
+            return content.ReadAsStreamAsync(cancellationToken);
+    #else
+            return content.ReadAsStreamAsync();
+    #endif
+        }
+
+        public bool ReadResponseAsString { get; set; }
+
+        protected virtual async System.Threading.Tasks.Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(System.Net.Http.HttpResponseMessage response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Threading.CancellationToken cancellationToken)
+        {
+            if (response == null || response.Content == null)
+            {
+                return new ObjectResponseResult<T>(default(T), string.Empty);
+            }
+
+            if (ReadResponseAsString)
+            {
+                var responseText = await ReadAsStringAsync(response.Content, cancellationToken).ConfigureAwait(false);
+                try
+                {
+                    var typedBody = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(responseText, JsonSerializerSettings);
+                    return new ObjectResponseResult<T>(typedBody, responseText);
+                }
+                catch (Newtonsoft.Json.JsonException exception)
+                {
+                    var message = "Could not deserialize the response body string as " + typeof(T).FullName + ".";
+                    throw new ApiException(message, (int)response.StatusCode, responseText, headers, exception);
+                }
+            }
+            else
+            {
+                try
+                {
+                    using (var responseStream = await ReadAsStreamAsync(response.Content, cancellationToken).ConfigureAwait(false))
+                    using (var streamReader = new System.IO.StreamReader(responseStream))
+                    using (var jsonTextReader = new Newtonsoft.Json.JsonTextReader(streamReader))
+                    {
+                        var serializer = Newtonsoft.Json.JsonSerializer.Create(JsonSerializerSettings);
+                        var typedBody = serializer.Deserialize<T>(jsonTextReader);
+                        return new ObjectResponseResult<T>(typedBody, string.Empty);
+                    }
+                }
+                catch (Newtonsoft.Json.JsonException exception)
+                {
+                    var message = "Could not deserialize the response body stream as " + typeof(T).FullName + ".";
+                    throw new ApiException(message, (int)response.StatusCode, string.Empty, headers, exception);
+                }
+            }
+        }
+
+        private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
+        {
+            if (value == null)
+            {
+                return "";
+            }
+
+            if (value is System.Enum)
+            {
+                var name = System.Enum.GetName(value.GetType(), value);
+                if (name != null)
+                {
+                    var field_ = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
+                    if (field_ != null)
+                    {
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field_, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                            as System.Runtime.Serialization.EnumMemberAttribute;
+                        if (attribute != null)
+                        {
+                            return attribute.Value != null ? attribute.Value : name;
+                        }
+                    }
+
+                    var converted = System.Convert.ToString(System.Convert.ChangeType(value, System.Enum.GetUnderlyingType(value.GetType()), cultureInfo));
+                    return converted == null ? string.Empty : converted;
+                }
+            }
+            else if (value is bool) 
+            {
+                return System.Convert.ToString((bool)value, cultureInfo).ToLowerInvariant();
+            }
+            else if (value is byte[])
+            {
+                return System.Convert.ToBase64String((byte[]) value);
+            }
+            else if (value is string[])
+            {
+                return string.Join(",", (string[])value);
+            }
+            else if (value.GetType().IsArray)
+            {
+                var valueArray = (System.Array)value;
+                var valueTextArray = new string[valueArray.Length];
+                for (var i = 0; i < valueArray.Length; i++)
+                {
+                    valueTextArray[i] = ConvertToString(valueArray.GetValue(i), cultureInfo);
+                }
+                return string.Join(",", valueTextArray);
+            }
+
+            var result = System.Convert.ToString(value, cultureInfo);
+            return result == null ? "" : result;
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AiUsageObservationsClient 
     {
         #pragma warning disable 8618
@@ -4611,7 +4922,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CapabilityDtoListEnvelope> GetCapabilitiesAsync(System.Guid tenantId, Surface? surface, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<CapabilityDtoListEnvelope> GetCapabilitiesAsync(System.Guid tenantId, CapabilitySurface? surface, string api_version, string x_api_version)
         {
             return GetCapabilitiesAsync(tenantId, surface, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -4625,7 +4936,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CapabilityDtoListEnvelope> GetCapabilitiesAsync(System.Guid tenantId, Surface? surface, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CapabilityDtoListEnvelope> GetCapabilitiesAsync(System.Guid tenantId, CapabilitySurface? surface, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -4728,7 +5039,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCapabilitiesCountAsync(System.Guid tenantId, Surface2? surface, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCapabilitiesCountAsync(System.Guid tenantId, CapabilitySurface? surface, string api_version, string x_api_version)
         {
             return GetCapabilitiesCountAsync(tenantId, surface, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -4742,7 +5053,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCapabilitiesCountAsync(System.Guid tenantId, Surface2? surface, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCapabilitiesCountAsync(System.Guid tenantId, CapabilitySurface? surface, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -5490,7 +5801,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CognitiveAgentConversationDtoListEnvelope> GetCognitiveAgentConversationsAsync(System.Guid tenantId, System.Guid agentId, Scope? scope, string api_version, string x_api_version, CognitiveAgentConversationDtoCollectionQueryParameters body)
+        public virtual System.Threading.Tasks.Task<CognitiveAgentConversationDtoListEnvelope> GetCognitiveAgentConversationsAsync(System.Guid tenantId, System.Guid agentId, ConversationAccessScope? scope, string api_version, string x_api_version, CognitiveAgentConversationDtoCollectionQueryParameters body)
         {
             return GetCognitiveAgentConversationsAsync(tenantId, agentId, scope, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -5504,7 +5815,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CognitiveAgentConversationDtoListEnvelope> GetCognitiveAgentConversationsAsync(System.Guid tenantId, System.Guid agentId, Scope? scope, string api_version, string x_api_version, CognitiveAgentConversationDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CognitiveAgentConversationDtoListEnvelope> GetCognitiveAgentConversationsAsync(System.Guid tenantId, System.Guid agentId, ConversationAccessScope? scope, string api_version, string x_api_version, CognitiveAgentConversationDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (agentId == null)
                 throw new System.ArgumentNullException("agentId");
@@ -5742,7 +6053,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCognitiveAgentConversationsCountAsync(System.Guid tenantId, System.Guid agentId, Scope2? scope, string api_version, string x_api_version, CognitiveAgentConversationDtoCollectionQueryParameters body)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCognitiveAgentConversationsCountAsync(System.Guid tenantId, System.Guid agentId, ConversationAccessScope? scope, string api_version, string x_api_version, CognitiveAgentConversationDtoCollectionQueryParameters body)
         {
             return GetCognitiveAgentConversationsCountAsync(tenantId, agentId, scope, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -5756,7 +6067,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCognitiveAgentConversationsCountAsync(System.Guid tenantId, System.Guid agentId, Scope2? scope, string api_version, string x_api_version, CognitiveAgentConversationDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCognitiveAgentConversationsCountAsync(System.Guid tenantId, System.Guid agentId, ConversationAccessScope? scope, string api_version, string x_api_version, CognitiveAgentConversationDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (agentId == null)
                 throw new System.ArgumentNullException("agentId");
@@ -5868,7 +6179,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CognitiveAgentConversationDtoEnvelope> GetCognitiveAgentConversationByIdAsync(System.Guid tenantId, System.Guid agentId, System.Guid id, Scope3? scope, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<CognitiveAgentConversationDtoEnvelope> GetCognitiveAgentConversationByIdAsync(System.Guid tenantId, System.Guid agentId, System.Guid id, ConversationAccessScope? scope, string api_version, string x_api_version)
         {
             return GetCognitiveAgentConversationByIdAsync(tenantId, agentId, id, scope, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -5882,7 +6193,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CognitiveAgentConversationDtoEnvelope> GetCognitiveAgentConversationByIdAsync(System.Guid tenantId, System.Guid agentId, System.Guid id, Scope3? scope, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CognitiveAgentConversationDtoEnvelope> GetCognitiveAgentConversationByIdAsync(System.Guid tenantId, System.Guid agentId, System.Guid id, ConversationAccessScope? scope, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (agentId == null)
                 throw new System.ArgumentNullException("agentId");
@@ -6004,7 +6315,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task UpdateCognitiveAgentConversationAsync(System.Guid tenantId, System.Guid agentId, System.Guid id, Scope4? scope, string api_version, string x_api_version, CognitiveAgentConversationUpdateDto body)
+        public virtual System.Threading.Tasks.Task UpdateCognitiveAgentConversationAsync(System.Guid tenantId, System.Guid agentId, System.Guid id, ConversationAccessScope? scope, string api_version, string x_api_version, CognitiveAgentConversationUpdateDto body)
         {
             return UpdateCognitiveAgentConversationAsync(tenantId, agentId, id, scope, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -6018,7 +6329,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task UpdateCognitiveAgentConversationAsync(System.Guid tenantId, System.Guid agentId, System.Guid id, Scope4? scope, string api_version, string x_api_version, CognitiveAgentConversationUpdateDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task UpdateCognitiveAgentConversationAsync(System.Guid tenantId, System.Guid agentId, System.Guid id, ConversationAccessScope? scope, string api_version, string x_api_version, CognitiveAgentConversationUpdateDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (agentId == null)
                 throw new System.ArgumentNullException("agentId");
@@ -6138,7 +6449,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task DeleteCognitiveAgentConversationAsync(System.Guid tenantId, System.Guid agentId, System.Guid id, Scope5? scope, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task DeleteCognitiveAgentConversationAsync(System.Guid tenantId, System.Guid agentId, System.Guid id, ConversationAccessScope? scope, string api_version, string x_api_version)
         {
             return DeleteCognitiveAgentConversationAsync(tenantId, agentId, id, scope, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -6152,7 +6463,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task DeleteCognitiveAgentConversationAsync(System.Guid tenantId, System.Guid agentId, System.Guid id, Scope5? scope, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task DeleteCognitiveAgentConversationAsync(System.Guid tenantId, System.Guid agentId, System.Guid id, ConversationAccessScope? scope, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (agentId == null)
                 throw new System.ArgumentNullException("agentId");
@@ -6448,7 +6759,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CognitiveAgentMessageDtoListEnvelope> GetCognitiveAgentMessagesAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, Scope6? scope, string api_version, string x_api_version, CognitiveAgentMessageDtoCollectionQueryParameters body)
+        public virtual System.Threading.Tasks.Task<CognitiveAgentMessageDtoListEnvelope> GetCognitiveAgentMessagesAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, ConversationAccessScope? scope, string api_version, string x_api_version, CognitiveAgentMessageDtoCollectionQueryParameters body)
         {
             return GetCognitiveAgentMessagesAsync(tenantId, agentId, conversationId, scope, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -6462,7 +6773,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CognitiveAgentMessageDtoListEnvelope> GetCognitiveAgentMessagesAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, Scope6? scope, string api_version, string x_api_version, CognitiveAgentMessageDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CognitiveAgentMessageDtoListEnvelope> GetCognitiveAgentMessagesAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, ConversationAccessScope? scope, string api_version, string x_api_version, CognitiveAgentMessageDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (agentId == null)
                 throw new System.ArgumentNullException("agentId");
@@ -6579,7 +6890,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCognitiveAgentMessagesCountAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, Scope7? scope, string api_version, string x_api_version, CognitiveAgentMessageDtoCollectionQueryParameters body)
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetCognitiveAgentMessagesCountAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, ConversationAccessScope? scope, string api_version, string x_api_version, CognitiveAgentMessageDtoCollectionQueryParameters body)
         {
             return GetCognitiveAgentMessagesCountAsync(tenantId, agentId, conversationId, scope, api_version, x_api_version, body, System.Threading.CancellationToken.None);
         }
@@ -6593,7 +6904,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCognitiveAgentMessagesCountAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, Scope7? scope, string api_version, string x_api_version, CognitiveAgentMessageDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetCognitiveAgentMessagesCountAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, ConversationAccessScope? scope, string api_version, string x_api_version, CognitiveAgentMessageDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
         {
             if (agentId == null)
                 throw new System.ArgumentNullException("agentId");
@@ -6710,7 +7021,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CognitiveAgentMessageDtoEnvelope> GetCognitiveAgentMessageByIdAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, System.Guid id, Scope8? scope, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<CognitiveAgentMessageDtoEnvelope> GetCognitiveAgentMessageByIdAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, System.Guid id, ConversationAccessScope? scope, string api_version, string x_api_version)
         {
             return GetCognitiveAgentMessageByIdAsync(tenantId, agentId, conversationId, id, scope, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -6724,7 +7035,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CognitiveAgentMessageDtoEnvelope> GetCognitiveAgentMessageByIdAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, System.Guid id, Scope8? scope, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CognitiveAgentMessageDtoEnvelope> GetCognitiveAgentMessageByIdAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, System.Guid id, ConversationAccessScope? scope, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (agentId == null)
                 throw new System.ArgumentNullException("agentId");
@@ -6851,7 +7162,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<ConversationPendingApprovalDtoListEnvelope> GetConversationPendingApprovalsAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, Scope9? scope, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<ConversationPendingApprovalDtoListEnvelope> GetConversationPendingApprovalsAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, ConversationAccessScope? scope, string api_version, string x_api_version)
         {
             return GetConversationPendingApprovalsAsync(tenantId, agentId, conversationId, scope, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -6865,7 +7176,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<ConversationPendingApprovalDtoListEnvelope> GetConversationPendingApprovalsAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, Scope9? scope, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<ConversationPendingApprovalDtoListEnvelope> GetConversationPendingApprovalsAsync(System.Guid tenantId, System.Guid agentId, System.Guid conversationId, ConversationAccessScope? scope, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (agentId == null)
                 throw new System.ArgumentNullException("agentId");
@@ -11943,7 +12254,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<InstalledDefinitionDtoIReadOnlyListEnvelope> GetInstalledDefinitionStateAsync(System.Guid tenantId, Kind? kind, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<InstalledDefinitionDtoIReadOnlyListEnvelope> GetInstalledDefinitionStateAsync(System.Guid tenantId, DefinitionKind? kind, string api_version, string x_api_version)
         {
             return GetInstalledDefinitionStateAsync(tenantId, kind, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -11957,7 +12268,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<InstalledDefinitionDtoIReadOnlyListEnvelope> GetInstalledDefinitionStateAsync(System.Guid tenantId, Kind? kind, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<InstalledDefinitionDtoIReadOnlyListEnvelope> GetInstalledDefinitionStateAsync(System.Guid tenantId, DefinitionKind? kind, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -13918,6 +14229,36 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AgentExecutionAnomalyCode
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"None")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"WaitingForApproval")]
+        WaitingForApproval = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"RetryableInfrastructure")]
+        RetryableInfrastructure = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"StaleFence")]
+        StaleFence = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OutcomeUnknown")]
+        OutcomeUnknown = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AlreadyFinalized")]
+        AlreadyFinalized = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ClaimNotFound")]
+        ClaimNotFound = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"StuckOrphaned")]
+        StuckOrphaned = 7,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AgentExecutionDiagnosticDto
     {
 
@@ -13932,7 +14273,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AgentExecutionDiagnosticDtoStatus Status { get; set; }
+        public AgentWorkOrderStatus Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("statusName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string StatusName { get; set; }
@@ -13943,9 +14284,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         [Newtonsoft.Json.JsonProperty("currentLeaseGeneration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? CurrentLeaseGeneration { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("currentLeaseStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("currentLeaseStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AgentExecutionDiagnosticDtoCurrentLeaseStatus? CurrentLeaseStatus { get; set; }
+        public AgentWorkLeaseStatus CurrentLeaseStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("currentLeaseStatusName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CurrentLeaseStatusName { get; set; }
@@ -13961,14 +14302,14 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("anomalyCode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AgentExecutionDiagnosticDtoAnomalyCode AnomalyCode { get; set; }
+        public AgentExecutionAnomalyCode AnomalyCode { get; set; }
 
         [Newtonsoft.Json.JsonProperty("anomalyCodeName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string AnomalyCodeName { get; set; }
 
         [Newtonsoft.Json.JsonProperty("recommendedAction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AgentExecutionDiagnosticDtoRecommendedAction RecommendedAction { get; set; }
+        public AgentExecutionRecoveryAction RecommendedAction { get; set; }
 
         [Newtonsoft.Json.JsonProperty("recommendedActionName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string RecommendedActionName { get; set; }
@@ -13979,9 +14320,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         [Newtonsoft.Json.JsonProperty("claimObserved", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ClaimObserved { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("claimState", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("claimState", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AgentExecutionDiagnosticDtoClaimState? ClaimState { get; set; }
+        public GovernedInvocationClaimState ClaimState { get; set; }
 
         [Newtonsoft.Json.JsonProperty("claimFingerprintRecorded", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ClaimFingerprintRecorded { get; set; }
@@ -14084,6 +14425,27 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<AgentExecutionDiagnosticDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AgentExecutionRecoveryAction
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Wait")]
+        Wait = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Retry")]
+        Retry = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Reconcile")]
+        Reconcile = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Completed")]
+        Completed = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ManualAction")]
+        ManualAction = 4,
 
     }
 
@@ -14292,6 +14654,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AgentWorkLeaseStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Claimed")]
+        Claimed = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Completed")]
+        Completed = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AgentWorkOrderCancellationDto
     {
 
@@ -14334,6 +14711,27 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AgentWorkOrderStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Claimed")]
+        Claimed = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Completed")]
+        Completed = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Cancelled")]
+        Cancelled = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AgentWorkOrderStatusDto
     {
 
@@ -14351,7 +14749,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AgentWorkOrderStatusDtoStatus Status { get; set; }
+        public AgentWorkOrderStatus Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("statusName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string StatusName { get; set; }
@@ -14365,9 +14763,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         [Newtonsoft.Json.JsonProperty("currentLeaseGeneration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? CurrentLeaseGeneration { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("currentLeaseStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("currentLeaseStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AgentWorkOrderStatusDtoCurrentLeaseStatus? CurrentLeaseStatus { get; set; }
+        public AgentWorkLeaseStatus CurrentLeaseStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("currentLeaseStatusName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CurrentLeaseStatusName { get; set; }
@@ -14519,9 +14917,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         [Newtonsoft.Json.JsonProperty("available", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Available { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("connectionScope", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("connectionScope", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AiModelAvailabilityDtoConnectionScope? ConnectionScope { get; set; }
+        public AiProviderConnectionScope ConnectionScope { get; set; }
 
     }
 
@@ -14553,9 +14951,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         [Newtonsoft.Json.JsonProperty("available", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Available { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("connectionScope", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("connectionScope", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AiProviderAvailabilityDtoConnectionScope? ConnectionScope { get; set; }
+        public AiProviderConnectionScope ConnectionScope { get; set; }
 
         [Newtonsoft.Json.JsonProperty("categories", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<AiModelCategoryDto> Categories { get; set; }
@@ -14592,6 +14990,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<AiProviderAvailabilityDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AiProviderConnectionScope
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Instance")]
+        Instance = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
+        Tenant = 1,
 
     }
 
@@ -14665,9 +15075,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         [Newtonsoft.Json.JsonProperty("engineKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EngineKey { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("fundingScope", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("fundingScope", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AiRunDtoFundingScope? FundingScope { get; set; }
+        public AiProviderConnectionScope FundingScope { get; set; }
 
         [Newtonsoft.Json.JsonProperty("fundingScopeName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FundingScopeName { get; set; }
@@ -14683,14 +15093,14 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AiRunDtoStatus Status { get; set; }
+        public AiRunStatus Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("statusName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string StatusName { get; set; }
 
         [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AiRunDtoKind Kind { get; set; }
+        public AiRunKind Kind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("startedAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset StartedAt { get; set; }
@@ -14730,11 +15140,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("runAs", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AiRunDtoRunAs RunAs { get; set; }
+        public RunAs RunAs { get; set; }
 
         [Newtonsoft.Json.JsonProperty("principalKind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AiRunDtoPrincipalKind PrincipalKind { get; set; }
+        public PrincipalKind PrincipalKind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TenantId { get; set; }
@@ -14847,6 +15257,78 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AiRunKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Chat")]
+        Chat = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ToolAugmented")]
+        ToolAugmented = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AiRunStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Started")]
+        Started = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Succeeded")]
+        Succeeded = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
+        Rejected = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AwaitingApproval")]
+        AwaitingApproval = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"InDoubt")]
+        InDoubt = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AiUsageBreakdownDto
+    {
+
+        [Newtonsoft.Json.JsonProperty("managed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Managed { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("byok", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Byok { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("unresolved", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Unresolved { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("unmeasuredEvents", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long UnmeasuredEvents { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("daily", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<AiUsageDailyDto> Daily { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AiUsageDailyDto
+    {
+
+        [Newtonsoft.Json.JsonProperty("dateUtc", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset DateUtc { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("managed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Managed { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("missing", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Missing { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AiUsageObservationDto
     {
 
@@ -14865,9 +15347,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         [Newtonsoft.Json.JsonProperty("modelKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ModelKey { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("connectionScope", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("connectionScope", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AiUsageObservationDtoConnectionScope? ConnectionScope { get; set; }
+        public AiProviderConnectionScope ConnectionScope { get; set; }
 
         [Newtonsoft.Json.JsonProperty("connectionScopeName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ConnectionScopeName { get; set; }
@@ -14886,7 +15368,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("usageState", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AiUsageObservationDtoUsageState UsageState { get; set; }
+        public AiUsageObservationState UsageState { get; set; }
 
         [Newtonsoft.Json.JsonProperty("usageStateName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string UsageStateName { get; set; }
@@ -15002,6 +15484,84 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AiUsageObservationState
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Measured")]
+        Measured = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"LateMeasured")]
+        LateMeasured = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AiUsageSummaryDto
+    {
+
+        [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TenantId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("fromUtc", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset FromUtc { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("toUtc", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset ToUtc { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("asOfUtc", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset AsOfUtc { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("inputTokens", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public AiUsageBreakdownDto InputTokens { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("outputTokens", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public AiUsageBreakdownDto OutputTokens { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("runs", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public AiUsageBreakdownDto Runs { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("decisionCalls", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public AiUsageBreakdownDto DecisionCalls { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AiUsageSummaryDtoEnvelope
+    {
+
+        [Newtonsoft.Json.JsonProperty("isSuccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsSuccess { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("correlationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CorrelationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ActivityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public AiUsageSummaryDto Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ApprovalAdviceAdvisorDisclosureDto
     {
 
@@ -15056,9 +15616,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TenantId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("state", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("state", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ApprovalAdviceConsentDtoState? State { get; set; }
+        public ApprovalAdviceConsentState State { get; set; }
 
         [Newtonsoft.Json.JsonProperty("isOptedIn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsOptedIn { get; set; }
@@ -15102,6 +15662,12 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         [Newtonsoft.Json.JsonProperty("optedOutAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? OptedOutAt { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("optedInByDisplayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OptedInByDisplayName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("optedOutByDisplayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OptedOutByDisplayName { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -15134,6 +15700,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ApprovalAdviceConsentDto Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ApprovalAdviceConsentState
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OptedIn")]
+        OptedIn = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OptedOut")]
+        OptedOut = 1,
 
     }
 
@@ -15236,7 +15814,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BuiltInAgentCapabilityDtoKind Kind { get; set; }
+        public BuiltInAgentCapabilityKind Kind { get; set; }
 
     }
 
@@ -15270,6 +15848,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<BuiltInAgentCapabilityDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum BuiltInAgentCapabilityKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SelfState")]
+        SelfState = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"CurrentContext")]
+        CurrentContext = 1,
 
     }
 
@@ -15393,6 +15983,36 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<CapabilityDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum CapabilitySurface
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"None")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Workflow")]
+        Workflow = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AI")]
+        AI = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Mcp")]
+        Mcp = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Job")]
+        Job = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Integration")]
+        Integration = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Webhook")]
+        Webhook = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Admin")]
+        Admin = 7,
 
     }
 
@@ -16536,6 +17156,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ConversationAccessScope
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Mine")]
+        Mine = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AllUsers")]
+        AllUsers = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ConversationAttachmentUploadResultDto
     {
 
@@ -16663,7 +17295,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DefinitionCoordinateRequestKind Kind { get; set; }
+        public DefinitionKind Kind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("key", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -16675,6 +17307,36 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         [Newtonsoft.Json.JsonProperty("path", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public string Path { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum DefinitionInstallStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Installed")]
+        Installed = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UpdateAvailable")]
+        UpdateAvailable = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MissingFromSource")]
+        MissingFromSource = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum DefinitionKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
+        Agent = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Skill")]
+        Skill = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Workflow")]
+        Workflow = 2,
 
     }
 
@@ -16696,7 +17358,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DefinitionValidationDtoKind Kind { get; set; }
+        public DefinitionKind Kind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("key", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Key { get; set; }
@@ -16737,9 +17399,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         [Newtonsoft.Json.JsonProperty("alreadyInstalled", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool AlreadyInstalled { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("installedStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("installedStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DefinitionValidationDtoInstalledStatus? InstalledStatus { get; set; }
+        public DefinitionInstallStatus InstalledStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Message { get; set; }
@@ -16939,6 +17601,30 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum GovernedInvocationClaimState
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Claimed")]
+        Claimed = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Executing")]
+        Executing = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Finalized")]
+        Finalized = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OutcomeUnknown")]
+        OutcomeUnknown = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class GrantAgentToolPermissionsRequestDto
     {
 
@@ -17016,7 +17702,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public InstalledDefinitionDtoKind Kind { get; set; }
+        public DefinitionKind Kind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("definitionKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DefinitionKey { get; set; }
@@ -17041,7 +17727,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public InstalledDefinitionDtoStatus Status { get; set; }
+        public DefinitionInstallStatus Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("installedAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset InstalledAt { get; set; }
@@ -17172,6 +17858,27 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PrincipalKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Human")]
+        Human = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
+        Agent = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Application")]
+        Application = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
+        Service = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"System")]
+        System = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class RefreshRequest
     {
 
@@ -17241,6 +17948,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum RunAs
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Invoker")]
+        Invoker = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Application")]
+        Application = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"System")]
+        System = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
+        Service = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TwoFactorRequest
     {
 
@@ -17292,594 +18017,12 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.IntelligenceService
         [Newtonsoft.Json.JsonProperty("sourceKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SourceKey { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UninstallDefinitionRequestDtoKind? Kind { get; set; }
+        public DefinitionKind Kind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("key", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Key { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Surface
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Workflow")]
-        Workflow = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AI")]
-        AI = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Mcp")]
-        Mcp = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Job")]
-        Job = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Integration")]
-        Integration = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Webhook")]
-        Webhook = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Admin")]
-        Admin = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Surface2
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Workflow")]
-        Workflow = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AI")]
-        AI = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Mcp")]
-        Mcp = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Job")]
-        Job = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Integration")]
-        Integration = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Webhook")]
-        Webhook = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Admin")]
-        Admin = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Scope
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Mine")]
-        Mine = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AllUsers")]
-        AllUsers = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Scope2
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Mine")]
-        Mine = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AllUsers")]
-        AllUsers = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Scope3
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Mine")]
-        Mine = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AllUsers")]
-        AllUsers = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Scope4
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Mine")]
-        Mine = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AllUsers")]
-        AllUsers = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Scope5
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Mine")]
-        Mine = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AllUsers")]
-        AllUsers = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Scope6
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Mine")]
-        Mine = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AllUsers")]
-        AllUsers = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Scope7
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Mine")]
-        Mine = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AllUsers")]
-        AllUsers = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Scope8
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Mine")]
-        Mine = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AllUsers")]
-        AllUsers = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Scope9
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Mine")]
-        Mine = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AllUsers")]
-        AllUsers = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Kind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
-        Agent = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Skill")]
-        Skill = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Workflow")]
-        Workflow = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AgentExecutionDiagnosticDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
-        Pending = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Claimed")]
-        Claimed = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Completed")]
-        Completed = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Cancelled")]
-        Cancelled = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AgentExecutionDiagnosticDtoCurrentLeaseStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Claimed")]
-        Claimed = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Completed")]
-        Completed = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AgentExecutionDiagnosticDtoAnomalyCode
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"WaitingForApproval")]
-        WaitingForApproval = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"RetryableInfrastructure")]
-        RetryableInfrastructure = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"StaleFence")]
-        StaleFence = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OutcomeUnknown")]
-        OutcomeUnknown = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AlreadyFinalized")]
-        AlreadyFinalized = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ClaimNotFound")]
-        ClaimNotFound = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"StuckOrphaned")]
-        StuckOrphaned = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AgentExecutionDiagnosticDtoRecommendedAction
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wait")]
-        Wait = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Retry")]
-        Retry = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Reconcile")]
-        Reconcile = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Completed")]
-        Completed = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ManualAction")]
-        ManualAction = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AgentExecutionDiagnosticDtoClaimState
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
-        Pending = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Claimed")]
-        Claimed = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Executing")]
-        Executing = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Finalized")]
-        Finalized = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OutcomeUnknown")]
-        OutcomeUnknown = 5,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AgentWorkOrderStatusDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
-        Pending = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Claimed")]
-        Claimed = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Completed")]
-        Completed = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Cancelled")]
-        Cancelled = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AgentWorkOrderStatusDtoCurrentLeaseStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Claimed")]
-        Claimed = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Completed")]
-        Completed = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AiModelAvailabilityDtoConnectionScope
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Instance")]
-        Instance = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AiProviderAvailabilityDtoConnectionScope
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Instance")]
-        Instance = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AiRunDtoFundingScope
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Instance")]
-        Instance = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AiRunDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Started")]
-        Started = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Succeeded")]
-        Succeeded = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
-        Rejected = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AwaitingApproval")]
-        AwaitingApproval = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"InDoubt")]
-        InDoubt = 5,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AiRunDtoKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Chat")]
-        Chat = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ToolAugmented")]
-        ToolAugmented = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AiRunDtoRunAs
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Invoker")]
-        Invoker = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Application")]
-        Application = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"System")]
-        System = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
-        Service = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AiRunDtoPrincipalKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Human")]
-        Human = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
-        Agent = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Application")]
-        Application = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
-        Service = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"System")]
-        System = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AiUsageObservationDtoConnectionScope
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Instance")]
-        Instance = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AiUsageObservationDtoUsageState
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Measured")]
-        Measured = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"LateMeasured")]
-        LateMeasured = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ApprovalAdviceConsentDtoState
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OptedIn")]
-        OptedIn = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OptedOut")]
-        OptedOut = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum BuiltInAgentCapabilityDtoKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SelfState")]
-        SelfState = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CurrentContext")]
-        CurrentContext = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DefinitionCoordinateRequestKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
-        Agent = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Skill")]
-        Skill = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Workflow")]
-        Workflow = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DefinitionValidationDtoKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
-        Agent = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Skill")]
-        Skill = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Workflow")]
-        Workflow = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DefinitionValidationDtoInstalledStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Installed")]
-        Installed = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UpdateAvailable")]
-        UpdateAvailable = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MissingFromSource")]
-        MissingFromSource = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum InstalledDefinitionDtoKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
-        Agent = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Skill")]
-        Skill = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Workflow")]
-        Workflow = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum InstalledDefinitionDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Installed")]
-        Installed = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UpdateAvailable")]
-        UpdateAvailable = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MissingFromSource")]
-        MissingFromSource = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UninstallDefinitionRequestDtoKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
-        Agent = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Skill")]
-        Skill = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Workflow")]
-        Workflow = 2,
 
     }
 

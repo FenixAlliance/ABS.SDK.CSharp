@@ -7465,6 +7465,152 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
             }
         }
 
+        /// <summary>
+        /// Refunds one collection through its own rail
+        /// </summary>
+        /// <remarks>
+        /// Returns the money of ONE succeeded collection instruction through the rail that collected it, on the governed refund path (the same use case the ePayco connector route dispatches; the rail is chosen from the collection, never from the route). Gated on payment_refunds_create; the operation is re-checked against the acting tenant, and a missing instruction and another tenant's instruction answer identically. 
+        /// <br/>
+        /// <br/>A POST because it is an external effect on money. A refund is SINGLE-SHOT unless the rail certifies idempotent replay for refunds: the refund intent is committed before the rail is contacted, so a repeated call is refused with a conflict and a lost answer is reconciled, never re-sent. Read the outcome's Certainty.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<ProviderOperationRefundOutcomeEnvelope> RefundCollectionAsync(System.Guid tenantId, System.Guid providerOperationId)
+        {
+            return RefundCollectionAsync(tenantId, providerOperationId, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Refunds one collection through its own rail
+        /// </summary>
+        /// <remarks>
+        /// Returns the money of ONE succeeded collection instruction through the rail that collected it, on the governed refund path (the same use case the ePayco connector route dispatches; the rail is chosen from the collection, never from the route). Gated on payment_refunds_create; the operation is re-checked against the acting tenant, and a missing instruction and another tenant's instruction answer identically. 
+        /// <br/>
+        /// <br/>A POST because it is an external effect on money. A refund is SINGLE-SHOT unless the rail certifies idempotent replay for refunds: the refund intent is committed before the rail is contacted, so a repeated call is refused with a conflict and a lost answer is reconciled, never re-sent. Read the outcome's Certainty.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<ProviderOperationRefundOutcomeEnvelope> RefundCollectionAsync(System.Guid tenantId, System.Guid providerOperationId, System.Threading.CancellationToken cancellationToken)
+        {
+            if (providerOperationId == null)
+                throw new System.ArgumentNullException("providerOperationId");
+
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/PaymentsService/ProviderOperations/{providerOperationId}/Refund"
+                    urlBuilder_.Append("api/v2/PaymentsService/ProviderOperations/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(providerOperationId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Refund");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ProviderOperationRefundOutcomeEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 409)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Conflict", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
         protected struct ObjectResponseResult<T>
         {
             public ObjectResponseResult(T responseObject, string responseText)
@@ -8256,6 +8402,30 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum CanonicalPaymentStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"RequiresAction")]
+        RequiresAction = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Authorized")]
+        Authorized = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Succeeded")]
+        Succeeded = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Cancelled")]
+        Cancelled = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CreateProviderWebhookRegistrationRequest
     {
 
@@ -8268,9 +8438,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
         [Newtonsoft.Json.JsonProperty("webhookSigningSecret", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string WebhookSigningSecret { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("environment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("environment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public CreateProviderWebhookRegistrationRequestEnvironment? Environment { get; set; }
+        public PaymentEnvironment Environment { get; set; }
 
     }
 
@@ -8278,9 +8448,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
     public partial class DeclarePaymentProviderEnvironmentRequest
     {
 
-        [Newtonsoft.Json.JsonProperty("environment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("environment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DeclarePaymentProviderEnvironmentRequestEnvironment? Environment { get; set; }
+        public PaymentEnvironment Environment { get; set; }
 
     }
 
@@ -8452,7 +8622,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("obligationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public IssuePaymentLinkCreateDtoObligationType ObligationType { get; set; }
+        public PaymentObligationType ObligationType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("obligationId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid ObligationId { get; set; }
@@ -8468,7 +8638,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("obligationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public IssuePublicPaymentReferenceCreateDtoObligationType ObligationType { get; set; }
+        public PaymentObligationType ObligationType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("obligationId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid ObligationId { get; set; }
@@ -8484,7 +8654,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("obligationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public IssuedPaymentLinkDtoObligationType ObligationType { get; set; }
+        public PaymentObligationType ObligationType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("obligationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ObligationId { get; set; }
@@ -8551,6 +8721,60 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("twoFactorRecoveryCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TwoFactorRecoveryCode { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum OnBehalfOf
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Self")]
+        Self = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
+        Tenant = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum OperationOutcomeCertainty
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"KnownNoEffect")]
+        KnownNoEffect = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"KnownSucceeded")]
+        KnownSucceeded = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"KnownFailed")]
+        KnownFailed = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum OutcomeReconciliationAvailability
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unavailable")]
+        Unavailable = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Available")]
+        Available = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AlreadyEstablished")]
+        AlreadyEstablished = 3,
 
     }
 
@@ -8638,15 +8862,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("onBehalfOf", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PaymentCreateDtoOnBehalfOf OnBehalfOf { get; set; }
+        public OnBehalfOf OnBehalfOf { get; set; }
 
         [Newtonsoft.Json.JsonProperty("paymentType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PaymentCreateDtoPaymentType PaymentType { get; set; }
+        public PaymentType PaymentType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("paymentStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PaymentCreateDtoPaymentStatus PaymentStatus { get; set; }
+        public PaymentStatus PaymentStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("baseCost", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double BaseCost { get; set; }
@@ -8839,15 +9063,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("onBehalfOf", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PaymentDtoOnBehalfOf OnBehalfOf { get; set; }
+        public OnBehalfOf OnBehalfOf { get; set; }
 
         [Newtonsoft.Json.JsonProperty("paymentType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PaymentDtoPaymentType PaymentType { get; set; }
+        public PaymentType PaymentType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("paymentStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PaymentDtoPaymentStatus PaymentStatus { get; set; }
+        public PaymentStatus PaymentStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("baseCost", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double BaseCost { get; set; }
@@ -9025,6 +9249,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<PaymentDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PaymentEnvironment
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Test")]
+        Test = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Live")]
+        Live = 2,
 
     }
 
@@ -9354,6 +9593,69 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PaymentObligationType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Invoice")]
+        Invoice = 0,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PaymentProviderCapability
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"None")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Collection")]
+        Collection = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Authorization")]
+        Authorization = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Capture")]
+        Capture = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Refund")]
+        Refund = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Void")]
+        Void = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SplitPayment")]
+        SplitPayment = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Transfer")]
+        Transfer = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Payout")]
+        Payout = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"RecipientOnboarding")]
+        RecipientOnboarding = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"BalanceInquiry")]
+        BalanceInquiry = 10,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PaymentProviderCredentialMode
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"TenantManaged")]
+        TenantManaged = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PlatformManaged")]
+        PlatformManaged = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ExternalReference")]
+        ExternalReference = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class PaymentProviderRegistrationDto
     {
 
@@ -9383,22 +9685,22 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("credentialMode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PaymentProviderRegistrationDtoCredentialMode CredentialMode { get; set; }
+        public PaymentProviderCredentialMode CredentialMode { get; set; }
 
         [Newtonsoft.Json.JsonProperty("environment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PaymentProviderRegistrationDtoEnvironment Environment { get; set; }
+        public PaymentEnvironment Environment { get; set; }
 
         [Newtonsoft.Json.JsonProperty("externalAccountId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ExternalAccountId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("enabledCapabilities", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PaymentProviderRegistrationDtoEnabledCapabilities EnabledCapabilities { get; set; }
+        public PaymentProviderCapability EnabledCapabilities { get; set; }
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PaymentProviderRegistrationDtoStatus Status { get; set; }
+        public PaymentProviderRegistrationStatus Status { get; set; }
 
     }
 
@@ -9469,15 +9771,75 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PaymentProviderRegistrationStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Draft")]
+        Draft = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
+        Active = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Disabled")]
+        Disabled = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Suspended")]
+        Suspended = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class PaymentProviderRegistrationUpdateDto
     {
 
         [Newtonsoft.Json.JsonProperty("enabledCapabilities", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PaymentProviderRegistrationUpdateDtoEnabledCapabilities EnabledCapabilities { get; set; }
+        public PaymentProviderCapability EnabledCapabilities { get; set; }
 
         [Newtonsoft.Json.JsonProperty("externalAccountId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ExternalAccountId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PaymentStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unset")]
+        Unset = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Accepted")]
+        Accepted = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
+        Rejected = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OnHold")]
+        OnHold = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Reversed")]
+        Reversed = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Retained")]
+        Retained = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Initialized")]
+        Initialized = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Expired")]
+        Expired = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Abandoned")]
+        Abandoned = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Cancelled")]
+        Cancelled = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AcceptedRetained")]
+        AcceptedRetained = 11,
 
     }
 
@@ -9705,6 +10067,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PaymentType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Paid")]
+        Paid = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Received")]
+        Received = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Internal")]
+        Internal = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class PaymentUpdateDto
     {
 
@@ -9764,15 +10141,15 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("onBehalfOf", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PaymentUpdateDtoOnBehalfOf OnBehalfOf { get; set; }
+        public OnBehalfOf OnBehalfOf { get; set; }
 
         [Newtonsoft.Json.JsonProperty("paymentType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PaymentUpdateDtoPaymentType PaymentType { get; set; }
+        public PaymentType PaymentType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("paymentStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PaymentUpdateDtoPaymentStatus PaymentStatus { get; set; }
+        public PaymentStatus PaymentStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("baseCost", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double BaseCost { get; set; }
@@ -9903,20 +10280,20 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
         [Newtonsoft.Json.JsonProperty("providerOperationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ProviderOperationId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("operationKind", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("operationKind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProviderOperationOutcomeReconciliationOperationKind? OperationKind { get; set; }
+        public ProviderOperationType OperationKind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("providerCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ProviderCode { get; set; }
 
         [Newtonsoft.Json.JsonProperty("certainty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProviderOperationOutcomeReconciliationCertainty Certainty { get; set; }
+        public OperationOutcomeCertainty Certainty { get; set; }
 
         [Newtonsoft.Json.JsonProperty("availability", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProviderOperationOutcomeReconciliationAvailability Availability { get; set; }
+        public OutcomeReconciliationAvailability Availability { get; set; }
 
         [Newtonsoft.Json.JsonProperty("disposition", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Disposition { get; set; }
@@ -9980,19 +10357,19 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("operationKind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProviderOperationOutcomeReviewDtoOperationKind OperationKind { get; set; }
+        public ProviderOperationType OperationKind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("environment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProviderOperationOutcomeReviewDtoEnvironment Environment { get; set; }
+        public PaymentEnvironment Environment { get; set; }
 
         [Newtonsoft.Json.JsonProperty("state", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProviderOperationOutcomeReviewDtoState State { get; set; }
+        public ProviderOperationState State { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("canonicalStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("canonicalStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProviderOperationOutcomeReviewDtoCanonicalStatus? CanonicalStatus { get; set; }
+        public CanonicalPaymentStatus CanonicalStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("requestedAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double RequestedAmount { get; set; }
@@ -10017,7 +10394,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("outcomeReconciliation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProviderOperationOutcomeReviewDtoOutcomeReconciliation OutcomeReconciliation { get; set; }
+        public OutcomeReconciliationAvailability OutcomeReconciliation { get; set; }
 
         [Newtonsoft.Json.JsonProperty("reconciliationDisposition", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ReconciliationDisposition { get; set; }
@@ -10091,6 +10468,119 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ProviderOperationRefundOutcome
+    {
+
+        [Newtonsoft.Json.JsonProperty("providerOperationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ProviderOperationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("refundedProviderOperationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string RefundedProviderOperationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("providerResourceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ProviderResourceId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("canonicalStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public CanonicalPaymentStatus CanonicalStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("certainty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public OperationOutcomeCertainty Certainty { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Message { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("requiresReconciliation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool RequiresReconciliation { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ProviderOperationRefundOutcomeEnvelope
+    {
+
+        [Newtonsoft.Json.JsonProperty("isSuccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsSuccess { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("correlationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CorrelationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ActivityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ProviderOperationRefundOutcome Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ProviderOperationState
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Prepared")]
+        Prepared = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Dispatched")]
+        Dispatched = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Observed")]
+        Observed = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Settled")]
+        Settled = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Discontinued")]
+        Discontinued = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ProviderOperationType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Collection")]
+        Collection = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Refund")]
+        Refund = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Payout")]
+        Payout = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FxQuote")]
+        FxQuote = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tokenization")]
+        Tokenization = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"VirtualAccountIssuance")]
+        VirtualAccountIssuance = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Void")]
+        Void = 6,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ProviderWebhookRegistrationCreatedDto
     {
 
@@ -10102,7 +10592,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProviderWebhookRegistrationCreatedDtoStatus Status { get; set; }
+        public PaymentProviderRegistrationStatus Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("webhookRegistrationKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string WebhookRegistrationKey { get; set; }
@@ -10157,7 +10647,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("obligationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PublicPaymentReferenceDtoObligationType ObligationType { get; set; }
+        public PaymentObligationType ObligationType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("obligationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ObligationId { get; set; }
@@ -10170,7 +10660,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("state", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PublicPaymentReferenceDtoState State { get; set; }
+        public PublicPaymentReferenceState State { get; set; }
 
         [Newtonsoft.Json.JsonProperty("mintedAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? MintedAt { get; set; }
@@ -10207,6 +10697,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PublicPaymentReferenceDto Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PublicPaymentReferenceState
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unminted")]
+        Unminted = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
+        Active = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Revoked")]
+        Revoked = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Rotated")]
+        Rotated = 3,
 
     }
 
@@ -10259,9 +10767,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
     public partial class SetPaymentProviderRegistrationCredentialRequest
     {
 
-        [Newtonsoft.Json.JsonProperty("credentialMode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("credentialMode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SetPaymentProviderRegistrationCredentialRequestCredentialMode? CredentialMode { get; set; }
+        public PaymentProviderCredentialMode CredentialMode { get; set; }
 
     }
 
@@ -10304,645 +10812,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PaymentsService
 
         [Newtonsoft.Json.JsonProperty("isMachineRemembered", Required = Newtonsoft.Json.Required.Always)]
         public bool IsMachineRemembered { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum CreateProviderWebhookRegistrationRequestEnvironment
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Test")]
-        Test = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Live")]
-        Live = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DeclarePaymentProviderEnvironmentRequestEnvironment
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Test")]
-        Test = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Live")]
-        Live = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum IssuePaymentLinkCreateDtoObligationType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Invoice")]
-        Invoice = 0,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum IssuePublicPaymentReferenceCreateDtoObligationType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Invoice")]
-        Invoice = 0,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum IssuedPaymentLinkDtoObligationType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Invoice")]
-        Invoice = 0,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PaymentCreateDtoOnBehalfOf
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Self")]
-        Self = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PaymentCreateDtoPaymentType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Paid")]
-        Paid = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Received")]
-        Received = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Internal")]
-        Internal = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PaymentCreateDtoPaymentStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unset")]
-        Unset = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Accepted")]
-        Accepted = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
-        Rejected = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OnHold")]
-        OnHold = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Reversed")]
-        Reversed = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Retained")]
-        Retained = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Initialized")]
-        Initialized = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Expired")]
-        Expired = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Abandoned")]
-        Abandoned = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Cancelled")]
-        Cancelled = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AcceptedRetained")]
-        AcceptedRetained = 11,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PaymentDtoOnBehalfOf
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Self")]
-        Self = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PaymentDtoPaymentType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Paid")]
-        Paid = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Received")]
-        Received = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Internal")]
-        Internal = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PaymentDtoPaymentStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unset")]
-        Unset = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Accepted")]
-        Accepted = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
-        Rejected = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OnHold")]
-        OnHold = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Reversed")]
-        Reversed = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Retained")]
-        Retained = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Initialized")]
-        Initialized = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Expired")]
-        Expired = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Abandoned")]
-        Abandoned = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Cancelled")]
-        Cancelled = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AcceptedRetained")]
-        AcceptedRetained = 11,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PaymentProviderRegistrationDtoCredentialMode
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"TenantManaged")]
-        TenantManaged = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PlatformManaged")]
-        PlatformManaged = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ExternalReference")]
-        ExternalReference = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PaymentProviderRegistrationDtoEnvironment
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Test")]
-        Test = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Live")]
-        Live = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PaymentProviderRegistrationDtoEnabledCapabilities
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Collection")]
-        Collection = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Authorization")]
-        Authorization = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Capture")]
-        Capture = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Refund")]
-        Refund = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Void")]
-        Void = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SplitPayment")]
-        SplitPayment = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Transfer")]
-        Transfer = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Payout")]
-        Payout = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"RecipientOnboarding")]
-        RecipientOnboarding = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"BalanceInquiry")]
-        BalanceInquiry = 10,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PaymentProviderRegistrationDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Draft")]
-        Draft = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
-        Active = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Disabled")]
-        Disabled = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Suspended")]
-        Suspended = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PaymentProviderRegistrationUpdateDtoEnabledCapabilities
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Collection")]
-        Collection = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Authorization")]
-        Authorization = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Capture")]
-        Capture = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Refund")]
-        Refund = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Void")]
-        Void = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SplitPayment")]
-        SplitPayment = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Transfer")]
-        Transfer = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Payout")]
-        Payout = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"RecipientOnboarding")]
-        RecipientOnboarding = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"BalanceInquiry")]
-        BalanceInquiry = 10,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PaymentUpdateDtoOnBehalfOf
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Self")]
-        Self = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PaymentUpdateDtoPaymentType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Paid")]
-        Paid = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Received")]
-        Received = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Internal")]
-        Internal = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PaymentUpdateDtoPaymentStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unset")]
-        Unset = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Accepted")]
-        Accepted = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
-        Rejected = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OnHold")]
-        OnHold = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Reversed")]
-        Reversed = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Retained")]
-        Retained = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Initialized")]
-        Initialized = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Expired")]
-        Expired = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Abandoned")]
-        Abandoned = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Cancelled")]
-        Cancelled = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AcceptedRetained")]
-        AcceptedRetained = 11,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ProviderOperationOutcomeReconciliationOperationKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Collection")]
-        Collection = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Refund")]
-        Refund = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Payout")]
-        Payout = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FxQuote")]
-        FxQuote = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tokenization")]
-        Tokenization = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"VirtualAccountIssuance")]
-        VirtualAccountIssuance = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Void")]
-        Void = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ProviderOperationOutcomeReconciliationCertainty
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"KnownNoEffect")]
-        KnownNoEffect = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"KnownSucceeded")]
-        KnownSucceeded = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"KnownFailed")]
-        KnownFailed = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ProviderOperationOutcomeReconciliationAvailability
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unavailable")]
-        Unavailable = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Available")]
-        Available = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AlreadyEstablished")]
-        AlreadyEstablished = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ProviderOperationOutcomeReviewDtoOperationKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Collection")]
-        Collection = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Refund")]
-        Refund = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Payout")]
-        Payout = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FxQuote")]
-        FxQuote = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tokenization")]
-        Tokenization = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"VirtualAccountIssuance")]
-        VirtualAccountIssuance = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Void")]
-        Void = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ProviderOperationOutcomeReviewDtoEnvironment
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Test")]
-        Test = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Live")]
-        Live = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ProviderOperationOutcomeReviewDtoState
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Prepared")]
-        Prepared = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Dispatched")]
-        Dispatched = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Observed")]
-        Observed = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Settled")]
-        Settled = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Discontinued")]
-        Discontinued = 5,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ProviderOperationOutcomeReviewDtoCanonicalStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
-        Pending = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"RequiresAction")]
-        RequiresAction = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Authorized")]
-        Authorized = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Succeeded")]
-        Succeeded = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Cancelled")]
-        Cancelled = 5,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ProviderOperationOutcomeReviewDtoOutcomeReconciliation
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unavailable")]
-        Unavailable = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Available")]
-        Available = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AlreadyEstablished")]
-        AlreadyEstablished = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ProviderWebhookRegistrationCreatedDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Draft")]
-        Draft = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
-        Active = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Disabled")]
-        Disabled = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Suspended")]
-        Suspended = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PublicPaymentReferenceDtoObligationType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Invoice")]
-        Invoice = 0,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PublicPaymentReferenceDtoState
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unminted")]
-        Unminted = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
-        Active = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Revoked")]
-        Revoked = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Rotated")]
-        Rotated = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SetPaymentProviderRegistrationCredentialRequestCredentialMode
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"TenantManaged")]
-        TenantManaged = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PlatformManaged")]
-        PlatformManaged = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ExternalReference")]
-        ExternalReference = 2,
 
     }
 

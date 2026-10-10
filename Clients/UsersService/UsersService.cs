@@ -3360,7 +3360,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UpdateCurrentUserAsync(string api_version, string x_api_version, UserUpdateDto body, string qualifiedName, System.DateTimeOffset? birthday, string firstName, string lastName, string publicName, string idProvider, Gender? gender, string email, string about, string status, string jobTitle, string timezoneId, string languageId, string currencyId, string countryId, string stateId, string cityId, string gitHubUrl, string websiteUrl, string twitterUrl, string facebookUrl, string youTubeUrl, string linkedInUrl, string instagramUrl, string webUrl, Availability? availability)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UpdateCurrentUserAsync(string api_version, string x_api_version, UserUpdateDto body, string qualifiedName, System.DateTimeOffset? birthday, string firstName, string lastName, string publicName, string idProvider, Gender? gender, string email, string about, string status, string jobTitle, string timezoneId, string languageId, string currencyId, string countryId, string stateId, string cityId, string gitHubUrl, string websiteUrl, string twitterUrl, string facebookUrl, string youTubeUrl, string linkedInUrl, string instagramUrl, string webUrl, UserAvailability? availability)
         {
             return UpdateCurrentUserAsync(api_version, x_api_version, body, qualifiedName, birthday, firstName, lastName, publicName, idProvider, gender, email, about, status, jobTitle, timezoneId, languageId, currencyId, countryId, stateId, cityId, gitHubUrl, websiteUrl, twitterUrl, facebookUrl, youTubeUrl, linkedInUrl, instagramUrl, webUrl, availability, System.Threading.CancellationToken.None);
         }
@@ -3374,7 +3374,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UpdateCurrentUserAsync(string api_version, string x_api_version, UserUpdateDto body, string qualifiedName, System.DateTimeOffset? birthday, string firstName, string lastName, string publicName, string idProvider, Gender? gender, string email, string about, string status, string jobTitle, string timezoneId, string languageId, string currencyId, string countryId, string stateId, string cityId, string gitHubUrl, string websiteUrl, string twitterUrl, string facebookUrl, string youTubeUrl, string linkedInUrl, string instagramUrl, string webUrl, Availability? availability, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UpdateCurrentUserAsync(string api_version, string x_api_version, UserUpdateDto body, string qualifiedName, System.DateTimeOffset? birthday, string firstName, string lastName, string publicName, string idProvider, Gender? gender, string email, string about, string status, string jobTitle, string timezoneId, string languageId, string currencyId, string countryId, string stateId, string cityId, string gitHubUrl, string websiteUrl, string twitterUrl, string facebookUrl, string youTubeUrl, string linkedInUrl, string instagramUrl, string webUrl, UserAvailability? availability, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -6510,6 +6510,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum BusinessEntityKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CartDto
     {
 
@@ -6548,6 +6560,13 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
 
         [Newtonsoft.Json.JsonProperty("itemToCompareRecordsCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? ItemToCompareRecordsCount { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("saleChannel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SaleChannel SaleChannel { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("directSellerTenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string DirectSellerTenantId { get; set; }
 
     }
 
@@ -6659,7 +6678,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
 
         [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedTenantDtoKind Kind { get; set; }
+        public BusinessEntityKind Kind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TaxId { get; set; }
@@ -6952,9 +6971,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
         [Newtonsoft.Json.JsonProperty("languageId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string LanguageId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedUserDtoGender? Gender { get; set; }
+        public Gender Gender { get; set; }
 
         [Newtonsoft.Json.JsonProperty("cityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CityId { get; set; }
@@ -7010,9 +7029,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
         [Newtonsoft.Json.JsonProperty("emailConfirmed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool EmailConfirmed { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("availability", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("availability", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedUserDtoAvailability? Availability { get; set; }
+        public UserAvailability Availability { get; set; }
 
         [Newtonsoft.Json.JsonProperty("lockoutEnabled", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool LockoutEnabled { get; set; }
@@ -7023,9 +7042,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
         [Newtonsoft.Json.JsonProperty("enrollmentsCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? EnrollmentsCount { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("siteTheme", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("siteTheme", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedUserDtoSiteTheme? SiteTheme { get; set; }
+        public SiteTheme SiteTheme { get; set; }
 
         [Newtonsoft.Json.JsonProperty("cart", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CartDto Cart { get; set; }
@@ -7177,6 +7196,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum Gender
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Male")]
+        Male = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Female")]
+        Female = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PreferNotToSay")]
+        PreferNotToSay = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class HttpValidationProblemDetails
     {
 
@@ -7314,7 +7351,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public NotificationDtoType Type { get; set; }
+        public NotificationType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("socialProfileId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialProfileId { get; set; }
@@ -7396,6 +7433,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<NotificationDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum NotificationType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Event")]
+        Event = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Alert")]
+        Alert = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Log")]
+        Log = 2,
 
     }
 
@@ -7657,6 +7709,36 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SaleChannel
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unset")]
+        Unset = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Marketplace")]
+        Marketplace = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Direct")]
+        Direct = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SiteTheme
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"System")]
+        System = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Light")]
+        Light = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Dark")]
+        Dark = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SocialProfileDto
     {
 
@@ -7705,9 +7787,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
         [Newtonsoft.Json.JsonProperty("unreadMessagesCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? UnreadMessagesCount { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialProfileDtoType? Type { get; set; }
+        public SocialProfileType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("socialFeedId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialFeedId { get; set; }
@@ -7775,6 +7857,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialProfileType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"User")]
+        User = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
+        Tenant = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
+        Contact = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class StudioAccessDto
     {
 
@@ -7831,7 +7928,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
 
         [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TenantDtoKind Kind { get; set; }
+        public BusinessEntityKind Kind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TaxId { get; set; }
@@ -8247,6 +8344,27 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum UserAvailability
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DND")]
+        DND = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Busy")]
+        Busy = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Away")]
+        Away = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Offline")]
+        Offline = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Available")]
+        Available = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class UserDto
     {
 
@@ -8319,9 +8437,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
         [Newtonsoft.Json.JsonProperty("languageId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string LanguageId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UserDtoGender? Gender { get; set; }
+        public Gender Gender { get; set; }
 
         [Newtonsoft.Json.JsonProperty("cityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CityId { get; set; }
@@ -8377,9 +8495,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
         [Newtonsoft.Json.JsonProperty("emailConfirmed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool EmailConfirmed { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("availability", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("availability", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UserDtoAvailability? Availability { get; set; }
+        public UserAvailability Availability { get; set; }
 
         [Newtonsoft.Json.JsonProperty("lockoutEnabled", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool LockoutEnabled { get; set; }
@@ -8390,9 +8508,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
         [Newtonsoft.Json.JsonProperty("enrollmentsCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? EnrollmentsCount { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("siteTheme", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("siteTheme", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UserDtoSiteTheme? SiteTheme { get; set; }
+        public SiteTheme SiteTheme { get; set; }
 
     }
 
@@ -8501,7 +8619,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
 
         [Newtonsoft.Json.JsonProperty("siteTheme", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UserSettingsDtoSiteTheme SiteTheme { get; set; }
+        public SiteTheme SiteTheme { get; set; }
 
     }
 
@@ -8647,7 +8765,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
 
         [Newtonsoft.Json.JsonProperty("availability", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public Availability Availability { get; set; }
+        public UserAvailability Availability { get; set; }
 
     }
 
@@ -8737,45 +8855,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Gender
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Male")]
-        Male = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Female")]
-        Female = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PreferNotToSay")]
-        PreferNotToSay = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Availability
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DND")]
-        DND = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Busy")]
-        Busy = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Away")]
-        Away = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Offline")]
-        Offline = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Available")]
-        Available = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Body
     {
 
@@ -8790,198 +8869,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UsersService
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
             set { _additionalProperties = value; }
         }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SiteTheme
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"System")]
-        System = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Light")]
-        Light = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Dark")]
-        Dark = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedTenantDtoKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedUserDtoGender
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Male")]
-        Male = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Female")]
-        Female = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PreferNotToSay")]
-        PreferNotToSay = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedUserDtoAvailability
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DND")]
-        DND = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Busy")]
-        Busy = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Away")]
-        Away = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Offline")]
-        Offline = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Available")]
-        Available = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedUserDtoSiteTheme
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"System")]
-        System = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Light")]
-        Light = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Dark")]
-        Dark = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum NotificationDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Event")]
-        Event = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Alert")]
-        Alert = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Log")]
-        Log = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialProfileDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"User")]
-        User = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TenantDtoKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UserDtoGender
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Male")]
-        Male = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Female")]
-        Female = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PreferNotToSay")]
-        PreferNotToSay = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UserDtoAvailability
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DND")]
-        DND = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Busy")]
-        Busy = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Away")]
-        Away = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Offline")]
-        Offline = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Available")]
-        Available = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UserDtoSiteTheme
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"System")]
-        System = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Light")]
-        Light = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Dark")]
-        Dark = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UserSettingsDtoSiteTheme
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"System")]
-        System = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Light")]
-        Light = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Dark")]
-        Dark = 2,
 
     }
 

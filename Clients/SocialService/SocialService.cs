@@ -16474,6 +16474,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum BodyFormat
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PlainText")]
+        PlainText = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Html")]
+        Html = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class BooleanEnvelope
     {
 
@@ -16564,9 +16576,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("counterpartyAvatarUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CounterpartyAvatarUrl { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("counterpartyType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("counterpartyType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ConversationDtoCounterpartyType? CounterpartyType { get; set; }
+        public SocialProfileType CounterpartyType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("unreadCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int UnreadCount { get; set; }
@@ -17405,6 +17417,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum FileUploadPublicAccessType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
+        Off = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
+        Container = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
+        Blob = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class FollowRecordDto
     {
 
@@ -17641,7 +17671,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public NotificationDtoType Type { get; set; }
+        public NotificationType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("socialProfileId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialProfileId { get; set; }
@@ -17805,6 +17835,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum NotificationType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Event")]
+        Event = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Alert")]
+        Alert = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Log")]
+        Log = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class PatchOperation
     {
 
@@ -17892,9 +17937,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("socialProfileAvatarUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialProfileAvatarUrl { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PrivateMessageDtoSocialProfileType? SocialProfileType { get; set; }
+        public SocialProfileType SocialProfileType { get; set; }
 
     }
 
@@ -17977,6 +18022,36 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum Reaction
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Like")]
+        Like = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Happy")]
+        Happy = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"HaHa")]
+        HaHa = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Love")]
+        Love = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Sad")]
+        Sad = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Angry")]
+        Angry = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Wow")]
+        Wow = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
+        Afraid = 7,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class RefreshRequest
     {
 
@@ -18048,7 +18123,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("skillType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SkillCreateDtoSkillType SkillType { get; set; }
+        public SkillType SkillType { get; set; }
 
     }
 
@@ -18079,7 +18154,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("skillType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SkillDtoSkillType SkillType { get; set; }
+        public SkillType SkillType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TenantId { get; set; }
@@ -18189,6 +18264,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SkillType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Skill")]
+        Skill = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Certification")]
+        Certification = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SkillUpdateDto
     {
 
@@ -18208,7 +18295,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("skillType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SkillUpdateDtoSkillType SkillType { get; set; }
+        public SkillType SkillType { get; set; }
 
     }
 
@@ -18224,7 +18311,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("reaction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialCommentReactionDtoReaction Reaction { get; set; }
+        public Reaction Reaction { get; set; }
 
         [Newtonsoft.Json.JsonProperty("reactionValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ReactionValue { get; set; }
@@ -18238,9 +18325,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("socialProfileAvatarUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialProfileAvatarUrl { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialCommentReactionDtoSocialProfileType? SocialProfileType { get; set; }
+        public SocialProfileType SocialProfileType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("socialCommentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialCommentId { get; set; }
@@ -18489,9 +18576,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [System.ComponentModel.DataAnnotations.StringLength(8000)]
         public string BodyHtml { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialFeedPostCreateDtoBodyFormat? BodyFormat { get; set; }
+        public BodyFormat BodyFormat { get; set; }
 
         [Newtonsoft.Json.JsonProperty("backgroundStyle", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(64)]
@@ -18530,16 +18617,16 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("reactionsCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int ReactionsCount { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialFeedPostDtoSocialProfileType? SocialProfileType { get; set; }
+        public SocialProfileType SocialProfileType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("bodyHtml", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BodyHtml { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialFeedPostDtoBodyFormat? BodyFormat { get; set; }
+        public BodyFormat BodyFormat { get; set; }
 
         [Newtonsoft.Json.JsonProperty("backgroundStyle", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BackgroundStyle { get; set; }
@@ -18553,9 +18640,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("attachments", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<SocialPostAttachmentRefDto> Attachments { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("myReaction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("myReaction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialFeedPostDtoMyReaction? MyReaction { get; set; }
+        public Reaction MyReaction { get; set; }
 
         [Newtonsoft.Json.JsonProperty("myReactionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string MyReactionId { get; set; }
@@ -18675,9 +18762,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [System.ComponentModel.DataAnnotations.StringLength(8000)]
         public string BodyHtml { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialFeedPostUpdateDtoBodyFormat? BodyFormat { get; set; }
+        public BodyFormat BodyFormat { get; set; }
 
         [Newtonsoft.Json.JsonProperty("backgroundStyle", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(64)]
@@ -18895,7 +18982,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("publicAccessType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialPostAttachmentCreateDtoPublicAccessType PublicAccessType { get; set; }
+        public FileUploadPublicAccessType PublicAccessType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("socialPostId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialPostId { get; set; }
@@ -18980,11 +19067,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("scanStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialPostAttachmentDtoScanStatus ScanStatus { get; set; }
+        public StorageScanStatus ScanStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("thumbnailStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialPostAttachmentDtoThumbnailStatus ThumbnailStatus { get; set; }
+        public StorageThumbnailStatus ThumbnailStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("hasThumbnail", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool HasThumbnail { get; set; }
@@ -19003,7 +19090,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("publicAccessType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialPostAttachmentDtoPublicAccessType PublicAccessType { get; set; }
+        public FileUploadPublicAccessType PublicAccessType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("socialPostId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialPostId { get; set; }
@@ -19183,9 +19270,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [System.ComponentModel.DataAnnotations.StringLength(8000)]
         public string BodyHtml { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialPostCommentCreateDtoBodyFormat? BodyFormat { get; set; }
+        public BodyFormat BodyFormat { get; set; }
 
         [Newtonsoft.Json.JsonProperty("parentCommentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ParentCommentId { get; set; }
@@ -19229,16 +19316,16 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("socialProfileAvatarUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialProfileAvatarUrl { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialPostCommentDtoSocialProfileType? SocialProfileType { get; set; }
+        public SocialProfileType SocialProfileType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("bodyHtml", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BodyHtml { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialPostCommentDtoBodyFormat? BodyFormat { get; set; }
+        public BodyFormat BodyFormat { get; set; }
 
         [Newtonsoft.Json.JsonProperty("replyCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int ReplyCount { get; set; }
@@ -19252,9 +19339,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("facepile", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<SocialPostReactionFacepileDto> Facepile { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("myReaction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("myReaction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialPostCommentDtoMyReaction? MyReaction { get; set; }
+        public Reaction MyReaction { get; set; }
 
         [Newtonsoft.Json.JsonProperty("myReactionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string MyReactionId { get; set; }
@@ -19427,16 +19514,16 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("reactionsCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int ReactionsCount { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialPostDtoSocialProfileType? SocialProfileType { get; set; }
+        public SocialProfileType SocialProfileType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("bodyHtml", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BodyHtml { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("bodyFormat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialPostDtoBodyFormat? BodyFormat { get; set; }
+        public BodyFormat BodyFormat { get; set; }
 
         [Newtonsoft.Json.JsonProperty("backgroundStyle", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BackgroundStyle { get; set; }
@@ -19554,7 +19641,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("reaction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialPostReactionDtoReaction Reaction { get; set; }
+        public Reaction Reaction { get; set; }
 
         [Newtonsoft.Json.JsonProperty("reactionValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ReactionValue { get; set; }
@@ -19568,9 +19655,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("socialProfileAvatarUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialProfileAvatarUrl { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialPostReactionDtoSocialProfileType? SocialProfileType { get; set; }
+        public SocialProfileType SocialProfileType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("socialPostId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialPostId { get; set; }
@@ -19656,13 +19743,13 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("socialProfileAvatarUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialProfileAvatarUrl { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialPostReactionFacepileDtoSocialProfileType? SocialProfileType { get; set; }
+        public SocialProfileType SocialProfileType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("reaction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialPostReactionFacepileDtoReaction Reaction { get; set; }
+        public Reaction Reaction { get; set; }
 
     }
 
@@ -19727,9 +19814,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("unreadMessagesCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? UnreadMessagesCount { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialProfileDtoType? Type { get; set; }
+        public SocialProfileType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("socialFeedId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialFeedId { get; set; }
@@ -19863,6 +19950,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialProfileType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"User")]
+        User = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
+        Tenant = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
+        Contact = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SocialReactionCreateDto
     {
 
@@ -19874,7 +19976,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("reaction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialReactionCreateDtoReaction Reaction { get; set; }
+        public Reaction Reaction { get; set; }
 
         [Newtonsoft.Json.JsonProperty("reactionValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ReactionValue { get; set; }
@@ -19896,7 +19998,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("reaction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialReactionDtoReaction Reaction { get; set; }
+        public Reaction Reaction { get; set; }
 
         [Newtonsoft.Json.JsonProperty("reactionValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ReactionValue { get; set; }
@@ -19910,9 +20012,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
         [Newtonsoft.Json.JsonProperty("socialProfileAvatarUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialProfileAvatarUrl { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialReactionDtoSocialProfileType? SocialProfileType { get; set; }
+        public SocialProfileType SocialProfileType { get; set; }
 
     }
 
@@ -19994,10 +20096,55 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
 
         [Newtonsoft.Json.JsonProperty("reaction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialReactionUpdateDtoReaction Reaction { get; set; }
+        public Reaction Reaction { get; set; }
 
         [Newtonsoft.Json.JsonProperty("reactionValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ReactionValue { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum StorageScanStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
+        NotRequired = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Clean")]
+        Clean = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Infected")]
+        Infected = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Quarantined")]
+        Quarantined = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum StorageThumbnailStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
+        NotRequired = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Ready")]
+        Ready = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unsupported")]
+        Unsupported = 4,
 
     }
 
@@ -20106,600 +20253,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SocialService
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
             set { _additionalProperties = value; }
         }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ConversationDtoCounterpartyType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"User")]
-        User = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum NotificationDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Event")]
-        Event = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Alert")]
-        Alert = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Log")]
-        Log = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PrivateMessageDtoSocialProfileType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"User")]
-        User = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SkillCreateDtoSkillType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Skill")]
-        Skill = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Certification")]
-        Certification = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SkillDtoSkillType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Skill")]
-        Skill = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Certification")]
-        Certification = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SkillUpdateDtoSkillType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Skill")]
-        Skill = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Certification")]
-        Certification = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialCommentReactionDtoReaction
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Like")]
-        Like = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Happy")]
-        Happy = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"HaHa")]
-        HaHa = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Love")]
-        Love = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sad")]
-        Sad = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Angry")]
-        Angry = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wow")]
-        Wow = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
-        Afraid = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialCommentReactionDtoSocialProfileType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"User")]
-        User = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialFeedPostCreateDtoBodyFormat
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PlainText")]
-        PlainText = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Html")]
-        Html = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialFeedPostDtoSocialProfileType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"User")]
-        User = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialFeedPostDtoBodyFormat
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PlainText")]
-        PlainText = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Html")]
-        Html = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialFeedPostDtoMyReaction
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Like")]
-        Like = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Happy")]
-        Happy = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"HaHa")]
-        HaHa = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Love")]
-        Love = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sad")]
-        Sad = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Angry")]
-        Angry = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wow")]
-        Wow = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
-        Afraid = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialFeedPostUpdateDtoBodyFormat
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PlainText")]
-        PlainText = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Html")]
-        Html = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialPostAttachmentCreateDtoPublicAccessType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
-        Off = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
-        Container = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
-        Blob = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialPostAttachmentDtoScanStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
-        NotRequired = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
-        Pending = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Clean")]
-        Clean = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Infected")]
-        Infected = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Quarantined")]
-        Quarantined = 5,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialPostAttachmentDtoThumbnailStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
-        NotRequired = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
-        Pending = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Ready")]
-        Ready = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unsupported")]
-        Unsupported = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialPostAttachmentDtoPublicAccessType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
-        Off = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
-        Container = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
-        Blob = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialPostCommentCreateDtoBodyFormat
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PlainText")]
-        PlainText = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Html")]
-        Html = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialPostCommentDtoSocialProfileType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"User")]
-        User = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialPostCommentDtoBodyFormat
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PlainText")]
-        PlainText = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Html")]
-        Html = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialPostCommentDtoMyReaction
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Like")]
-        Like = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Happy")]
-        Happy = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"HaHa")]
-        HaHa = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Love")]
-        Love = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sad")]
-        Sad = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Angry")]
-        Angry = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wow")]
-        Wow = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
-        Afraid = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialPostDtoSocialProfileType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"User")]
-        User = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialPostDtoBodyFormat
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PlainText")]
-        PlainText = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Html")]
-        Html = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialPostReactionDtoReaction
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Like")]
-        Like = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Happy")]
-        Happy = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"HaHa")]
-        HaHa = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Love")]
-        Love = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sad")]
-        Sad = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Angry")]
-        Angry = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wow")]
-        Wow = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
-        Afraid = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialPostReactionDtoSocialProfileType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"User")]
-        User = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialPostReactionFacepileDtoSocialProfileType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"User")]
-        User = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialPostReactionFacepileDtoReaction
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Like")]
-        Like = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Happy")]
-        Happy = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"HaHa")]
-        HaHa = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Love")]
-        Love = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sad")]
-        Sad = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Angry")]
-        Angry = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wow")]
-        Wow = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
-        Afraid = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialProfileDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"User")]
-        User = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialReactionCreateDtoReaction
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Like")]
-        Like = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Happy")]
-        Happy = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"HaHa")]
-        HaHa = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Love")]
-        Love = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sad")]
-        Sad = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Angry")]
-        Angry = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wow")]
-        Wow = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
-        Afraid = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialReactionDtoReaction
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Like")]
-        Like = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Happy")]
-        Happy = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"HaHa")]
-        HaHa = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Love")]
-        Love = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sad")]
-        Sad = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Angry")]
-        Angry = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wow")]
-        Wow = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
-        Afraid = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialReactionDtoSocialProfileType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"User")]
-        User = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialReactionUpdateDtoReaction
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Like")]
-        Like = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Happy")]
-        Happy = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"HaHa")]
-        HaHa = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Love")]
-        Love = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sad")]
-        Sad = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Angry")]
-        Angry = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wow")]
-        Wow = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Afraid")]
-        Afraid = 7,
 
     }
 

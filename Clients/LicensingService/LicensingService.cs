@@ -6985,7 +6985,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<TenantUsageSummaryDtoIReadOnlyListEnvelope> GetTenantsUsageAsync(System.Guid tenantId, MinimumStatus? minimumStatus, string search, string sortBy, bool? descending, int? skip, int? top, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<TenantUsageSummaryDtoIReadOnlyListEnvelope> GetTenantsUsageAsync(System.Guid tenantId, UsageMeterStatus? minimumStatus, string search, string sortBy, bool? descending, int? skip, int? top, string api_version, string x_api_version)
         {
             return GetTenantsUsageAsync(tenantId, minimumStatus, search, sortBy, descending, skip, top, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -6999,7 +6999,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<TenantUsageSummaryDtoIReadOnlyListEnvelope> GetTenantsUsageAsync(System.Guid tenantId, MinimumStatus? minimumStatus, string search, string sortBy, bool? descending, int? skip, int? top, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<TenantUsageSummaryDtoIReadOnlyListEnvelope> GetTenantsUsageAsync(System.Guid tenantId, UsageMeterStatus? minimumStatus, string search, string sortBy, bool? descending, int? skip, int? top, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -7231,6 +7231,266 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
             }
         }
 
+        /// <summary>
+        /// Get a tenant's usage limit overrides (root admin)
+        /// </summary>
+        /// <remarks>
+        /// Root-admin audit read of one tenant's usage limit overrides, active and past: the license and meter, the grant and pool before and after, the hard stop before and after, the actor, reason and expiry.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<TenantUsageLimitOverrideDtoIReadOnlyListEnvelope> GetTenantUsageLimitOverridesAsync(System.Guid tenantId, System.Guid targetTenantId, string api_version, string x_api_version)
+        {
+            return GetTenantUsageLimitOverridesAsync(tenantId, targetTenantId, api_version, x_api_version, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get a tenant's usage limit overrides (root admin)
+        /// </summary>
+        /// <remarks>
+        /// Root-admin audit read of one tenant's usage limit overrides, active and past: the license and meter, the grant and pool before and after, the hard stop before and after, the actor, reason and expiry.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<TenantUsageLimitOverrideDtoIReadOnlyListEnvelope> GetTenantUsageLimitOverridesAsync(System.Guid tenantId, System.Guid targetTenantId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        {
+            if (targetTenantId == null)
+                throw new System.ArgumentNullException("targetTenantId");
+
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/LicensingService/Admin/Usage/{targetTenantId}/LimitOverrides"
+                    urlBuilder_.Append("api/v2/LicensingService/Admin/Usage/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(targetTenantId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/LimitOverrides");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<TenantUsageLimitOverrideDtoIReadOnlyListEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Override a tenant's usage limit (root admin)
+        /// </summary>
+        /// <remarks>
+        /// Root-admin, audited change to ONE license's grant of one meter: set or extend the allowance, or reset a reached hard stop for the current period. Requires ExpectedRevision (the grant's Revision): 400 when missing, 409 when stale. Changes enforcement limits only. Returns the new override's id.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<StringEnvelope> CreateTenantUsageLimitOverrideAsync(System.Guid tenantId, System.Guid targetTenantId, string api_version, string x_api_version, TenantUsageLimitOverrideCreateDto body)
+        {
+            return CreateTenantUsageLimitOverrideAsync(tenantId, targetTenantId, api_version, x_api_version, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Override a tenant's usage limit (root admin)
+        /// </summary>
+        /// <remarks>
+        /// Root-admin, audited change to ONE license's grant of one meter: set or extend the allowance, or reset a reached hard stop for the current period. Requires ExpectedRevision (the grant's Revision): 400 when missing, 409 when stale. Changes enforcement limits only. Returns the new override's id.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<StringEnvelope> CreateTenantUsageLimitOverrideAsync(System.Guid tenantId, System.Guid targetTenantId, string api_version, string x_api_version, TenantUsageLimitOverrideCreateDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (targetTenantId == null)
+                throw new System.ArgumentNullException("targetTenantId");
+
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata.metadata=minimal;odata.streaming=true");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/LicensingService/Admin/Usage/{targetTenantId}/LimitOverrides"
+                    urlBuilder_.Append("api/v2/LicensingService/Admin/Usage/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(targetTenantId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/LimitOverrides");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<StringEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 400)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Bad Request", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 409)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Conflict", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
         protected struct ObjectResponseResult<T>
         {
             public ObjectResponseResult(T responseObject, string responseText)
@@ -7378,6 +7638,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
 
         [Newtonsoft.Json.JsonProperty("refreshToken", Required = Newtonsoft.Json.Required.AllowNull)]
         public string RefreshToken { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum BillingCycle
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Monthly")]
+        Monthly = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Annual")]
+        Annual = 1,
 
     }
 
@@ -8388,6 +8660,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class StringEnvelope
+    {
+
+        [Newtonsoft.Json.JsonProperty("isSuccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsSuccess { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("correlationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CorrelationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ActivityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TenantUsageDto
     {
 
@@ -8460,6 +8765,44 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class TenantUsageLimitOverrideCreateDto
+    {
+
+        [Newtonsoft.Json.JsonProperty("licenseId", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public string LicenseId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("meterKey", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public string MeterKey { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public UsageLimitOverrideKind Kind { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("quantity", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0D, 1000000000000D)]
+        public double? Quantity { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expectedRevision", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public string ExpectedRevision { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expectedEffectiveAllowance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? ExpectedEffectiveAllowance { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expiresAtUtc", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? ExpiresAtUtc { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("reason", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(1024, MinimumLength = 3)]
+        public string Reason { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TenantUsageLimitOverrideDto
     {
 
@@ -8480,7 +8823,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
 
         [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TenantUsageLimitOverrideDtoKind Kind { get; set; }
+        public UsageLimitOverrideKind Kind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("quantity", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Quantity { get; set; }
@@ -8524,6 +8867,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class TenantUsageLimitOverrideDtoIReadOnlyListEnvelope
+    {
+
+        [Newtonsoft.Json.JsonProperty("isSuccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsSuccess { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("correlationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CorrelationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ActivityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<TenantUsageLimitOverrideDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TenantUsageSummaryDto
     {
 
@@ -8550,7 +8926,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
 
         [Newtonsoft.Json.JsonProperty("worstStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TenantUsageSummaryDtoWorstStatus WorstStatus { get; set; }
+        public UsageMeterStatus WorstStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("metersNear", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int MetersNear { get; set; }
@@ -8642,6 +9018,42 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum UsageAggregationKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PeriodCumulative")]
+        PeriodCumulative = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Gauge")]
+        Gauge = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"TimeIntegral")]
+        TimeIntegral = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum UsageAllowanceKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Finite")]
+        Finite = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unlimited")]
+        Unlimited = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotIncluded")]
+        NotIncluded = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unlicensed")]
+        Unlicensed = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class UsageBudgetDto
     {
 
@@ -8675,6 +9087,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum UsageCostStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotRated")]
+        NotRated = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Estimated")]
+        Estimated = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Invoiced")]
+        Invoiced = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum UsageDataState
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Measured")]
+        Measured = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Partial")]
+        Partial = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Delayed")]
+        Delayed = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unavailable")]
+        Unavailable = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class UsageGrantDto
     {
 
@@ -8683,7 +9128,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
 
         [Newtonsoft.Json.JsonProperty("allowanceKind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UsageGrantDtoAllowanceKind AllowanceKind { get; set; }
+        public UsageAllowanceKind AllowanceKind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("planAllowance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? PlanAllowance { get; set; }
@@ -8727,6 +9172,36 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum UsageLimitBehavior
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"None")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"HardStop")]
+        HardStop = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Overage")]
+        Overage = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum UsageLimitOverrideKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SetAllowance")]
+        SetAllowance = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ExtendAllowance")]
+        ExtendAllowance = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ResetHardStop")]
+        ResetHardStop = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class UsageMeterDefinitionDto
     {
 
@@ -8744,7 +9219,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
 
         [Newtonsoft.Json.JsonProperty("aggregation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UsageMeterDefinitionDtoAggregation Aggregation { get; set; }
+        public UsageAggregationKind Aggregation { get; set; }
 
         [Newtonsoft.Json.JsonProperty("entitlementKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EntitlementKey { get; set; }
@@ -8820,11 +9295,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
 
         [Newtonsoft.Json.JsonProperty("aggregation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UsageMeterDtoAggregation Aggregation { get; set; }
+        public UsageAggregationKind Aggregation { get; set; }
 
         [Newtonsoft.Json.JsonProperty("allowanceKind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UsageMeterDtoAllowanceKind AllowanceKind { get; set; }
+        public UsageAllowanceKind AllowanceKind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("allowance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Allowance { get; set; }
@@ -8839,14 +9314,14 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
         public double NearThresholdPercent { get; set; }
 
         [Newtonsoft.Json.JsonProperty("allowedOverrides", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public System.Collections.Generic.ICollection<AllowedOverrides> AllowedOverrides { get; set; }
+        public System.Collections.Generic.ICollection<UsageLimitOverrideKind> AllowedOverrides { get; set; }
 
         [Newtonsoft.Json.JsonProperty("overrideNote", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string OverrideNote { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dataState", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UsageMeterDtoDataState DataState { get; set; }
+        public UsageDataState DataState { get; set; }
 
         [Newtonsoft.Json.JsonProperty("consumed", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Consumed { get; set; }
@@ -8871,11 +9346,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UsageMeterDtoStatus Status { get; set; }
+        public UsageMeterStatus Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("limitBehavior", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UsageMeterDtoLimitBehavior LimitBehavior { get; set; }
+        public UsageLimitBehavior LimitBehavior { get; set; }
 
         [Newtonsoft.Json.JsonProperty("stopped", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Stopped { get; set; }
@@ -8888,7 +9363,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
 
         [Newtonsoft.Json.JsonProperty("costStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UsageMeterDtoCostStatus CostStatus { get; set; }
+        public UsageCostStatus CostStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("overageCost", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public UsageMoneyDto OverageCost { get; set; }
@@ -8907,6 +9382,33 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
 
         [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Note { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum UsageMeterStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Ok")]
+        Ok = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Near")]
+        Near = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AtLimit")]
+        AtLimit = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Over")]
+        Over = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NoAllowance")]
+        NoAllowance = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unavailable")]
+        Unavailable = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unlicensed")]
+        Unlicensed = 6,
 
     }
 
@@ -8961,7 +9463,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
 
         [Newtonsoft.Json.JsonProperty("billingCycle", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UsagePlanDtoBillingCycle BillingCycle { get; set; }
+        public BillingCycle BillingCycle { get; set; }
 
         [Newtonsoft.Json.JsonProperty("periodPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public UsageMoneyDto PeriodPrice { get; set; }
@@ -8986,249 +9488,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.LicensingService
 
         [Newtonsoft.Json.JsonProperty("missing", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Missing { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum MinimumStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Ok")]
-        Ok = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Near")]
-        Near = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AtLimit")]
-        AtLimit = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Over")]
-        Over = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NoAllowance")]
-        NoAllowance = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unavailable")]
-        Unavailable = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unlicensed")]
-        Unlicensed = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TenantUsageLimitOverrideDtoKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SetAllowance")]
-        SetAllowance = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ExtendAllowance")]
-        ExtendAllowance = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ResetHardStop")]
-        ResetHardStop = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TenantUsageSummaryDtoWorstStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Ok")]
-        Ok = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Near")]
-        Near = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AtLimit")]
-        AtLimit = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Over")]
-        Over = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NoAllowance")]
-        NoAllowance = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unavailable")]
-        Unavailable = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unlicensed")]
-        Unlicensed = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UsageGrantDtoAllowanceKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Finite")]
-        Finite = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unlimited")]
-        Unlimited = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotIncluded")]
-        NotIncluded = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unlicensed")]
-        Unlicensed = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UsageMeterDefinitionDtoAggregation
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PeriodCumulative")]
-        PeriodCumulative = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Gauge")]
-        Gauge = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"TimeIntegral")]
-        TimeIntegral = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UsageMeterDtoAggregation
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PeriodCumulative")]
-        PeriodCumulative = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Gauge")]
-        Gauge = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"TimeIntegral")]
-        TimeIntegral = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UsageMeterDtoAllowanceKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Finite")]
-        Finite = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unlimited")]
-        Unlimited = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotIncluded")]
-        NotIncluded = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unlicensed")]
-        Unlicensed = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AllowedOverrides
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SetAllowance")]
-        SetAllowance = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ExtendAllowance")]
-        ExtendAllowance = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ResetHardStop")]
-        ResetHardStop = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UsageMeterDtoDataState
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Measured")]
-        Measured = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Partial")]
-        Partial = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Delayed")]
-        Delayed = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unavailable")]
-        Unavailable = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UsageMeterDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Ok")]
-        Ok = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Near")]
-        Near = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AtLimit")]
-        AtLimit = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Over")]
-        Over = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NoAllowance")]
-        NoAllowance = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unavailable")]
-        Unavailable = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unlicensed")]
-        Unlicensed = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UsageMeterDtoLimitBehavior
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"HardStop")]
-        HardStop = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Overage")]
-        Overage = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UsageMeterDtoCostStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRated")]
-        NotRated = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Estimated")]
-        Estimated = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Invoiced")]
-        Invoiced = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UsagePlanDtoBillingCycle
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Monthly")]
-        Monthly = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Annual")]
-        Annual = 1,
 
     }
 

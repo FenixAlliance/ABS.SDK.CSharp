@@ -15034,6 +15034,13 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CrmService
         [Newtonsoft.Json.JsonProperty("itemToCompareRecordsCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? ItemToCompareRecordsCount { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("saleChannel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SaleChannel SaleChannel { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("directSellerTenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string DirectSellerTenantId { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -15082,7 +15089,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CrmService
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ContactCreateDtoType Type { get; set; }
+        public ContactType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -15231,7 +15238,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CrmService
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ContactDtoType Type { get; set; }
+        public ContactType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Email { get; set; }
@@ -15395,6 +15402,17 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CrmService
 
         [Newtonsoft.Json.JsonProperty("birthday", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? Birthday { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("contactStage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ContactStage ContactStage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("contactStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ContactStatus ContactStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lastContactDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? LastContactDate { get; set; }
 
         [Newtonsoft.Json.JsonProperty("tikTokUsername", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TikTokUsername { get; set; }
@@ -16379,13 +16397,61 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CrmService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactStage
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Lead")]
+        Lead = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Prospect")]
+        Prospect = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Customer")]
+        Customer = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Opportunity")]
+        Opportunity = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"New")]
+        New = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
+        Active = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Qualified")]
+        Qualified = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unqualified")]
+        Unqualified = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContactUpdateDto
     {
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ContactUpdateDtoType Type { get; set; }
+        public ContactType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("birthday", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? Birthday { get; set; }
@@ -16643,6 +16709,33 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CrmService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum EmailAlertType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"None")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Info")]
+        Info = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Error")]
+        Error = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Warning")]
+        Warning = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Success")]
+        Success = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Action")]
+        Action = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Alert")]
+        Alert = 6,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class EmailDispatchRequest
     {
 
@@ -16668,7 +16761,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CrmService
 
         [Newtonsoft.Json.JsonProperty("alertType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public EmailDispatchRequestAlertType AlertType { get; set; }
+        public EmailAlertType AlertType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("culture", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -16813,7 +16906,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CrmService
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedContactDtoType Type { get; set; }
+        public ContactType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Email { get; set; }
@@ -16977,6 +17070,17 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CrmService
 
         [Newtonsoft.Json.JsonProperty("birthday", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? Birthday { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("contactStage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ContactStage ContactStage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("contactStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ContactStatus ContactStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lastContactDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? LastContactDate { get; set; }
 
         [Newtonsoft.Json.JsonProperty("tikTokUsername", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TikTokUsername { get; set; }
@@ -17478,6 +17582,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CrmService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SaleChannel
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unset")]
+        Unset = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Marketplace")]
+        Marketplace = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Direct")]
+        Direct = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SimpleContactDto
     {
 
@@ -17495,7 +17614,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CrmService
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SimpleContactDtoType Type { get; set; }
+        public ContactType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Email { get; set; }
@@ -17620,9 +17739,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CrmService
         [Newtonsoft.Json.JsonProperty("unreadMessagesCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? UnreadMessagesCount { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SocialProfileDtoType? Type { get; set; }
+        public SocialProfileType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("socialFeedId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialFeedId { get; set; }
@@ -17686,6 +17805,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CrmService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public SocialProfileDto Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialProfileType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"User")]
+        User = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
+        Tenant = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
+        Contact = 2,
 
     }
 
@@ -17831,108 +17965,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CrmService
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
             set { _additionalProperties = value; }
         }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ContactCreateDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ContactDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ContactUpdateDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum EmailDispatchRequestAlertType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Info")]
-        Info = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Error")]
-        Error = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Warning")]
-        Warning = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Success")]
-        Success = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Action")]
-        Action = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Alert")]
-        Alert = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedContactDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SimpleContactDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SocialProfileDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"User")]
-        User = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
 
     }
 

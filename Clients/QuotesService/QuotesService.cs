@@ -2128,6 +2128,872 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
         }
 
         /// <summary>
+        /// List the quotes the tenant received.
+        /// </summary>
+        /// <remarks>
+        /// Quotes whose receiver is the tenant and which it did not issue, supporting OData query options.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<ExtendedQuoteDtoListEnvelope> GetReceivedQuotesAsync(System.Guid tenantId, ExtendedQuoteDtoCollectionQueryParameters body)
+        {
+            return GetReceivedQuotesAsync(tenantId, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// List the quotes the tenant received.
+        /// </summary>
+        /// <remarks>
+        /// Quotes whose receiver is the tenant and which it did not issue, supporting OData query options.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<ExtendedQuoteDtoListEnvelope> GetReceivedQuotesAsync(System.Guid tenantId, ExtendedQuoteDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/QuotesService/Quotes/Received"
+                    urlBuilder_.Append("api/v2/QuotesService/Quotes/Received");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ExtendedQuoteDtoListEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Count the quotes the tenant received.
+        /// </summary>
+        /// <remarks>
+        /// The count companion of GetReceivedQuotes, supporting OData query options.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetReceivedQuotesCountAsync(System.Guid tenantId, ExtendedQuoteDtoCollectionQueryParameters body)
+        {
+            return GetReceivedQuotesCountAsync(tenantId, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Count the quotes the tenant received.
+        /// </summary>
+        /// <remarks>
+        /// The count companion of GetReceivedQuotes, supporting OData query options.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetReceivedQuotesCountAsync(System.Guid tenantId, ExtendedQuoteDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/QuotesService/Quotes/Received/Count"
+                    urlBuilder_.Append("api/v2/QuotesService/Quotes/Received/Count");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Int32Envelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Get a quote the tenant received.
+        /// </summary>
+        /// <remarks>
+        /// A quote the tenant did not receive (one it issued included) is not found.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<ExtendedQuoteDtoEnvelope> GetReceivedQuoteAsync(System.Guid tenantId, System.Guid quoteId)
+        {
+            return GetReceivedQuoteAsync(tenantId, quoteId, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get a quote the tenant received.
+        /// </summary>
+        /// <remarks>
+        /// A quote the tenant did not receive (one it issued included) is not found.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<ExtendedQuoteDtoEnvelope> GetReceivedQuoteAsync(System.Guid tenantId, System.Guid quoteId, System.Threading.CancellationToken cancellationToken)
+        {
+            if (quoteId == null)
+                throw new System.ArgumentNullException("quoteId");
+
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/QuotesService/Quotes/Received/{quoteId}"
+                    urlBuilder_.Append("api/v2/QuotesService/Quotes/Received/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(quoteId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ExtendedQuoteDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// List the quotes the current user received.
+        /// </summary>
+        /// <remarks>
+        /// Quotes whose account holder is the current user and that name no receiving tenant.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<ExtendedQuoteDtoListEnvelope> GetMyReceivedQuotesAsync(ExtendedQuoteDtoCollectionQueryParameters body)
+        {
+            return GetMyReceivedQuotesAsync(body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// List the quotes the current user received.
+        /// </summary>
+        /// <remarks>
+        /// Quotes whose account holder is the current user and that name no receiving tenant.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<ExtendedQuoteDtoListEnvelope> GetMyReceivedQuotesAsync(ExtendedQuoteDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        {
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/QuotesService/Quotes/Me/Received"
+                    urlBuilder_.Append("api/v2/QuotesService/Quotes/Me/Received");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ExtendedQuoteDtoListEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Count the quotes the current user received.
+        /// </summary>
+        /// <remarks>
+        /// The count companion of GetMyReceivedQuotes, supporting OData query options.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<Int32Envelope> GetMyReceivedQuotesCountAsync(ExtendedQuoteDtoCollectionQueryParameters body)
+        {
+            return GetMyReceivedQuotesCountAsync(body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Count the quotes the current user received.
+        /// </summary>
+        /// <remarks>
+        /// The count companion of GetMyReceivedQuotes, supporting OData query options.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Int32Envelope> GetMyReceivedQuotesCountAsync(ExtendedQuoteDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        {
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/QuotesService/Quotes/Me/Received/Count"
+                    urlBuilder_.Append("api/v2/QuotesService/Quotes/Me/Received/Count");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Int32Envelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Get a quote the current user received.
+        /// </summary>
+        /// <remarks>
+        /// A quote the current user did not receive is not found.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<ExtendedQuoteDtoEnvelope> GetMyReceivedQuoteAsync(System.Guid quoteId)
+        {
+            return GetMyReceivedQuoteAsync(quoteId, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get a quote the current user received.
+        /// </summary>
+        /// <remarks>
+        /// A quote the current user did not receive is not found.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<ExtendedQuoteDtoEnvelope> GetMyReceivedQuoteAsync(System.Guid quoteId, System.Threading.CancellationToken cancellationToken)
+        {
+            if (quoteId == null)
+                throw new System.ArgumentNullException("quoteId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/QuotesService/Quotes/Me/Received/{quoteId}"
+                    urlBuilder_.Append("api/v2/QuotesService/Quotes/Me/Received/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(quoteId, System.Globalization.CultureInfo.InvariantCulture)));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ExtendedQuoteDtoEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// List the lines of a quote the tenant received.
+        /// </summary>
+        /// <remarks>
+        /// A quote the tenant did not receive is not found. Supports OData query options.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<QuoteLineDtoListEnvelope> GetReceivedQuoteLinesAsync(System.Guid tenantId, System.Guid quoteId, QuoteLineDtoCollectionQueryParameters body)
+        {
+            return GetReceivedQuoteLinesAsync(tenantId, quoteId, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// List the lines of a quote the tenant received.
+        /// </summary>
+        /// <remarks>
+        /// A quote the tenant did not receive is not found. Supports OData query options.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<QuoteLineDtoListEnvelope> GetReceivedQuoteLinesAsync(System.Guid tenantId, System.Guid quoteId, QuoteLineDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (quoteId == null)
+                throw new System.ArgumentNullException("quoteId");
+
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/QuotesService/Quotes/Received/{quoteId}/Lines"
+                    urlBuilder_.Append("api/v2/QuotesService/Quotes/Received/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(quoteId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Lines");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<QuoteLineDtoListEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// List the lines of a quote the current user received.
+        /// </summary>
+        /// <remarks>
+        /// A quote the current user did not receive is not found. Supports OData query options.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<QuoteLineDtoListEnvelope> GetMyReceivedQuoteLinesAsync(System.Guid quoteId, QuoteLineDtoCollectionQueryParameters body)
+        {
+            return GetMyReceivedQuoteLinesAsync(quoteId, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// List the lines of a quote the current user received.
+        /// </summary>
+        /// <remarks>
+        /// A quote the current user did not receive is not found. Supports OData query options.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<QuoteLineDtoListEnvelope> GetMyReceivedQuoteLinesAsync(System.Guid quoteId, QuoteLineDtoCollectionQueryParameters body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (quoteId == null)
+                throw new System.ArgumentNullException("quoteId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/QuotesService/Quotes/Me/Received/{quoteId}/Lines"
+                    urlBuilder_.Append("api/v2/QuotesService/Quotes/Me/Received/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(quoteId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Lines");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<QuoteLineDtoListEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
         /// Get a quote by ID.
         /// </summary>
         /// <remarks>
@@ -3012,6 +3878,264 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Place an order from a quote the tenant received.
+        /// </summary>
+        /// <remarks>
+        /// The receiving tenant accepts an open, unexpired quote and places an order from it. Answers the order id; a repeat call answers the same order. A quote the tenant does not receive is not found.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<OrderIdEnvelope> PlaceOrderFromQuoteAsync(System.Guid tenantId, System.Guid quoteId)
+        {
+            return PlaceOrderFromQuoteAsync(tenantId, quoteId, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Place an order from a quote the tenant received.
+        /// </summary>
+        /// <remarks>
+        /// The receiving tenant accepts an open, unexpired quote and places an order from it. Answers the order id; a repeat call answers the same order. A quote the tenant does not receive is not found.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<OrderIdEnvelope> PlaceOrderFromQuoteAsync(System.Guid tenantId, System.Guid quoteId, System.Threading.CancellationToken cancellationToken)
+        {
+            if (quoteId == null)
+                throw new System.ArgumentNullException("quoteId");
+
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/QuotesService/Quotes/{quoteId}/PlaceOrder"
+                    urlBuilder_.Append("api/v2/QuotesService/Quotes/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(quoteId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/PlaceOrder");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<OrderIdEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 400)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Bad Request", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Place an order from a quote the current user received.
+        /// </summary>
+        /// <remarks>
+        /// The current user, as the quote's personal receiver, accepts an open, unexpired quote and places an order from it. Answers the order id; a repeat call answers the same order. A quote the user does not receive is not found.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<OrderIdEnvelope> PlaceMyOrderFromQuoteAsync(System.Guid quoteId)
+        {
+            return PlaceMyOrderFromQuoteAsync(quoteId, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Place an order from a quote the current user received.
+        /// </summary>
+        /// <remarks>
+        /// The current user, as the quote's personal receiver, accepts an open, unexpired quote and places an order from it. Answers the order id; a repeat call answers the same order. A quote the user does not receive is not found.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<OrderIdEnvelope> PlaceMyOrderFromQuoteAsync(System.Guid quoteId, System.Threading.CancellationToken cancellationToken)
+        {
+            if (quoteId == null)
+                throw new System.ArgumentNullException("quoteId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/QuotesService/Quotes/Me/{quoteId}/PlaceOrder"
+                    urlBuilder_.Append("api/v2/QuotesService/Quotes/Me/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(quoteId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/PlaceOrder");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<OrderIdEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 400)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Bad Request", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Unauthorized", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         if (status_ == 404)
@@ -4644,6 +5768,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum BusinessEntityKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContactDto
     {
 
@@ -4661,7 +5797,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ContactDtoType Type { get; set; }
+        public ContactType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Email { get; set; }
@@ -4826,11 +5962,109 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
         [Newtonsoft.Json.JsonProperty("birthday", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? Birthday { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("contactStage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ContactStage ContactStage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("contactStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ContactStatus ContactStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lastContactDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? LastContactDate { get; set; }
+
         [Newtonsoft.Json.JsonProperty("tikTokUsername", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TikTokUsername { get; set; }
 
         [Newtonsoft.Json.JsonProperty("instagramUsername", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string InstagramUsername { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactStage
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Lead")]
+        Lead = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Prospect")]
+        Prospect = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Customer")]
+        Customer = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Opportunity")]
+        Opportunity = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"New")]
+        New = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
+        Active = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Qualified")]
+        Qualified = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unqualified")]
+        Unqualified = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum CostCalculationMethod
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
+        Automatic = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
+        Custom = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum EmailAlertType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"None")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Info")]
+        Info = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Error")]
+        Error = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Warning")]
+        Warning = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Success")]
+        Success = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Action")]
+        Action = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Alert")]
+        Alert = 6,
 
     }
 
@@ -4860,7 +6094,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("alertType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public EmailDispatchRequestAlertType AlertType { get; set; }
+        public EmailAlertType AlertType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("culture", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -5032,11 +6266,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedQuoteDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedQuoteDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("forexRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double ForexRate { get; set; }
@@ -5169,11 +6403,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("quoteStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedQuoteDtoQuoteStatus QuoteStatus { get; set; }
+        public QuoteStatus QuoteStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("freightTerms", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtendedQuoteDtoFreightTerms FreightTerms { get; set; }
+        public FreightTerms FreightTerms { get; set; }
 
         [Newtonsoft.Json.JsonProperty("customDiscountsAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double CustomDiscountsAmount { get; set; }
@@ -5195,6 +6429,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("enrollment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public TenantEnrollmentDto Enrollment { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("effectiveDiscountPercent", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double EffectiveDiscountPercent { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("effectiveSurchargePercent", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double EffectiveSurchargePercent { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("effectiveTaxesPercent", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double EffectiveTaxesPercent { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("effectiveGlobalDiscountPercent", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double EffectiveGlobalDiscountPercent { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("effectiveGlobalSurchargePercent", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double EffectiveGlobalSurchargePercent { get; set; }
 
     }
 
@@ -5228,6 +6477,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("isEmpty", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsEmpty { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ExtendedQuoteDtoEnvelope
+    {
+
+        [Newtonsoft.Json.JsonProperty("isSuccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsSuccess { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("correlationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CorrelationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ActivityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ExtendedQuoteDto Result { get; set; }
 
     }
 
@@ -5270,6 +6552,36 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.AllowNull)]
         public string Email { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum FreightTerms
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FOB")]
+        FOB = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NoCharge")]
+        NoCharge = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum Gender
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Male")]
+        Male = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Female")]
+        Female = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PreferNotToSay")]
+        PreferNotToSay = 3,
 
     }
 
@@ -5381,6 +6693,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("twoFactorRecoveryCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TwoFactorRecoveryCode { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class OrderIdEnvelope
+    {
+
+        [Newtonsoft.Json.JsonProperty("isSuccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsSuccess { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("correlationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CorrelationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Timestamp { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("httpStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HttpStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("validationDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ActivityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid Result { get; set; }
 
     }
 
@@ -5546,11 +6891,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteCreateDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteCreateDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("cartId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CartId { get; set; }
@@ -5566,7 +6911,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("quoteStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteCreateDtoQuoteStatus QuoteStatus { get; set; }
+        public QuoteStatus QuoteStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("quoteLines", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<QuoteLineCreateDto> QuoteLines { get; set; }
@@ -5651,11 +6996,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("forexRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double ForexRate { get; set; }
@@ -5788,11 +7133,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("quoteStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteDtoQuoteStatus QuoteStatus { get; set; }
+        public QuoteStatus QuoteStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("freightTerms", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteDtoFreightTerms FreightTerms { get; set; }
+        public FreightTerms FreightTerms { get; set; }
 
         [Newtonsoft.Json.JsonProperty("customDiscountsAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double CustomDiscountsAmount { get; set; }
@@ -6042,11 +7387,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteLineCreateDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteLineCreateDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("itemId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ItemId { get; set; }
@@ -6314,11 +7659,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteLineDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteLineDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("forexRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double ForexRate { get; set; }
@@ -6454,6 +7799,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("quantity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Quantity { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("unitPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double UnitPrice { get; set; }
 
         [Newtonsoft.Json.JsonProperty("free", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Free { get; set; }
@@ -6832,11 +8180,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteLineUpdateDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteLineUpdateDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("itemId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ItemId { get; set; }
@@ -7170,11 +8518,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteLineUpsertDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteLineUpsertDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("itemId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ItemId { get; set; }
@@ -7365,6 +8713,27 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum QuoteStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Draft")]
+        Draft = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"New")]
+        New = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Accepted")]
+        Accepted = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Declined")]
+        Declined = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Expired")]
+        Expired = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class QuoteUpdateDto
     {
 
@@ -7514,22 +8883,22 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteUpdateDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteUpdateDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("cartId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CartId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("quoteStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteUpdateDtoQuoteStatus QuoteStatus { get; set; }
+        public QuoteStatus QuoteStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("freightTerms", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public QuoteUpdateDtoFreightTerms FreightTerms { get; set; }
+        public FreightTerms FreightTerms { get; set; }
 
         [Newtonsoft.Json.JsonProperty("effectiveTo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? EffectiveTo { get; set; }
@@ -7612,6 +8981,33 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SiteTheme
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"System")]
+        System = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Light")]
+        Light = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Dark")]
+        Dark = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum TaxCalculationMethod
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
+        Included = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
+        Excluded = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TenantDto
     {
 
@@ -7626,7 +9022,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
 
         [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TenantDtoKind Kind { get; set; }
+        public BusinessEntityKind Kind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TaxId { get; set; }
@@ -7808,6 +9204,27 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum UserAvailability
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DND")]
+        DND = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Busy")]
+        Busy = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Away")]
+        Away = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Offline")]
+        Offline = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Available")]
+        Available = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class UserDto
     {
 
@@ -7880,9 +9297,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
         [Newtonsoft.Json.JsonProperty("languageId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string LanguageId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UserDtoGender? Gender { get; set; }
+        public Gender Gender { get; set; }
 
         [Newtonsoft.Json.JsonProperty("cityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CityId { get; set; }
@@ -7938,9 +9355,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
         [Newtonsoft.Json.JsonProperty("emailConfirmed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool EmailConfirmed { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("availability", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("availability", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UserDtoAvailability? Availability { get; set; }
+        public UserAvailability Availability { get; set; }
 
         [Newtonsoft.Json.JsonProperty("lockoutEnabled", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool LockoutEnabled { get; set; }
@@ -7951,426 +9368,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.QuotesService
         [Newtonsoft.Json.JsonProperty("enrollmentsCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? EnrollmentsCount { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("siteTheme", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("siteTheme", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UserDtoSiteTheme? SiteTheme { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ContactDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum EmailDispatchRequestAlertType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Info")]
-        Info = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Error")]
-        Error = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Warning")]
-        Warning = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Success")]
-        Success = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Action")]
-        Action = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Alert")]
-        Alert = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedQuoteDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedQuoteDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedQuoteDtoQuoteStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Draft")]
-        Draft = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"New")]
-        New = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Accepted")]
-        Accepted = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Declined")]
-        Declined = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Expired")]
-        Expired = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ExtendedQuoteDtoFreightTerms
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FOB")]
-        FOB = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NoCharge")]
-        NoCharge = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteCreateDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteCreateDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteCreateDtoQuoteStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Draft")]
-        Draft = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"New")]
-        New = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Accepted")]
-        Accepted = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Declined")]
-        Declined = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Expired")]
-        Expired = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteDtoQuoteStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Draft")]
-        Draft = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"New")]
-        New = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Accepted")]
-        Accepted = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Declined")]
-        Declined = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Expired")]
-        Expired = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteDtoFreightTerms
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FOB")]
-        FOB = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NoCharge")]
-        NoCharge = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteLineCreateDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteLineCreateDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteLineDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteLineDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteLineUpdateDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteLineUpdateDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteLineUpsertDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteLineUpsertDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteUpdateDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteUpdateDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteUpdateDtoQuoteStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Draft")]
-        Draft = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"New")]
-        New = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Accepted")]
-        Accepted = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Declined")]
-        Declined = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Expired")]
-        Expired = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum QuoteUpdateDtoFreightTerms
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FOB")]
-        FOB = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NoCharge")]
-        NoCharge = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TenantDtoKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UserDtoGender
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Male")]
-        Male = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Female")]
-        Female = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PreferNotToSay")]
-        PreferNotToSay = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UserDtoAvailability
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DND")]
-        DND = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Busy")]
-        Busy = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Away")]
-        Away = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Offline")]
-        Offline = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Available")]
-        Available = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum UserDtoSiteTheme
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"System")]
-        System = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Light")]
-        Light = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Dark")]
-        Dark = 2,
+        public SiteTheme SiteTheme { get; set; }
 
     }
 

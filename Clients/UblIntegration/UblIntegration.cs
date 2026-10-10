@@ -77,7 +77,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UblIntegration
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FileResponse> GetUblCreditNoteAsync(System.Guid tenantId, System.Guid invoiceId, Profile? profile, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FileResponse> GetUblCreditNoteAsync(System.Guid tenantId, System.Guid invoiceId, UblProfileType? profile, string api_version, string x_api_version)
         {
             return GetUblCreditNoteAsync(tenantId, invoiceId, profile, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -88,7 +88,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UblIntegration
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileResponse> GetUblCreditNoteAsync(System.Guid tenantId, System.Guid invoiceId, Profile? profile, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FileResponse> GetUblCreditNoteAsync(System.Guid tenantId, System.Guid invoiceId, UblProfileType? profile, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (invoiceId == null)
                 throw new System.ArgumentNullException("invoiceId");
@@ -400,7 +400,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UblIntegration
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FileResponse> GetUblDebitNoteAsync(System.Guid tenantId, System.Guid invoiceId, Profile2? profile, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FileResponse> GetUblDebitNoteAsync(System.Guid tenantId, System.Guid invoiceId, UblProfileType? profile, string api_version, string x_api_version)
         {
             return GetUblDebitNoteAsync(tenantId, invoiceId, profile, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -411,7 +411,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UblIntegration
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileResponse> GetUblDebitNoteAsync(System.Guid tenantId, System.Guid invoiceId, Profile2? profile, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FileResponse> GetUblDebitNoteAsync(System.Guid tenantId, System.Guid invoiceId, UblProfileType? profile, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (invoiceId == null)
                 throw new System.ArgumentNullException("invoiceId");
@@ -723,7 +723,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UblIntegration
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FileResponse> GetUblDespatchAdviceAsync(System.Guid tenantId, System.Guid shipmentId, Profile3? profile, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FileResponse> GetUblDespatchAdviceAsync(System.Guid tenantId, System.Guid shipmentId, UblProfileType? profile, string api_version, string x_api_version)
         {
             return GetUblDespatchAdviceAsync(tenantId, shipmentId, profile, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -734,7 +734,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UblIntegration
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileResponse> GetUblDespatchAdviceAsync(System.Guid tenantId, System.Guid shipmentId, Profile3? profile, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FileResponse> GetUblDespatchAdviceAsync(System.Guid tenantId, System.Guid shipmentId, UblProfileType? profile, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (shipmentId == null)
                 throw new System.ArgumentNullException("shipmentId");
@@ -2661,7 +2661,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UblIntegration
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FileResponse> GetUblInvoiceAsync(System.Guid tenantId, System.Guid invoiceId, Profile4? profile, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FileResponse> GetUblInvoiceAsync(System.Guid tenantId, System.Guid invoiceId, UblProfileType? profile, string api_version, string x_api_version)
         {
             return GetUblInvoiceAsync(tenantId, invoiceId, profile, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -2672,7 +2672,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UblIntegration
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileResponse> GetUblInvoiceAsync(System.Guid tenantId, System.Guid invoiceId, Profile4? profile, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FileResponse> GetUblInvoiceAsync(System.Guid tenantId, System.Guid invoiceId, UblProfileType? profile, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (invoiceId == null)
                 throw new System.ArgumentNullException("invoiceId");
@@ -2984,7 +2984,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UblIntegration
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<FileResponse> GetUblReceiptAdviceAsync(System.Guid tenantId, System.Guid itemRestockId, Profile5? profile, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<FileResponse> GetUblReceiptAdviceAsync(System.Guid tenantId, System.Guid itemRestockId, UblProfileType? profile, string api_version, string x_api_version)
         {
             return GetUblReceiptAdviceAsync(tenantId, itemRestockId, profile, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -2995,7 +2995,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UblIntegration
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileResponse> GetUblReceiptAdviceAsync(System.Guid tenantId, System.Guid itemRestockId, Profile5? profile, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<FileResponse> GetUblReceiptAdviceAsync(System.Guid tenantId, System.Guid itemRestockId, UblProfileType? profile, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (itemRestockId == null)
                 throw new System.ArgumentNullException("itemRestockId");
@@ -3127,7 +3127,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UblIntegration
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<UblRenderedDocumentModelListEnvelope> GetUblReceiptAdvicePartitionsAsync(System.Guid tenantId, System.Guid itemRestockId, Profile6? profile, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<UblRenderedDocumentModelListEnvelope> GetUblReceiptAdvicePartitionsAsync(System.Guid tenantId, System.Guid itemRestockId, UblProfileType? profile, string api_version, string x_api_version)
         {
             return GetUblReceiptAdvicePartitionsAsync(tenantId, itemRestockId, profile, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -3138,7 +3138,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UblIntegration
         /// </summary>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<UblRenderedDocumentModelListEnvelope> GetUblReceiptAdvicePartitionsAsync(System.Guid tenantId, System.Guid itemRestockId, Profile6? profile, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<UblRenderedDocumentModelListEnvelope> GetUblReceiptAdvicePartitionsAsync(System.Guid tenantId, System.Guid itemRestockId, UblProfileType? profile, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (itemRestockId == null)
                 throw new System.ArgumentNullException("itemRestockId");
@@ -3623,6 +3623,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UblIntegration
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum UblProfileType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Generic")]
+        Generic = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Dian")]
+        Dian = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class UblRenderedDocumentModel
     {
 
@@ -3670,78 +3682,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.UblIntegration
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<UblRenderedDocumentModel> Result { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Profile
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Generic")]
-        Generic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Dian")]
-        Dian = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Profile2
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Generic")]
-        Generic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Dian")]
-        Dian = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Profile3
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Generic")]
-        Generic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Dian")]
-        Dian = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Profile4
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Generic")]
-        Generic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Dian")]
-        Dian = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Profile5
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Generic")]
-        Generic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Dian")]
-        Dian = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Profile6
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Generic")]
-        Generic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Dian")]
-        Dian = 1,
 
     }
 

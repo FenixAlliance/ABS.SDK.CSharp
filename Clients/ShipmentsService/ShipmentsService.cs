@@ -12966,7 +12966,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ShipmentsService
 
         [Newtonsoft.Json.JsonProperty("shippingTerms", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ShipmentCreateDtoShippingTerms ShippingTerms { get; set; }
+        public ShippingTerms ShippingTerms { get; set; }
 
         [Newtonsoft.Json.JsonProperty("orderId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string OrderId { get; set; }
@@ -13009,7 +13009,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ShipmentsService
 
         [Newtonsoft.Json.JsonProperty("shippingTerms", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ShipmentDtoShippingTerms ShippingTerms { get; set; }
+        public ShippingTerms ShippingTerms { get; set; }
 
         [Newtonsoft.Json.JsonProperty("orderId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string OrderId { get; set; }
@@ -13154,10 +13154,22 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ShipmentsService
 
         [Newtonsoft.Json.JsonProperty("shippingTerms", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ShipmentUpdateDtoShippingTerms ShippingTerms { get; set; }
+        public ShippingTerms ShippingTerms { get; set; }
 
         [Newtonsoft.Json.JsonProperty("orderId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string OrderId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ShippingClassCalculationType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PerClass")]
+        PerClass = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PerOrder")]
+        PerOrder = 1,
 
     }
 
@@ -13684,7 +13696,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ShipmentsService
 
         [Newtonsoft.Json.JsonProperty("shippingClassCalculationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ShippingMethodCreateDtoShippingClassCalculationType ShippingClassCalculationType { get; set; }
+        public ShippingClassCalculationType ShippingClassCalculationType { get; set; }
 
     }
 
@@ -13721,7 +13733,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ShipmentsService
 
         [Newtonsoft.Json.JsonProperty("shippingClassCalculationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ShippingMethodDtoShippingClassCalculationType ShippingClassCalculationType { get; set; }
+        public ShippingClassCalculationType ShippingClassCalculationType { get; set; }
 
     }
 
@@ -13848,7 +13860,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ShipmentsService
 
         [Newtonsoft.Json.JsonProperty("shippingClassCalculationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ShippingMethodUpdateDtoShippingClassCalculationType ShippingClassCalculationType { get; set; }
+        public ShippingClassCalculationType ShippingClassCalculationType { get; set; }
 
     }
 
@@ -14000,6 +14012,48 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ShipmentsService
 
         [Newtonsoft.Json.JsonProperty("postalCodes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PostalCodes { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ShippingTerms
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NC")]
+        NC = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"EXW")]
+        EXW = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FCA")]
+        FCA = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FOB")]
+        FOB = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FAS")]
+        FAS = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"CFR")]
+        CFR = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"CIF")]
+        CIF = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"CPT")]
+        CPT = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"CIP")]
+        CIP = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DDP")]
+        DDP = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DAP")]
+        DAP = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DPU")]
+        DPU = 11,
 
     }
 
@@ -14220,168 +14274,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ShipmentsService
 
         [Newtonsoft.Json.JsonProperty("isMachineRemembered", Required = Newtonsoft.Json.Required.Always)]
         public bool IsMachineRemembered { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ShipmentCreateDtoShippingTerms
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NC")]
-        NC = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"EXW")]
-        EXW = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FCA")]
-        FCA = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FOB")]
-        FOB = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FAS")]
-        FAS = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CFR")]
-        CFR = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CIF")]
-        CIF = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CPT")]
-        CPT = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CIP")]
-        CIP = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DDP")]
-        DDP = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DAP")]
-        DAP = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DPU")]
-        DPU = 11,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ShipmentDtoShippingTerms
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NC")]
-        NC = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"EXW")]
-        EXW = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FCA")]
-        FCA = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FOB")]
-        FOB = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FAS")]
-        FAS = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CFR")]
-        CFR = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CIF")]
-        CIF = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CPT")]
-        CPT = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CIP")]
-        CIP = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DDP")]
-        DDP = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DAP")]
-        DAP = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DPU")]
-        DPU = 11,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ShipmentUpdateDtoShippingTerms
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NC")]
-        NC = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"EXW")]
-        EXW = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FCA")]
-        FCA = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FOB")]
-        FOB = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FAS")]
-        FAS = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CFR")]
-        CFR = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CIF")]
-        CIF = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CPT")]
-        CPT = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CIP")]
-        CIP = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DDP")]
-        DDP = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DAP")]
-        DAP = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DPU")]
-        DPU = 11,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ShippingMethodCreateDtoShippingClassCalculationType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PerClass")]
-        PerClass = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PerOrder")]
-        PerOrder = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ShippingMethodDtoShippingClassCalculationType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PerClass")]
-        PerClass = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PerOrder")]
-        PerOrder = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ShippingMethodUpdateDtoShippingClassCalculationType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PerClass")]
-        PerClass = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PerOrder")]
-        PerOrder = 1,
 
     }
 

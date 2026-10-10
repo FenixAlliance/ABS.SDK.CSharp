@@ -8483,7 +8483,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PricingService
 
         [Newtonsoft.Json.JsonProperty("discountListType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DiscountListCreateDtoDiscountListType DiscountListType { get; set; }
+        public DiscountListType DiscountListType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("currencyId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CurrencyId { get; set; }
@@ -8505,7 +8505,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PricingService
 
         [Newtonsoft.Json.JsonProperty("discountListType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DiscountListDtoDiscountListType DiscountListType { get; set; }
+        public DiscountListType DiscountListType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("currencyId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CurrencyId { get; set; }
@@ -8618,6 +8618,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PricingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum DiscountListType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Amount")]
+        Amount = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Percentage")]
+        Percentage = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class DiscountListUpdateDto
     {
 
@@ -8627,7 +8639,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PricingService
 
         [Newtonsoft.Json.JsonProperty("discountListType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DiscountListUpdateDtoDiscountListType DiscountListType { get; set; }
+        public DiscountListType DiscountListType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("currencyId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CurrencyId { get; set; }
@@ -9247,6 +9259,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PricingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PriceListContext
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Sales")]
+        Sales = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Purchase")]
+        Purchase = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Cost")]
+        Cost = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class PriceListCreateDto
     {
 
@@ -9268,7 +9295,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PricingService
 
         [Newtonsoft.Json.JsonProperty("context", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PriceListCreateDtoContext Context { get; set; }
+        public PriceListContext Context { get; set; }
 
         [Newtonsoft.Json.JsonProperty("startDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset StartDate { get; set; }
@@ -9317,7 +9344,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PricingService
 
         [Newtonsoft.Json.JsonProperty("context", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PriceListDtoContext Context { get; set; }
+        public PriceListContext Context { get; set; }
 
         [Newtonsoft.Json.JsonProperty("currencyId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CurrencyId { get; set; }
@@ -9457,7 +9484,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PricingService
 
         [Newtonsoft.Json.JsonProperty("context", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PriceListUpdateDtoContext Context { get; set; }
+        public PriceListContext Context { get; set; }
 
         [Newtonsoft.Json.JsonProperty("startDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset StartDate { get; set; }
@@ -10217,87 +10244,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.PricingService
 
         [Newtonsoft.Json.JsonProperty("isMachineRemembered", Required = Newtonsoft.Json.Required.Always)]
         public bool IsMachineRemembered { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DiscountListCreateDtoDiscountListType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Amount")]
-        Amount = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Percentage")]
-        Percentage = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DiscountListDtoDiscountListType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Amount")]
-        Amount = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Percentage")]
-        Percentage = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum DiscountListUpdateDtoDiscountListType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Amount")]
-        Amount = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Percentage")]
-        Percentage = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PriceListCreateDtoContext
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sales")]
-        Sales = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Purchase")]
-        Purchase = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Cost")]
-        Cost = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PriceListDtoContext
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sales")]
-        Sales = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Purchase")]
-        Purchase = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Cost")]
-        Cost = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PriceListUpdateDtoContext
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sales")]
-        Sales = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Purchase")]
-        Purchase = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Cost")]
-        Cost = 2,
 
     }
 

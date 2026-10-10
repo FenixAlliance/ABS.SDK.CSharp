@@ -12914,11 +12914,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SecurityService
 
         [Newtonsoft.Json.JsonProperty("principalKind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ApplicationPrincipalDetailDtoPrincipalKind PrincipalKind { get; set; }
+        public PrincipalKind PrincipalKind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("principalStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ApplicationPrincipalDetailDtoPrincipalStatus PrincipalStatus { get; set; }
+        public PrincipalStatus PrincipalStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("businessApplicationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BusinessApplicationId { get; set; }
@@ -12997,11 +12997,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SecurityService
 
         [Newtonsoft.Json.JsonProperty("principalKind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ApplicationPrincipalDtoPrincipalKind PrincipalKind { get; set; }
+        public PrincipalKind PrincipalKind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("principalStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ApplicationPrincipalDtoPrincipalStatus PrincipalStatus { get; set; }
+        public PrincipalStatus PrincipalStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("businessApplicationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BusinessApplicationId { get; set; }
@@ -13834,6 +13834,195 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SecurityService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum HttpStatusCode
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Continue")]
+        Continue = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SwitchingProtocols")]
+        SwitchingProtocols = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Processing")]
+        Processing = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"EarlyHints")]
+        EarlyHints = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OK")]
+        OK = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Created")]
+        Created = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Accepted")]
+        Accepted = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NonAuthoritativeInformation")]
+        NonAuthoritativeInformation = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NoContent")]
+        NoContent = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ResetContent")]
+        ResetContent = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PartialContent")]
+        PartialContent = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MultiStatus")]
+        MultiStatus = 11,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AlreadyReported")]
+        AlreadyReported = 12,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"IMUsed")]
+        IMUsed = 13,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MultipleChoices")]
+        MultipleChoices = 14,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MovedPermanently")]
+        MovedPermanently = 15,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Found")]
+        Found = 16,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SeeOther")]
+        SeeOther = 17,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotModified")]
+        NotModified = 18,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UseProxy")]
+        UseProxy = 19,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unused")]
+        Unused = 20,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"TemporaryRedirect")]
+        TemporaryRedirect = 21,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PermanentRedirect")]
+        PermanentRedirect = 22,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"BadRequest")]
+        BadRequest = 23,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unauthorized")]
+        Unauthorized = 24,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PaymentRequired")]
+        PaymentRequired = 25,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Forbidden")]
+        Forbidden = 26,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotFound")]
+        NotFound = 27,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MethodNotAllowed")]
+        MethodNotAllowed = 28,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotAcceptable")]
+        NotAcceptable = 29,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ProxyAuthenticationRequired")]
+        ProxyAuthenticationRequired = 30,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"RequestTimeout")]
+        RequestTimeout = 31,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Conflict")]
+        Conflict = 32,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Gone")]
+        Gone = 33,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"LengthRequired")]
+        LengthRequired = 34,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PreconditionFailed")]
+        PreconditionFailed = 35,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"RequestEntityTooLarge")]
+        RequestEntityTooLarge = 36,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"RequestUriTooLong")]
+        RequestUriTooLong = 37,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UnsupportedMediaType")]
+        UnsupportedMediaType = 38,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"RequestedRangeNotSatisfiable")]
+        RequestedRangeNotSatisfiable = 39,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ExpectationFailed")]
+        ExpectationFailed = 40,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MisdirectedRequest")]
+        MisdirectedRequest = 41,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UnprocessableEntity")]
+        UnprocessableEntity = 42,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Locked")]
+        Locked = 43,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FailedDependency")]
+        FailedDependency = 44,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UpgradeRequired")]
+        UpgradeRequired = 45,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PreconditionRequired")]
+        PreconditionRequired = 46,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"TooManyRequests")]
+        TooManyRequests = 47,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"RequestHeaderFieldsTooLarge")]
+        RequestHeaderFieldsTooLarge = 48,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UnavailableForLegalReasons")]
+        UnavailableForLegalReasons = 49,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"InternalServerError")]
+        InternalServerError = 50,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotImplemented")]
+        NotImplemented = 51,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"BadGateway")]
+        BadGateway = 52,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ServiceUnavailable")]
+        ServiceUnavailable = 53,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"GatewayTimeout")]
+        GatewayTimeout = 54,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"HttpVersionNotSupported")]
+        HttpVersionNotSupported = 55,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"VariantAlsoNegotiates")]
+        VariantAlsoNegotiates = 56,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"InsufficientStorage")]
+        InsufficientStorage = 57,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"LoopDetected")]
+        LoopDetected = 58,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotExtended")]
+        NotExtended = 59,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NetworkAuthenticationRequired")]
+        NetworkAuthenticationRequired = 60,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class HttpValidationProblemDetails
     {
 
@@ -13944,7 +14133,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SecurityService
 
         [Newtonsoft.Json.JsonProperty("logType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public LogDtoLogType LogType { get; set; }
+        public HttpStatusCode LogType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("businessID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BusinessID { get; set; }
@@ -14360,6 +14549,42 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SecurityService
 
         [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public object Value { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PrincipalKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Human")]
+        Human = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
+        Agent = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Application")]
+        Application = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
+        Service = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"System")]
+        System = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PrincipalStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
+        Active = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Suspended")]
+        Suspended = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Disabled")]
+        Disabled = 2,
 
     }
 
@@ -15013,267 +15238,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SecurityService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<WebhookRequestDto> Result { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ApplicationPrincipalDetailDtoPrincipalKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Human")]
-        Human = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
-        Agent = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Application")]
-        Application = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
-        Service = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"System")]
-        System = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ApplicationPrincipalDetailDtoPrincipalStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
-        Active = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Suspended")]
-        Suspended = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Disabled")]
-        Disabled = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ApplicationPrincipalDtoPrincipalKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Human")]
-        Human = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
-        Agent = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Application")]
-        Application = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
-        Service = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"System")]
-        System = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ApplicationPrincipalDtoPrincipalStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
-        Active = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Suspended")]
-        Suspended = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Disabled")]
-        Disabled = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum LogDtoLogType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Continue")]
-        Continue = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SwitchingProtocols")]
-        SwitchingProtocols = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Processing")]
-        Processing = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"EarlyHints")]
-        EarlyHints = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OK")]
-        OK = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Created")]
-        Created = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Accepted")]
-        Accepted = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NonAuthoritativeInformation")]
-        NonAuthoritativeInformation = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NoContent")]
-        NoContent = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ResetContent")]
-        ResetContent = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PartialContent")]
-        PartialContent = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MultiStatus")]
-        MultiStatus = 11,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AlreadyReported")]
-        AlreadyReported = 12,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"IMUsed")]
-        IMUsed = 13,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MultipleChoices")]
-        MultipleChoices = 14,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MovedPermanently")]
-        MovedPermanently = 15,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Found")]
-        Found = 16,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SeeOther")]
-        SeeOther = 17,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotModified")]
-        NotModified = 18,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UseProxy")]
-        UseProxy = 19,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unused")]
-        Unused = 20,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"TemporaryRedirect")]
-        TemporaryRedirect = 21,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PermanentRedirect")]
-        PermanentRedirect = 22,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"BadRequest")]
-        BadRequest = 23,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unauthorized")]
-        Unauthorized = 24,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PaymentRequired")]
-        PaymentRequired = 25,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Forbidden")]
-        Forbidden = 26,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotFound")]
-        NotFound = 27,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MethodNotAllowed")]
-        MethodNotAllowed = 28,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotAcceptable")]
-        NotAcceptable = 29,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ProxyAuthenticationRequired")]
-        ProxyAuthenticationRequired = 30,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"RequestTimeout")]
-        RequestTimeout = 31,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Conflict")]
-        Conflict = 32,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Gone")]
-        Gone = 33,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"LengthRequired")]
-        LengthRequired = 34,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PreconditionFailed")]
-        PreconditionFailed = 35,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"RequestEntityTooLarge")]
-        RequestEntityTooLarge = 36,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"RequestUriTooLong")]
-        RequestUriTooLong = 37,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UnsupportedMediaType")]
-        UnsupportedMediaType = 38,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"RequestedRangeNotSatisfiable")]
-        RequestedRangeNotSatisfiable = 39,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ExpectationFailed")]
-        ExpectationFailed = 40,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MisdirectedRequest")]
-        MisdirectedRequest = 41,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UnprocessableEntity")]
-        UnprocessableEntity = 42,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Locked")]
-        Locked = 43,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FailedDependency")]
-        FailedDependency = 44,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UpgradeRequired")]
-        UpgradeRequired = 45,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PreconditionRequired")]
-        PreconditionRequired = 46,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"TooManyRequests")]
-        TooManyRequests = 47,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"RequestHeaderFieldsTooLarge")]
-        RequestHeaderFieldsTooLarge = 48,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UnavailableForLegalReasons")]
-        UnavailableForLegalReasons = 49,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"InternalServerError")]
-        InternalServerError = 50,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotImplemented")]
-        NotImplemented = 51,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"BadGateway")]
-        BadGateway = 52,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ServiceUnavailable")]
-        ServiceUnavailable = 53,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"GatewayTimeout")]
-        GatewayTimeout = 54,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"HttpVersionNotSupported")]
-        HttpVersionNotSupported = 55,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"VariantAlsoNegotiates")]
-        VariantAlsoNegotiates = 56,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"InsufficientStorage")]
-        InsufficientStorage = 57,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"LoopDetected")]
-        LoopDetected = 58,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotExtended")]
-        NotExtended = 59,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NetworkAuthenticationRequired")]
-        NetworkAuthenticationRequired = 60,
 
     }
 

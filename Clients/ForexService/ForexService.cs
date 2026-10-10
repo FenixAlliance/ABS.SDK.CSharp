@@ -4249,6 +4249,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ForexService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ForexSetRepairAction
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Create")]
+        Create = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Replace")]
+        Replace = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unchanged")]
+        Unchanged = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NoSnapshot")]
+        NoSnapshot = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ForexSetRepairDay
     {
 
@@ -4257,7 +4275,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ForexService
 
         [Newtonsoft.Json.JsonProperty("action", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ForexSetRepairDayAction Action { get; set; }
+        public ForexSetRepairAction Action { get; set; }
 
         [Newtonsoft.Json.JsonProperty("snapshotRevision", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SnapshotRevision { get; set; }
@@ -4591,24 +4609,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ForexService
 
         [Newtonsoft.Json.JsonProperty("isMachineRemembered", Required = Newtonsoft.Json.Required.Always)]
         public bool IsMachineRemembered { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ForexSetRepairDayAction
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Create")]
-        Create = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Replace")]
-        Replace = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unchanged")]
-        Unchanged = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NoSnapshot")]
-        NoSnapshot = 3,
 
     }
 

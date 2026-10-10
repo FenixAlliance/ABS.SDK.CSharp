@@ -60173,6 +60173,39 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AccountBalanceCriteria
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Debit")]
+        Debit = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Credit")]
+        Credit = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AccountCategory
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Assets")]
+        Assets = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Equity")]
+        Equity = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Revenue")]
+        Revenue = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Expense")]
+        Expense = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Liabilities")]
+        Liabilities = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AccountCreateDto
     {
 
@@ -60217,7 +60250,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("accountCategory", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AccountCreateDtoAccountCategory AccountCategory { get; set; }
+        public AccountCategory AccountCategory { get; set; }
 
         [Newtonsoft.Json.JsonProperty("isContra", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsContra { get; set; }
@@ -60225,9 +60258,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("isMonetary", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsMonetary { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("incomeStatementSubType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("incomeStatementSubType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AccountCreateDtoIncomeStatementSubType? IncomeStatementSubType { get; set; }
+        public IncomeStatementSubType IncomeStatementSubType { get; set; }
 
     }
 
@@ -60312,7 +60345,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("accountCategory", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AccountDtoAccountCategory AccountCategory { get; set; }
+        public AccountCategory AccountCategory { get; set; }
 
         [Newtonsoft.Json.JsonProperty("isContra", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsContra { get; set; }
@@ -60320,13 +60353,13 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("isMonetary", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsMonetary { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("incomeStatementSubType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("incomeStatementSubType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AccountDtoIncomeStatementSubType? IncomeStatementSubType { get; set; }
+        public IncomeStatementSubType IncomeStatementSubType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("normalBalance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AccountDtoNormalBalance NormalBalance { get; set; }
+        public AccountBalanceCriteria NormalBalance { get; set; }
 
         [Newtonsoft.Json.JsonProperty("balanceAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Money BalanceAmount { get; set; }
@@ -60926,7 +60959,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("accountCategory", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AccountUpdateDtoAccountCategory AccountCategory { get; set; }
+        public AccountCategory AccountCategory { get; set; }
 
         [Newtonsoft.Json.JsonProperty("isContra", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsContra { get; set; }
@@ -60934,9 +60967,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("isMonetary", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsMonetary { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("incomeStatementSubType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("incomeStatementSubType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AccountUpdateDtoIncomeStatementSubType? IncomeStatementSubType { get; set; }
+        public IncomeStatementSubType IncomeStatementSubType { get; set; }
 
     }
 
@@ -60961,7 +60994,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("direction", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AccountingEntryCreateDtoDirection Direction { get; set; }
+        public PostingDirection Direction { get; set; }
 
         [Newtonsoft.Json.JsonProperty("transactionAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.0000000000000001D, 999999999999999900000D)]
@@ -61004,7 +61037,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("direction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AccountingEntryDtoDirection Direction { get; set; }
+        public PostingDirection Direction { get; set; }
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; }
@@ -61167,7 +61200,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("direction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AccountingEntryUpdateDtoDirection Direction { get; set; }
+        public PostingDirection Direction { get; set; }
 
         [Newtonsoft.Json.JsonProperty("transactionAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.0000000000000001D, 999999999999999900000D)]
@@ -62110,7 +62143,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("bankGuaranteeType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BankGuaranteeCreateDtoBankGuaranteeType BankGuaranteeType { get; set; }
+        public BankGuaranteeType BankGuaranteeType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("contactId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(36)]
@@ -62179,7 +62212,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("bankGuaranteeType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BankGuaranteeDtoBankGuaranteeType BankGuaranteeType { get; set; }
+        public BankGuaranteeType BankGuaranteeType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EnrollmentId { get; set; }
@@ -62304,6 +62337,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum BankGuaranteeType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Receiving")]
+        Receiving = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Providing")]
+        Providing = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class BankGuaranteeUpdateDto
     {
 
@@ -62336,7 +62381,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("bankGuaranteeType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BankGuaranteeUpdateDtoBankGuaranteeType BankGuaranteeType { get; set; }
+        public BankGuaranteeType BankGuaranteeType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("contactId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(36)]
@@ -62899,7 +62944,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("taxPayerType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BillingProfileCreateDtoTaxPayerType TaxPayerType { get; set; }
+        public TaxPayerType TaxPayerType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("countryId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -63088,7 +63133,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("taxPayerType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BillingProfileDtoTaxPayerType TaxPayerType { get; set; }
+        public TaxPayerType TaxPayerType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("countryId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -63282,7 +63327,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("taxPayerType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BillingProfileUpdateDtoTaxPayerType TaxPayerType { get; set; }
+        public TaxPayerType TaxPayerType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("countryId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CountryId { get; set; }
@@ -63973,7 +64018,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ContactDtoType Type { get; set; }
+        public ContactType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Email { get; set; }
@@ -64138,11 +64183,82 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("birthday", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? Birthday { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("contactStage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ContactStage ContactStage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("contactStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ContactStatus ContactStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lastContactDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? LastContactDate { get; set; }
+
         [Newtonsoft.Json.JsonProperty("tikTokUsername", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TikTokUsername { get; set; }
 
         [Newtonsoft.Json.JsonProperty("instagramUsername", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string InstagramUsername { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactStage
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Lead")]
+        Lead = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Prospect")]
+        Prospect = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Customer")]
+        Customer = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Opportunity")]
+        Opportunity = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"New")]
+        New = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
+        Active = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Qualified")]
+        Qualified = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unqualified")]
+        Unqualified = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum CostCalculationMethod
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
+        Automatic = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
+        Custom = 1,
 
     }
 
@@ -64330,7 +64446,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("costCentreType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public CostCentreCreateDtoCostCentreType CostCentreType { get; set; }
+        public CostCentreType CostCentreType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("costCentresGroupId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(36)]
@@ -64363,7 +64479,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("costCentreType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public CostCentreDtoCostCentreType CostCentreType { get; set; }
+        public CostCentreType CostCentreType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TenantId { get; set; }
@@ -64650,6 +64766,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum CostCentreType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
+        Service = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Production")]
+        Production = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CostCentreUpdateDto
     {
 
@@ -64666,7 +64794,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("costCentreType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public CostCentreUpdateDtoCostCentreType CostCentreType { get; set; }
+        public CostCentreType CostCentreType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("costCentresGroupId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(36)]
@@ -64750,6 +64878,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum DocumentType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Standard")]
+        Standard = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DebitNote")]
+        DebitNote = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"CreditNote")]
+        CreditNote = 2,
 
     }
 
@@ -65673,7 +65816,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public FiscalPeriodDtoStatus Status { get; set; }
+        public FiscalPeriodStatus Status { get; set; }
 
     }
 
@@ -65773,6 +65916,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<FiscalPeriodDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum FiscalPeriodStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Open")]
+        Open = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Closed")]
+        Closed = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Locked")]
+        Locked = 2,
 
     }
 
@@ -66691,6 +66849,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum IncomeStatementSubType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OperatingRevenue")]
+        OperatingRevenue = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Gain")]
+        Gain = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OperatingExpense")]
+        OperatingExpense = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Loss")]
+        Loss = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class InfoRequest
     {
 
@@ -66794,7 +66970,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("documentType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public InvoiceEnumerationRangeCreateDtoDocumentType DocumentType { get; set; }
+        public DocumentType DocumentType { get; set; }
 
     }
 
@@ -66846,7 +67022,14 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("documentType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public InvoiceEnumerationRangeDtoDocumentType DocumentType { get; set; }
+        public DocumentType DocumentType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("remainingNumbers", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long RemainingNumbers { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("health", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public InvoiceEnumerationRangeHealth Health { get; set; }
 
     }
 
@@ -66950,6 +67133,30 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum InvoiceEnumerationRangeHealth
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
+        Active = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ExpiringSoon")]
+        ExpiringSoon = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NearlyExhausted")]
+        NearlyExhausted = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Exhausted")]
+        Exhausted = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Expired")]
+        Expired = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotYetValid")]
+        NotYetValid = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class InvoiceEnumerationRangeUpdateDto
     {
 
@@ -66985,7 +67192,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("documentType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public InvoiceEnumerationRangeUpdateDtoDocumentType DocumentType { get; set; }
+        public DocumentType DocumentType { get; set; }
 
     }
 
@@ -67422,11 +67629,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("entryType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public JournalEntryDtoEntryType EntryType { get; set; }
+        public JournalEntryType EntryType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public JournalEntryDtoStatus Status { get; set; }
+        public JournalEntryStatus Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("postingDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? PostingDate { get; set; }
@@ -67455,16 +67662,16 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("executionPrincipalId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ExecutionPrincipalId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("executionPrincipalKind", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("executionPrincipalKind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public JournalEntryDtoExecutionPrincipalKind? ExecutionPrincipalKind { get; set; }
+        public PrincipalKind ExecutionPrincipalKind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("executionPrincipalEnrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ExecutionPrincipalEnrollmentId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("runAs", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("runAs", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public JournalEntryDtoRunAs? RunAs { get; set; }
+        public RunAs RunAs { get; set; }
 
         [Newtonsoft.Json.JsonProperty("applicationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ApplicationId { get; set; }
@@ -67472,9 +67679,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("onBehalfOfPrincipalId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string OnBehalfOfPrincipalId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("onBehalfOfActorKind", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("onBehalfOfActorKind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public JournalEntryDtoOnBehalfOfActorKind? OnBehalfOfActorKind { get; set; }
+        public PrincipalKind OnBehalfOfActorKind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("hasDualAxisIdentity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool HasDualAxisIdentity { get; set; }
@@ -67610,6 +67817,42 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<JournalEntryDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum JournalEntryStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Draft")]
+        Draft = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Posted")]
+        Posted = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Reversed")]
+        Reversed = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Voided")]
+        Voided = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum JournalEntryType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple")]
+        Simple = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Compound")]
+        Compound = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Adjusting")]
+        Adjusting = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Reversing")]
+        Reversing = 3,
 
     }
 
@@ -67815,6 +68058,27 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum LedgerClass
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Assets")]
+        Assets = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Equity")]
+        Equity = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Revenue")]
+        Revenue = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Expense")]
+        Expense = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Liabilities")]
+        Liabilities = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LedgerDto
     {
 
@@ -67960,7 +68224,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("ledgerClass", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public LedgerTypeCreateDtoLedgerClass LedgerClass { get; set; }
+        public LedgerClass LedgerClass { get; set; }
 
     }
 
@@ -67979,7 +68243,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("ledgerClass", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public LedgerTypeDtoLedgerClass LedgerClass { get; set; }
+        public LedgerClass LedgerClass { get; set; }
 
         [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TenantId { get; set; }
@@ -68096,9 +68360,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string Name { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("ledgerClass", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("ledgerClass", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public LedgerTypeUpdateDtoLedgerClass? LedgerClass { get; set; }
+        public LedgerClass LedgerClass { get; set; }
 
     }
 
@@ -68909,13 +69173,40 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PostingBookResultDtoStatus Status { get; set; }
+        public PostingBookResultStatus Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("journalEntryId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string JournalEntryId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("failureCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FailureCode { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PostingBookResultStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Posted")]
+        Posted = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Duplicate")]
+        Duplicate = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
+        Rejected = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PostingDirection
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Debit")]
+        Debit = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Credit")]
+        Credit = 1,
 
     }
 
@@ -68955,11 +69246,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PostingExecutionDtoStatus Status { get; set; }
+        public PostingExecutionStatus Status { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("failureKind", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("failureKind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PostingExecutionDtoFailureKind? FailureKind { get; set; }
+        public PostingFailureKind FailureKind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("failureCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FailureCode { get; set; }
@@ -68985,9 +69276,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("bookResults", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<PostingBookResultDto> BookResults { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("failureClass", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("failureClass", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PostingExecutionDtoFailureClass? FailureClass { get; set; }
+        public PostingFailureClass FailureClass { get; set; }
 
     }
 
@@ -69054,6 +69345,126 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<PostingExecutionDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PostingExecutionStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Received")]
+        Received = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Processing")]
+        Processing = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Posted")]
+        Posted = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Duplicate")]
+        Duplicate = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PendingMapping")]
+        PendingMapping = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PendingPeriod")]
+        PendingPeriod = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PendingRate")]
+        PendingRate = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
+        Rejected = 7,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PostingFailureClass
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Retryable")]
+        Retryable = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OperatorActionRequired")]
+        OperatorActionRequired = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ConfigurationError")]
+        ConfigurationError = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ProducerError")]
+        ProducerError = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PostingFailureKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UnknownOperation")]
+        UnknownOperation = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UnknownRole")]
+        UnknownRole = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AmbiguousPolicy")]
+        AmbiguousPolicy = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MissingAccountMapping")]
+        MissingAccountMapping = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MissingFinancialBook")]
+        MissingFinancialBook = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MissingJournal")]
+        MissingJournal = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ClosedPeriod")]
+        ClosedPeriod = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MissingFxRate")]
+        MissingFxRate = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"InvalidFxEvidence")]
+        InvalidFxEvidence = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UnbalancedPlan")]
+        UnbalancedPlan = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DuplicateIntent")]
+        DuplicateIntent = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DuplicateBookPosting")]
+        DuplicateBookPosting = 11,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"InvalidPartyReference")]
+        InvalidPartyReference = 12,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"InvalidCustodyContext")]
+        InvalidCustodyContext = 13,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PolicyConfigurationError")]
+        PolicyConfigurationError = 14,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PrincipalKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Human")]
+        Human = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
+        Agent = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Application")]
+        Application = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
+        Service = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"System")]
+        System = 4,
 
     }
 
@@ -69201,11 +69612,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("costCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ReceiptCreateDtoCostCalculationMethod CostCalculationMethod { get; set; }
+        public CostCalculationMethod CostCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("taxCalculationMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ReceiptCreateDtoTaxCalculationMethod TaxCalculationMethod { get; set; }
+        public TaxCalculationMethod TaxCalculationMethod { get; set; }
 
         [Newtonsoft.Json.JsonProperty("paymentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PaymentId { get; set; }
@@ -69221,7 +69632,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("receiptType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ReceiptCreateDtoReceiptType ReceiptType { get; set; }
+        public ReceiptType ReceiptType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("orderId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string OrderId { get; set; }
@@ -69261,7 +69672,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("receiptType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ReceiptDtoReceiptType ReceiptType { get; set; }
+        public ReceiptType ReceiptType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("orderId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string OrderId { get; set; }
@@ -69371,6 +69782,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ReceiptType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PaymentReceipt")]
+        PaymentReceipt = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PurchaseReceipt")]
+        PurchaseReceipt = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ReceiptUpdateDto
     {
 
@@ -69455,6 +69878,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("reversalPeriodId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public string ReversalPeriodId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum RunAs
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Invoker")]
+        Invoker = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Application")]
+        Application = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"System")]
+        System = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
+        Service = 3,
 
     }
 
@@ -70161,6 +70602,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum TaxCalculationMethod
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
+        Included = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
+        Excluded = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TaxClassCreateDto
     {
 
@@ -70176,7 +70629,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TaxClassCreateDtoType Type { get; set; }
+        public TaxClassType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("fiscalAuthorityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(36)]
@@ -70202,7 +70655,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TaxClassDtoType Type { get; set; }
+        public TaxClassType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("enrollmentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EnrollmentId { get; set; }
@@ -70312,6 +70765,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum TaxClassType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tax")]
+        Tax = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Withholding")]
+        Withholding = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TaxClassUpdateDto
     {
 
@@ -70321,11 +70786,23 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TaxClassUpdateDtoType Type { get; set; }
+        public TaxClassType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("fiscalAuthorityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(36)]
         public string FiscalAuthorityId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum TaxPayerType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Business")]
+        Business = 1,
 
     }
 
@@ -71504,7 +71981,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
 
         [Newtonsoft.Json.JsonProperty("normalBalance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TrialBalanceRowDtoNormalBalance NormalBalance { get; set; }
+        public AccountBalanceCriteria NormalBalance { get; set; }
 
         [Newtonsoft.Json.JsonProperty("debit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Debit { get; set; }
@@ -71571,720 +72048,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.AccountingService
         [Newtonsoft.Json.JsonProperty("ledgerTypeId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(36)]
         public string LedgerTypeId { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AccountCreateDtoAccountCategory
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Assets")]
-        Assets = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Equity")]
-        Equity = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Revenue")]
-        Revenue = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Expense")]
-        Expense = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Liabilities")]
-        Liabilities = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AccountCreateDtoIncomeStatementSubType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OperatingRevenue")]
-        OperatingRevenue = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Gain")]
-        Gain = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OperatingExpense")]
-        OperatingExpense = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Loss")]
-        Loss = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AccountDtoAccountCategory
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Assets")]
-        Assets = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Equity")]
-        Equity = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Revenue")]
-        Revenue = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Expense")]
-        Expense = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Liabilities")]
-        Liabilities = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AccountDtoIncomeStatementSubType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OperatingRevenue")]
-        OperatingRevenue = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Gain")]
-        Gain = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OperatingExpense")]
-        OperatingExpense = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Loss")]
-        Loss = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AccountDtoNormalBalance
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Debit")]
-        Debit = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Credit")]
-        Credit = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AccountUpdateDtoAccountCategory
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Assets")]
-        Assets = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Equity")]
-        Equity = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Revenue")]
-        Revenue = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Expense")]
-        Expense = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Liabilities")]
-        Liabilities = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AccountUpdateDtoIncomeStatementSubType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OperatingRevenue")]
-        OperatingRevenue = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Gain")]
-        Gain = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OperatingExpense")]
-        OperatingExpense = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Loss")]
-        Loss = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AccountingEntryCreateDtoDirection
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Debit")]
-        Debit = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Credit")]
-        Credit = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AccountingEntryDtoDirection
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Debit")]
-        Debit = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Credit")]
-        Credit = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AccountingEntryUpdateDtoDirection
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Debit")]
-        Debit = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Credit")]
-        Credit = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum BankGuaranteeCreateDtoBankGuaranteeType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Receiving")]
-        Receiving = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Providing")]
-        Providing = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum BankGuaranteeDtoBankGuaranteeType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Receiving")]
-        Receiving = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Providing")]
-        Providing = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum BankGuaranteeUpdateDtoBankGuaranteeType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Receiving")]
-        Receiving = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Providing")]
-        Providing = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum BillingProfileCreateDtoTaxPayerType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Business")]
-        Business = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum BillingProfileDtoTaxPayerType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Business")]
-        Business = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum BillingProfileUpdateDtoTaxPayerType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Business")]
-        Business = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ContactDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum CostCentreCreateDtoCostCentreType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
-        Service = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Production")]
-        Production = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum CostCentreDtoCostCentreType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
-        Service = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Production")]
-        Production = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum CostCentreUpdateDtoCostCentreType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
-        Service = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Production")]
-        Production = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum FiscalPeriodDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Open")]
-        Open = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Closed")]
-        Closed = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Locked")]
-        Locked = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum InvoiceEnumerationRangeCreateDtoDocumentType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Standard")]
-        Standard = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DebitNote")]
-        DebitNote = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CreditNote")]
-        CreditNote = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum InvoiceEnumerationRangeDtoDocumentType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Standard")]
-        Standard = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DebitNote")]
-        DebitNote = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CreditNote")]
-        CreditNote = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum InvoiceEnumerationRangeUpdateDtoDocumentType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Standard")]
-        Standard = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DebitNote")]
-        DebitNote = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"CreditNote")]
-        CreditNote = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum JournalEntryDtoEntryType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Simple")]
-        Simple = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Compound")]
-        Compound = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Adjusting")]
-        Adjusting = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Reversing")]
-        Reversing = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum JournalEntryDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Draft")]
-        Draft = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Posted")]
-        Posted = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Reversed")]
-        Reversed = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Voided")]
-        Voided = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum JournalEntryDtoExecutionPrincipalKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Human")]
-        Human = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
-        Agent = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Application")]
-        Application = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
-        Service = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"System")]
-        System = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum JournalEntryDtoRunAs
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Invoker")]
-        Invoker = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Application")]
-        Application = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"System")]
-        System = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
-        Service = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum JournalEntryDtoOnBehalfOfActorKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Human")]
-        Human = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
-        Agent = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Application")]
-        Application = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Service")]
-        Service = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"System")]
-        System = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum LedgerTypeCreateDtoLedgerClass
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Assets")]
-        Assets = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Equity")]
-        Equity = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Revenue")]
-        Revenue = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Expense")]
-        Expense = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Liabilities")]
-        Liabilities = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum LedgerTypeDtoLedgerClass
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Assets")]
-        Assets = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Equity")]
-        Equity = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Revenue")]
-        Revenue = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Expense")]
-        Expense = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Liabilities")]
-        Liabilities = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum LedgerTypeUpdateDtoLedgerClass
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Assets")]
-        Assets = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Equity")]
-        Equity = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Revenue")]
-        Revenue = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Expense")]
-        Expense = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Liabilities")]
-        Liabilities = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PostingBookResultDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Posted")]
-        Posted = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Duplicate")]
-        Duplicate = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
-        Rejected = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PostingExecutionDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Received")]
-        Received = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Processing")]
-        Processing = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Posted")]
-        Posted = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Duplicate")]
-        Duplicate = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PendingMapping")]
-        PendingMapping = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PendingPeriod")]
-        PendingPeriod = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PendingRate")]
-        PendingRate = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
-        Rejected = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PostingExecutionDtoFailureKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UnknownOperation")]
-        UnknownOperation = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UnknownRole")]
-        UnknownRole = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AmbiguousPolicy")]
-        AmbiguousPolicy = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MissingAccountMapping")]
-        MissingAccountMapping = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MissingFinancialBook")]
-        MissingFinancialBook = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MissingJournal")]
-        MissingJournal = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ClosedPeriod")]
-        ClosedPeriod = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MissingFxRate")]
-        MissingFxRate = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"InvalidFxEvidence")]
-        InvalidFxEvidence = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UnbalancedPlan")]
-        UnbalancedPlan = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DuplicateIntent")]
-        DuplicateIntent = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"DuplicateBookPosting")]
-        DuplicateBookPosting = 11,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"InvalidPartyReference")]
-        InvalidPartyReference = 12,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"InvalidCustodyContext")]
-        InvalidCustodyContext = 13,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PolicyConfigurationError")]
-        PolicyConfigurationError = 14,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PostingExecutionDtoFailureClass
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Retryable")]
-        Retryable = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OperatorActionRequired")]
-        OperatorActionRequired = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ConfigurationError")]
-        ConfigurationError = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ProducerError")]
-        ProducerError = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ReceiptCreateDtoCostCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ReceiptCreateDtoTaxCalculationMethod
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Included")]
-        Included = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Excluded")]
-        Excluded = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ReceiptCreateDtoReceiptType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PaymentReceipt")]
-        PaymentReceipt = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PurchaseReceipt")]
-        PurchaseReceipt = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ReceiptDtoReceiptType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PaymentReceipt")]
-        PaymentReceipt = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PurchaseReceipt")]
-        PurchaseReceipt = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TaxClassCreateDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tax")]
-        Tax = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Withholding")]
-        Withholding = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TaxClassDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tax")]
-        Tax = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Withholding")]
-        Withholding = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TaxClassUpdateDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tax")]
-        Tax = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Withholding")]
-        Withholding = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TrialBalanceRowDtoNormalBalance
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Debit")]
-        Debit = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Credit")]
-        Credit = 1,
 
     }
 

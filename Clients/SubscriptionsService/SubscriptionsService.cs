@@ -4991,6 +4991,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SubscriptionsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum BillingCycle
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Monthly")]
+        Monthly = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Annual")]
+        Annual = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CommercialSubscriptionDto
     {
 
@@ -5003,9 +5015,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SubscriptionsService
         [Newtonsoft.Json.JsonProperty("subscriptionPlanId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SubscriptionPlanId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("lifecycleState", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("lifecycleState", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public CommercialSubscriptionDtoLifecycleState? LifecycleState { get; set; }
+        public SubscriptionLifecycleState LifecycleState { get; set; }
 
         [Newtonsoft.Json.JsonProperty("quantity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Quantity { get; set; }
@@ -5153,11 +5165,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SubscriptionsService
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public CommercialSubscriptionPayableObligationDtoStatus Status { get; set; }
+        public SubscriptionPayableObligationStatus Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("obligationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public CommercialSubscriptionPayableObligationDtoObligationType ObligationType { get; set; }
+        public PaymentObligationType ObligationType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("obligationReference", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ObligationReference { get; set; }
@@ -5304,7 +5316,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SubscriptionsService
         [Newtonsoft.Json.JsonProperty("billToMode", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public EstablishCommercialSubscriptionRequestBillToMode BillToMode { get; set; }
+        public PayerRelationshipMode BillToMode { get; set; }
 
         [Newtonsoft.Json.JsonProperty("billToReference", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -5470,6 +5482,33 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SubscriptionsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PayerRelationshipMode
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"BusinessToConsumer")]
+        BusinessToConsumer = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"BusinessToBusiness")]
+        BusinessToBusiness = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"TenantToTenant")]
+        TenantToTenant = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PaymentObligationType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Invoice")]
+        Invoice = 0,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class PlatformPlanPriceDto
     {
 
@@ -5478,7 +5517,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SubscriptionsService
 
         [Newtonsoft.Json.JsonProperty("billingCycle", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PlatformPlanPriceDtoBillingCycle BillingCycle { get; set; }
+        public BillingCycle BillingCycle { get; set; }
 
         [Newtonsoft.Json.JsonProperty("planSku", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PlanSku { get; set; }
@@ -5567,7 +5606,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SubscriptionsService
 
         [Newtonsoft.Json.JsonProperty("billingCycle", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PurchaseOfferingRequestBillingCycle BillingCycle { get; set; }
+        public BillingCycle BillingCycle { get; set; }
 
         [Newtonsoft.Json.JsonProperty("periodStartUtc", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset PeriodStartUtc { get; set; }
@@ -5634,6 +5673,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SubscriptionsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SubscriptionClass
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Trial")]
+        Trial = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Standard")]
+        Standard = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SubscriptionCreateDto
     {
 
@@ -5654,7 +5705,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SubscriptionsService
 
         [Newtonsoft.Json.JsonProperty("subscriptionClass", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SubscriptionCreateDtoSubscriptionClass SubscriptionClass { get; set; }
+        public SubscriptionClass SubscriptionClass { get; set; }
 
     }
 
@@ -5679,7 +5730,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SubscriptionsService
 
         [Newtonsoft.Json.JsonProperty("subscriptionClass", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SubscriptionDtoSubscriptionClass SubscriptionClass { get; set; }
+        public SubscriptionClass SubscriptionClass { get; set; }
 
     }
 
@@ -5779,6 +5830,42 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SubscriptionsService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<SubscriptionDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SubscriptionLifecycleState
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
+        Active = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Suspended")]
+        Suspended = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Ended")]
+        Ended = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SubscriptionPayableObligationStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Payable")]
+        Payable = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PendingMaterialization")]
+        PendingMaterialization = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Satisfied")]
+        Satisfied = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NoOpenObligation")]
+        NoOpenObligation = 3,
 
     }
 
@@ -7414,7 +7501,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SubscriptionsService
 
         [Newtonsoft.Json.JsonProperty("subscriptionClass", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SubscriptionUpdateDtoSubscriptionClass SubscriptionClass { get; set; }
+        public SubscriptionClass SubscriptionClass { get; set; }
 
     }
 
@@ -7457,129 +7544,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SubscriptionsService
 
         [Newtonsoft.Json.JsonProperty("isMachineRemembered", Required = Newtonsoft.Json.Required.Always)]
         public bool IsMachineRemembered { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum CommercialSubscriptionDtoLifecycleState
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
-        Pending = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
-        Active = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Suspended")]
-        Suspended = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Ended")]
-        Ended = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum CommercialSubscriptionPayableObligationDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Payable")]
-        Payable = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"PendingMaterialization")]
-        PendingMaterialization = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Satisfied")]
-        Satisfied = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NoOpenObligation")]
-        NoOpenObligation = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum CommercialSubscriptionPayableObligationDtoObligationType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Invoice")]
-        Invoice = 0,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum EstablishCommercialSubscriptionRequestBillToMode
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"BusinessToConsumer")]
-        BusinessToConsumer = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"BusinessToBusiness")]
-        BusinessToBusiness = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"TenantToTenant")]
-        TenantToTenant = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PlatformPlanPriceDtoBillingCycle
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Monthly")]
-        Monthly = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Annual")]
-        Annual = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PurchaseOfferingRequestBillingCycle
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Monthly")]
-        Monthly = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Annual")]
-        Annual = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SubscriptionCreateDtoSubscriptionClass
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Trial")]
-        Trial = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Standard")]
-        Standard = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SubscriptionDtoSubscriptionClass
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Trial")]
-        Trial = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Standard")]
-        Standard = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SubscriptionUpdateDtoSubscriptionClass
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Trial")]
-        Trial = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Standard")]
-        Standard = 1,
 
     }
 

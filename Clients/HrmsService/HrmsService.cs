@@ -6312,6 +6312,284 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
             }
         }
 
+        /// <summary>
+        /// Publish an employer profile
+        /// </summary>
+        /// <remarks>
+        /// Opts the employer into the public employer directory.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PublishEmployerProfileAsync(System.Guid tenantId, System.Guid employerId, string api_version, string x_api_version)
+        {
+            return PublishEmployerProfileAsync(tenantId, employerId, api_version, x_api_version, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Publish an employer profile
+        /// </summary>
+        /// <remarks>
+        /// Opts the employer into the public employer directory.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PublishEmployerProfileAsync(System.Guid tenantId, System.Guid employerId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        {
+            if (employerId == null)
+                throw new System.ArgumentNullException("employerId");
+
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/HrmsService/Employers/{employerId}/Publish"
+                    urlBuilder_.Append("api/v2/HrmsService/Employers/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(employerId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Publish");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<EmptyEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 409)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Conflict", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Unpublish an employer profile
+        /// </summary>
+        /// <remarks>
+        /// Withdraws the employer from the public employer directory.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UnpublishEmployerProfileAsync(System.Guid tenantId, System.Guid employerId, string api_version, string x_api_version)
+        {
+            return UnpublishEmployerProfileAsync(tenantId, employerId, api_version, x_api_version, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Unpublish an employer profile
+        /// </summary>
+        /// <remarks>
+        /// Withdraws the employer from the public employer directory.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UnpublishEmployerProfileAsync(System.Guid tenantId, System.Guid employerId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        {
+            if (employerId == null)
+                throw new System.ArgumentNullException("employerId");
+
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/HrmsService/Employers/{employerId}/Unpublish"
+                    urlBuilder_.Append("api/v2/HrmsService/Employers/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(employerId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Unpublish");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<EmptyEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 409)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Conflict", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
         protected struct ObjectResponseResult<T>
         {
             public ObjectResponseResult(T responseObject, string responseText)
@@ -10290,6 +10568,562 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
             }
         }
 
+        /// <summary>
+        /// Publish a gig
+        /// </summary>
+        /// <remarks>
+        /// Publishes a draft gig.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> PublishGigAsync(System.Guid tenantId, System.Guid gigId, string api_version, string x_api_version)
+        {
+            return PublishGigAsync(tenantId, gigId, api_version, x_api_version, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Publish a gig
+        /// </summary>
+        /// <remarks>
+        /// Publishes a draft gig.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> PublishGigAsync(System.Guid tenantId, System.Guid gigId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        {
+            if (gigId == null)
+                throw new System.ArgumentNullException("gigId");
+
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/HrmsService/Gigs/{gigId}/Publish"
+                    urlBuilder_.Append("api/v2/HrmsService/Gigs/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(gigId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Publish");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<EmptyEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 409)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Conflict", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Award a gig
+        /// </summary>
+        /// <remarks>
+        /// Marks a published gig as awarded.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> AwardGigAsync(System.Guid tenantId, System.Guid gigId, string api_version, string x_api_version)
+        {
+            return AwardGigAsync(tenantId, gigId, api_version, x_api_version, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Award a gig
+        /// </summary>
+        /// <remarks>
+        /// Marks a published gig as awarded.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> AwardGigAsync(System.Guid tenantId, System.Guid gigId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        {
+            if (gigId == null)
+                throw new System.ArgumentNullException("gigId");
+
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/HrmsService/Gigs/{gigId}/Award"
+                    urlBuilder_.Append("api/v2/HrmsService/Gigs/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(gigId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Award");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<EmptyEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 409)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Conflict", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Complete a gig
+        /// </summary>
+        /// <remarks>
+        /// Marks an awarded gig as completed.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> CompleteGigAsync(System.Guid tenantId, System.Guid gigId, string api_version, string x_api_version)
+        {
+            return CompleteGigAsync(tenantId, gigId, api_version, x_api_version, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Complete a gig
+        /// </summary>
+        /// <remarks>
+        /// Marks an awarded gig as completed.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> CompleteGigAsync(System.Guid tenantId, System.Guid gigId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        {
+            if (gigId == null)
+                throw new System.ArgumentNullException("gigId");
+
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/HrmsService/Gigs/{gigId}/Complete"
+                    urlBuilder_.Append("api/v2/HrmsService/Gigs/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(gigId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Complete");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<EmptyEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 409)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Conflict", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Cancel a gig
+        /// </summary>
+        /// <remarks>
+        /// Cancels a gig before it is completed.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> CancelGigAsync(System.Guid tenantId, System.Guid gigId, string api_version, string x_api_version)
+        {
+            return CancelGigAsync(tenantId, gigId, api_version, x_api_version, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Cancel a gig
+        /// </summary>
+        /// <remarks>
+        /// Cancels a gig before it is completed.
+        /// </remarks>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> CancelGigAsync(System.Guid tenantId, System.Guid gigId, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        {
+            if (gigId == null)
+                throw new System.ArgumentNullException("gigId");
+
+            if (tenantId == null)
+                throw new System.ArgumentNullException("tenantId");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+
+                    if (x_api_version != null)
+                        request_.Headers.TryAddWithoutValidation("x-api-version", ConvertToString(x_api_version, System.Globalization.CultureInfo.InvariantCulture));
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/HrmsService/Gigs/{gigId}/Cancel"
+                    urlBuilder_.Append("api/v2/HrmsService/Gigs/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(gigId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/Cancel");
+                    urlBuilder_.Append('?');
+                    urlBuilder_.Append(System.Uri.EscapeDataString("tenantId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(tenantId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (api_version != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("api-version")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(api_version, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<EmptyEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Forbidden", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 409)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorEnvelope>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorEnvelope>("Conflict", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await ReadAsStringAsync(response_.Content, cancellationToken).ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
         protected struct ObjectResponseResult<T>
         {
             public ObjectResponseResult(T responseObject, string responseText)
@@ -12532,7 +13366,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> ChangeJobApplicationStatusAsync(System.Guid tenantId, System.Guid jobApplicationId, Status status, string api_version, string x_api_version)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> ChangeJobApplicationStatusAsync(System.Guid tenantId, System.Guid jobApplicationId, JobApplicationStatus status, string api_version, string x_api_version)
         {
             return ChangeJobApplicationStatusAsync(tenantId, jobApplicationId, status, api_version, x_api_version, System.Threading.CancellationToken.None);
         }
@@ -12546,7 +13380,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> ChangeJobApplicationStatusAsync(System.Guid tenantId, System.Guid jobApplicationId, Status status, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> ChangeJobApplicationStatusAsync(System.Guid tenantId, System.Guid jobApplicationId, JobApplicationStatus status, string api_version, string x_api_version, System.Threading.CancellationToken cancellationToken)
         {
             if (jobApplicationId == null)
                 throw new System.ArgumentNullException("jobApplicationId");
@@ -32461,6 +33295,27 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum CareerLevel
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Junior")]
+        Junior = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Intermediate")]
+        Intermediate = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MidLevel")]
+        MidLevel = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Executive")]
+        Executive = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Senior")]
+        Senior = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContactCreateDto
     {
 
@@ -32473,7 +33328,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ContactCreateDtoType Type { get; set; }
+        public ContactType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -32622,7 +33477,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ContactDtoType Type { get; set; }
+        public ContactType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Email { get; set; }
@@ -32787,11 +33642,100 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
         [Newtonsoft.Json.JsonProperty("birthday", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? Birthday { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("contactStage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ContactStage ContactStage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("contactStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ContactStatus ContactStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lastContactDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? LastContactDate { get; set; }
+
         [Newtonsoft.Json.JsonProperty("tikTokUsername", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TikTokUsername { get; set; }
 
         [Newtonsoft.Json.JsonProperty("instagramUsername", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string InstagramUsername { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactStage
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Lead")]
+        Lead = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Prospect")]
+        Prospect = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Customer")]
+        Customer = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Opportunity")]
+        Opportunity = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"New")]
+        New = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
+        Active = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Qualified")]
+        Qualified = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unqualified")]
+        Unqualified = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ContactType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
+        Organization = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum DayOfTheWeek
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"All")]
+        All = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Sunday")]
+        Sunday = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Monday")]
+        Monday = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tuesday")]
+        Tuesday = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Wednesday")]
+        Wednesday = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Thursday")]
+        Thursday = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Friday")]
+        Friday = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Saturday")]
+        Saturday = 7,
 
     }
 
@@ -33729,6 +34673,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
         [Newtonsoft.Json.JsonProperty("data9Label", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Data9Label { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("isPublicProfile", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsPublicProfile { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -34383,6 +35330,10 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
         [Newtonsoft.Json.JsonProperty("externalUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ExternalUrl { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public GigStatus Status { get; set; }
+
         [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TenantId { get; set; }
 
@@ -34502,6 +35453,27 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<GigDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum GigStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Draft")]
+        Draft = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Published")]
+        Published = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Awarded")]
+        Awarded = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Completed")]
+        Completed = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Cancelled")]
+        Cancelled = 4,
 
     }
 
@@ -34796,7 +35768,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("careerLevel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public JobApplicantProfileCreateDtoCareerLevel CareerLevel { get; set; }
+        public CareerLevel CareerLevel { get; set; }
 
         [Newtonsoft.Json.JsonProperty("experienceInYears", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int ExperienceInYears { get; set; }
@@ -34923,7 +35895,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("careerLevel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public JobApplicantProfileDtoCareerLevel CareerLevel { get; set; }
+        public CareerLevel CareerLevel { get; set; }
 
         [Newtonsoft.Json.JsonProperty("experienceInYears", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int ExperienceInYears { get; set; }
@@ -35122,7 +36094,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("careerLevel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public JobApplicantProfileUpdateDtoCareerLevel CareerLevel { get; set; }
+        public CareerLevel CareerLevel { get; set; }
 
         [Newtonsoft.Json.JsonProperty("experienceInYears", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int ExperienceInYears { get; set; }
@@ -35138,6 +36110,33 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("currencyId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CurrencyId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum JobApplicationStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Submitted")]
+        Submitted = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UnderReview")]
+        UnderReview = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Interviewing")]
+        Interviewing = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Offered")]
+        Offered = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Hired")]
+        Hired = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
+        Rejected = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Withdrawn")]
+        Withdrawn = 6,
 
     }
 
@@ -35359,7 +36358,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public JobOfferApplicationDtoStatus Status { get; set; }
+        public JobApplicationStatus Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("start", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Start { get; set; }
@@ -35681,7 +36680,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public JobOfferDtoStatus Status { get; set; }
+        public JobOfferStatus Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("remote", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Remote { get; set; }
@@ -36277,6 +37276,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<JobOfferPublicDto> Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum JobOfferStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Draft")]
+        Draft = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Published")]
+        Published = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Closed")]
+        Closed = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Filled")]
+        Filled = 3,
 
     }
 
@@ -37196,7 +38213,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PayrollPeriodDtoStatus Status { get; set; }
+        public PayrollPeriodStatus Status { get; set; }
 
     }
 
@@ -37300,6 +38317,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PayrollPeriodStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Open")]
+        Open = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Closed")]
+        Closed = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class PayrollPeriodUpdateDto
     {
 
@@ -37384,6 +38413,27 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum RepetitionCriteria
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotRepeat")]
+        NotRepeat = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"WorkWeek")]
+        WorkWeek = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Day")]
+        Day = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Month")]
+        Month = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Year")]
+        Year = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class RequiredSkillRecordCreateDto
     {
 
@@ -37411,7 +38461,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("requiredSkillRecordType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public RequiredSkillRecordCreateDtoRequiredSkillRecordType RequiredSkillRecordType { get; set; }
+        public RequiredSkillRecordType RequiredSkillRecordType { get; set; }
 
     }
 
@@ -37433,7 +38483,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("requiredSkillRecordType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public RequiredSkillRecordDtoRequiredSkillRecordType RequiredSkillRecordType { get; set; }
+        public RequiredSkillRecordType RequiredSkillRecordType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("skillId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SkillId { get; set; }
@@ -37552,6 +38602,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum RequiredSkillRecordType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MustHave")]
+        MustHave = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Optional")]
+        Optional = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class RequiredSkillRecordUpdateDto
     {
 
@@ -37572,7 +38634,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("requiredSkillRecordType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public RequiredSkillRecordUpdateDtoRequiredSkillRecordType RequiredSkillRecordType { get; set; }
+        public RequiredSkillRecordType RequiredSkillRecordType { get; set; }
 
     }
 
@@ -38105,7 +39167,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("repetitionCriteria", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ShiftCreateDtoRepetitionCriteria RepetitionCriteria { get; set; }
+        public RepetitionCriteria RepetitionCriteria { get; set; }
 
         [Newtonsoft.Json.JsonProperty("recurrenceStart", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? RecurrenceStart { get; set; }
@@ -38115,7 +39177,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("dayOfTheWeek", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ShiftCreateDtoDayOfTheWeek DayOfTheWeek { get; set; }
+        public DayOfTheWeek DayOfTheWeek { get; set; }
 
         [Newtonsoft.Json.JsonProperty("scheduleId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ScheduleId { get; set; }
@@ -38180,7 +39242,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("repetitionCriteria", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ShiftDtoRepetitionCriteria RepetitionCriteria { get; set; }
+        public RepetitionCriteria RepetitionCriteria { get; set; }
 
         [Newtonsoft.Json.JsonProperty("recurrenceStart", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? RecurrenceStart { get; set; }
@@ -38190,7 +39252,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("dayOfTheWeek", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ShiftDtoDayOfTheWeek DayOfTheWeek { get; set; }
+        public DayOfTheWeek DayOfTheWeek { get; set; }
 
         [Newtonsoft.Json.JsonProperty("scheduleId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ScheduleId { get; set; }
@@ -38348,9 +39410,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
         [Newtonsoft.Json.JsonProperty("repeatEvery", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? RepeatEvery { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("repetitionCriteria", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("repetitionCriteria", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ShiftUpdateDtoRepetitionCriteria? RepetitionCriteria { get; set; }
+        public RepetitionCriteria RepetitionCriteria { get; set; }
 
         [Newtonsoft.Json.JsonProperty("recurrenceStart", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? RecurrenceStart { get; set; }
@@ -38358,9 +39420,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
         [Newtonsoft.Json.JsonProperty("recurrenceEnd", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? RecurrenceEnd { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("dayOfTheWeek", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("dayOfTheWeek", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ShiftUpdateDtoDayOfTheWeek? DayOfTheWeek { get; set; }
+        public DayOfTheWeek DayOfTheWeek { get; set; }
 
         [Newtonsoft.Json.JsonProperty("scheduleId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ScheduleId { get; set; }
@@ -38986,7 +40048,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("repetitionCriteria", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TrainingProgramEventCreateDtoRepetitionCriteria RepetitionCriteria { get; set; }
+        public RepetitionCriteria RepetitionCriteria { get; set; }
 
         [Newtonsoft.Json.JsonProperty("recurrenceStart", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? RecurrenceStart { get; set; }
@@ -38996,7 +40058,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("dayOfTheWeek", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TrainingProgramEventCreateDtoDayOfTheWeek DayOfTheWeek { get; set; }
+        public DayOfTheWeek DayOfTheWeek { get; set; }
 
         [Newtonsoft.Json.JsonProperty("scheduleId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ScheduleId { get; set; }
@@ -39061,7 +40123,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("repetitionCriteria", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TrainingProgramEventDtoRepetitionCriteria RepetitionCriteria { get; set; }
+        public RepetitionCriteria RepetitionCriteria { get; set; }
 
         [Newtonsoft.Json.JsonProperty("recurrenceStart", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? RecurrenceStart { get; set; }
@@ -39071,7 +40133,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("dayOfTheWeek", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TrainingProgramEventDtoDayOfTheWeek DayOfTheWeek { get; set; }
+        public DayOfTheWeek DayOfTheWeek { get; set; }
 
         [Newtonsoft.Json.JsonProperty("scheduleId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ScheduleId { get; set; }
@@ -39232,9 +40294,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
         [Newtonsoft.Json.JsonProperty("repeatEvery", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? RepeatEvery { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("repetitionCriteria", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("repetitionCriteria", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TrainingProgramEventUpdateDtoRepetitionCriteria? RepetitionCriteria { get; set; }
+        public RepetitionCriteria RepetitionCriteria { get; set; }
 
         [Newtonsoft.Json.JsonProperty("recurrenceStart", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? RecurrenceStart { get; set; }
@@ -39242,9 +40304,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
         [Newtonsoft.Json.JsonProperty("recurrenceEnd", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? RecurrenceEnd { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("dayOfTheWeek", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("dayOfTheWeek", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TrainingProgramEventUpdateDtoDayOfTheWeek? DayOfTheWeek { get; set; }
+        public DayOfTheWeek DayOfTheWeek { get; set; }
 
         [Newtonsoft.Json.JsonProperty("scheduleId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ScheduleId { get; set; }
@@ -39308,519 +40370,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.HrmsService
 
         [Newtonsoft.Json.JsonProperty("isMachineRemembered", Required = Newtonsoft.Json.Required.Always)]
         public bool IsMachineRemembered { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Status
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Submitted")]
-        Submitted = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UnderReview")]
-        UnderReview = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Interviewing")]
-        Interviewing = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Offered")]
-        Offered = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Hired")]
-        Hired = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
-        Rejected = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Withdrawn")]
-        Withdrawn = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ContactCreateDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ContactDtoType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
-        Individual = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Organization")]
-        Organization = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum JobApplicantProfileCreateDtoCareerLevel
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Junior")]
-        Junior = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Intermediate")]
-        Intermediate = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MidLevel")]
-        MidLevel = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Executive")]
-        Executive = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Senior")]
-        Senior = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum JobApplicantProfileDtoCareerLevel
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Junior")]
-        Junior = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Intermediate")]
-        Intermediate = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MidLevel")]
-        MidLevel = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Executive")]
-        Executive = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Senior")]
-        Senior = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum JobApplicantProfileUpdateDtoCareerLevel
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Junior")]
-        Junior = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Intermediate")]
-        Intermediate = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MidLevel")]
-        MidLevel = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Executive")]
-        Executive = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Senior")]
-        Senior = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum JobOfferApplicationDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Submitted")]
-        Submitted = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"UnderReview")]
-        UnderReview = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Interviewing")]
-        Interviewing = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Offered")]
-        Offered = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Hired")]
-        Hired = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
-        Rejected = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Withdrawn")]
-        Withdrawn = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum JobOfferDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Draft")]
-        Draft = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Published")]
-        Published = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Closed")]
-        Closed = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Filled")]
-        Filled = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PayrollPeriodDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Open")]
-        Open = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Closed")]
-        Closed = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum RequiredSkillRecordCreateDtoRequiredSkillRecordType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MustHave")]
-        MustHave = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Optional")]
-        Optional = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum RequiredSkillRecordDtoRequiredSkillRecordType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MustHave")]
-        MustHave = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Optional")]
-        Optional = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum RequiredSkillRecordUpdateDtoRequiredSkillRecordType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MustHave")]
-        MustHave = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Optional")]
-        Optional = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ShiftCreateDtoRepetitionCriteria
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRepeat")]
-        NotRepeat = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"WorkWeek")]
-        WorkWeek = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Day")]
-        Day = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Month")]
-        Month = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Year")]
-        Year = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ShiftCreateDtoDayOfTheWeek
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"All")]
-        All = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sunday")]
-        Sunday = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Monday")]
-        Monday = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tuesday")]
-        Tuesday = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wednesday")]
-        Wednesday = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Thursday")]
-        Thursday = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Friday")]
-        Friday = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Saturday")]
-        Saturday = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ShiftDtoRepetitionCriteria
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRepeat")]
-        NotRepeat = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"WorkWeek")]
-        WorkWeek = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Day")]
-        Day = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Month")]
-        Month = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Year")]
-        Year = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ShiftDtoDayOfTheWeek
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"All")]
-        All = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sunday")]
-        Sunday = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Monday")]
-        Monday = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tuesday")]
-        Tuesday = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wednesday")]
-        Wednesday = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Thursday")]
-        Thursday = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Friday")]
-        Friday = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Saturday")]
-        Saturday = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ShiftUpdateDtoRepetitionCriteria
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRepeat")]
-        NotRepeat = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"WorkWeek")]
-        WorkWeek = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Day")]
-        Day = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Month")]
-        Month = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Year")]
-        Year = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ShiftUpdateDtoDayOfTheWeek
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"All")]
-        All = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sunday")]
-        Sunday = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Monday")]
-        Monday = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tuesday")]
-        Tuesday = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wednesday")]
-        Wednesday = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Thursday")]
-        Thursday = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Friday")]
-        Friday = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Saturday")]
-        Saturday = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TrainingProgramEventCreateDtoRepetitionCriteria
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRepeat")]
-        NotRepeat = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"WorkWeek")]
-        WorkWeek = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Day")]
-        Day = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Month")]
-        Month = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Year")]
-        Year = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TrainingProgramEventCreateDtoDayOfTheWeek
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"All")]
-        All = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sunday")]
-        Sunday = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Monday")]
-        Monday = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tuesday")]
-        Tuesday = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wednesday")]
-        Wednesday = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Thursday")]
-        Thursday = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Friday")]
-        Friday = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Saturday")]
-        Saturday = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TrainingProgramEventDtoRepetitionCriteria
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRepeat")]
-        NotRepeat = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"WorkWeek")]
-        WorkWeek = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Day")]
-        Day = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Month")]
-        Month = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Year")]
-        Year = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TrainingProgramEventDtoDayOfTheWeek
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"All")]
-        All = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sunday")]
-        Sunday = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Monday")]
-        Monday = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tuesday")]
-        Tuesday = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wednesday")]
-        Wednesday = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Thursday")]
-        Thursday = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Friday")]
-        Friday = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Saturday")]
-        Saturday = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TrainingProgramEventUpdateDtoRepetitionCriteria
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRepeat")]
-        NotRepeat = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"WorkWeek")]
-        WorkWeek = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Day")]
-        Day = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Month")]
-        Month = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Year")]
-        Year = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum TrainingProgramEventUpdateDtoDayOfTheWeek
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"All")]
-        All = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Sunday")]
-        Sunday = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Monday")]
-        Monday = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tuesday")]
-        Tuesday = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Wednesday")]
-        Wednesday = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Thursday")]
-        Thursday = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Friday")]
-        Friday = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Saturday")]
-        Saturday = 7,
 
     }
 

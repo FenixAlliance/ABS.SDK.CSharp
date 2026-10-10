@@ -32193,6 +32193,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CatalogService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum FileUploadPublicAccessType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
+        Off = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
+        Container = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
+        Blob = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ForgotPasswordRequest
     {
 
@@ -32336,7 +32354,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CatalogService
 
         [Newtonsoft.Json.JsonProperty("publicAccessType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ItemAttachmentCreateDtoPublicAccessType PublicAccessType { get; set; }
+        public FileUploadPublicAccessType PublicAccessType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("itemId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ItemId { get; set; }
@@ -32421,11 +32439,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CatalogService
 
         [Newtonsoft.Json.JsonProperty("scanStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ItemAttachmentDtoScanStatus ScanStatus { get; set; }
+        public StorageScanStatus ScanStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("thumbnailStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ItemAttachmentDtoThumbnailStatus ThumbnailStatus { get; set; }
+        public StorageThumbnailStatus ThumbnailStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("hasThumbnail", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool HasThumbnail { get; set; }
@@ -32444,7 +32462,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CatalogService
 
         [Newtonsoft.Json.JsonProperty("publicAccessType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ItemAttachmentDtoPublicAccessType PublicAccessType { get; set; }
+        public FileUploadPublicAccessType PublicAccessType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("itemId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ItemId { get; set; }
@@ -36361,6 +36379,51 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CatalogService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum StorageScanStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
+        NotRequired = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Clean")]
+        Clean = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Infected")]
+        Infected = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Quarantined")]
+        Quarantined = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum StorageThumbnailStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
+        NotRequired = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Ready")]
+        Ready = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unsupported")]
+        Unsupported = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TwoFactorRequest
     {
 
@@ -36417,87 +36480,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.CatalogService
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
             set { _additionalProperties = value; }
         }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ItemAttachmentCreateDtoPublicAccessType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
-        Off = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
-        Container = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
-        Blob = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ItemAttachmentDtoScanStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
-        NotRequired = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
-        Pending = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Clean")]
-        Clean = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Infected")]
-        Infected = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Quarantined")]
-        Quarantined = 5,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ItemAttachmentDtoThumbnailStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
-        NotRequired = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
-        Pending = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Ready")]
-        Ready = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unsupported")]
-        Unsupported = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ItemAttachmentDtoPublicAccessType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
-        Off = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
-        Container = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
-        Blob = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
 
     }
 

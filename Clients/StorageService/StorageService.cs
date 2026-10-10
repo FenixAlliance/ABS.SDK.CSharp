@@ -3753,7 +3753,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> CreateFileAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, PublicAccessType? publicAccessType, Purpose? purpose, System.Guid? socialProfileId_value, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, Source? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Guid? id, System.DateTimeOffset? timestamp)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> CreateFileAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, FileUploadPublicAccessType? publicAccessType, StoragePurpose? purpose, System.Guid? socialProfileId_value, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, FileSource? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Guid? id, System.DateTimeOffset? timestamp)
         {
             return CreateFileAsync(tenantId, api_version, x_api_version, file, notes, title, author, isFolder, fileName, @abstract, keyWords, validResponse, parentFileUploadId, filePath, publicAccessType, purpose, socialProfileId_value, appFile_content, appFile_sha256, appFile_createdAtUtc, appFile_userId_value, appFile_tenantId_value, appFile_enrollmentId_value, appFile_source, appFile_length, appFile_name, appFile_fileName, appFile_lastModified, appFile_size, appFile_contentType, appFile_contentDisposition, appFile_headers, id, timestamp, System.Threading.CancellationToken.None);
         }
@@ -3761,7 +3761,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> CreateFileAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, PublicAccessType? publicAccessType, Purpose? purpose, System.Guid? socialProfileId_value, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, Source? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Guid? id, System.DateTimeOffset? timestamp, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> CreateFileAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, FileUploadPublicAccessType? publicAccessType, StoragePurpose? purpose, System.Guid? socialProfileId_value, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, FileSource? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Guid? id, System.DateTimeOffset? timestamp, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -4380,7 +4380,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UpdateFileAsync(System.Guid? tenantId, System.Guid fileId, string api_version, string x_api_version, FileParameter file, string notes, string metadata, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadID, string filePath, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, Source2? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> UpdateFileAsync(System.Guid? tenantId, System.Guid fileId, string api_version, string x_api_version, FileParameter file, string notes, string metadata, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadID, string filePath, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, FileSource? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers)
         {
             return UpdateFileAsync(tenantId, fileId, api_version, x_api_version, file, notes, metadata, title, author, isFolder, fileName, @abstract, keyWords, validResponse, parentFileUploadID, filePath, appFile_content, appFile_sha256, appFile_createdAtUtc, appFile_userId_value, appFile_tenantId_value, appFile_enrollmentId_value, appFile_source, appFile_length, appFile_name, appFile_fileName, appFile_lastModified, appFile_size, appFile_contentType, appFile_contentDisposition, appFile_headers, System.Threading.CancellationToken.None);
         }
@@ -4388,7 +4388,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UpdateFileAsync(System.Guid? tenantId, System.Guid fileId, string api_version, string x_api_version, FileParameter file, string notes, string metadata, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadID, string filePath, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, Source2? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> UpdateFileAsync(System.Guid? tenantId, System.Guid fileId, string api_version, string x_api_version, FileParameter file, string notes, string metadata, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadID, string filePath, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, FileSource? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Threading.CancellationToken cancellationToken)
         {
             if (fileId == null)
                 throw new System.ArgumentNullException("fileId");
@@ -6328,7 +6328,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<EmptyEnvelope> SaveFileAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, PublicAccessType2? publicAccessType, Purpose2? purpose, System.Guid? socialProfileId_value, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, Source3? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Guid? id, System.DateTimeOffset? timestamp)
+        public virtual System.Threading.Tasks.Task<EmptyEnvelope> SaveFileAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, FileUploadPublicAccessType? publicAccessType, StoragePurpose? purpose, System.Guid? socialProfileId_value, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, FileSource? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Guid? id, System.DateTimeOffset? timestamp)
         {
             return SaveFileAsync(tenantId, api_version, x_api_version, file, notes, title, author, isFolder, fileName, @abstract, keyWords, validResponse, parentFileUploadId, filePath, publicAccessType, purpose, socialProfileId_value, appFile_content, appFile_sha256, appFile_createdAtUtc, appFile_userId_value, appFile_tenantId_value, appFile_enrollmentId_value, appFile_source, appFile_length, appFile_name, appFile_fileName, appFile_lastModified, appFile_size, appFile_contentType, appFile_contentDisposition, appFile_headers, id, timestamp, System.Threading.CancellationToken.None);
         }
@@ -6342,7 +6342,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> SaveFileAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, PublicAccessType2? publicAccessType, Purpose2? purpose, System.Guid? socialProfileId_value, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, Source3? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Guid? id, System.DateTimeOffset? timestamp, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<EmptyEnvelope> SaveFileAsync(System.Guid? tenantId, string api_version, string x_api_version, FileParameter file, string notes, string title, string author, bool? isFolder, string fileName, string @abstract, string keyWords, bool? validResponse, string parentFileUploadId, string filePath, FileUploadPublicAccessType? publicAccessType, StoragePurpose? purpose, System.Guid? socialProfileId_value, byte[] appFile_content, string appFile_sha256, System.DateTimeOffset? appFile_createdAtUtc, System.Guid? appFile_userId_value, System.Guid? appFile_tenantId_value, System.Guid? appFile_enrollmentId_value, FileSource? appFile_source, long? appFile_length, string appFile_name, string appFile_fileName, System.DateTimeOffset? appFile_lastModified, long? appFile_size, string appFile_contentType, string appFile_contentDisposition, System.Collections.Generic.IDictionary<string, string> appFile_headers, System.Guid? id, System.DateTimeOffset? timestamp, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -6825,7 +6825,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
         [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BlobKind Kind { get; set; }
+        public BlobItemKind Kind { get; set; }
 
         [Newtonsoft.Json.JsonProperty("isFolder", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsFolder { get; set; }
@@ -6899,6 +6899,18 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum BlobItemKind
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"File")]
+        File = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Folder")]
+        Folder = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class EmptyEnvelope
     {
 
@@ -6955,6 +6967,30 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum FileSource
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"HttpUpload")]
+        HttpUpload = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Integration")]
+        Integration = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"InternalProcess")]
+        InternalProcess = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ApiClient")]
+        ApiClient = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"WorkflowEngine")]
+        WorkflowEngine = 5,
 
     }
 
@@ -7036,11 +7072,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
         [Newtonsoft.Json.JsonProperty("scanStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public FileUploadDtoScanStatus ScanStatus { get; set; }
+        public StorageScanStatus ScanStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("thumbnailStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public FileUploadDtoThumbnailStatus ThumbnailStatus { get; set; }
+        public StorageThumbnailStatus ThumbnailStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("hasThumbnail", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool HasThumbnail { get; set; }
@@ -7059,7 +7095,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
         [Newtonsoft.Json.JsonProperty("publicAccessType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public FileUploadDtoPublicAccessType PublicAccessType { get; set; }
+        public FileUploadPublicAccessType PublicAccessType { get; set; }
 
     }
 
@@ -7126,6 +7162,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public FileUploadDto Result { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum FileUploadPublicAccessType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
+        Off = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
+        Container = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
+        Blob = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 3,
 
     }
 
@@ -7307,6 +7361,93 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum StoragePurpose
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"IdentityAvatar")]
+        IdentityAvatar = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"IdentityBanner")]
+        IdentityBanner = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ProfileAsset")]
+        ProfileAsset = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"EngagementInline")]
+        EngagementInline = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"EngagementAttachment")]
+        EngagementAttachment = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MessageAttachment")]
+        MessageAttachment = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SocialPost")]
+        SocialPost = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"RecordAttachment")]
+        RecordAttachment = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AiGenerated")]
+        AiGenerated = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SystemArtifact")]
+        SystemArtifact = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Temporary")]
+        Temporary = 11,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum StorageScanStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
+        NotRequired = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Clean")]
+        Clean = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Infected")]
+        Infected = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Quarantined")]
+        Quarantined = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum StorageThumbnailStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
+        NotRequired = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Ready")]
+        Ready = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unsupported")]
+        Unsupported = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TwoFactorRequest
     {
 
@@ -7345,273 +7486,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.StorageService
 
         [Newtonsoft.Json.JsonProperty("isMachineRemembered", Required = Newtonsoft.Json.Required.Always)]
         public bool IsMachineRemembered { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PublicAccessType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
-        Off = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
-        Container = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
-        Blob = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Purpose
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"IdentityAvatar")]
-        IdentityAvatar = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"IdentityBanner")]
-        IdentityBanner = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ProfileAsset")]
-        ProfileAsset = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"EngagementInline")]
-        EngagementInline = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"EngagementAttachment")]
-        EngagementAttachment = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MessageAttachment")]
-        MessageAttachment = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SocialPost")]
-        SocialPost = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"RecordAttachment")]
-        RecordAttachment = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AiGenerated")]
-        AiGenerated = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SystemArtifact")]
-        SystemArtifact = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Temporary")]
-        Temporary = 11,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Source
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"HttpUpload")]
-        HttpUpload = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Integration")]
-        Integration = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"InternalProcess")]
-        InternalProcess = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ApiClient")]
-        ApiClient = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"WorkflowEngine")]
-        WorkflowEngine = 5,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Source2
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"HttpUpload")]
-        HttpUpload = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Integration")]
-        Integration = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"InternalProcess")]
-        InternalProcess = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ApiClient")]
-        ApiClient = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"WorkflowEngine")]
-        WorkflowEngine = 5,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PublicAccessType2
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
-        Off = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
-        Container = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
-        Blob = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Purpose2
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"IdentityAvatar")]
-        IdentityAvatar = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"IdentityBanner")]
-        IdentityBanner = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ProfileAsset")]
-        ProfileAsset = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"EngagementInline")]
-        EngagementInline = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"EngagementAttachment")]
-        EngagementAttachment = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"MessageAttachment")]
-        MessageAttachment = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SocialPost")]
-        SocialPost = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"RecordAttachment")]
-        RecordAttachment = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"AiGenerated")]
-        AiGenerated = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SystemArtifact")]
-        SystemArtifact = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Temporary")]
-        Temporary = 11,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Source3
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"HttpUpload")]
-        HttpUpload = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Integration")]
-        Integration = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"InternalProcess")]
-        InternalProcess = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ApiClient")]
-        ApiClient = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"WorkflowEngine")]
-        WorkflowEngine = 5,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum BlobKind
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"File")]
-        File = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Folder")]
-        Folder = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum FileUploadDtoScanStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
-        NotRequired = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
-        Pending = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Clean")]
-        Clean = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Infected")]
-        Infected = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Quarantined")]
-        Quarantined = 5,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum FileUploadDtoThumbnailStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
-        NotRequired = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
-        Pending = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Ready")]
-        Ready = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unsupported")]
-        Unsupported = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum FileUploadDtoPublicAccessType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
-        Off = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
-        Container = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
-        Blob = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
 
     }
 

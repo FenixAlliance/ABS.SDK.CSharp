@@ -9512,6 +9512,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ProjectsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ApprovalStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Approved")]
+        Approved = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
+        Rejected = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class EmptyEnvelope
     {
 
@@ -9913,7 +9928,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ProjectsService
 
         [Newtonsoft.Json.JsonProperty("approvalStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProjectHoursApprovalStatusUpdateDtoApprovalStatus ApprovalStatus { get; set; }
+        public ApprovalStatus ApprovalStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("comments", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Comments { get; set; }
@@ -10222,7 +10237,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ProjectsService
 
         [Newtonsoft.Json.JsonProperty("projectTimeLogRecordType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProjectTimeLogCreateDtoProjectTimeLogRecordType ProjectTimeLogRecordType { get; set; }
+        public ProjectTimeLogRecordType ProjectTimeLogRecordType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("projectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ProjectId { get; set; }
@@ -10259,7 +10274,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ProjectsService
 
         [Newtonsoft.Json.JsonProperty("recordType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProjectTimeLogDtoRecordType RecordType { get; set; }
+        public ProjectTimeLogRecordType RecordType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("timeSpan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TimeSpan { get; set; }
@@ -10375,6 +10390,21 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ProjectsService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum ProjectTimeLogRecordType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"RegularHours")]
+        RegularHours = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OvertimeToPay")]
+        OvertimeToPay = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OvertimeToCompensate")]
+        OvertimeToCompensate = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ProjectTimeLogUpdateDto
     {
 
@@ -10395,7 +10425,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ProjectsService
 
         [Newtonsoft.Json.JsonProperty("projectTimeLogRecordType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProjectTimeLogUpdateDtoProjectTimeLogRecordType ProjectTimeLogRecordType { get; set; }
+        public ProjectTimeLogRecordType ProjectTimeLogRecordType { get; set; }
 
     }
 
@@ -10699,66 +10729,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.ProjectsService
 
         [Newtonsoft.Json.JsonProperty("isMachineRemembered", Required = Newtonsoft.Json.Required.Always)]
         public bool IsMachineRemembered { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ProjectHoursApprovalStatusUpdateDtoApprovalStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
-        Pending = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Approved")]
-        Approved = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Rejected")]
-        Rejected = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ProjectTimeLogCreateDtoProjectTimeLogRecordType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"RegularHours")]
-        RegularHours = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OvertimeToPay")]
-        OvertimeToPay = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OvertimeToCompensate")]
-        OvertimeToCompensate = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ProjectTimeLogDtoRecordType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"RegularHours")]
-        RegularHours = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OvertimeToPay")]
-        OvertimeToPay = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OvertimeToCompensate")]
-        OvertimeToCompensate = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum ProjectTimeLogUpdateDtoProjectTimeLogRecordType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"RegularHours")]
-        RegularHours = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OvertimeToPay")]
-        OvertimeToPay = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OvertimeToCompensate")]
-        OvertimeToCompensate = 2,
 
     }
 

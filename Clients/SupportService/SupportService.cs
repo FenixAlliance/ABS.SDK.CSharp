@@ -18128,6 +18128,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum EntitlementStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
+        Active = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"GracePeriod")]
+        GracePeriod = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Disabled")]
+        Disabled = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Deleted")]
+        Deleted = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ErrorEnvelope
     {
 
@@ -18154,6 +18172,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
 
         [Newtonsoft.Json.JsonProperty("activityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum FileUploadPublicAccessType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
+        Off = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
+        Container = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
+        Blob = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 3,
 
     }
 
@@ -19971,9 +20007,9 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
         [Newtonsoft.Json.JsonProperty("socialProfileAvatarUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SocialProfileAvatarUrl { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("socialProfileType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PrivateMessageDtoSocialProfileType? SocialProfileType { get; set; }
+        public SocialProfileType SocialProfileType { get; set; }
 
     }
 
@@ -20467,6 +20503,66 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SocialProfileType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"User")]
+        User = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
+        Tenant = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
+        Contact = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum StorageScanStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
+        NotRequired = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Clean")]
+        Clean = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Infected")]
+        Infected = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Quarantined")]
+        Quarantined = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum StorageThumbnailStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
+        NotRequired = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
+        Pending = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Ready")]
+        Ready = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unsupported")]
+        Unsupported = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SupportEntitlementCreateDto
     {
 
@@ -20633,7 +20729,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SupportEntitlementDtoStatus Status { get; set; }
+        public EntitlementStatus Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("startDateTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset StartDateTime { get; set; }
@@ -21054,7 +21150,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
 
         [Newtonsoft.Json.JsonProperty("publicAccessType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SupportRequestAttachmentCreateDtoPublicAccessType PublicAccessType { get; set; }
+        public FileUploadPublicAccessType PublicAccessType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("metadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Metadata { get; set; }
@@ -21142,11 +21238,11 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
 
         [Newtonsoft.Json.JsonProperty("scanStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SupportRequestAttachmentDtoScanStatus ScanStatus { get; set; }
+        public StorageScanStatus ScanStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("thumbnailStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SupportRequestAttachmentDtoThumbnailStatus ThumbnailStatus { get; set; }
+        public StorageThumbnailStatus ThumbnailStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("hasThumbnail", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool HasThumbnail { get; set; }
@@ -21165,7 +21261,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
 
         [Newtonsoft.Json.JsonProperty("publicAccessType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SupportRequestAttachmentDtoPublicAccessType PublicAccessType { get; set; }
+        public FileUploadPublicAccessType PublicAccessType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("supportRequestId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SupportRequestId { get; set; }
@@ -21679,7 +21775,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
 
         [Newtonsoft.Json.JsonProperty("supportTicketStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SupportTicketCreateDtoSupportTicketStatus SupportTicketStatus { get; set; }
+        public SupportTicketStatus SupportTicketStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("contactId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(36, MinimumLength = 36)]
@@ -21717,7 +21813,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
 
         [Newtonsoft.Json.JsonProperty("supportTicketStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SupportTicketDtoSupportTicketStatus SupportTicketStatus { get; set; }
+        public SupportTicketStatus SupportTicketStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string UserId { get; set; }
@@ -22004,6 +22100,24 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum SupportTicketStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"New")]
+        New = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OpenAndWaitingForAgent")]
+        OpenAndWaitingForAgent = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OpenAndWaitingForCustomer")]
+        OpenAndWaitingForCustomer = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Closed")]
+        Closed = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SupportTicketTypeCreateDto
     {
 
@@ -22175,7 +22289,7 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
 
         [Newtonsoft.Json.JsonProperty("supportTicketStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SupportTicketUpdateDtoSupportTicketStatus SupportTicketStatus { get; set; }
+        public SupportTicketStatus SupportTicketStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("contactId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ContactId { get; set; }
@@ -22431,174 +22545,6 @@ namespace FenixAlliance.ABP.SDK.CSharp.Clients.SupportService
 
         [Newtonsoft.Json.JsonProperty("warrantyPolicyId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string WarrantyPolicyId { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum PrivateMessageDtoSocialProfileType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"User")]
-        User = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Tenant")]
-        Tenant = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Contact")]
-        Contact = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SupportEntitlementDtoStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Active")]
-        Active = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"GracePeriod")]
-        GracePeriod = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Disabled")]
-        Disabled = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Deleted")]
-        Deleted = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SupportRequestAttachmentCreateDtoPublicAccessType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
-        Off = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
-        Container = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
-        Blob = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SupportRequestAttachmentDtoScanStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
-        NotRequired = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
-        Pending = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Clean")]
-        Clean = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Infected")]
-        Infected = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Quarantined")]
-        Quarantined = 5,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SupportRequestAttachmentDtoThumbnailStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NotRequired")]
-        NotRequired = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
-        Pending = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Ready")]
-        Ready = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unsupported")]
-        Unsupported = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SupportRequestAttachmentDtoPublicAccessType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Off")]
-        Off = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Container")]
-        Container = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Blob")]
-        Blob = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
-        Unknown = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SupportTicketCreateDtoSupportTicketStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"New")]
-        New = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OpenAndWaitingForAgent")]
-        OpenAndWaitingForAgent = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OpenAndWaitingForCustomer")]
-        OpenAndWaitingForCustomer = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Closed")]
-        Closed = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SupportTicketDtoSupportTicketStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"New")]
-        New = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OpenAndWaitingForAgent")]
-        OpenAndWaitingForAgent = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OpenAndWaitingForCustomer")]
-        OpenAndWaitingForCustomer = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Closed")]
-        Closed = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum SupportTicketUpdateDtoSupportTicketStatus
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"New")]
-        New = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OpenAndWaitingForAgent")]
-        OpenAndWaitingForAgent = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"OpenAndWaitingForCustomer")]
-        OpenAndWaitingForCustomer = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Closed")]
-        Closed = 3,
 
     }
 
